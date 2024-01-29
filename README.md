@@ -69,4 +69,4 @@ This [Google Drive Link](https://docs.google.com/document/d/1cv3wYupLLT9KxdokIB3
 
 - System Block Diagram (Work in Progress) - A diagram showing the connections between the front-end and backend.
 - Database ERD (Work in Progress) - An Entity Relationship Diagram that outlines the setup of the database.
-- Paid Subscriptions - This is Just a location to keep track of subscriptions used for Spell to Excel.
+- Paid Subscriptions - Just a location to keep track of subscriptions used for Spell to Excel.
