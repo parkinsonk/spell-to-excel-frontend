@@ -27,7 +27,7 @@
             await SecureStore.setItemAsync('access_token', access);
             await SecureStore.setItemAsync('refresh_token', refresh);
 
-            navigation.navigate('StudentHomePage');
+            navigation.navigate('SelectWordBatches');
 
         })
         .catch(error => {

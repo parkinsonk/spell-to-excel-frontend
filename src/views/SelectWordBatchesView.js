@@ -3,7 +3,7 @@ import { ImageBackground, View, TextInput, Button, StyleSheet, Alert} from 'reac
 import axios from 'axios';
 import * as Keychain from 'react-native-keychain';
 
-const StudentHomeView = ({ navigation }) => {
+const SelectWordBatchesView = ({ navigation }) => {
     const [associatedEmail, setAssociatedEmail] = useState('');
     const [studentName, setStudentName] = useState('');
     const [pin, setPin] = useState('');
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default StudentHomeView;
+export default SelectWordBatchesView;
