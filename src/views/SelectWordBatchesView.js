@@ -4,6 +4,10 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 import axios from 'axios';
 import * as Keychain from 'react-native-keychain';
 
+
+const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
+
 const SelectWordBatchesView = ({ navigation }) => {
 
     return (
@@ -17,10 +21,10 @@ const SelectWordBatchesView = ({ navigation }) => {
                     style={styles.background}
                 >
                     <TouchableOpacity 
-                    style={[styles.button, { top: 50, left: 30 }]} // Adjust position as needed
+                    style={styles.batch1opacity} // Adjust position as needed
                     onPress={() => console.log('Button 1 pressed')} // Handle button press
                 >
-                    <Image source={require('../assets/SelectWordBatchesView/1-13.png')} style={styles.buttonImage} />
+                    <Image source={require('../assets/SelectWordBatchesView/1-13.png')} style={styles.batch1Image}/>
                 </TouchableOpacity>
 
                 </ImageBackground>
@@ -39,7 +43,16 @@ const styles = StyleSheet.create({
     flex: 1, // Take up all available space
     width: '100%', // Ensure full width
     height: '100%', // Ensure full height
-}
+},
+    batch1opacity: {
+        marginTop: screenHeight * 0.05,
+        resizeMode: 'contain',
+    },
+    batch1Image: {
+        width: screenWidth * .25,
+        height: screenHeight * .25,
+        resizeMode: 'contain',
+    },
 });
 
 export default SelectWordBatchesView;
