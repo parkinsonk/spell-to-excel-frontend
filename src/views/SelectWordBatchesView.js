@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
-import { ImageBackground, View, TextInput, Button, StyleSheet, Alert} from 'react-native';
+import React, { useState, useEffect} from 'react';
+import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions} from 'react-native';
+import * as ScreenOrientation from 'expo-screen-orientation';
 import axios from 'axios';
 import * as Keychain from 'react-native-keychain';
 
 const SelectWordBatchesView = ({ navigation }) => {
-    const [associatedEmail, setAssociatedEmail] = useState('');
-    const [studentName, setStudentName] = useState('');
-    const [pin, setPin] = useState('');
 
     return (
-        <View style={styles.container}>
+        <View style={[
+            styles.container, 
+            ]}>
+
                 <ImageBackground 
                     source={require('../assets/SelectWordBatchesView/BatchesBackground.png')} 
                     resizeMode="cover"
                     style={styles.background}
                 >
                 </ImageBackground>
+                
         </View>
      
     );
