@@ -3,11 +3,11 @@
     "name": "spell-to-excel",
     "slug": "spell-to-excel",
     "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/1.jpeg",
+    "orientation": "landscape",
+    "icon": "./src/assets/1.jpeg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/1.jpeg",
+      "image": "./src/assets/1.jpeg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/1.jpeg",
+        "foregroundImage": "./src/assets/1.jpeg",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/1.jpeg"
+      "favicon": "./src/assets/1.jpeg"
     }
   }
 }
