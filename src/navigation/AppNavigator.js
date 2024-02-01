@@ -13,7 +13,7 @@ const AppNavigator = () => {
       <Stack.Navigator>
         <Stack.Screen name="Welcome" component={WelcomeView} />
         <Stack.Screen name="Login" component={LoginView} />
-        <Stack.Screen name="SelectWordBatches" component={SelectWordBatchesView} />
+        <Stack.Screen name="Word Batches" component={SelectWordBatchesView} />
       </Stack.Navigator>
     </NavigationContainer>
   );
