@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         marginLeft: screenWidth * 0.05,
         width: screenWidth * .2,
-        height: screenHeight * .4,
+        height: screenHeight * .35,
         borderColor: 'red', // Temporary for visual debugging
         borderWidth: 1
     },
     batch3Image: {
         width: screenWidth * .2,
-        height: screenHeight * .4,
+        height: screenHeight * .35,
         alignSelf: 'flex-start',
         resizeMode: 'contain',
     },
