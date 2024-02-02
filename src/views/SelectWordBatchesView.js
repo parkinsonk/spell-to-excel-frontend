@@ -20,21 +20,33 @@ const SelectWordBatchesView = ({ navigation }) => {
                     resizeMode="cover"
                     style={styles.background}
                 >
+                    
+
+                <View style={styles.batchRow}>
                     {/* Batch 1-13 */}
                     <TouchableOpacity 
-                    style={styles.batch1opacity} // Adjust position as needed
-                    onPress={() => console.log('Button 1 pressed')} // Handle button press
-                >
-                    <Image source={require('../assets/SelectWordBatchesView/1-13.png')} style={styles.batch1Image}/>
-                </TouchableOpacity>
+                        style={styles.batch1opacity} // Adjust position as needed
+                        onPress={() => console.log('Button 1 pressed')} // Handle button press
+                    >
+                        <Image source={require('../assets/SelectWordBatchesView/1-13.png')} style={styles.batch1Image}/>
+                    </TouchableOpacity>
+                    
+                    {/* Batch 29-43 */}
+                    <TouchableOpacity 
+                        style={styles.batch3opacity} // Adjust position as needed
+                        onPress={() => console.log('Button 3 pressed')} // Handle button press
+                    >
+                        <Image source={require('../assets/SelectWordBatchesView/29-43.gif')} style={styles.batch3Image}/>
+                    </TouchableOpacity>
+                </View>
 
                 {/* Batch 14-28 */}
                 <TouchableOpacity 
-                    style={styles.batch2opacity} // Adjust position as needed
-                    onPress={() => console.log('Button 2 pressed')} // Handle button press
-                >
-                    <Image source={require('../assets/SelectWordBatchesView/14-28.png')} style={styles.batch2Image}/>
-                </TouchableOpacity>
+                        style={styles.batch2opacity} // Adjust position as needed
+                        onPress={() => console.log('Button 2 pressed')} // Handle button press
+                    >
+                        <Image source={require('../assets/SelectWordBatchesView/14-28.png')} style={styles.batch2Image}/>
+                    </TouchableOpacity>
 
                 </ImageBackground>
                 
@@ -56,14 +68,14 @@ const styles = StyleSheet.create({
     batch1opacity: {
         marginTop: screenHeight * 0.05,
         resizeMode: 'contain',
-        marginLeft: screenWidth * 0.15,
-        width: screenWidth * .3,
+        marginLeft: screenWidth * 0.1,
+        width: screenWidth * .25,
         height: screenHeight * .3,
         borderColor: 'red', // Temporary for visual debugging
         borderWidth: 1
     },
     batch1Image: {
-        width: screenWidth * .3,
+        width: screenWidth * .25,
         height: screenHeight * .3,
         resizeMode: 'contain',
         borderColor: 'red', // Temporary for visual debugging
@@ -85,6 +97,26 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         resizeMode: 'contain',
     },
+    batch3opacity: {
+        marginTop: screenHeight * 0.005,
+        resizeMode: 'contain',
+        marginLeft: screenWidth * 0.05,
+        width: screenWidth * .2,
+        height: screenHeight * .4,
+        borderColor: 'red', // Temporary for visual debugging
+        borderWidth: 1
+    },
+    batch3Image: {
+        width: screenWidth * .2,
+        height: screenHeight * .4,
+        alignSelf: 'flex-start',
+        resizeMode: 'contain',
+    },
+    batchRow: {
+    flexDirection: 'row', // Layout children in a row
+    alignItems: 'center', // Align items vertically
+    justifyContent: 'flex-start', // Align items to the start of the row
+  },
 });
 
 export default SelectWordBatchesView;
