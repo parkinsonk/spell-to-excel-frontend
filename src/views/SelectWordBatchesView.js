@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 
     FlyingHighOpacity: {
         marginTop: '5%',
-        marginLeft: '15%',
+        marginLeft: '20%',
         height: '70%',
         width: '20%',
     },
@@ -131,15 +131,31 @@ const styles = StyleSheet.create({
 
     SunnyIslandOpacity: {
         marginTop: '2%',
-        marginLeft: '10%',
-        height: '70%',
+        height: '80%',
         width: '20%',
+        marginLeft: '5%',
+
     },
 
     SunnyIslandImage: {
         height: '100%',
         width: '100%',
         resizeMode: 'contain',
+
+    },
+
+    PlanetsAndBeyondOpacity: {
+        marginTop: '8%',
+        marginLeft: '5%',
+        height: '90%',
+        width: '20%',
+    },
+
+    PlanetsAndBeyondImage: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+
     },
 
     SpringtimeFunOpacity: {
@@ -178,19 +194,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
 
-    PlanetsAndBeyondOpacity: {
-        marginTop: '8%',
-        marginLeft: '10%',
-        height: '90%',
-        width: '20%',
-    },
-
-    PlanetsAndBeyondImage: {
-        height: '100%',
-        width: '100%',
-        resizeMode: 'contain',
-
-    },
+    
 
     DivingDeepOpacity: {
         marginTop: '8%',
