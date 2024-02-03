@@ -121,17 +121,12 @@ const styles = StyleSheet.create({
         marginLeft: '15%',
         height: '70%',
         width: '20%',
-        borderColor: 'black',
-        borderWidth: 2,
-
     },
 
     FlyingHighImage: {
         height: '100%',
         width: '100%',
         resizeMode: 'contain',
-        borderColor: 'black',
-        borderWidth: 2,
     },
 
     SunnyIslandOpacity: {
@@ -139,31 +134,23 @@ const styles = StyleSheet.create({
         marginLeft: '10%',
         height: '70%',
         width: '20%',
-        borderColor: 'black',
-        borderWidth: 2,
     },
 
     SunnyIslandImage: {
         height: '100%',
         width: '100%',
         resizeMode: 'contain',
-        borderColor: 'black',
-        borderWidth: 2,
     },
 
     SpringtimeFunOpacity: {
         height: '70%',
         width: '25%',
-        borderColor: 'black',
-        borderWidth: 2,
     },
 
     SpringtimeFunImage: {
         height: '100%',
         width: '100%',
         resizeMode: 'contain',
-        borderColor: 'black',
-        borderWidth: 2,
     },
 
     AlienAdventuresOpacity: {
@@ -171,32 +158,24 @@ const styles = StyleSheet.create({
         marginRight: '5%',
         height: '70%',
         width: '20%',
-        borderColor: 'green',
-        borderWidth: 2,
     },
 
     AlienAdventuresImage: {
         height: '100%',
         width: '100%',
         resizeMode: 'contain',
-        borderColor: 'green',
-        borderWidth: 2,
     },
 
     OuterSpaceOpacity: {
         marginTop: '3%',
         height: '70%',
         width: '20%',
-        borderColor: 'black',
-        borderWidth: 2,
     },
 
     OuterSpaceImage: {
         height: '100%',
         width: '100%',
         resizeMode: 'contain',
-        borderColor: 'green',
-        borderWidth: 2,
     },
 
     PlanetsAndBeyondOpacity: {
@@ -204,16 +183,13 @@ const styles = StyleSheet.create({
         marginLeft: '10%',
         height: '90%',
         width: '20%',
-        borderColor: 'green',
-        borderWidth: 2,
     },
 
     PlanetsAndBeyondImage: {
         height: '100%',
         width: '100%',
         resizeMode: 'contain',
-        borderColor: 'green',
-        borderWidth: 2,
+
     },
 
     DivingDeepOpacity: {
@@ -221,16 +197,12 @@ const styles = StyleSheet.create({
         marginLeft: '8%',
         height: '70%',
         width: '20%',
-        borderColor: 'green',
-        borderWidth: 2,
     },
 
     DivingDeepImage: {
         height: '100%',
         width: '100%',
         resizeMode: 'contain',
-        borderColor: 'green',
-        borderWidth: 2,
     },
 
 
