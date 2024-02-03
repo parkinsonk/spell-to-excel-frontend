@@ -117,93 +117,120 @@ const styles = StyleSheet.create({
     },
 
     FlyingHighOpacity: {
-        marginTop: screenHeight * .05,
-        marginLeft: screenWidth * .1,
-        height: screenHeight * .3,
-        width: screenWidth * .3,
+        marginTop: '5%',
+        marginLeft: '15%',
+        height: '70%',
+        width: '20%',
+        borderColor: 'black',
+        borderWidth: 2,
 
     },
 
     FlyingHighImage: {
-        height: screenHeight * .3,
-        width: screenWidth * .3,
+        height: '100%',
+        width: '100%',
         resizeMode: 'contain',
+        borderColor: 'black',
+        borderWidth: 2,
     },
 
     SunnyIslandOpacity: {
-        marginTop: screenHeight * .05,
-        marginLeft: screenWidth * .05,
-        height: screenHeight * .3,
-        width: screenWidth * .2,
+        marginTop: '2%',
+        marginLeft: '10%',
+        height: '70%',
+        width: '20%',
+        borderColor: 'black',
+        borderWidth: 2,
     },
 
     SunnyIslandImage: {
-        height: screenHeight * .3,
-        width: screenWidth * .2,
-        resizeMode: 'contain'
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+        borderColor: 'black',
+        borderWidth: 2,
     },
 
     SpringtimeFunOpacity: {
-        marginLeft: -screenWidth * .05,
-        height: screenHeight * .3,
-        width: screenWidth * .3,   
+        height: '70%',
+        width: '25%',
+        borderColor: 'black',
+        borderWidth: 2,
     },
 
     SpringtimeFunImage: {
-        height: screenHeight * .3,
-        width: screenWidth * .3,
-        resizeMode: 'contain'
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+        borderColor: 'black',
+        borderWidth: 2,
     },
 
     AlienAdventuresOpacity: {
-        marginTop: screenWidth * .14,
-        marginRight: screenWidth * .05,
-        height: screenHeight * .3,
-        width: screenWidth * .2,
+        marginTop: '10%',
+        marginRight: '5%',
+        height: '70%',
+        width: '20%',
+        borderColor: 'green',
+        borderWidth: 2,
     },
 
     AlienAdventuresImage: {
-        height: screenHeight * .3,
-        width: screenWidth * .2,
-        resizeMode: 'contain'
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+        borderColor: 'green',
+        borderWidth: 2,
     },
 
     OuterSpaceOpacity: {
-        marginTop: screenWidth * .05,
-        height: screenHeight * .3,
-        width: screenWidth * .2, 
+        marginTop: '3%',
+        height: '70%',
+        width: '20%',
+        borderColor: 'black',
+        borderWidth: 2,
     },
 
     OuterSpaceImage: {
-        height: screenHeight * .3,
-        width: screenWidth * .2,
-        resizeMode: 'contain'
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+        borderColor: 'green',
+        borderWidth: 2,
     },
 
     PlanetsAndBeyondOpacity: {
-        marginTop: screenHeight * .15,
-        marginLeft: screenWidth * .1,
-        height: screenHeight * .3,
-        width: screenWidth * .2,
+        marginTop: '8%',
+        marginLeft: '10%',
+        height: '90%',
+        width: '20%',
+        borderColor: 'green',
+        borderWidth: 2,
     },
 
     PlanetsAndBeyondImage: {
-        height: screenHeight * .3,
-        width: screenWidth * .2,
-        resizeMode: 'contain'
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+        borderColor: 'green',
+        borderWidth: 2,
     },
 
     DivingDeepOpacity: {
-        marginTop: screenHeight * .2,
-        marginLeft: screenWidth * .08,
-        height: screenHeight * .3,
-        width: screenWidth * .2,
+        marginTop: '8%',
+        marginLeft: '8%',
+        height: '70%',
+        width: '20%',
+        borderColor: 'green',
+        borderWidth: 2,
     },
 
     DivingDeepImage: {
-        height: screenHeight * .3,
-        width: screenWidth * .2,
-        resizeMode: 'contain'
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+        borderColor: 'green',
+        borderWidth: 2,
     },
 
 
