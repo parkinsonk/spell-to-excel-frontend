@@ -20,40 +20,71 @@ const SelectWordBatchesView = ({ navigation }) => {
                     resizeMode="cover"
                     style={styles.background}
                 >
-                    
+                    <View style={styles.upperHalf}>
+               
+                        {/* Flying High Batch */}
+                        <TouchableOpacity 
+                            style={styles.FlyingHighOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/FlyingHigh.png')} style={styles.FlyingHighImage}/>
+                        </TouchableOpacity>
 
-                <View style={styles.batchRow}>
-                    {/* Flying High Batch */}
-                    <TouchableOpacity 
-                        style={styles.FlyingHighOpacity} // Adjust position as needed
-                        onPress={() => console.log('Button 1 pressed')} // Handle button press
-                    >
-                        <Image source={require('../assets/SelectWordBatchesView/FlyingHigh.png')} style={styles.FlyingHighImage}/>
-                    </TouchableOpacity>
-                    
-                    {/* Sunny Island Batch */}
-                    <TouchableOpacity 
-                        style={styles.SunnyIslandOpacity} // Adjust position as needed
-                        onPress={() => console.log('Button 3 pressed')} // Handle button press
-                    >
-                        <Image source={require('../assets/SelectWordBatchesView/SunnyIsland.gif')} style={styles.SunnyIslandImage}/>
-                    </TouchableOpacity>
-                </View>
+                        {/* Sunny Island */}
+                        <TouchableOpacity 
+                            style={styles.SunnyIslandOpacity}
+                            onPress={() => console.log('Button 1 pressed')}
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/SunnyIsland.gif')} style={styles.SunnyIslandImage}/>
+                        </TouchableOpacity>
 
-                {/* Springtime Fun Batch */}
-                <TouchableOpacity 
-                        style={styles.SpringtimeFunOpacity} // Adjust position as needed
-                        onPress={() => console.log('Button 2 pressed')} // Handle button press
-                    >
-                        <Image source={require('../assets/SelectWordBatchesView/SpringtimeFun.png')} style={styles.SpringtimeFunImage}/>
-                </TouchableOpacity>
+                        {/* Planets and Beyond */}
+                        <TouchableOpacity 
+                            style={styles.PlanetsAndBeyondOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/PlanetsAndBeyond.png')} style={styles.PlanetsAndBeyondImage}/>
+                        </TouchableOpacity>
 
-                <TouchableOpacity 
-                        style={styles.AlienAdventuresOpacity} // Adjust position as needed
-                        onPress={() => console.log('Button 4 pressed')} // Handle button press
-                    >
-                        <Image source={require('../assets/SelectWordBatchesView/AlienAdventures.png')} style={styles.AlienAdventuresImage}/>
-                </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.bottomHalf}>
+
+                        {/* Springtime Fun */}
+                        <TouchableOpacity 
+                            style={styles.SpringtimeFunOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/SpringtimeFun.png')} style={styles.SpringtimeFunImage}/>
+                        </TouchableOpacity>
+
+                        {/* Alien Adventures */}
+                        <TouchableOpacity 
+                            style={styles.AlienAdventuresOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/AlienAdventures.png')} style={styles.AlienAdventuresImage}/>
+                        </TouchableOpacity>
+
+                        {/* Outer Space */}
+                        <TouchableOpacity 
+                            style={styles.OuterSpaceOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/OuterSpace.png')} style={styles.OuterSpaceImage}/>
+                        </TouchableOpacity>
+
+                        
+
+                        {/* Diving Deep */}
+                        <TouchableOpacity 
+                            style={styles.DivingDeepOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/DivingDeep.png')} style={styles.DivingDeepImage}/>
+                        </TouchableOpacity>
+
+                    </View>
 
                 </ImageBackground>
                 
@@ -72,73 +103,111 @@ const styles = StyleSheet.create({
     width: '100%', // Ensure full width
     height: '100%', // Ensure full height
     },
-    batchRow: {
-        flexDirection: 'row', // Layout children in a row
-        alignItems: 'center', // Align items vertically
-        justifyContent: 'flex-start', // Align items to the start of the row
+
+    upperHalf: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
     },
+
+    bottomHalf: {
+        flex: 1.5,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+    },
+
     FlyingHighOpacity: {
-        marginTop: screenHeight * 0.05,
-        resizeMode: 'contain',
-        marginLeft: screenWidth * 0.1,
-        width: screenWidth * .25,
+        marginTop: screenHeight * .05,
+        marginLeft: screenWidth * .1,
         height: screenHeight * .3,
-        borderColor: 'red', // Temporary for visual debugging
-        borderWidth: 1
+        width: screenWidth * .3,
+
     },
+
     FlyingHighImage: {
-        width: screenWidth * .25,
         height: screenHeight * .3,
-        resizeMode: 'contain',
-        borderColor: 'red', // Temporary for visual debugging
-        borderWidth: 1
-        
-    },
-    SpringtimeFunOpacity: {
-        marginTop: screenHeight * 0.005,
-        resizeMode: 'contain',
-        marginLeft: -20,
-        width: screenWidth * .35,
-        height: screenHeight * .4,
-        borderColor: 'red', // Temporary for visual debugging
-        borderWidth: 1
-    },
-    SpringtimeFunImage: {
-        width: screenWidth * .35,
-        height: screenHeight * .4,
-        alignSelf: 'flex-start',
+        width: screenWidth * .3,
         resizeMode: 'contain',
     },
+
     SunnyIslandOpacity: {
-        marginTop: screenHeight * 0.005,
-        resizeMode: 'contain',
-        marginLeft: screenWidth * 0.05,
+        marginTop: screenHeight * .05,
+        marginLeft: screenWidth * .05,
+        height: screenHeight * .3,
         width: screenWidth * .2,
-        height: screenHeight * .4,
-        borderColor: 'red', // Temporary for visual debugging
-        borderWidth: 1
     },
+
     SunnyIslandImage: {
+        height: screenHeight * .3,
         width: screenWidth * .2,
-        height: screenHeight * .4,
-        alignSelf: 'flex-start',
         resizeMode: 'contain'
     },
+
+    SpringtimeFunOpacity: {
+        marginLeft: -screenWidth * .05,
+        height: screenHeight * .3,
+        width: screenWidth * .3,   
+    },
+
+    SpringtimeFunImage: {
+        height: screenHeight * .3,
+        width: screenWidth * .3,
+        resizeMode: 'contain'
+    },
+
     AlienAdventuresOpacity: {
-        marginTop: screenHeight * 0.005,
-        resizeMode: 'contain',
-        marginLeft: screenWidth * 0.05,
+        marginTop: screenWidth * .14,
+        marginRight: screenWidth * .05,
+        height: screenHeight * .3,
         width: screenWidth * .2,
-        height: screenHeight * .4,
-        borderColor: 'red', // Temporary for visual debugging
-        borderWidth: 1
     },
+
     AlienAdventuresImage: {
+        height: screenHeight * .3,
         width: screenWidth * .2,
-        height: screenHeight * .4,
-        alignSelf: 'flex-start',
         resizeMode: 'contain'
     },
+
+    OuterSpaceOpacity: {
+        marginTop: screenWidth * .05,
+        height: screenHeight * .3,
+        width: screenWidth * .2, 
+    },
+
+    OuterSpaceImage: {
+        height: screenHeight * .3,
+        width: screenWidth * .2,
+        resizeMode: 'contain'
+    },
+
+    PlanetsAndBeyondOpacity: {
+        marginTop: screenHeight * .15,
+        marginLeft: screenWidth * .1,
+        height: screenHeight * .3,
+        width: screenWidth * .2,
+    },
+
+    PlanetsAndBeyondImage: {
+        height: screenHeight * .3,
+        width: screenWidth * .2,
+        resizeMode: 'contain'
+    },
+
+    DivingDeepOpacity: {
+        marginTop: screenHeight * .2,
+        marginLeft: screenWidth * .08,
+        height: screenHeight * .3,
+        width: screenWidth * .2,
+    },
+
+    DivingDeepImage: {
+        height: screenHeight * .3,
+        width: screenWidth * .2,
+        resizeMode: 'contain'
+    },
+
+
+
     
 });
 
