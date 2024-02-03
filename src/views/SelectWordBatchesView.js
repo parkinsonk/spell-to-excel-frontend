@@ -23,30 +23,37 @@ const SelectWordBatchesView = ({ navigation }) => {
                     
 
                 <View style={styles.batchRow}>
-                    {/* Batch 1-13 */}
+                    {/* Flying High Batch */}
                     <TouchableOpacity 
-                        style={styles.batch1opacity} // Adjust position as needed
+                        style={styles.FlyingHighOpacity} // Adjust position as needed
                         onPress={() => console.log('Button 1 pressed')} // Handle button press
                     >
-                        <Image source={require('../assets/SelectWordBatchesView/1-13.png')} style={styles.batch1Image}/>
+                        <Image source={require('../assets/SelectWordBatchesView/FlyingHigh.png')} style={styles.FlyingHighImage}/>
                     </TouchableOpacity>
                     
-                    {/* Batch 29-43 */}
+                    {/* Sunny Island Batch */}
                     <TouchableOpacity 
-                        style={styles.batch3opacity} // Adjust position as needed
+                        style={styles.SunnyIslandOpacity} // Adjust position as needed
                         onPress={() => console.log('Button 3 pressed')} // Handle button press
                     >
-                        <Image source={require('../assets/SelectWordBatchesView/29-43.gif')} style={styles.batch3Image}/>
+                        <Image source={require('../assets/SelectWordBatchesView/SunnyIsland.gif')} style={styles.SunnyIslandImage}/>
                     </TouchableOpacity>
                 </View>
 
-                {/* Batch 14-28 */}
+                {/* Springtime Fun Batch */}
                 <TouchableOpacity 
-                        style={styles.batch2opacity} // Adjust position as needed
+                        style={styles.SpringtimeFunOpacity} // Adjust position as needed
                         onPress={() => console.log('Button 2 pressed')} // Handle button press
                     >
-                        <Image source={require('../assets/SelectWordBatchesView/14-28.png')} style={styles.batch2Image}/>
-                    </TouchableOpacity>
+                        <Image source={require('../assets/SelectWordBatchesView/SpringtimeFun.png')} style={styles.SpringtimeFunImage}/>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                        style={styles.AlienAdventuresOpacity} // Adjust position as needed
+                        onPress={() => console.log('Button 4 pressed')} // Handle button press
+                    >
+                        <Image source={require('../assets/SelectWordBatchesView/AlienAdventures.png')} style={styles.AlienAdventuresImage}/>
+                </TouchableOpacity>
 
                 </ImageBackground>
                 
@@ -64,8 +71,13 @@ const styles = StyleSheet.create({
     flex: 1, // Take up all available space
     width: '100%', // Ensure full width
     height: '100%', // Ensure full height
-},
-    batch1opacity: {
+    },
+    batchRow: {
+        flexDirection: 'row', // Layout children in a row
+        alignItems: 'center', // Align items vertically
+        justifyContent: 'flex-start', // Align items to the start of the row
+    },
+    FlyingHighOpacity: {
         marginTop: screenHeight * 0.05,
         resizeMode: 'contain',
         marginLeft: screenWidth * 0.1,
@@ -74,7 +86,7 @@ const styles = StyleSheet.create({
         borderColor: 'red', // Temporary for visual debugging
         borderWidth: 1
     },
-    batch1Image: {
+    FlyingHighImage: {
         width: screenWidth * .25,
         height: screenHeight * .3,
         resizeMode: 'contain',
@@ -82,7 +94,7 @@ const styles = StyleSheet.create({
         borderWidth: 1
         
     },
-    batch2opacity: {
+    SpringtimeFunOpacity: {
         marginTop: screenHeight * 0.005,
         resizeMode: 'contain',
         marginLeft: -20,
@@ -91,32 +103,43 @@ const styles = StyleSheet.create({
         borderColor: 'red', // Temporary for visual debugging
         borderWidth: 1
     },
-    batch2Image: {
+    SpringtimeFunImage: {
         width: screenWidth * .35,
         height: screenHeight * .4,
         alignSelf: 'flex-start',
         resizeMode: 'contain',
     },
-    batch3opacity: {
+    SunnyIslandOpacity: {
         marginTop: screenHeight * 0.005,
         resizeMode: 'contain',
         marginLeft: screenWidth * 0.05,
         width: screenWidth * .2,
-        height: screenHeight * .35,
+        height: screenHeight * .4,
         borderColor: 'red', // Temporary for visual debugging
         borderWidth: 1
     },
-    batch3Image: {
+    SunnyIslandImage: {
         width: screenWidth * .2,
-        height: screenHeight * .35,
+        height: screenHeight * .4,
         alignSelf: 'flex-start',
-        resizeMode: 'contain',
+        resizeMode: 'contain'
     },
-    batchRow: {
-    flexDirection: 'row', // Layout children in a row
-    alignItems: 'center', // Align items vertically
-    justifyContent: 'flex-start', // Align items to the start of the row
-  },
+    AlienAdventuresOpacity: {
+        marginTop: screenHeight * 0.005,
+        resizeMode: 'contain',
+        marginLeft: screenWidth * 0.05,
+        width: screenWidth * .2,
+        height: screenHeight * .4,
+        borderColor: 'red', // Temporary for visual debugging
+        borderWidth: 1
+    },
+    AlienAdventuresImage: {
+        width: screenWidth * .2,
+        height: screenHeight * .4,
+        alignSelf: 'flex-start',
+        resizeMode: 'contain'
+    },
+    
 });
 
 export default SelectWordBatchesView;
