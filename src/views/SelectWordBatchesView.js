@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
     },
 
     PlanetsAndBeyondOpacity: {
-        marginTop: '8%',
-        marginLeft: '9%',
+        marginTop: '10%',
+        marginLeft: '11%',
         height: '90%',
         width: '20%',
     },
@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
     SpringtimeFunOpacity: {
         height: '70%',
         width: '25%',
+        marginLeft: '-2%',
     },
 
     SpringtimeFunImage: {
