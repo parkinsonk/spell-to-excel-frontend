@@ -74,8 +74,6 @@ const SelectWordBatchesView = ({ navigation }) => {
                             <Image source={require('../assets/SelectWordBatchesView/OuterSpace.png')} style={styles.OuterSpaceImage}/>
                         </TouchableOpacity>
 
-                        
-
                         {/* Diving Deep */}
                         <TouchableOpacity 
                             style={styles.DivingDeepOpacity} // Adjust position as needed
@@ -146,7 +144,7 @@ const styles = StyleSheet.create({
 
     PlanetsAndBeyondOpacity: {
         marginTop: '8%',
-        marginLeft: '5%',
+        marginLeft: '9%',
         height: '90%',
         width: '20%',
     },
