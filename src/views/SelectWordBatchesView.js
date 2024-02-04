@@ -14,18 +14,75 @@ const SelectWordBatchesView = ({ navigation }) => {
         <View style={[
             styles.container, 
             ]}>
-                {/* Batch 1-13 */}
+                
                 <ImageBackground 
                     source={require('../assets/SelectWordBatchesView/BatchesBackground.png')} 
                     resizeMode="cover"
                     style={styles.background}
                 >
-                    <TouchableOpacity 
-                    style={styles.batch1opacity} // Adjust position as needed
-                    onPress={() => console.log('Button 1 pressed')} // Handle button press
-                >
-                    <Image source={require('../assets/SelectWordBatchesView/1-13.png')} style={styles.batch1Image}/>
-                </TouchableOpacity>
+                    <View style={styles.upperHalf}>
+               
+                        {/* Flying High Batch */}
+                        <TouchableOpacity 
+                            style={styles.FlyingHighOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/FlyingHigh.png')} style={styles.FlyingHighImage}/>
+                        </TouchableOpacity>
+
+                        {/* Sunny Island */}
+                        <TouchableOpacity 
+                            style={styles.SunnyIslandOpacity}
+                            onPress={() => console.log('Button 1 pressed')}
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/SunnyIsland.gif')} style={styles.SunnyIslandImage}/>
+                        </TouchableOpacity>
+
+                        {/* Planets and Beyond */}
+                        <TouchableOpacity 
+                            style={styles.PlanetsAndBeyondOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/PlanetsAndBeyond.png')} style={styles.PlanetsAndBeyondImage}/>
+                        </TouchableOpacity>
+
+                    </View>
+
+                    <View style={styles.bottomHalf}>
+
+                        {/* Springtime Fun */}
+                        <TouchableOpacity 
+                            style={styles.SpringtimeFunOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/SpringtimeFun.png')} style={styles.SpringtimeFunImage}/>
+                        </TouchableOpacity>
+
+                        {/* Alien Adventures */}
+                        <TouchableOpacity 
+                            style={styles.AlienAdventuresOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/AlienAdventures.png')} style={styles.AlienAdventuresImage}/>
+                        </TouchableOpacity>
+
+                        {/* Outer Space */}
+                        <TouchableOpacity 
+                            style={styles.OuterSpaceOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/OuterSpace.png')} style={styles.OuterSpaceImage}/>
+                        </TouchableOpacity>
+
+                        {/* Diving Deep */}
+                        <TouchableOpacity 
+                            style={styles.DivingDeepOpacity} // Adjust position as needed
+                            onPress={() => console.log('Button 1 pressed')} // Handle button press
+                        >
+                            <Image source={require('../assets/SelectWordBatchesView/DivingDeep.png')} style={styles.DivingDeepImage}/>
+                        </TouchableOpacity>
+
+                    </View>
 
                 </ImageBackground>
                 
@@ -43,16 +100,116 @@ const styles = StyleSheet.create({
     flex: 1, // Take up all available space
     width: '100%', // Ensure full width
     height: '100%', // Ensure full height
-},
-    batch1opacity: {
-        marginTop: screenHeight * 0.05,
+    },
+
+    upperHalf: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+    },
+
+    bottomHalf: {
+        flex: 1.5,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+    },
+
+    FlyingHighOpacity: {
+        marginTop: '5%',
+        marginLeft: '20%',
+        height: '70%',
+        width: '20%',
+    },
+
+    FlyingHighImage: {
+        height: '100%',
+        width: '100%',
         resizeMode: 'contain',
     },
-    batch1Image: {
-        width: screenWidth * .25,
-        height: screenHeight * .25,
+
+    SunnyIslandOpacity: {
+        marginTop: '2%',
+        height: '80%',
+        width: '20%',
+        marginLeft: '5%',
+
+    },
+
+    SunnyIslandImage: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+
+    },
+
+    PlanetsAndBeyondOpacity: {
+        marginTop: '8%',
+        marginLeft: '9%',
+        height: '90%',
+        width: '20%',
+    },
+
+    PlanetsAndBeyondImage: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+
+    },
+
+    SpringtimeFunOpacity: {
+        height: '70%',
+        width: '25%',
+    },
+
+    SpringtimeFunImage: {
+        height: '100%',
+        width: '100%',
         resizeMode: 'contain',
     },
+
+    AlienAdventuresOpacity: {
+        marginTop: '10%',
+        marginRight: '5%',
+        height: '70%',
+        width: '20%',
+    },
+
+    AlienAdventuresImage: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+    },
+
+    OuterSpaceOpacity: {
+        marginTop: '3%',
+        height: '70%',
+        width: '20%',
+    },
+
+    OuterSpaceImage: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+    },
+
+    
+
+    DivingDeepOpacity: {
+        marginTop: '8%',
+        marginLeft: '8%',
+        height: '70%',
+        width: '20%',
+    },
+
+    DivingDeepImage: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain',
+    },
+
+
+
+    
 });
 
 export default SelectWordBatchesView;
