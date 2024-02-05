@@ -19,7 +19,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                     <View style={styles.leftSide}>
                         <View style={styles.upperHalfLeft}>
                             {/* Flying High Batch */}
-                            <TouchableOpacity style={styles.FlyingHighOpacity} onPress={() => console.log('Button 1 pressed')}>
+                            <TouchableOpacity style={styles.FlyingHighOpacity} onPress={() => navigation.navigate('Flying High Words')}>
                                 <Image source={require('../assets/SelectWordBatchesView/FlyingHigh.png')} style={styles.Image} />
                             </TouchableOpacity>
                             {/* Sunny Island */}
