@@ -15,11 +15,11 @@ const FlyingHighWordsView = ({ navigation }) => {
             >
                 <View style={styles.top}>
 
-                    <TouchableOpacity style={styles.theOpacity} onPress={() => console.log('button pressed')}>
+                    <TouchableOpacity style={styles.theOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/the.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.toOpacity} onPress={() => console.log('button pressed')}>
+                    <TouchableOpacity style={styles.toOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/to.png')} style={styles.Image} />
                     </TouchableOpacity>
 
@@ -27,7 +27,7 @@ const FlyingHighWordsView = ({ navigation }) => {
                         <Image source={require('../assets/FlyingHighWordsView/PlaneSun.png')} style={styles.Image} />
                     </View>
 
-                    <TouchableOpacity style={styles.ofOpacity} onPress={() => console.log('button pressed')}>
+                    <TouchableOpacity style={styles.ofOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/of.png')} style={styles.Image} />
                     </TouchableOpacity>
 
@@ -35,23 +35,23 @@ const FlyingHighWordsView = ({ navigation }) => {
 
                 <View style={styles.middle}>
 
-                    <TouchableOpacity style={styles.isOpacity} onPress={() => console.log('button pressed')}>
+                    <TouchableOpacity style={styles.isOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/is.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.inOpacity} onPress={() => console.log('button pressed')}>
+                    <TouchableOpacity style={styles.inOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/in.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.youOpacity} onPress={() => console.log('button pressed')}>
+                    <TouchableOpacity style={styles.youOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/you.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.andOpacity} onPress={() => console.log('button pressed')}>
+                    <TouchableOpacity style={styles.andOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/and.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.thatOpacity} onPress={() => console.log('button pressed')}>
+                    <TouchableOpacity style={styles.thatOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/that.png')} style={styles.Image} />
                     </TouchableOpacity>
 
@@ -59,23 +59,23 @@ const FlyingHighWordsView = ({ navigation }) => {
 
                 <View style={styles.bottom}>
 
-                <TouchableOpacity style={styles.itOpacity} onPress={() => console.log('button pressed')}>
+                <TouchableOpacity style={styles.itOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/it.png')} style={styles.Image} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.heOpacity} onPress={() => console.log('button pressed')}>
+                <TouchableOpacity style={styles.heOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/he.png')} style={styles.Image} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.wasOpacity} onPress={() => console.log('button pressed')}>
+                <TouchableOpacity style={styles.wasOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/was.png')} style={styles.Image} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.aOpacity} onPress={() => console.log('button pressed')}>
+                <TouchableOpacity style={styles.aOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/a.png')} style={styles.Image} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.forOpacity} onPress={() => console.log('button pressed')}>
+                <TouchableOpacity style={styles.forOpacity} onPress={() => navigation.navigate('Activites')}>
                         <Image source={require('../assets/FlyingHighWordsView/for.png')} style={styles.Image} />
                 </TouchableOpacity>
                 
