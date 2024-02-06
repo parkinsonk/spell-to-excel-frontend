@@ -31,6 +31,26 @@ const FlyingHighWordsView = ({ navigation }) => {
 
                 <View style={styles.middle}>
 
+                    <TouchableOpacity style={styles.isOpacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/FlyingHighWordsView/is.png')} style={styles.Image} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.inOpacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/FlyingHighWordsView/in.png')} style={styles.Image} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.youOpacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/FlyingHighWordsView/you.png')} style={styles.Image} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.andOpacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/FlyingHighWordsView/and.png')} style={styles.Image} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.thatOpacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/FlyingHighWordsView/that.png')} style={styles.Image} />
+                    </TouchableOpacity>
+
                 </View>
 
                 <View style={styles.bottom}>
@@ -101,6 +121,54 @@ const styles = StyleSheet.create({
         marginLeft: '4%',
         marginTop: '1%',
     },
+    isOpacity: {
+        height: '70%',
+        width: '15%',
+        resizeMode: 'contain',
+        borderColor: 'yellow',
+        borderWidth: 2,
+        marginLeft: '2%',
+        marginTop: '1%',
+    },
+
+    youOpacity: {
+        height: '70%',
+        width: '17%',
+        resizeMode: 'contain',
+        borderColor: 'yellow',
+        borderWidth: 2,
+        marginLeft: '5%',
+        marginTop: '1%',
+    },
+
+    inOpacity: {
+        height: '70%',
+        width: '15%',
+        resizeMode: 'contain',
+        borderColor: 'yellow',
+        borderWidth: 2,
+        marginLeft: '5%',
+        marginTop: '5%',
+    },
+    andOpacity: {
+        height: '70%',
+        width: '15%',
+        resizeMode: 'contain',
+        borderColor: 'yellow',
+        borderWidth: 2,
+        marginLeft: '5%',
+        marginTop: '4%',
+    },
+    thatOpacity: { 
+        height: '60%',
+        width: '15%',
+        resizeMode: 'contain',
+        borderColor: 'yellow',
+        borderWidth: 2,
+        marginLeft: '3%',
+        marginTop: '8%',
+    },
+
     Image: {
         height: '100%',
         width: '100%',
