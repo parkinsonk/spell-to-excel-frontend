@@ -5,7 +5,13 @@ import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 
-const FlyingHighWordsView = ({ navigation }) => {
+const FlyingHighWordsView = ({ navigation, route, batch }) => {
+    
+    const { selectedWord } = route.params;
+    const batchActivity = activitiesMapping[batch] || {};
+    const traceActivity = batchActivity['trace'];
+    const traceActivityView = traceActivity[selectedWord];
+
     return (
         
             <ImageBackground
