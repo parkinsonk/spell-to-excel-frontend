@@ -9,20 +9,20 @@ const WelcomeScreen = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.upperHalf}>
                 <Image
-                    source={require('../assets/WelcomeView/Welcome.gif')}
+                    source={require('../assets/welcomeView/welcome.gif')}
                     style={styles.image}
                 />
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Login')}>
                     <Image
-                        source={require('../assets/WelcomeView/LoginButton.png')}
+                        source={require('../assets/welcomeView/loginButton.png')}
                         style={styles.buttonImage}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.learnMoreButton} onPress={() => {/* Handle button press */}}>
                     <Image
-                        source={require('../assets/WelcomeView/LearnMore.png')}
+                        source={require('../assets/welcomeView/learnMore.png')}
                         style={styles.buttonImage}
                     />
                 </TouchableOpacity>
