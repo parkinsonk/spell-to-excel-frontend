@@ -19,7 +19,7 @@ const FlyingHighWordsView = ({ navigation }) => {
                         <Image source={require('../assets/flyingHighWordsView/the.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.toOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'to' })}>
+                    <TouchableOpacity style={styles.toOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'to', batch: 'FlyingHigh'  })}>
                         <Image source={require('../assets/flyingHighWordsView/to.png')} style={styles.Image} />
                     </TouchableOpacity>
 
@@ -51,7 +51,7 @@ const FlyingHighWordsView = ({ navigation }) => {
                         <Image source={require('../assets/flyingHighWordsView/and.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.thatOpacity} onPress={() => navigation.navigate('v', { selectedWord: 'that' })}>
+                    <TouchableOpacity style={styles.thatOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'that' })}>
                         <Image source={require('../assets/flyingHighWordsView/that.png')} style={styles.Image} />
                     </TouchableOpacity>
 

@@ -8,6 +8,7 @@ const screenWidth = Dimensions.get('window').width;
 const TraceView = ({ navigation, route }) => {
 
     const { batch, activity, selectedWord } = route.params;
+    console.log(batch, activity, selectedWord);
     const background = activitiesWordMapping[batch]?.[activity]?.[selectedWord] || activitiesWordMapping.default;
 
 
@@ -18,6 +19,9 @@ const TraceView = ({ navigation, route }) => {
                 resizeMode="cover"
                 style={styles.background}
             >
+                <TouchableOpacity style={styles.greenCrayon} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/traceViews/greenCrayon.png')} style={styles.Image} />
+                </TouchableOpacity>
             
                 
             </ImageBackground>
