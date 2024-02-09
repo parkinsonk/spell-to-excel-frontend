@@ -24,14 +24,14 @@ const TraceView = ({ navigation, route }) => {
     onStartShouldSetPanResponder: () => true,
     onPanResponderGrant: (evt, gestureState) => {
       // Start a new path with M command    
-      correctionFactor = 20;
+      const correctionFactor = 20;
       const correctedY0 = gestureState.y0 - correctionFactor;
       const newPoint = `M${gestureState.x0},${correctedY0}`;
       setPaths((prevPaths) => [...prevPaths, newPoint]);
     },
     onPanResponderMove: (evt, gestureState) => {
       // Add line to command to the current path
-      correctionFactor = 20;
+      const correctionFactor = 20;
       const correctedMoveY = gestureState.moveY - correctionFactor;
       const newPoint = `L${gestureState.moveX},${correctedMoveY}`;
       setPaths((prevPaths) => [...prevPaths.slice(0, -1), prevPaths[prevPaths.length - 1] + ' ' + newPoint]);
