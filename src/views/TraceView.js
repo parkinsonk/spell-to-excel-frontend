@@ -12,6 +12,13 @@ const TraceView = ({ navigation, route }) => {
   const background = activitiesWordMapping[batch]?.[activity]?.[selectedWord] || activitiesWordMapping.default;
   const [paths, setPaths] = useState([]);
   const [color, setColor] = useState("black"); // Ensure color state is defined
+  const [showColorPicker, setShowColorPicker] = useState(false);
+
+  const colorOptions = ["black", "red", "blue", "green", "yellow", "purple"];
+
+  const toggleColorPicker = () => {
+    setShowColorPicker(!showColorPicker);
+  };
 
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
@@ -43,7 +50,6 @@ const TraceView = ({ navigation, route }) => {
   };
 
   return (
-    
     <ImageBackground source={background} resizeMode="cover" style={styles.background}>
       <View {...panResponder.panHandlers} style={styles.svgContainer}>
         <Svg height={screenHeight} width={screenWidth}>
@@ -58,36 +64,87 @@ const TraceView = ({ navigation, route }) => {
           ))}
         </Svg>
       </View>
+      
       <TouchableOpacity style={styles.button} onPress={handleClearButtonClick}>
-        <Image source={require('../assets/traceViews/eraser.png')} style={styles.Image} />
+        <Image source={require('../assets/traceViews/eraser.png')} style={styles.eraserImage} />
       </TouchableOpacity>
+  
+      <TouchableOpacity style={styles.crayonBox} onPress={toggleColorPicker}>
+        <Image source={require('../assets/traceViews/crayonBox.png')} style={styles.crayonBoxImage} />
+      </TouchableOpacity>
+  
+      {/* Color Picker Overlay */}
+      {showColorPicker && (
+        <View style={styles.colorPickerContainer}>
+          {colorOptions.map((optionColor, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[styles.colorOption, {backgroundColor: optionColor}]}
+              onPress={() => {
+                handleChangeColor(optionColor);
+                toggleColorPicker(); // Hide color picker after selection
+              }}
+            />
+          ))}
+        </View>
+      )}
+  
       {/* Additional buttons for changing color */}
     </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+
   background: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    resizeMode: 'contain',
+    
   },
   svgContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: 'blue',
-    borderWidth: 4,
   },
   button: {
     position: 'absolute',
     right: 20,
     bottom: 20,
   },
-  Image: {
+crayonBox: {
+    position: 'absolute',
+    left: 0,
+    bottom: 20,
+},
+crayonBoxImage: {
+    width: 100,
+    height: 100,
+    borderColor: 'black',
+    marginLeft: 50,
+},
+  eraserImage: {
+    width: 100,
+    height: 50,
+    borderColor: 'black',
+
+  },
+  colorPickerContainer: {
+    position: 'absolute',
+    padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  colorOption: {
     width: 50,
     height: 50,
+    margin: 5,
   },
 });
 
