@@ -12,7 +12,7 @@ const SelectWordBatchesView = ({ navigation }) => {
     return (
         
             <ImageBackground
-                source={require('../assets/SelectWordBatchesView/BatchesBackground.png')}
+                source={require('../assets/selectWordBatchesView/batchesBackground.png')}
                 resizeMode="cover"
                 style={styles.background}
             >
@@ -20,25 +20,25 @@ const SelectWordBatchesView = ({ navigation }) => {
                         <View style={styles.upperHalfLeft}>
                             {/* Flying High Batch */}
                             <TouchableOpacity style={styles.FlyingHighOpacity} onPress={() => navigation.navigate('Flying High Words')}>
-                                <Image source={require('../assets/SelectWordBatchesView/FlyingHigh.png')} style={styles.Image} />
+                                <Image source={require('../assets/selectWordBatchesView/flyingHigh.png')} style={styles.Image} />
                             </TouchableOpacity>
                             {/* Sunny Island */}
                             <TouchableOpacity style={styles.SunnyIslandOpacity} onPress={() => console.log('Button 1 pressed')}>
-                                <Image source={require('../assets/SelectWordBatchesView/SunnyIsland.gif')} style={styles.Image} />
+                                <Image source={require('../assets/selectWordBatchesView/sunnyIsland.gif')} style={styles.Image} />
                             </TouchableOpacity>
                         </View>
                         <View style={styles.bottomHalfLeft}>
                             {/* Springtime Fun */}
                             <TouchableOpacity style={styles.SpringtimeFunOpacity} onPress={() => console.log('Button 1 pressed')}>
-                                <Image source={require('../assets/SelectWordBatchesView/SpringtimeFun.png')} style={styles.Image} />
+                                <Image source={require('../assets/selectWordBatchesView/springtimeFun.png')} style={styles.Image} />
                             </TouchableOpacity>
                             {/* Alien Adventures */}
                             <TouchableOpacity style={styles.AlienAdventuresOpacity} onPress={() => console.log('Button 1 pressed')}>
-                                <Image source={require('../assets/SelectWordBatchesView/AlienAdventures.png')} style={styles.Image} />
+                                <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')} style={styles.Image} />
                             </TouchableOpacity>
                             {/* Outer Space */}
                             <TouchableOpacity style={styles.OuterSpaceOpacity} onPress={() => console.log('Button 1 pressed')}>
-                                <Image source={require('../assets/SelectWordBatchesView/OuterSpace.png')} style={styles.Image} />
+                                <Image source={require('../assets/selectWordBatchesView/outerSpace.png')} style={styles.Image} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -48,14 +48,14 @@ const SelectWordBatchesView = ({ navigation }) => {
                         <View style={styles.upperHalfRight}>
                             {/* Planets and Beyond */}
                             <TouchableOpacity style={styles.PlanetsAndBeyondOpacity} onPress={() => console.log('Button 1 pressed')}>
-                                <Image source={require('../assets/SelectWordBatchesView/PlanetsAndBeyond.png')} style={styles.Image} />
+                                <Image source={require('../assets/selectWordBatchesView/planetsAndBeyond.png')} style={styles.Image} />
                             </TouchableOpacity>
                         </View>
 
                         <View style={styles.bottomHalfRight}>
                             {/* Diving Deep */}
                             <TouchableOpacity style={styles.DivingDeepOpacity} onPress={() => console.log('Button 1 pressed')}>
-                                <Image source={require('../assets/SelectWordBatchesView/DivingDeep.png')} style={styles.Image} />
+                                <Image source={require('../assets/selectWordBatchesView/divingDeep.png')} style={styles.Image} />
                             </TouchableOpacity>
                         </View>
                         

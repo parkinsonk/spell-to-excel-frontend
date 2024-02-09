@@ -5,11 +5,15 @@ import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 
-const FlyingHighWordsView = ({ navigation }) => {
+const FlyingHighWordsView = ({ navigation, route}) => {
+    
+    const { selectedWord, batch } = route.params;
+
+
     return (
         
             <ImageBackground
-                source={require('../assets/ActivitiesView/ActivitiesBackground.png')}
+                source={require('../assets/activitiesView/activitiesBackground.png')}
                 resizeMode="cover"
                 style={styles.background}
             >
@@ -17,47 +21,47 @@ const FlyingHighWordsView = ({ navigation }) => {
                 <View style={styles.top}>
 
                     <View style={styles.activities}>
-                        <Image source={require('../assets/ActivitiesView/activities.png')} style={styles.Image} />
+                        <Image source={require('../assets/activitiesView/activities.png')} style={styles.Image} />
                     </View>
 
                 </View>
 
                 <View style={styles.middle}>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => navigation.navigate('Activites')}>
-                        <Image source={require('../assets/ActivitiesView/story.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/activitiesView/story.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => navigation.navigate('Activites')}>
-                        <Image source={require('../assets/ActivitiesView/boxes.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/activitiesView/boxes.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => navigation.navigate('Activites')}>
-                        <Image source={require('../assets/ActivitiesView/trace.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.opacity} onPress={() => navigation.navigate('Trace', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
+                        <Image source={require('../assets/activitiesView/trace.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => navigation.navigate('Activites')}>
-                        <Image source={require('../assets/ActivitiesView/flashcards.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/activitiesView/flashcards.png')} style={styles.Image} />
                     </TouchableOpacity>
 
                 </View>
 
                 <View style={styles.bottom}>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => navigation.navigate('Activites')}>
-                        <Image source={require('../assets/ActivitiesView/baskets.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/activitiesView/baskets.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => navigation.navigate('Activites')}>
-                        <Image source={require('../assets/ActivitiesView/SoundSpelling.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/activitiesView/soundSpelling.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => navigation.navigate('Activites')}>
-                        <Image source={require('../assets/ActivitiesView/test.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/activitiesView/test.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => navigation.navigate('Activites')}>
-                        <Image source={require('../assets/ActivitiesView/WordsIKnow.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/activitiesView/wordsIKnow.png')} style={styles.Image} />
                     </TouchableOpacity>
 
                 </View>
