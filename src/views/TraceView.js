@@ -11,7 +11,7 @@ const TraceView = ({ navigation, route }) => {
   const { batch, activity, selectedWord } = route.params;
   const background = activitiesWordMapping[batch]?.[activity]?.[selectedWord] || activitiesWordMapping.default;
   const [paths, setPaths] = useState([]);
-  const [color, setColor] = useState("black"); // Ensure color state is defined
+  const [color, setColor] = useState("white"); // Ensure color state is defined
   const [showColorPicker, setShowColorPicker] = useState(false);
 
   const colorOptions = ["black", "red", "blue", "green", "yellow", "purple"];
@@ -51,6 +51,7 @@ const TraceView = ({ navigation, route }) => {
 
   return (
     <ImageBackground source={background} resizeMode="cover" style={styles.background}>
+       <ImageBackground source={require('../assets/traceViews/Tracev.gif')} resizeMode="cover" style={styles.newBackground}></ImageBackground>
       <View {...panResponder.panHandlers} style={styles.svgContainer}>
         <Svg height={screenHeight} width={screenWidth}>
           {paths.map((path, index) => (
@@ -59,7 +60,7 @@ const TraceView = ({ navigation, route }) => {
               d={path}
               stroke={color}
               fill="none"
-              strokeWidth={15}
+              strokeWidth={15}nm
             />
           ))}
         </Svg>
@@ -122,13 +123,13 @@ crayonBox: {
 crayonBoxImage: {
     width: 100,
     height: 100,
-    borderColor: 'black',
+    borderColor: 'white',
     marginLeft: 50,
 },
   eraserImage: {
     width: 100,
     height: 50,
-    borderColor: 'black',
+    borderColor: 'white',
 
   },
   colorPickerContainer: {
