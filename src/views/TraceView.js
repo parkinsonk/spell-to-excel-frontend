@@ -9,10 +9,21 @@ const screenWidth = Dimensions.get('window').width;
 
 const TraceView = ({ navigation, route }) => {
   const { batch, activity, selectedWord } = route.params;
-  const background = activitiesWordMapping[batch]?.[activity]?.[selectedWord] || activitiesWordMapping.default;
+  const traceBackground = activitiesWordMapping[batch]?.[activity]?.[selectedWord] || activitiesWordMapping.default;
+  const coverBackground = require('../assets/traceViews/blankTraceBackground.png')
   const [paths, setPaths] = useState([]);
   const [color, setColor] = useState("black"); // Ensure color state is defined
   const [showColorPicker, setShowColorPicker] = useState(false);
+  const [showBackground, setBackground] = useState(traceBackground);
+
+  
+  const setTraceBackground = () => {
+    setBackground(traceBackground); // Set the background to trace image
+  };
+  
+  const setCoverBackground = () => {
+    setBackground(coverBackground); // Set the background to cover image
+  };
 
   const colorOptions = ["black", "red", "blue", "green", "yellow", "purple"];
 
@@ -50,7 +61,7 @@ const TraceView = ({ navigation, route }) => {
   };
 
   return (
-    <ImageBackground source={background} resizeMode="cover" style={styles.background}>
+    <ImageBackground source={showBackground} resizeMode="cover" style={styles.background}>
       <View {...panResponder.panHandlers} style={styles.svgContainer}>
         <Svg height={screenHeight} width={screenWidth}>
           {paths.map((path, index) => (
@@ -65,12 +76,24 @@ const TraceView = ({ navigation, route }) => {
         </Svg>
       </View>
       
-      <TouchableOpacity style={styles.button} onPress={handleClearButtonClick}>
+      <TouchableOpacity style={styles.eraser} onPress={handleClearButtonClick}>
         <Image source={require('../assets/traceViews/eraser.png')} style={styles.eraserImage} />
       </TouchableOpacity>
   
       <TouchableOpacity style={styles.crayonBox} onPress={toggleColorPicker}>
         <Image source={require('../assets/traceViews/crayonBox.png')} style={styles.crayonBoxImage} />
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.trace} onPress={setTraceBackground}>
+        <Image source={require('../assets/traceViews/trace.png')} style={styles.traceImage} />
+      </TouchableOpacity>
+
+      <View style={styles.copy} onPress={onPress={toggleColorPicker}}>  
+        <Image source={require('../assets/traceViews/copy.png')} style={styles.copyImage} />
+      </View>
+
+      <TouchableOpacity style={styles.cover} onPress={setCoverBackground}>
+        <Image source={require('../assets/traceViews/cover.png')} style={styles.coverImage} />
       </TouchableOpacity>
   
       {/* Color Picker Overlay */}
@@ -109,9 +132,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  button: {
+  eraser: {
     position: 'absolute',
-    right: 20,
+    left: 200,
     bottom: 20,
   },
 crayonBox: {
@@ -145,6 +168,40 @@ crayonBoxImage: {
     width: 50,
     height: 50,
     margin: 5,
+  },
+  trace: {
+    position: 'absolute',
+    right: screenWidth * .05,
+    top: screenHeight * .2,
+  },
+  traceImage: {
+    width: screenWidth * .12,
+    height: screenHeight * .12,
+    borderColor: 'black',
+    marginRight: 50,
+  },
+  copy: {
+    position: 'absolute',
+    right: screenWidth * .05,
+    top: screenHeight * .45,
+  },
+  copyImage: {
+    width: screenWidth * .12,
+    height: screenHeight * .12,
+    borderColor: 'black',
+    marginRight: 50,
+  },
+
+  cover: {
+    position: 'absolute',
+    right: screenWidth * .05,
+    top: screenHeight * .7,
+  },
+  coverImage: {
+    width: screenWidth * .12,
+    height: screenHeight * .125,
+    borderColor: 'black',
+    marginRight: 50,
   },
 });
 
