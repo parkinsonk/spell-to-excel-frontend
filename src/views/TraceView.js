@@ -133,7 +133,6 @@ const TraceView = ({ navigation, route }) => {
       borderColor: 'black',
       marginRight: 50,
     },
-  
     cover: {
       position: 'absolute',
       right: screenWidth * .05,
@@ -142,6 +141,17 @@ const TraceView = ({ navigation, route }) => {
     coverImage: {
       width: aspectRatio > 1.5 ?  screenWidth * .11 : screenWidth * .13,
       height: aspectRatio > 1.5 ?  screenHeight * .18 : screenHeight * .14,
+      borderColor: 'black',
+      marginRight: 50,
+    },
+    sound: {
+      position: 'absolute',
+      left: screenWidth * .17,
+      top: screenHeight * .20,
+    },
+    soundImage: {
+      width: aspectRatio > 1.5 ?  screenWidth * .10 : screenWidth * .10,
+      height: aspectRatio > 1.5 ?  screenHeight * .15 : screenHeight * .10,
       borderColor: 'black',
       marginRight: 50,
     },
@@ -175,12 +185,16 @@ const TraceView = ({ navigation, route }) => {
         <Image source={require('../assets/traceViews/trace.png')} style={styles.traceImage} />
       </TouchableOpacity>
 
-      <View style={styles.copy} onPress={onPress={toggleColorPicker}}>  
+      <View style={styles.copy}>  
         <Image source={require('../assets/traceViews/copy.png')} style={styles.copyImage} />
       </View>
 
-      <TouchableOpacity style={styles.cover} onPress={setCoverBackground}>
+      <TouchableOpacity style={styles.cover} onPress={() => {setCoverBackground(); handleClearButtonClick();}}>
         <Image source={require('../assets/traceViews/cover.png')} style={styles.coverImage} />
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.sound} onPress={handleClearButtonClick}>
+        <Image source={require('../assets/traceViews/sound.png')} style={styles.soundImage} />
       </TouchableOpacity>
   
       {/* Color Picker Overlay */}
