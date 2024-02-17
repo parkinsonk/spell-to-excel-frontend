@@ -33,7 +33,6 @@ const FlyingHighWordsView = ({ navigation, route}) => {
                         <Image source={require('../assets/activitiesView/trace.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    
 
                 </View>
 
