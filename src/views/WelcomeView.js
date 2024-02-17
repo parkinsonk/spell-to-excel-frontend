@@ -11,40 +11,32 @@ const WelcomeScreen = ({ navigation }) => {
   resizeMode="cover"
   style={styles.background}
 >
-  <View style={styles.container}>
-    <View style={styles.upperHalf}>
+    <View style={styles.container}>
       <Image
         source={require('../assets/welcomeView/welcomeBlueWB.gif')}
         style={styles.image}
       />
     </View>
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={() => navigation.navigate('Login')}
-      >
-        <Image
-          source={require('../assets/welcomeView/loginp.png')}
-          style={styles.buttonImage}
-        />
-      </TouchableOpacity>
-    </View>
-  </View>
+
+
+    <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Login')}>
+      <Image source={require('../assets/welcomeView/loginp.png')} style={styles.buttonImage} />
+    </TouchableOpacity>
+
+
 </ImageBackground>
   );
 };
 
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
   container: {
     flex: 1,
-    backgroundColor: 'white', // Set the background color for the whole page
-  },
-  upperHalf: {
-    flex: 1,
-    justifyContent: 'center', // Center the image vertically
-    borderColor: 'white',
-    borderWidth: 0.1,
   },
   image: {
     width: '100%', 
@@ -52,17 +44,14 @@ const styles = StyleSheet.create({
     aspectRatio: 2, 
     resizeMode: 'contain',
     alignSelf: 'center',
-    backgroundColor: 'white',
     
   },
-  buttonContainer: {
-    position: 'absolute',
-    bottom: 16, // Adjust the bottom spacing
-    left: screenWidth / 2 - 25 + screenWidth / 5, // Move halfway more to the right
-  },
   loginButton: {
-    width: 100, 
-    height: 40, 
+    position: 'absolute',
+    right: 0,
+    bottom: 5,
+    width: screenWidth * 0.2, 
+    height: screenHeight * 0.13,
     justifyContent: 'center',
     alignItems: 'center',
     
