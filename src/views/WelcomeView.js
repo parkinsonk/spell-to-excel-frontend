@@ -6,32 +6,39 @@ const screenWidth = Dimensions.get('window').width;
 
 const WelcomeScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.upperHalf}>
-        <Image
-          source={require('../assets/welcomeView/welcomeBlueWB.gif')}
-          style={styles.image}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => navigation.navigate('Login')}
-        >
-          <Image
-            source={require('../assets/welcomeView/loginp.png')}
-            style={styles.buttonImage}
-          />
-        </TouchableOpacity>
-      </View>
+    <ImageBackground
+  source={require('../assets/welcomeView/blueBackground.png')}
+  resizeMode="cover"
+  style={styles.background}
+>
+  <View style={styles.container}>
+    <View style={styles.upperHalf}>
+      <Image
+        source={require('../assets/welcomeView/welcomeBlueWB.gif')}
+        style={styles.image}
+      />
     </View>
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={() => navigation.navigate('Login')}
+      >
+        <Image
+          source={require('../assets/welcomeView/loginp.png')}
+          style={styles.buttonImage}
+        />
+      </TouchableOpacity>
+    </View>
+  </View>
+</ImageBackground>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0c3fb', // Set the background color for the whole page
+    backgroundColor: 'white', // Set the background color for the whole page
   },
   upperHalf: {
     flex: 1,
@@ -40,9 +47,9 @@ const styles = StyleSheet.create({
     borderWidth: 0.1,
   },
   image: {
-    width: '100%', // Make the image take up the entire width
-    height: '100%', // Make the image take up the entire height
-    aspectRatio: 2, // Adjust the aspect ratio as needed to make the image wider
+    width: '100%', 
+    height: '100%', 
+    aspectRatio: 2, 
     resizeMode: 'contain',
     alignSelf: 'center',
     backgroundColor: 'white',
@@ -65,6 +72,11 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'contain',
   },
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  }
 });
 
 export default WelcomeScreen;
