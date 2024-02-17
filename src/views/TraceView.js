@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Dimensions, PanResponder } from 'react-native';
+import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Dimensions, PanResponder, useWindowDimensions} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import activitiesWordMapping from '../utils/activitiesWordMapping';
 import { SafeAreaView } from 'react-native';
 
-const screenHeight = Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
 
 const TraceView = ({ navigation, route }) => {
   const { batch, activity, selectedWord } = route.params;
@@ -15,6 +13,8 @@ const TraceView = ({ navigation, route }) => {
   const [color, setColor] = useState("black"); // Ensure color state is defined
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [showBackground, setBackground] = useState(traceBackground);
+  const {width: screenWidth, height: screenHeight} = useWindowDimensions();
+  
 
   
   const setTraceBackground = () => {
@@ -59,6 +59,94 @@ const TraceView = ({ navigation, route }) => {
   const handleChangeColor = (newColor) => {
     setColor(newColor);
   };
+
+  const styles = StyleSheet.create({
+
+    background: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      resizeMode: 'contain',
+      
+    },
+    svgContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    eraser: {
+      position: 'absolute',
+      left: 200,
+      bottom: 20,
+    },
+  crayonBox: {
+      position: 'absolute',
+      left: 0,
+      bottom: 20,
+  },
+  crayonBoxImage: {
+      width: 100,
+      height: 100,
+      borderColor: 'black',
+      marginLeft: 50,
+  },
+    eraserImage: {
+      width: 100,
+      height: 50,
+      borderColor: 'black',
+  
+    },
+    colorPickerContainer: {
+      position: 'absolute',
+      padding: 20,
+      backgroundColor: '#fff',
+      borderRadius: 10,
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    colorOption: {
+      width: 50,
+      height: 50,
+      margin: 5,
+    },
+    trace: {
+      position: 'absolute',
+      right: screenWidth * .05,
+      top: screenHeight * .2,
+    },
+    traceImage: {
+      width: screenWidth * .12,
+      height: screenHeight * .12,
+      borderColor: 'black',
+      marginRight: 50,
+    },
+    copy: {
+      position: 'absolute',
+      right: screenWidth * .05,
+      top: screenHeight * .45,
+    },
+    copyImage: {
+      width: screenWidth * .12,
+      height: screenHeight * .12,
+      borderColor: 'black',
+      marginRight: 50,
+    },
+  
+    cover: {
+      position: 'absolute',
+      right: screenWidth * .05,
+      top: screenHeight * .7,
+    },
+    coverImage: {
+      width: screenWidth * .12,
+      height: screenHeight * .13,
+      borderColor: 'black',
+      marginRight: 50,
+    },
+  });
 
   return (
     <ImageBackground source={showBackground} resizeMode="cover" style={styles.background}>
@@ -117,92 +205,6 @@ const TraceView = ({ navigation, route }) => {
   );
 };
 
-const styles = StyleSheet.create({
 
-  background: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    resizeMode: 'contain',
-    
-  },
-  svgContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  eraser: {
-    position: 'absolute',
-    left: 200,
-    bottom: 20,
-  },
-crayonBox: {
-    position: 'absolute',
-    left: 0,
-    bottom: 20,
-},
-crayonBoxImage: {
-    width: 100,
-    height: 100,
-    borderColor: 'black',
-    marginLeft: 50,
-},
-  eraserImage: {
-    width: 100,
-    height: 50,
-    borderColor: 'black',
-
-  },
-  colorPickerContainer: {
-    position: 'absolute',
-    padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  colorOption: {
-    width: 50,
-    height: 50,
-    margin: 5,
-  },
-  trace: {
-    position: 'absolute',
-    right: screenWidth * .05,
-    top: screenHeight * .2,
-  },
-  traceImage: {
-    width: screenWidth * .12,
-    height: screenHeight * .12,
-    borderColor: 'black',
-    marginRight: 50,
-  },
-  copy: {
-    position: 'absolute',
-    right: screenWidth * .05,
-    top: screenHeight * .45,
-  },
-  copyImage: {
-    width: screenWidth * .12,
-    height: screenHeight * .12,
-    borderColor: 'black',
-    marginRight: 50,
-  },
-
-  cover: {
-    position: 'absolute',
-    right: screenWidth * .05,
-    top: screenHeight * .7,
-  },
-  coverImage: {
-    width: screenWidth * .12,
-    height: screenHeight * .125,
-    borderColor: 'black',
-    marginRight: 50,
-  },
-});
 
 export default TraceView;
