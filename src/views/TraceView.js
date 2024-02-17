@@ -14,8 +14,7 @@ const TraceView = ({ navigation, route }) => {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [showBackground, setBackground] = useState(traceBackground);
   const {width: screenWidth, height: screenHeight} = useWindowDimensions();
-  
-
+  const aspectRatio = screenWidth / screenHeight;
   
   const setTraceBackground = () => {
     setBackground(traceBackground); // Set the background to trace image
@@ -118,8 +117,8 @@ const TraceView = ({ navigation, route }) => {
       top: screenHeight * .2,
     },
     traceImage: {
-      width: screenWidth * .12,
-      height: screenHeight * .12,
+      width: aspectRatio > 1.5 ?  screenWidth * .12 : screenWidth * .15,
+      height: aspectRatio > 1.5 ?  screenHeight * .16 : screenHeight * .14,
       borderColor: 'black',
       marginRight: 50,
     },
@@ -129,8 +128,8 @@ const TraceView = ({ navigation, route }) => {
       top: screenHeight * .45,
     },
     copyImage: {
-      width: screenWidth * .12,
-      height: screenHeight * .12,
+      width: aspectRatio > 1.5 ?  screenWidth * .11 : screenWidth * .14,
+      height: aspectRatio > 1.5 ?  screenHeight * .17 : screenHeight * .143,
       borderColor: 'black',
       marginRight: 50,
     },
@@ -141,8 +140,8 @@ const TraceView = ({ navigation, route }) => {
       top: screenHeight * .7,
     },
     coverImage: {
-      width: screenWidth * .12,
-      height: screenHeight * .13,
+      width: aspectRatio > 1.5 ?  screenWidth * .11 : screenWidth * .13,
+      height: aspectRatio > 1.5 ?  screenHeight * .18 : screenHeight * .14,
       borderColor: 'black',
       marginRight: 50,
     },

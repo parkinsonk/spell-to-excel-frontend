@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     },
 
     DivingDeepOpacity: {
-        marginTop: '12%',
+        marginTop: '6%',
         marginLeft: '12%',
         height: '100%',
         width: '70%',
