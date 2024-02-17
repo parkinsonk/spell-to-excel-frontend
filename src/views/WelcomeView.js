@@ -31,21 +31,22 @@ const WelcomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'transparent', // Set the background to transparent
+    backgroundColor: '#0c3fb', // Set the background color for the whole page
   },
   upperHalf: {
     flex: 1,
     justifyContent: 'center', // Center the image vertically
-    borderColor: 'transparent',
+    borderColor: 'white',
     borderWidth: 0.1,
   },
   image: {
-    width: '100%',
-    height: '100%', // Make the image take up the entire screen height
-    aspectRatio: 16 / 9, // Set the aspect ratio to maintain the original image's proportions
+    width: '100%', // Make the image take up the entire width
+    height: '100%', // Make the image take up the entire height
+    aspectRatio: 2, // Adjust the aspect ratio as needed to make the image wider
     resizeMode: 'contain',
     alignSelf: 'center',
     backgroundColor: 'white',
+    
   },
   buttonContainer: {
     position: 'absolute',
@@ -53,10 +54,11 @@ const styles = StyleSheet.create({
     left: screenWidth / 2 - 25 + screenWidth / 5, // Move halfway more to the right
   },
   loginButton: {
-    width: 100, // Make the button twice as big (adjust as needed)
-    height: 40, // Make the button twice as big (adjust as needed)
+    width: 100, 
+    height: 40, 
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   buttonImage: {
     width: '100%',
