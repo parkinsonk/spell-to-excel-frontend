@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 5,
     width: screenWidth * 0.2, 
-    height: screenHeight * 0.13,
+    height: screenHeight * 0.14,
     justifyContent: 'center',
     alignItems: 'center',
     
