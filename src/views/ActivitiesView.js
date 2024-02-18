@@ -16,59 +16,43 @@ const FlyingHighWordsView = ({ navigation, route}) => {
                 source={require('../assets/activitiesView/activitiesBackground.png')}
                 resizeMode="cover"
                 style={styles.background}
+                
             >
+
+                <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => console.log('button pressed')}>
+                    <Image source={require('../assets/activitiesView/wordsIKnow.png')} style={styles.wordsIKnowImage} />
+                </TouchableOpacity>
 
                 <View style={styles.top}>
 
-                    <View style={styles.activities}>
-                        <Image source={require('../assets/activitiesView/activities.png')} style={styles.Image} />
-                    </View>
-
-                </View>
-
-                <View style={styles.middle}>
-
-                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/story.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.readOpacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/activitiesView/read.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/boxes.png')} style={styles.Image} />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.opacity} onPress={() => navigation.navigate('Trace', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
+                    <TouchableOpacity style={styles.traceOpacity} onPress={() => navigation.navigate('Trace', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
                         <Image source={require('../assets/activitiesView/trace.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/flashcards.png')} style={styles.Image} />
-                    </TouchableOpacity>
 
                 </View>
 
+
                 <View style={styles.bottom}>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/baskets.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.flashcardsOpacity} onPress={() => console.log('button pressed')}>
+                        <Image source={require('../assets/activitiesView/flashcards.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/soundSpelling.png')} style={styles.Image} />
-                    </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
+                    <TouchableOpacity style={styles.testOpacity} onPress={() => console.log('button pressed')}>
                         <Image source={require('../assets/activitiesView/test.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.opacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/wordsIKnow.png')} style={styles.Image} />
-                    </TouchableOpacity>
 
                 </View>
             
                 
             </ImageBackground>
-
     );
 };
 
@@ -87,33 +71,40 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    middle: {
-        flex: 2,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-    },
     bottom: {
-        flex: 2,
+        flex: 1,
         width: '100%',
         height: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
     },
-    activities: {
-        height: '90%',
-        width: '100%',
-        resizeMode: 'contain',
+    wordsIKnowopacity: {
+        position: 'absolute',
+        top: 0.2,
+        right: 0,
+        zIndex: 10, 
     },
-    opacity: {
-        height: '80%',
+    traceOpacity: {
         width: '20%',
-        resizeMode: 'contain',
+        height: '60%',
+        marginLeft: '15%',
+        marginTop: '5%',
     },
-
+    readOpacity: {
+        width: '20%',
+        height: '60%',
+    },
+    flashcardsOpacity: {
+        width: '20%',
+        height: '60%',
+    },
+    testOpacity: {
+        width: '20%',
+        height: '60%',
+        marginLeft: '18%',
+        marginTop: '5%',
+    },
     Image: {
         height: '100%',
         width: '100%',
