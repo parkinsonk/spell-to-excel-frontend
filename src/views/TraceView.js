@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Dimensions, PanResponder, useWindowDimensions} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import activitiesWordMapping from '../utils/activitiesWordMapping';
-import { SafeAreaView } from 'react-native';
 
 
 const TraceView = ({ navigation, route }) => {
