@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Dimensions, PanResponder, useWindowDimensions} from 'react-native';
+import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Dimensions, PanResponder, useWindowDimensions, Animated} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import boxesWordMapping from '../utils/boxesWordMapping';
+
+// Initialize with Animated.Value for each circle position
+const initializeCirclePositions = (length) => Array.from({ length }, () => new Animated.ValueXY());
 
 const BoxesView = ({ navigation, route  }) => {
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
@@ -12,10 +15,11 @@ const BoxesView = ({ navigation, route  }) => {
     const [color, setColor] = useState("black"); // Ensure color state is defined
     const [showColorPicker, setShowColorPicker] = useState(false);
     const [boxesLayout, setBoxesLayout] = useState({});
+    const [circlePositions, setCirclePositions] = useState(initializeCirclePositions(lettersList.length));
 
-    const BOX_WIDTH = 150; // Width of each box
-    const BOX_HEIGHT = 150; // Height of each box
-    const BOX_MARGIN = 10; // Margin between boxes
+    const BOX_WIDTH = aspectRatio > 1.5 ? 100: 150; // Width of each box
+    const BOX_HEIGHT = aspectRatio > 1.5 ? 100: 150; // Height of each box
+    const BOX_MARGIN = aspectRatio > 1.5 ? 5: 10; // Margin between boxes
     const NUM_COLUMNS = lettersList.length; // Number of boxes per row
     
       const colorOptions = ["black", "red", "blue", "green", "yellow", "purple"];
@@ -44,6 +48,30 @@ const BoxesView = ({ navigation, route  }) => {
           // Path finalization logic (if any) can go here
         },
       });
+
+     // Create PanResponder for each circle
+        const circlePanResponders = circlePositions.map((pos, index) =>
+        PanResponder.create({
+            onStartShouldSetPanResponder: () => true,
+            onPanResponderGrant: (evt, gestureState) => {
+                // Get the current position of the circle
+                pos.setOffset({
+                    x: pos.x._value,
+                    y: pos.y._value,
+                });
+                // Initialize the position for this gesture
+                pos.setValue({ x: 0, y: 0 });
+            },
+            onPanResponderMove: Animated.event([
+                null,
+                { dx: pos.x, dy: pos.y }, // Directly map dx and dy to the Animated.ValueXY
+            ], { useNativeDriver: false }),
+            onPanResponderRelease: () => {
+                // Clear the offset and keep the circle at its last position
+                pos.flattenOffset();
+            },
+        })
+        );
     
       const handleClearButtonClick = () => {
         setPaths([]);
@@ -71,10 +99,6 @@ const BoxesView = ({ navigation, route  }) => {
         return startX + (BOX_WIDTH + BOX_MARGIN) * rowPosition; // Calculate left position
     };
 
-    // Calculates the top position of a box based on its index
-    const calculateTopPosition = (index, screenHeight) => {
-        return screenHeight - screenHeight * .32; // Calculate top position
-    };
     
 
       const styles = StyleSheet.create({
@@ -98,30 +122,27 @@ const BoxesView = ({ navigation, route  }) => {
           },
           eraser: {
             position: 'absolute',
-            left: 200,
-            bottom: 20,
+            bottom: 0,
             zIndex: 3,
+            left: aspectRatio > 1.5 ? screenWidth * .87 : screenWidth * .13,
+            top: aspectRatio > 1.5 ? screenHeight * .03 : screenHeight * .79,
           },
         crayonBox: {
             position: 'absolute',
-            left: 0,
-            bottom: 20,
+            left: aspectRatio > 1.5 ? screenWidth * .8 : 0,
+            bottom: 0,
+            top: aspectRatio > 1.5 ? 0 : screenHeight * .75,
             zIndex: 3,
-            borderColor: 'black',
-            borderWidth: 2,
         },
         crayonBoxImage: {
-            width: 100,
-            height: 100,
-            borderColor: 'black',
-            marginLeft: 50,
+            width: aspectRatio > 1.5 ? screenWidth * .07 : screenWidth * .08,
+            height: aspectRatio > 1.5 ? screenHeight * .15 : screenHeight * .13,
+            marginLeft: aspectRatio > 1.5 ? 0 : 50,
             zIndex: 3,
         },
           eraserImage: {
-            width: 100,
-            height: 50,
-            borderColor: 'black',
-            borderWidth: 2,
+            width: aspectRatio > 1.5 ? screenWidth * .1 : screenWidth * .09,
+            height: aspectRatio > 1.5 ? screenHeight * .1 : screenHeight * .08,
             zIndex: 3,
         
           },
@@ -134,7 +155,7 @@ const BoxesView = ({ navigation, route  }) => {
             flexWrap: 'wrap',
             justifyContent: 'center',
             alignItems: 'center',
-            zIndex: 3,
+            zIndex: 10,
           },
           colorOption: {
             width: 50,
@@ -143,8 +164,8 @@ const BoxesView = ({ navigation, route  }) => {
           },
           sound: {
             position: 'absolute',
-            left: screenWidth * .17,
-            top: screenHeight * .20,
+            left: aspectRatio > 1.5 ? screenWidth * .08 : screenWidth * .05,
+            top: aspectRatio > 1.5 ? screenHeight * .08 :screenHeight * .18,
             zIndex: 3,
           },
           soundImage: {
@@ -162,8 +183,23 @@ const BoxesView = ({ navigation, route  }) => {
             borderColor: 'black',
             borderRadius: 10,
             margin: BOX_MARGIN, // Add margin to space out the boxes
-            top: screenHeight * .6,
             zIndex: 1,
+          },
+        lettersImage: {
+            position: 'absolute',
+            width: BOX_WIDTH - screenWidth * .03, // Match the box width or adjust as needed
+            height: BOX_HEIGHT - screenHeight * .03, // Match the box height or adjust as needed
+            zIndex: 2,
+          },
+        circle: {
+            position: 'absolute',
+            width: BOX_WIDTH - screenWidth * .04,
+            height: BOX_HEIGHT - screenHeight * .05,
+            fill: 'black',
+            backgroundColor: 'black',
+            borderRadius: 100,
+            zIndex: 4,
+            transform: [{ translateX: 0 }, { translateY: 0 }],
           },
     });
 
@@ -205,14 +241,39 @@ const BoxesView = ({ navigation, route  }) => {
     <React.Fragment key={index}>
         <View
             style={[styles.box, {
+                top: aspectRatio > 1.5 ?  screenHeight * .55 : screenHeight * .55,
                 left: calculateBoxLeftPosition(index, screenWidth),
             }]}
             onLayout={handleBoxPositioning(index)}
         />
         <View style={[styles.box, {
-            top: screenHeight * .41,
+            top: aspectRatio > 1.5 ?  screenHeight * .28 : screenHeight * .35,
             left: calculateBoxLeftPosition(index, screenWidth),
         }]} />
+        {boxesWordMapping[selectedWord] && boxesWordMapping[selectedWord][index] &&
+            <Image
+                source={boxesWordMapping[selectedWord][index]}
+                style={[styles.lettersImage, { // Match the box height or adjust as needed
+                    top: aspectRatio > 1.5 ?  screenWidth * .02 : screenHeight * .18,
+                    left: calculateBoxLeftPosition(index, screenWidth) + screenWidth * .015,
+                    
+                }]}
+            />}
+
+        {circlePositions.map((pos, index) => (
+                <Animated.View
+                    {...circlePanResponders[index].panHandlers}
+                    key={index}
+                    style={[
+                        styles.circle,
+                        {
+                            left: calculateBoxLeftPosition(index, screenWidth) + screenWidth * .015,
+                            top: aspectRatio > 1.5 ?  screenWidth * .02 : screenHeight * .18,
+                            transform: pos.getTranslateTransform(), // Use the Animated.Value for smooth animation
+                        },
+                    ]}
+                />
+            ))}
     </React.Fragment>
     ))}
 
