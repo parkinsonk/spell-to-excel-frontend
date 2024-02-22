@@ -15,10 +15,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-    },
+      "orientation": "landscape",
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIRequiresFullScreen": true
+    }
+  },
     "android": {
       "adaptiveIcon": {
+        "orientation": "landscape",
         "foregroundImage": "./src/assets/1.jpeg",
         "backgroundColor": "#ffffff"
       }
