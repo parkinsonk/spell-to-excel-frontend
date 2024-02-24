@@ -15,21 +15,25 @@
       "**/*"
     ],
     "ios": {
-      "orientation": "landscape",
       "supportsTablet": true,
       "infoPlist": {
         "UIRequiresFullScreen": true
-    }
-  },
+      },
+      "bundleIdentifier": "com.parkinsonk.spelltoexcel"
+    },
     "android": {
       "adaptiveIcon": {
-        "orientation": "landscape",
         "foregroundImage": "./src/assets/1.jpeg",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
       "favicon": "./src/assets/1.jpeg"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b17f21e6-7088-4d89-90f0-18ec531db3f1"
+      }
     }
   }
 }

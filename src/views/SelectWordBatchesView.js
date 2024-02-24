@@ -1,16 +1,17 @@
 import React, { useState, useEffect} from 'react';
-import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions, TouchableOpacity, Image} from 'react-native';
+import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import axios from 'axios';
 import * as Keychain from 'react-native-keychain';
 
 
-const screenHeight = Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-
 const SelectWordBatchesView = ({ navigation }) => {
 
+    const { height: screenHeight, width: screenWidth } = useWindowDimensions();
+    const isLandscape = screenWidth > screenHeight;
+
     const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
+    const [backgroundImage, setBackgroundImage] = useState(require('../assets/selectWordBatchesView/batchesBackgroundLandscape.png'));
 
     useEffect(() => {
         // Function to update styles based on current orientation
@@ -18,10 +19,14 @@ const SelectWordBatchesView = ({ navigation }) => {
           const orientation = await ScreenOrientation.getOrientationAsync();
           if (orientation === ScreenOrientation.Orientation.LANDSCAPE_LEFT || orientation === ScreenOrientation.Orientation.LANDSCAPE_RIGHT) {
             setOrientationStyles(styles.landscape);
+            setBackgroundImage(require('../assets/selectWordBatchesView/batchesBackgroundLandscape.png'));
           } else {
             setOrientationStyles(styles.portrait);
+            setBackgroundImage(require('../assets/selectWordBatchesView/batchesBackgroundPortrait.png'));
           }
         };
+
+        
     
         // Initial update when component mounts
         updateOrientationStyles();
@@ -36,14 +41,17 @@ const SelectWordBatchesView = ({ navigation }) => {
           ScreenOrientation.removeOrientationChangeListener(subscription);
         };
       }, []);
+      
     return (
         
             <ImageBackground
-                source={require('../assets/selectWordBatchesView/batchesBackground.png')}
+                source={backgroundImage}
                 resizeMode="cover"
-                style={orientationStyles.background}
-            >
-                    <View style={orientationStyles.leftSide}>
+                style={orientationStyles.background}>
+
+            {isLandscape ? (
+                <>
+                    <View style={screenWidth > screenHeight ? orientationStyles.leftSide: orientationStyles.upperHalfPortrait}>
                         <View style={orientationStyles.upperHalfLeft}>
                             {/* Flying High Batch */}
                             <TouchableOpacity style={orientationStyles.FlyingHighOpacity} onPress={() => navigation.navigate('Flying High Words')}>
@@ -88,6 +96,54 @@ const SelectWordBatchesView = ({ navigation }) => {
                         
                     
                     </View>
+                    </>) : (
+                        <>
+                        <View style={orientationStyles.leftSidePortrait}>
+
+
+                            {/* Springtime Fun */}
+                            <TouchableOpacity style={orientationStyles.SpringtimeFunOpacity} onPress={() => console.log('Button 1 pressed')}>
+                                <Image source={require('../assets/selectWordBatchesView/springtimeFun.png')} style={orientationStyles.Image} />
+                            </TouchableOpacity>
+
+                            {/* Alien Adventures */}
+                            <TouchableOpacity style={orientationStyles.AlienAdventuresOpacity} onPress={() => console.log('Button 1 pressed')}>
+                                <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')} style={orientationStyles.Image} />
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={orientationStyles.middlePortrait}>
+                        {/* Flying High Batch */}
+                        <TouchableOpacity style={orientationStyles.FlyingHighOpacity} onPress={() => navigation.navigate('Flying High Words')}>
+                            <Image source={require('../assets/selectWordBatchesView/flyingHigh.png')} style={orientationStyles.Image} />
+                        </TouchableOpacity>
+
+                        {/* Alien Adventures */}
+                        <TouchableOpacity style={orientationStyles.AlienAdventuresOpacity} onPress={() => console.log('Button 1 pressed')}>
+                            <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')} style={orientationStyles.Image} />
+                        </TouchableOpacity>
+                        </View>
+
+                        <View style={orientationStyles.rightSidePortrait}>
+
+                        {/* Sunny Island */}
+                        <TouchableOpacity style={orientationStyles.SunnyIslandOpacity} onPress={() => console.log('Button 1 pressed')}>
+                                <Image source={require('../assets/selectWordBatchesView/sunnyIsland.gif')} style={orientationStyles.Image} />
+                        </TouchableOpacity>
+                    
+
+                        {/* Alien Adventures */}
+                        <TouchableOpacity style={orientationStyles.AlienAdventuresOpacity} onPress={() => console.log('Button 1 pressed')}>
+                            <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')} style={orientationStyles.Image} />
+                        </TouchableOpacity>
+                        </View>
+
+                        </>
+                        
+                        
+                        )}
+
+                        
             
                 
             </ImageBackground>
@@ -97,6 +153,7 @@ const SelectWordBatchesView = ({ navigation }) => {
 
 const styles = {
     
+// Landscape styles
     landscape: StyleSheet.create({
         background: {
             flex: 1,
@@ -143,6 +200,7 @@ const styles = {
         },
         SpringtimeFunOpacity: {
             marginLeft: '-2.5%',
+            
             height: '80%',
             width: '40%',
         },
@@ -179,54 +237,54 @@ const styles = {
         },
     }),
 
+// Portrait styles
     portrait: StyleSheet.create({
         background: {
             flex: 1,
             width: '100%',
             height: '100%',
-            flexDirection: 'column',
-        },
-        leftSide: {
-            flex: 1,
-            flexDirection: 'column',
-        },
-        rightSide: {
-            flex: 1,
-            flexDirection: 'column',
-        },
-        upperHalfLeft: {
-            flex: 1,
             flexDirection: 'row',
+            borderColor: 'red',
+            borderWidth: 2,
         },
-        bottomHalfLeft: {
+        leftSidePortrait: {
             flex: 1,
-            flexDirection: 'row',
+            borderColer: 'green',
+            borderWidth: 2,
         },
-        upperHalfRight: {
+        middlePortrait: {
             flex: 1,
-            flexDirection: 'row',
+            borderColer: 'green',
+            borderWidth: 2,
         },
-        bottomHalfRight: {
+        rightSidePortrait: {
             flex: 1,
-            flexDirection: 'row',
+            borderColer: 'blue',
+            borderWidth: 2,
         },
 
         FlyingHighOpacity: {
-            marginTop: '5%',
-            marginLeft: '15%',
-            height: '80%',
-            width: '30%',
+
+            height: '25%',
+            width: '100%',
+            borderColor: 'black',
+            borderWidth: 2,
         },
         SunnyIslandOpacity: {
-            marginTop: '5%',
-            marginLeft: '10%',
-            height: '80%',
-            width: '30%',
+        
+            marginTop: '20%',
+            height: '25%',
+            width: '100%',
+            borderColor: 'black',
+            borderWidth: 2,
         },
         SpringtimeFunOpacity: {
-            marginLeft: '-2.5%',
-            height: '80%',
-            width: '40%',
+            marginLeft: '-10%',
+            marginTop: '100%',
+            height: '20%',
+            width: '110%',
+            b0rderColor: 'black',  
+            borderWidth: 2,
         },
         AlienAdventuresOpacity: {
             marginTop: '15%',
