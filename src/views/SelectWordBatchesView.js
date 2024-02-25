@@ -3,6 +3,8 @@ import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions
 import * as ScreenOrientation from 'expo-screen-orientation';
 import axios from 'axios';
 import * as Keychain from 'react-native-keychain';
+import Svg, { Path } from 'react-native-svg';
+
 
 
 const SelectWordBatchesView = ({ navigation }) => {
@@ -54,25 +56,25 @@ const SelectWordBatchesView = ({ navigation }) => {
                     <View style={screenWidth > screenHeight ? orientationStyles.leftSide: orientationStyles.upperHalfPortrait}>
                         <View style={orientationStyles.upperHalfLeft}>
                             {/* Flying High Batch */}
-                            <TouchableOpacity style={orientationStyles.FlyingHighOpacity} onPress={() => navigation.navigate('Flying High Words')}>
+                            <TouchableOpacity style={orientationStyles.FlyingHighOpacity} resizeMode="contain" onPress={() => navigation.navigate('Flying High Words')}>
                                 <Image source={require('../assets/selectWordBatchesView/flyingHigh.png')} style={orientationStyles.Image} />
                             </TouchableOpacity>
                             {/* Sunny Island */}
-                            <TouchableOpacity style={orientationStyles.SunnyIslandOpacity} onPress={() => console.log('Button 1 pressed')}>
+                            <TouchableOpacity style={orientationStyles.SunnyIslandOpacity} resizeMode="contain" onPress={() => console.log('Button 1 pressed')}>
                                 <Image source={require('../assets/selectWordBatchesView/sunnyIsland.gif')} style={orientationStyles.Image} />
                             </TouchableOpacity>
                         </View>
                         <View style={orientationStyles.bottomHalfLeft}>
                             {/* Springtime Fun */}
-                            <TouchableOpacity style={orientationStyles.SpringtimeFunOpacity} onPress={() => console.log('Button 1 pressed')}>
+                            <TouchableOpacity style={orientationStyles.SpringtimeFunOpacity} resizeMode="contain" onPress={() => console.log('Button 1 pressed')}>
                                 <Image source={require('../assets/selectWordBatchesView/springtimeFun.png')} style={orientationStyles.Image} />
                             </TouchableOpacity>
                             {/* Alien Adventures */}
-                            <TouchableOpacity style={orientationStyles.AlienAdventuresOpacity} onPress={() => console.log('Button 1 pressed')}>
+                            <TouchableOpacity style={orientationStyles.AlienAdventuresOpacity} resizeMode="contain" onPress={() => console.log('Button 1 pressed')}>
                                 <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')} style={orientationStyles.Image} />
                             </TouchableOpacity>
                             {/* Outer Space */}
-                            <TouchableOpacity style={orientationStyles.OuterSpaceOpacity} onPress={() => console.log('Button 1 pressed')}>
+                            <TouchableOpacity style={orientationStyles.OuterSpaceOpacity} resizeMode="contain" onPress={() => console.log('Button 1 pressed')}>
                                 <Image source={require('../assets/selectWordBatchesView/outerSpace.png')} style={orientationStyles.Image} />
                             </TouchableOpacity>
                         </View>
@@ -82,14 +84,14 @@ const SelectWordBatchesView = ({ navigation }) => {
 
                         <View style={orientationStyles.upperHalfRight}>
                             {/* Planets and Beyond */}
-                            <TouchableOpacity style={orientationStyles.PlanetsAndBeyondOpacity} onPress={() => console.log('Button 1 pressed')}>
+                            <TouchableOpacity style={orientationStyles.PlanetsAndBeyondOpacity} resizeMode="contain" onPress={() => console.log('Button 1 pressed')}>
                                 <Image source={require('../assets/selectWordBatchesView/planetsAndBeyond.png')} style={orientationStyles.Image} />
                             </TouchableOpacity>
                         </View>
 
                         <View style={orientationStyles.bottomHalfRight}>
                             {/* Diving Deep */}
-                            <TouchableOpacity style={orientationStyles.DivingDeepOpacity} onPress={() => console.log('Button 1 pressed')}>
+                            <TouchableOpacity style={orientationStyles.DivingDeepOpacity} resizeMode="contain" onPress={() => console.log('Button 1 pressed')}>
                                 <Image source={require('../assets/selectWordBatchesView/divingDeep.png')} style={orientationStyles.Image} />
                             </TouchableOpacity>
                         </View>
@@ -102,39 +104,39 @@ const SelectWordBatchesView = ({ navigation }) => {
 
 
                             {/* Springtime Fun */}
-                            <TouchableOpacity style={orientationStyles.SpringtimeFunOpacity} onPress={() => console.log('Button 1 pressed')}>
+                            <TouchableOpacity style={orientationStyles.SpringtimeFunOpacity} resizeMode="contain" onPress={() => console.log('Button 1 pressed')}>
                                 <Image source={require('../assets/selectWordBatchesView/springtimeFun.png')} style={orientationStyles.Image} />
                             </TouchableOpacity>
 
                             {/* Alien Adventures */}
-                            <TouchableOpacity style={orientationStyles.AlienAdventuresOpacity} onPress={() => console.log('Button 1 pressed')}>
-                                <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')} style={orientationStyles.Image} />
+                            <TouchableOpacity style={orientationStyles.AlienAdventuresOpacity} resizeMode="contain" onPress={() => console.log('Button 1 pressed')}>
+                                <Image source={require('../assets/selectWordBatchesView/alienAdventuresPortrait.png')} style={orientationStyles.Image} />
                             </TouchableOpacity>
                         </View>
 
                         <View style={orientationStyles.middlePortrait}>
                         {/* Flying High Batch */}
-                        <TouchableOpacity style={orientationStyles.FlyingHighOpacity} onPress={() => navigation.navigate('Flying High Words')}>
+                        <TouchableOpacity style={orientationStyles.FlyingHighOpacity} resizeMode="contain" onPress={() => navigation.navigate('Flying High Words')}>
                             <Image source={require('../assets/selectWordBatchesView/flyingHigh.png')} style={orientationStyles.Image} />
                         </TouchableOpacity>
 
                         {/* Alien Adventures */}
-                        <TouchableOpacity style={orientationStyles.AlienAdventuresOpacity} onPress={() => console.log('Button 1 pressed')}>
-                            <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')} style={orientationStyles.Image} />
+                        <TouchableOpacity style={orientationStyles.AlienAdventuresOpacity} resizeMode="contain" onPress={() => console.log('Button 1 pressed')}>
+                            <Image source={require('../assets/selectWordBatchesView/alienAdventuresPortrait.png')} style={orientationStyles.Image} />
                         </TouchableOpacity>
                         </View>
 
                         <View style={orientationStyles.rightSidePortrait}>
 
                         {/* Sunny Island */}
-                        <TouchableOpacity style={orientationStyles.SunnyIslandOpacity} onPress={() => console.log('Button 1 pressed')}>
+                        <TouchableOpacity style={orientationStyles.SunnyIslandOpacity} resizeMode="contain" onPress={() => console.log('Button 1 pressed')}>
                                 <Image source={require('../assets/selectWordBatchesView/sunnyIsland.gif')} style={orientationStyles.Image} />
                         </TouchableOpacity>
                     
 
                         {/* Alien Adventures */}
-                        <TouchableOpacity style={orientationStyles.AlienAdventuresOpacity} onPress={() => console.log('Button 1 pressed')}>
-                            <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')} style={orientationStyles.Image} />
+                        <TouchableOpacity style={orientationStyles.AlienAdventuresOpacity} resizeMode="contain" onPress={() => console.log('Button 1 pressed')}>
+                            <Image source={require('../assets/selectWordBatchesView/alienAdventuresPortrait.png')} style={orientationStyles.Image} />
                         </TouchableOpacity>
                         </View>
 
@@ -191,49 +193,60 @@ const styles = {
             marginLeft: '15%',
             height: '80%',
             width: '30%',
+            borderColor: 'black',
+            borderWidth: 2,
         },
         SunnyIslandOpacity: {
             marginTop: '5%',
-            marginLeft: '10%',
-            height: '80%',
-            width: '30%',
+            marginLeft: '15%',
+            height: '90%',
+            width: '25%',
         },
         SpringtimeFunOpacity: {
             marginLeft: '-2.5%',
-            
-            height: '80%',
-            width: '40%',
+            height: '50%',
+            width: '45%',
         },
         AlienAdventuresOpacity: {
-            marginTop: '15%',
-            height: '70%',
+            marginTop: '25%',
+            height: '40%',
             width: '25%',
+            borderColor: 'green',
+            borderWidth: 2,
         },
         OuterSpaceOpacity: {
             marginTop: '5%',
             marginLeft: '10%',
             height: '70%',
             width: '25%',
+            borderColor: 'green',
+            borderWidth: 2,
         },
 
         PlanetsAndBeyondOpacity: {
-            marginTop: '20%',
+            marginTop: '45%',
             marginLeft: '12%',
-            height: '100%',
-            width: '70%',
+            height: '70%',
+            width: '80%',
+            borderColor: 'black',
+            borderWidth: 2,
         },
 
         DivingDeepOpacity: {
-            marginTop: '6%',
-            marginLeft: '12%',
-            height: '100%',
-            width: '70%',
+            marginTop: '25%',
+            marginLeft: '13%',
+            height: '80%',
+            width: '85%',
+            borderColor: 'black',
+            borderWidth: 2,
         },
 
         Image: {
             height: '100%',
             width: '100%',
-            resizeMode: 'contain',
+            borderColor: 'black',
+            borderWidth: 2,
+
         },
     }),
 
@@ -315,7 +328,6 @@ const styles = {
         Image: {
             height: '100%',
             width: '100%',
-            resizeMode: 'contain',
         },
     }),
 
