@@ -5,6 +5,7 @@
 
 
     /* Start of Login Logic. Sends a message over to the backend to authenticate student */
+    //dontchange
     const LoginScreen = ({ navigation }) => {
         const [email, setEmail] = useState('');
         const [studentName, setStudentName] = useState('');
@@ -40,6 +41,7 @@
             
         };
         /* End of Login Logic. */
+        //endofchange
 
         return (
             <View style={styles.background}>
