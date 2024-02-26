@@ -15,7 +15,7 @@ const WelcomeScreen = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.upperHalf}>
           <Image
-            source={require('../assets/WelcomeView/WelcomeBlueWB.gif')}
+            source={require('../assets/welcomeView/welcomeBlueWB.gif')}
             style={styles.image}
           />
         </View>
@@ -25,7 +25,7 @@ const WelcomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate('Login')}
           >
             <Image
-              source={require('../assets/WelcomeView/Loginp.png')}
+              source={require('../assets/welcomeView/loginp.png')}
               style={styles.buttonImage}
             />
           </TouchableOpacity>
@@ -34,7 +34,7 @@ const WelcomeScreen = ({ navigation }) => {
             onPress={handleLearnMorePress}
           >
             <Image
-              source={require('../assets/WelcomeView/Learnmore.png')}
+              source={require('../assets/welcomeView/learnMore.png')}
               style={styles.buttonImage}
             />
           </TouchableOpacity>

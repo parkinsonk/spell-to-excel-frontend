@@ -51,7 +51,7 @@ const TraceView = ({ navigation, route }) => {
 
   return (
     <ImageBackground source={background} resizeMode="cover" style={styles.background}>
-       <ImageBackground source={require('../assets/traceViews/Tracev.gif')} resizeMode="cover" style={styles.newBackground}></ImageBackground>
+       <ImageBackground source={require('../assets/traceViews/tracev.gif')} resizeMode="cover" style={styles.newBackground}></ImageBackground>
       <View {...panResponder.panHandlers} style={styles.svgContainer}>
         <Svg height={screenHeight} width={screenWidth}>
           {paths.map((path, index) => (
