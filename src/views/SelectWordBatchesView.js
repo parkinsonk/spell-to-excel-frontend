@@ -199,8 +199,6 @@ const styles = {
             marginLeft: '15%',
             height: '60%',
             width: '30%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         SunnyIslandOpacity: {
             marginTop: '5%',
@@ -216,17 +214,14 @@ const styles = {
         AlienAdventuresOpacity: {
             marginTop: '25%',
             height: '40%',
-            width: '25%',
-            borderColor: 'green',
-            borderWidth: 2,
+            width: '30%',
         },
         OuterSpaceOpacity: {
             marginTop: '5%',
-            marginLeft: '10%',
+            marginLeft: '5%',
             height: '70%',
             width: '25%',
-            borderColor: 'green',
-            borderWidth: 2,
+
         },
 
         PlanetsAndBeyondOpacity: {
@@ -234,8 +229,6 @@ const styles = {
             marginLeft: '8%',
             height: '75%',
             width: '90%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
 
         DivingDeepOpacity: {
@@ -243,16 +236,11 @@ const styles = {
             marginLeft: '13%',
             height: '80%',
             width: '85%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
 
         Image: {
             height: '100%',
             width: '100%',
-            borderColor: 'black',
-            borderWidth: 2,
-
         },
     }),
 
@@ -263,75 +251,59 @@ const styles = {
             width: '100%',
             height: '100%',
             flexDirection: 'row',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         leftSidePortrait: {
             flex: 1,
-            borderColer: 'green',
-            borderWidth: 2,
         },
         middlePortrait: {
             flex: 1,
-            borderColer: 'green',
-            borderWidth: 2,
         },
         rightSidePortrait: {
             flex: 1,
-            borderColer: 'blue',
-            borderWidth: 2,
         },
 
         FlyingHighOpacity: {
             marginTop: '10%',
+            marginLeft: '-40%',
             height: '16%',
             width: '100%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         SunnyIslandOpacity: {
         
             marginTop: '20%',
-
             height: '25%',
             width: '85%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         SpringtimeFunOpacity: {
             marginLeft: '-10%',
             marginTop: '100%',
             height: '20%',
             width: '110%',
-            b0rderColor: 'black',  
-            borderWidth: 2,
         },
         AlienAdventuresOpacity: {
             marginLeft: '2%',
             marginTop: '75%',
             height: '20%',
-            width: '100%',
+            width: '104%',
         },
         OuterSpaceOpacity: {
-            marginTop: '105%',
+            marginTop: '99%',
             height: '35%',
             width: '100%',
-            borderColor : 'black',
-            borderWidth: 2,
         },
 
         PlanetsAndBeyondOpacity: {
             marginTop: '20%',
             height: '25%',
             width: '100%',
+            marginLeft: '-10%',
         },
 
         DivingDeepOpacity: {
             marginTop: '60%',
             height: '25%',
             width: '100%',
-            borderColor: 'black',
-            borderWidth: 2,
+            marginLeft: '-30%',
         },
 
         Image: {
