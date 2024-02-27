@@ -198,7 +198,7 @@ const styles = {
             marginTop: '5%',
             marginLeft: '15%',
             height: '60%',
-            width: '30%',
+            width: '32%',
         },
         SunnyIslandOpacity: {
             marginTop: '5%',
