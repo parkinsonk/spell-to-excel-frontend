@@ -49,7 +49,7 @@ const FlyingHighWordsView = ({ navigation, route}) => {
             <ImageBackground
                 source={backgroundImage}
                 resizeMode="cover"
-                style={styles.background}
+                style={orientationStyles.background}
                 
             >
 
@@ -91,7 +91,9 @@ const FlyingHighWordsView = ({ navigation, route}) => {
 };
 
 const styles = StyleSheet.create({
-    landscape: {
+
+// Landscape styles
+landscape: {
     background: {
         flex: 1,
         width: '100%',
@@ -147,6 +149,7 @@ const styles = StyleSheet.create({
     },
 },
 
+// Portrait styles
 portrait: {
     background: {
         flex: 1,
