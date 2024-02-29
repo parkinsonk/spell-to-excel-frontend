@@ -10,7 +10,8 @@ const BoxesView = ({ navigation, route  }) => {
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
     const aspectRatio = screenWidth / screenHeight;
     const { batch, activity, selectedWord } = route.params;
-    const lettersList = boxesWordMapping[selectedWord] || boxesWordMapping.default;
+    const lettersList = boxesWordMapping[selectedWord]?.images || boxesWordMapping['default'].images;
+    const colorsList = boxesWordMapping[selectedWord]?.colors || boxesWordMapping['default'].colors;
     const [paths, setPaths] = useState([]);
     const [color, setColor] = useState("black"); // Ensure color state is defined
     const [showColorPicker, setShowColorPicker] = useState(false);
@@ -195,8 +196,6 @@ const BoxesView = ({ navigation, route  }) => {
             position: 'absolute',
             width: BOX_WIDTH - screenWidth * .04,
             height: BOX_HEIGHT - screenHeight * .05,
-            fill: 'black',
-            backgroundColor: 'black',
             borderRadius: 100,
             zIndex: 4,
             transform: [{ translateX: 0 }, { translateY: 0 }],
@@ -250,9 +249,9 @@ const BoxesView = ({ navigation, route  }) => {
             top: aspectRatio > 1.5 ?  screenHeight * .28 : screenHeight * .35,
             left: calculateBoxLeftPosition(index, screenWidth),
         }]} />
-        {boxesWordMapping[selectedWord] && boxesWordMapping[selectedWord][index] &&
+        {lettersList && lettersList[index] &&
             <Image
-                source={boxesWordMapping[selectedWord][index]}
+                source={lettersList[index]}
                 style={[styles.lettersImage, { // Match the box height or adjust as needed
                     top: aspectRatio > 1.5 ?  screenWidth * .02 : screenHeight * .18,
                     left: calculateBoxLeftPosition(index, screenWidth) + screenWidth * .015,
@@ -270,6 +269,8 @@ const BoxesView = ({ navigation, route  }) => {
                             left: calculateBoxLeftPosition(index, screenWidth) + screenWidth * .015,
                             top: aspectRatio > 1.5 ?  screenWidth * .02 : screenHeight * .18,
                             transform: pos.getTranslateTransform(), // Use the Animated.Value for smooth animation
+                            fill: colorsList[index],
+                            backgroundColor: colorsList[index],
                         },
                     ]}
                 />

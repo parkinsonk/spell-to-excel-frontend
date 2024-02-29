@@ -54,7 +54,9 @@ const FlyingHighWordsView = ({ navigation, route}) => {
             >
 
             {isLandscape ? (
+
                 <>
+                {/* Start of Landscape Views*/}
 
                 <TouchableOpacity style={orientationStyles.wordsIKnowopacity} onPress={() => console.log('button pressed')}>
                     <Image source={require('../assets/activitiesView/wordsIKnow.png')} style={orientationStyles.wordsIKnowImage} />
@@ -72,7 +74,7 @@ const FlyingHighWordsView = ({ navigation, route}) => {
 
 
                     <TouchableOpacity style={orientationStyles.traceOpacity} onPress={() => navigation.navigate('Trace', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
-                        <Image source={require('../assets/activitiesView/trace.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/traceLandscape.png')} style={orientationStyles.Image} />
                     </TouchableOpacity>
 
 
@@ -87,10 +89,10 @@ const FlyingHighWordsView = ({ navigation, route}) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={orientationStyles.flashcardsOpacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/flashcards.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/flashcardsLandscape.png')} style={orientationStyles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={orientationStyles.testOpacity} onPress={() => console.log('button pressed')}>
+                    <TouchableOpacity style={orientationStyles.testOpacity} onPress={() => navigation.navigate('Test', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
                         <Image source={require('../assets/activitiesView/test.png')} style={orientationStyles.Image} />
                     </TouchableOpacity>
 
@@ -98,7 +100,7 @@ const FlyingHighWordsView = ({ navigation, route}) => {
                 </View>
 
 
-                {/* Start of Portrait Viewss*/}
+                {/* Start of Portrait Views*/}
                 </>) : (
                         <>
                 <TouchableOpacity style={orientationStyles.wordsIKnowopacity} onPress={() => console.log('button pressed')}>
@@ -112,7 +114,7 @@ const FlyingHighWordsView = ({ navigation, route}) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={orientationStyles.soundsOpacity} onPress={() => navigation.navigate('Boxes', {batch: batch, activity: 'boxes', selectedWord: selectedWord})}>
-                        <Image source={require('../assets/activitiesView/sounds.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/soundsPortrait.png')} style={orientationStyles.Image} />
                     </TouchableOpacity>
 
 
@@ -121,13 +123,15 @@ const FlyingHighWordsView = ({ navigation, route}) => {
 
                 <View style={orientationStyles.middle}>
 
-                    <TouchableOpacity style={orientationStyles.traceOpacity} onPress={() => navigation.navigate('Trace', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
-                        <Image source={require('../assets/activitiesView/trace.png')} style={orientationStyles.Image} />
-                    </TouchableOpacity>
-
                     <TouchableOpacity style={orientationStyles.readOpacity} onPress={() => console.log('button pressed')}>
                         <Image source={require('../assets/activitiesView/read.png')} style={orientationStyles.Image} />
                     </TouchableOpacity>
+
+                    <TouchableOpacity style={orientationStyles.traceOpacity} onPress={() => navigation.navigate('Trace', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
+                        <Image source={require('../assets/activitiesView/tracePortrait.png')} style={orientationStyles.Image} />
+                    </TouchableOpacity>
+
+                    
 
 
                 </View>
@@ -135,10 +139,10 @@ const FlyingHighWordsView = ({ navigation, route}) => {
                 <View style={orientationStyles.bottom}>
 
                     <TouchableOpacity style={orientationStyles.flashcardsOpacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/flashcards.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/flashcardsPortrait.png')} style={orientationStyles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={orientationStyles.testOpacity} onPress={() => console.log('button pressed')}>
+                    <TouchableOpacity style={orientationStyles.testOpacity} onPress={() => navigation.navigate('Trace', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
                         <Image source={require('../assets/activitiesView/test.png')} style={orientationStyles.Image} />
                     </TouchableOpacity>
 
@@ -264,31 +268,31 @@ portrait: {
     letterFriendsOpacity: {
         marginLeft: '25%',
         width: '16%',
-        height: '47%',
+        height: '48%',
         marginTop: '15%',
     },
     soundsOpacity: {
-        marginTop: '10%',
-        marginLeft: '18%',
-        width: '20%',
-        height: '33%',
+        marginTop: '15%',
+        marginLeft: '19%',
+        width: '17%',
+        height: '48%',
     },
     traceOpacity: {
-        width: '20%',
-        height: '33%',
-        marginLeft: '25%',
-        marginBottom: '10%',
+        width: '17.5%',
+        height: '52%',
+        marginLeft: '15%',
+        marginBottom: '3%',
     },
     readOpacity: {
-        marginLeft: '14%',
+        marginLeft: '25%',
         width: '20%',
         height: '33%',
         marginBottom: '7%',
     },
     flashcardsOpacity: {
         marginBottom: '20%',
-        marginLeft: '22%',
-        width: '17%',
+        marginLeft: '21.5%',
+        width: '18%',
         height: '48%',
     },
     testOpacity: {
