@@ -13,6 +13,160 @@ const SelectWordBatchesView = ({ navigation }) => {
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
 
+    const styles = {
+        // Landscape styles
+        landscape: StyleSheet.create({
+            background: {
+                flex: 1,
+                width: '100%',
+                height: '100%',
+                flexDirection: 'row',
+            },
+            leftSide: {
+                flex: 2.5,
+                flexDirection: 'column',
+            },
+            rightSide: {
+                flex: 1,
+                flexDirection: 'column',
+            },
+            upperHalfLeft: {
+                flex: 1,
+                flexDirection: 'row',
+            },
+            bottomHalfLeft: {
+                flex: 1.5,
+                flexDirection: 'row',
+            },
+            upperHalfRight: {
+                flex: 1,
+                flexDirection: 'row',
+                
+            },
+            bottomHalfRight: {
+                flex: 1,
+                flexDirection: 'row',
+            },
+
+            FlyingHighOpacity: {
+                marginTop: '5%',
+                marginLeft: '15%',
+                height: '60%',
+                width: '32%',
+            },
+            SunnyIslandOpacity: {
+                marginTop: aspectRatio > 1.5 ? '5%': '5%',
+                marginLeft: '15%',
+                height: aspectRatio > 1.5 ? '95%': '90%',
+                width: '25%',
+            },
+            SpringtimeFunOpacity: {
+                marginLeft: '-2.5%',
+                height: '50%',
+                width: '45%',
+            },
+            AlienAdventuresOpacity: {
+                marginTop: '25%',
+                height: '40%',
+                width: '30%',
+            },
+            OuterSpaceOpacity: {
+                marginTop: '5%',
+                marginLeft: '5%',
+                height: '70%',
+                width: '25%',
+
+            },
+
+            PlanetsAndBeyondOpacity: {
+                marginTop: '40%',
+                marginLeft: '8%',
+                height: '75%',
+                width: '90%',
+            },
+
+            DivingDeepOpacity: {
+                marginTop: '25%',
+                marginLeft: '13%',
+                height: '80%',
+                width: '85%',
+            },
+
+            Image: {
+                height: '100%',
+                width: '100%',
+            },
+        }),
+
+    // Portrait styles
+        portrait: StyleSheet.create({
+            background: {
+                flex: 1,
+                width: '100%',
+                height: '100%',
+                flexDirection: 'row',
+            },
+            leftSidePortrait: {
+                flex: 1,
+            },
+            middlePortrait: {
+                flex: 1,
+            },
+            rightSidePortrait: {
+                flex: 1,
+            },
+
+            FlyingHighOpacity: {
+                marginTop: '10%',
+                marginLeft: '-40%',
+                height: '16%',
+                width: '100%',
+            },
+            SunnyIslandOpacity: {
+            
+                marginTop: '20%',
+                height: '25%',
+                width: '85%',
+            },
+            SpringtimeFunOpacity: {
+                marginLeft: '-10%',
+                marginTop: '100%',
+                height: '20%',
+                width: '110%',
+            },
+            AlienAdventuresOpacity: {
+                marginLeft: '2%',
+                marginTop: '75%',
+                height: '20%',
+                width: '104%',
+            },
+            OuterSpaceOpacity: {
+                marginTop: '99%',
+                height: '35%',
+                width: '100%',
+            },
+
+            PlanetsAndBeyondOpacity: {
+                marginTop: '20%',
+                height: '25%',
+                width: '100%',
+                marginLeft: '-10%',
+            },
+
+            DivingDeepOpacity: {
+                marginTop: '60%',
+                height: '25%',
+                width: '100%',
+                marginLeft: '-30%',
+            },
+
+            Image: {
+                height: '100%',
+                width: '100%',
+            },
+        })
+};
+
     const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
     const [backgroundImage, setBackgroundImage] = useState(require('../assets/selectWordBatchesView/batchesBackgroundLandscape.png'));
 
@@ -44,7 +198,9 @@ const SelectWordBatchesView = ({ navigation }) => {
           ScreenOrientation.removeOrientationChangeListener(subscription);
         };
       }, []);
-      
+
+
+ 
     return (
         
             <ImageBackground
@@ -161,162 +317,7 @@ const SelectWordBatchesView = ({ navigation }) => {
     );
 };
 
-const styles = {
-    
-// Landscape styles
-    landscape: StyleSheet.create({
-        background: {
-            flex: 1,
-            width: '100%',
-            height: '100%',
-            flexDirection: 'row',
-        },
-        leftSide: {
-            flex: 2.5,
-            flexDirection: 'column',
-        },
-        rightSide: {
-            flex: 1,
-            flexDirection: 'column',
-        },
-        upperHalfLeft: {
-            flex: 1,
-            flexDirection: 'row',
-        },
-        bottomHalfLeft: {
-            flex: 1.5,
-            flexDirection: 'row',
-        },
-        upperHalfRight: {
-            flex: 1,
-            flexDirection: 'row',
-            
-        },
-        bottomHalfRight: {
-            flex: 1,
-            flexDirection: 'row',
-        },
-
-        FlyingHighOpacity: {
-            marginTop: '5%',
-            marginLeft: '15%',
-            height: '60%',
-            width: '32%',
-        },
-        SunnyIslandOpacity: {
-            marginTop: '5%',
-            marginLeft: '15%',
-            height: '90%',
-            width: '25%',
-        },
-        SpringtimeFunOpacity: {
-            marginLeft: '-2.5%',
-            height: '50%',
-            width: '45%',
-        },
-        AlienAdventuresOpacity: {
-            marginTop: '25%',
-            height: '40%',
-            width: '30%',
-        },
-        OuterSpaceOpacity: {
-            marginTop: '5%',
-            marginLeft: '5%',
-            height: '70%',
-            width: '25%',
-
-        },
-
-        PlanetsAndBeyondOpacity: {
-            marginTop: '40%',
-            marginLeft: '8%',
-            height: '75%',
-            width: '90%',
-        },
-
-        DivingDeepOpacity: {
-            marginTop: '25%',
-            marginLeft: '13%',
-            height: '80%',
-            width: '85%',
-        },
-
-        Image: {
-            height: '100%',
-            width: '100%',
-        },
-    }),
-
-// Portrait styles
-    portrait: StyleSheet.create({
-        background: {
-            flex: 1,
-            width: '100%',
-            height: '100%',
-            flexDirection: 'row',
-        },
-        leftSidePortrait: {
-            flex: 1,
-        },
-        middlePortrait: {
-            flex: 1,
-        },
-        rightSidePortrait: {
-            flex: 1,
-        },
-
-        FlyingHighOpacity: {
-            marginTop: '10%',
-            marginLeft: '-40%',
-            height: '16%',
-            width: '100%',
-        },
-        SunnyIslandOpacity: {
-        
-            marginTop: '20%',
-            height: '25%',
-            width: '85%',
-        },
-        SpringtimeFunOpacity: {
-            marginLeft: '-10%',
-            marginTop: '100%',
-            height: '20%',
-            width: '110%',
-        },
-        AlienAdventuresOpacity: {
-            marginLeft: '2%',
-            marginTop: '75%',
-            height: '20%',
-            width: '104%',
-        },
-        OuterSpaceOpacity: {
-            marginTop: '99%',
-            height: '35%',
-            width: '100%',
-        },
-
-        PlanetsAndBeyondOpacity: {
-            marginTop: '20%',
-            height: '25%',
-            width: '100%',
-            marginLeft: '-10%',
-        },
-
-        DivingDeepOpacity: {
-            marginTop: '60%',
-            height: '25%',
-            width: '100%',
-            marginLeft: '-30%',
-        },
-
-        Image: {
-            height: '100%',
-            width: '100%',
-        },
-    }),
 
 
-
-};
 
 export default SelectWordBatchesView;
