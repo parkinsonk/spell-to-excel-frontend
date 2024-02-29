@@ -232,7 +232,7 @@ const BoxesView = ({ navigation, route  }) => {
         <Image source={require('../assets/traceViews/crayonBox.png')} style={styles.crayonBoxImage} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.sound} onPress={() => navigation.navigate('Boxes', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
+      <TouchableOpacity style={styles.sound} onPress={() => console.log('sound button pressed')}>
         <Image source={require('../assets/traceViews/sound.png')} style={styles.soundImage} />
       </TouchableOpacity>
 

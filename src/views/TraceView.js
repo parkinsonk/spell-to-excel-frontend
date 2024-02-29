@@ -192,7 +192,7 @@ const TraceView = ({ navigation, route }) => {
         <Image source={require('../assets/traceViews/cover.png')} style={styles.coverImage} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.sound} onPress={() => navigation.navigate('Boxes', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
+      <TouchableOpacity style={styles.sound} onPress={() => console.log('Sound button pressed')}>
         <Image source={require('../assets/traceViews/sound.png')} style={styles.soundImage} />
       </TouchableOpacity>
   
