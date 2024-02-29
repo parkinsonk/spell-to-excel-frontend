@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { ImageBackground, View, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
+import React, { useState, useEffect} from 'react';
+import { ImageBackground, View, TextInput, TouchableOpacity, StyleSheet, Alert, Image, useWindowDimensions} from 'react-native';
 import axios from 'axios';
+import * as ScreenOrientation from 'expo-screen-orientation';
 import * as SecureStore from 'expo-secure-store';
 
 const LoginScreen = ({ navigation }) => {
@@ -8,6 +9,43 @@ const LoginScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [pin, setPin] = useState('');
   const [isStudentMode, setStudentMode] = useState(true);
+
+  const { height: screenHeight, width: screenWidth } = useWindowDimensions();
+  const isLandscape = screenWidth > screenHeight;
+
+  const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
+  const [backgroundImage, setBackgroundImage] = useState(require('../assets/loginview/login.gif'));
+
+  useEffect(() => {
+    // Function to update styles based on current orientation
+    const updateOrientationStyles = async () => {
+      const orientation = await ScreenOrientation.getOrientationAsync();
+      if (orientation === ScreenOrientation.Orientation.LANDSCAPE_LEFT || orientation === ScreenOrientation.Orientation.LANDSCAPE_RIGHT) {
+        setOrientationStyles(styles.landscape);
+        setBackgroundImage(require('../assets/loginview/login.gif'));
+      } else {
+        setOrientationStyles(styles.portrait);
+        setBackgroundImage(require('../assets/loginview/login.gif'));
+      }
+    };
+
+    
+
+    // Initial update when component mounts
+    updateOrientationStyles();
+
+    // Subscribe to orientation changes
+    const subscription = ScreenOrientation.addOrientationChangeListener(() => {
+      updateOrientationStyles();
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      ScreenOrientation.removeOrientationChangeListener(subscription);
+    };
+  }, []);
+
+
 
   const handleLogin = () => {
     // Logic to handle login
@@ -39,13 +77,18 @@ const LoginScreen = ({ navigation }) => {
     
 return (
         <ImageBackground
-          source={require('../assets/loginview/login.gif')}
-          style={styles.background}
+          source={backgroundImage}
+          style={orientationStyles.background}
         >
-          <View style={styles.container}>
-            <View style={[styles.inputContainer, styles.inputBox]}>
+
+  {isLandscape ? (
+                <>
+
+          {/* Start of Landscape Views*/}
+          <View style={orientationStyles.container}>
+            <View style={orientationStyles.inputBox}>
               <TextInput
-                style={[styles.input, { color: 'black', fontWeight: 'bold' }]}
+                style={[orientationStyles.input, { color: 'black', fontWeight: 'bold' }]}
                 placeholder={isStudentMode ? 'Student Email' : 'Teacher Email'}
                 value={email}
                 onChangeText={setEmail}
@@ -53,9 +96,9 @@ return (
                 textAlignVertical="center"
               />
             </View>
-            <View style={[styles.inputContainer, styles.inputBox]}>
+            <View style={orientationStyles.inputBox}>
               <TextInput
-                style={[styles.input, { color: 'black', fontWeight: 'bold' }]}
+                style={[orientationStyles.input, { color: 'black', fontWeight: 'bold' }]}
                 placeholder={isStudentMode ? 'Student Name' : 'Teacher Name'}
                 value={name}
                 onChangeText={setName}
@@ -63,9 +106,9 @@ return (
                 textAlignVertical="center"
               />
             </View>
-            <View style={[styles.inputContainer, styles.inputBox]}>
+            <View style={orientationStyles.inputBox}>
               <TextInput
-                style={[styles.input, { color: 'black', fontWeight: 'bold' }]}
+                style={[orientationStyles.input, { color: 'black', fontWeight: 'bold' }]}
                 placeholder="Pin"
                 value={pin}
                 secureTextEntry
@@ -74,16 +117,30 @@ return (
                 textAlignVertical="center"
               />
             </View>
-            <TouchableOpacity onPress={handleLogin}>
-              <Image source={require('../assets/welcomeView/loginp.png')} style={styles.loginButton} />
+            <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={handleLogin}>
+              <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
             </TouchableOpacity>
           </View>
+
+          </>) : (
+
+                        <>
+
+                        {/* Start of Portrait Views*/}
+                        <View></View>
+
+                        </>
+                        )}
         </ImageBackground>
       );
     };      
 
 const styles = StyleSheet.create({
-  background: {
+
+// Landscape styles
+  landscape:{
+    
+    background: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
@@ -98,10 +155,6 @@ const styles = StyleSheet.create({
     justifyContent: 'right',
     alignItems: 'center',
   },
-  inputContainer: {
-    width: '100%',
-    marginBottom: 15,
-  },
   input: {
     height: 9,
     width: '100%',
@@ -109,18 +162,36 @@ const styles = StyleSheet.create({
     color: 'black', 
   },
   inputBox: {
+    width: '100%',
+    marginBottom: '2%',
     borderColor: 'black', 
     borderWidth: 1.5,
     borderRadius: 3,
   },
   loginButtonContainer: {
-    marginBottom: 9, 
+    width: '20%',
+    height: '40%',
+    marginTop: '2%', 
   },
   loginButton: {
     width: '100%', // Adjust the width as needed
-    height: '25%', // Adjust the height as needed
+    height: '100%', // Adjust the height as needed
     resizeMode: 'contain',
   },
+},
+// Portrait styles
+portrait: StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+  },
+
+})
+
+
 });
 
 export default LoginScreen;
