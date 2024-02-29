@@ -45,27 +45,33 @@ return (
           <View style={styles.container}>
             <View style={[styles.inputContainer, styles.inputBox]}>
               <TextInput
-                style={styles.input}
+                style={[styles.input, { color: 'black', fontWeight: 'bold' }]}
                 placeholder={isStudentMode ? 'Student Email' : 'Teacher Email'}
                 value={email}
                 onChangeText={setEmail}
+                importantForAutofill="no"
+                textAlignVertical="center"
               />
             </View>
             <View style={[styles.inputContainer, styles.inputBox]}>
               <TextInput
-                style={styles.input}
+                style={[styles.input, { color: 'black', fontWeight: 'bold' }]}
                 placeholder={isStudentMode ? 'Student Name' : 'Teacher Name'}
                 value={name}
                 onChangeText={setName}
+                importantForAutofill="no"
+                textAlignVertical="center"
               />
             </View>
             <View style={[styles.inputContainer, styles.inputBox]}>
               <TextInput
-                style={styles.input}
+                style={[styles.input, { color: 'black', fontWeight: 'bold' }]}
                 placeholder="Pin"
                 value={pin}
                 secureTextEntry
                 onChangeText={setPin}
+                importantForAutofill="no"
+                textAlignVertical="center"
               />
             </View>
             <TouchableOpacity onPress={handleLogin}>
@@ -85,30 +91,30 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   container: {
-    width: '14%', // Adjust the width as needed
-    height: '3%', // Adjust the height as needed
-    borderRadius: 50,
+    width: '60%', // Adjust the width as needed
+    height: '20%', // Adjust the height as needed
+    borderRadius: 3,
     alignSelf: 'center',
-    justifyContent: 'center',
+    justifyContent: 'right',
     alignItems: 'center',
   },
   inputContainer: {
     width: '100%',
-    marginBottom: 10,
+    marginBottom: 15,
   },
   input: {
-    height: 20,
+    height: 9,
     width: '100%',
-    padding: 10,
+    padding: 15,
     color: 'black', 
   },
   inputBox: {
     borderColor: 'black', 
-    borderWidth: 3,
-    borderRadius: 8,
+    borderWidth: 1.5,
+    borderRadius: 3,
   },
   loginButtonContainer: {
-    marginBottom: 20, // Adjust the margin as needed
+    marginBottom: 9, 
   },
   loginButton: {
     width: '100%', // Adjust the width as needed
