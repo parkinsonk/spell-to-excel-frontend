@@ -11,6 +11,7 @@ const SelectWordBatchesView = ({ navigation }) => {
 
     const { height: screenHeight, width: screenWidth } = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
+    const aspectRatio = screenWidth / screenHeight;
 
     const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
     const [backgroundImage, setBackgroundImage] = useState(require('../assets/selectWordBatchesView/batchesBackgroundLandscape.png'));

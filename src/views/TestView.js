@@ -10,35 +10,33 @@ const TestView = ({ navigation }) => {
     const isLandscape = screenWidth > screenHeight;
 
     const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
-    const [backgroundImage, setBackgroundImage] = useState(require('../assets/selectWordBatchesView/batchesBackgroundLandscape.png'));
+    const [backgroundImage, setBackgroundImage] = useState(require('../assets/testViews/blankTestBackground.png'));
+    const [fontSize, setFontSize] = useState(30);
 
     useEffect(() => {
-        // Function to update styles based on current orientation
-        const updateOrientationStyles = async () => {
-          const orientation = await ScreenOrientation.getOrientationAsync();
-          if (orientation === ScreenOrientation.Orientation.LANDSCAPE_LEFT || orientation === ScreenOrientation.Orientation.LANDSCAPE_RIGHT) {
-            setOrientationStyles(styles.landscape);
-            setBackgroundImage(require('../assets/testViews/blankTestBackground.png'));
-          } else {
-            setOrientationStyles(styles.portrait);
-            setBackgroundImage(require('../assets/testViews/blankTestBackground.png'));
-          }
-        };
+    // Function to update styles and font size based on orientation
+    const updateOrientationStyles = async () => {
+      const orientation = await ScreenOrientation.getOrientationAsync();
+      if (orientation === ScreenOrientation.Orientation.LANDSCAPE_LEFT || orientation === ScreenOrientation.Orientation.LANDSCAPE_RIGHT) {
+        setOrientationStyles(styles.landscape);
+        setBackgroundImage(require('../assets/testViews/blankTestBackground.png'));
+        setFontSize(80); // Adjust font size for landscape
+      } else {
+        setOrientationStyles(styles.portrait);
+        setBackgroundImage(require('../assets/testViews/blankTestBackground.png'));
+        setFontSize(30); // Adjust font size for portrait
+      }
+    };
 
-    
-        // Initial update when component mounts
-        updateOrientationStyles();
-    
-        // Subscribe to orientation changes
-        const subscription = ScreenOrientation.addOrientationChangeListener(() => {
-          updateOrientationStyles();
-        });
-    
-        // Cleanup subscription on unmount
-        return () => {
-          ScreenOrientation.removeOrientationChangeListener(subscription);
-        };
-      }, []);
+    updateOrientationStyles();
+    const subscription = ScreenOrientation.addOrientationChangeListener(() => {
+      updateOrientationStyles();
+    });
+
+    return () => {
+      ScreenOrientation.removeOrientationChangeListener(subscription);
+    };
+}, []);
 
     return (
 
@@ -50,18 +48,17 @@ const TestView = ({ navigation }) => {
                 style={orientationStyles.background}
             >
 
-            {/* Start of Landscape Views */}
+            
 
             {isLandscape ? (
                 <>
-                <View style={orientationStyles.top}>
-                    <TextInput
-            
-                    placeholder="Type Word Here."
 
-                    >
-                    
-                    </TextInput>
+                {/* Start of Landscape Views */}
+                <View style={orientationStyles.top}>
+                <TextInput
+                  style={[orientationStyles.textBox, { fontSize: fontSize }]}
+                  placeholder="Type Word Here"
+                />
 
                 </View>
 
@@ -97,19 +94,25 @@ landscape: {
         },
         top: {
             flex: 1,
-            width: '100%',
-            height: '100%',
-            flexDirection: 'row',
-            borderColor: 'black',
-            borderWidth: 2,
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'flex-end',
         },
         bottom: {
             flex: 1.5,
             width: '100%',
             height: '100%',
             flexDirection: 'row',
+
+        },
+        textBox: {
+            width: '80%',
+            height: '40%',
             borderColor: 'black',
             borderWidth: 2,
+            fontSize: 100,
+            textAlign: 'center',
+            
         },
 },
 // Portrait styles
