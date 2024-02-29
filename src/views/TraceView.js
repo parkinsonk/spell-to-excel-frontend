@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Dimensions, PanResponder, useWindowDimensions} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import activitiesWordMapping from '../utils/activitiesWordMapping';
+import traceWordMapping from '../utils/traceWordMapping';
 
 
 const TraceView = ({ navigation, route }) => {
   const { batch, activity, selectedWord } = route.params;
-  const traceBackground = activitiesWordMapping[batch]?.[activity]?.[selectedWord] || activitiesWordMapping.default;
+  const traceBackground = traceWordMapping[selectedWord] || traceWordMapping.default;
   const coverBackground = require('../assets/traceViews/blankTraceBackground.png')
   const [paths, setPaths] = useState([]);
   const [color, setColor] = useState("black"); // Ensure color state is defined
@@ -192,7 +192,7 @@ const TraceView = ({ navigation, route }) => {
         <Image source={require('../assets/traceViews/cover.png')} style={styles.coverImage} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.sound} onPress={handleClearButtonClick}>
+      <TouchableOpacity style={styles.sound} onPress={() => console.log('Sound button pressed')}>
         <Image source={require('../assets/traceViews/sound.png')} style={styles.soundImage} />
       </TouchableOpacity>
   
