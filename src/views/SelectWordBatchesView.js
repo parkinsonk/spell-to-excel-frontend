@@ -50,9 +50,9 @@ const SelectWordBatchesView = ({ navigation }) => {
 
             FlyingHighOpacity: {
                 marginTop: '5%',
-                marginLeft: '15%',
-                height: '60%',
-                width: '32%',
+                marginLeft: aspectRatio > 1.5 ? '30%' : '15%',
+                height: aspectRatio > 1.5 ? '57%' : '60%',
+                width: aspectRatio > 1.5 ? '20%' : '32%',
             },
             SunnyIslandOpacity: {
                 marginTop: aspectRatio > 1.5 ? '5%': '5%',
@@ -62,8 +62,8 @@ const SelectWordBatchesView = ({ navigation }) => {
             },
             SpringtimeFunOpacity: {
                 marginLeft: '-2.5%',
-                height: '50%',
-                width: '45%',
+                height: aspectRatio > 1.5 ? '65%': '50%',
+                width: aspectRatio > 1.5 ? '40%' : '50%',
             },
             AlienAdventuresOpacity: {
                 marginTop: '25%',
