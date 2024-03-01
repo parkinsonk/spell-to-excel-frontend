@@ -51,14 +51,14 @@ const SelectWordBatchesView = ({ navigation }) => {
             FlyingHighOpacity: {
                 marginTop: '5%',
                 marginLeft: aspectRatio > 1.5 ? '30%' : '15%',
-                height: aspectRatio > 1.5 ? '57%' : '60%',
-                width: aspectRatio > 1.5 ? '20%' : '32%',
+                height: aspectRatio > 1.5 ? '72%' : '60%',
+                width: aspectRatio > 1.5 ? '25%' : '32%',
             },
             SunnyIslandOpacity: {
-                marginTop: aspectRatio > 1.5 ? '5%': '5%',
+                marginTop: aspectRatio > 1.5 ? '1%': '5%',
                 marginLeft: '15%',
                 height: aspectRatio > 1.5 ? '95%': '90%',
-                width: '25%',
+                width: aspectRatio > 1.5 ? '18%': '25%',
             },
             SpringtimeFunOpacity: {
                 marginLeft: '-2.5%',
@@ -66,30 +66,30 @@ const SelectWordBatchesView = ({ navigation }) => {
                 width: aspectRatio > 1.5 ? '40%' : '50%',
             },
             AlienAdventuresOpacity: {
-                marginTop: '25%',
+                marginTop: aspectRatio > 1.5 ? '17%' : '25%',
                 height: '40%',
                 width: '30%',
             },
             OuterSpaceOpacity: {
-                marginTop: '5%',
-                marginLeft: '5%',
-                height: '70%',
-                width: '25%',
+                marginTop: '2%',
+                marginLeft: aspectRatio > 1.5 ? '9%' : '1%',
+                height: aspectRatio > 1.5 ? '90%' : '70%',
+                width: aspectRatio > 1.5 ? '20%': '25%',
 
             },
 
             PlanetsAndBeyondOpacity: {
-                marginTop: '40%',
+                marginTop: aspectRatio > 1.5 ? '25%' : '40%',
                 marginLeft: '8%',
-                height: '75%',
-                width: '90%',
+                height: aspectRatio > 1.5 ? '80%' : '75%',
+                width: aspectRatio > 1.5 ? '65%' : '90%',
             },
 
             DivingDeepOpacity: {
-                marginTop: '25%',
-                marginLeft: '13%',
-                height: '80%',
-                width: '85%',
+                marginTop: aspectRatio > 1.5 ? '12%' : '25%',
+                marginLeft: aspectRatio > 1.5 ? '30%' : '13%',
+                height: aspectRatio > 1.5 ? '80%' : '80%',
+                width: aspectRatio > 1.5 ? '55%' : '85%',
             },
 
             Image: {
