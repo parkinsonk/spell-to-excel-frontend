@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, useWindowDimensions, TouchableOpacity, Image} from 'react-native';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 
 
 
@@ -9,9 +10,168 @@ const FlyingHighWordsView = ({ navigation, route}) => {
     const { selectedWord, batch } = route.params;
     const { height: screenHeight, width: screenWidth } = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
+    const aspectRatio = screenWidth / screenHeight;
+
+    const styles = StyleSheet.create({
+
+        // Landscape styles
+        landscape: {
+            background: {
+                flex: 1,
+                width: '100%',
+                height: '100%',
+                flexDirection: 'column',
+            },
+            top: {
+                flex: 1,
+                width: '100%',
+                height: '100%',
+                flexDirection: 'row',
+                alignItems: 'center',
+            },
+            bottom: {
+                flex: 1,
+                width: '100%',
+                height: '100%',
+                flexDirection: 'row',
+                alignItems: 'center',
+            },
+            
+            wordsIKnowopacity: {
+                position: 'absolute',
+                top: 0,
+                left: aspectRatio > 1.5 ? '80%': '70%',
+                zIndex: 10, 
+                width: aspectRatio > 1.5 ? '20%': '30%',
+                height: aspectRatio > 1.5 ? '10%':'10%',
+            },
+            letterFriendsOpacity: {
+                width: aspectRatio > 1.5 ? '10%': '12%',
+                height: aspectRatio > 1.5 ? '65%':'51%',
+                marginLeft: aspectRatio > 1.5 ? '26%':'18%',
+                marginTop: aspectRatio > 1.5 ? '6%':'5%',
+            },
+            soundsOpacity: {
+                marginTop: '3%',
+                width: aspectRatio > 1.5 ? '14%':'16%',
+                height: aspectRatio > 1.5 ? '50%':'37%',
+                marginLeft: aspectRatio > 1.5 ? '8%':'14%',
+            },
+            traceOpacity: {
+                width: aspectRatio > 1.5 ? '14%':'16%',
+                height: aspectRatio > 1.5 ? '50%':'37%',
+                marginLeft: aspectRatio > 1.5 ? '7%':'14%',
+                marginTop: '5%',
+            },
+            readOpacity: {
+                marginBottom: aspectRatio > 1.5 ? '0%':'4%',
+                marginLeft: aspectRatio > 1.5 ? '24%':'15%',
+                width: aspectRatio > 1.5 ? '14%':'16%',
+                height: aspectRatio > 1.5 ? '50%':'37%',
+                marginTop: aspectRatio > 1.5 ? '3%':'0%',
+            },
+            flashcardsOpacity: {
+                marginBottom: aspectRatio > 1.5 ? '1%':'8%',
+                marginLeft: aspectRatio > 1.5 ? '6%':'12%',
+                width: aspectRatio > 1.5 ? '10%':'12%',
+                height: aspectRatio > 1.5 ? '63%':'48%',
+            },
+            testOpacity: {
+                width: aspectRatio > 1.5 ? '14%':'16%',
+                height: aspectRatio > 1.5 ? '50%':'37%',
+                marginLeft: aspectRatio > 1.5 ? '8%':'15%',
+                marginBottom: aspectRatio > 1.5 ? '0%':'4%',
+                marginTop: aspectRatio > 1.5 ? '3%':'0%',
+            },
+            Image: {
+                height: '100%',
+                width: '100%',
+            },
+        },
+        
+        // Portrait styles
+        portrait: {
+            background: {
+                flex: 1,
+                width: '100%',
+                height: '100%',
+                flexDirection: 'column',
+            },
+            top: {
+                flex: 1,
+                width: '100%',
+                height: '100%',
+                flexDirection: 'row',
+                alignItems: 'center',
+            },
+            middle: {
+                flex: 1,
+                width: '100%',
+                height: '100%',
+                flexDirection: 'row',
+                alignItems: 'center',
+            },
+            bottom: {
+                flex: 1,
+                width: '100%',
+                height: '100%',
+                flexDirection: 'row',
+                alignItems: 'center',
+            },
+            wordsIKnowopacity: {
+                position: 'absolute',
+                top: 0,
+                right: '0%',
+                zIndex: 10, 
+                width: '35%',
+                height: '5%',
+            },
+            letterFriendsOpacity: {
+                marginLeft: '25%',
+                width: '16%',
+                height: '48%',
+                marginTop: '15%',
+            },
+            soundsOpacity: {
+                marginTop: '15%',
+                marginLeft: '19%',
+                width: '17%',
+                height: '48%',
+            },
+            traceOpacity: {
+                width: '17.5%',
+                height: '52%',
+                marginLeft: '15%',
+                marginBottom: '3%',
+            },
+            readOpacity: {
+                marginLeft: '25%',
+                width: '20%',
+                height: '33%',
+                marginBottom: '7%',
+            },
+            flashcardsOpacity: {
+                marginBottom: '20%',
+                marginLeft: '21.5%',
+                width: '18%',
+                height: '48%',
+            },
+            testOpacity: {
+                width: '21%',
+                height: '35%',
+                marginLeft: '15%',
+                marginBottom: '10%',
+            },
+            Image: {
+                height: '100%',
+                width: '100%',
+            },
+        }
+        });
 
     const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
     const [backgroundImage, setBackgroundImage] = useState(require('../assets/activitiesView/activitiesBackgroundLandscape.png'));
+    const iphoneBackground = require('../assets/activitiesView/activitiesBackgroundIphone.png');
 
     useEffect(() => {
         // Function to update styles based on current orientation
@@ -47,7 +207,7 @@ const FlyingHighWordsView = ({ navigation, route}) => {
     return (
         
             <ImageBackground
-                source={backgroundImage}
+                source={aspectRatio > 1.5 ? iphoneBackground : backgroundImage}
                 resizeMode="cover"
                 style={orientationStyles.background}
                 
@@ -59,7 +219,7 @@ const FlyingHighWordsView = ({ navigation, route}) => {
                 {/* Start of Landscape Views*/}
 
                 <TouchableOpacity style={orientationStyles.wordsIKnowopacity} onPress={() => console.log('button pressed')}>
-                    <Image source={require('../assets/activitiesView/wordsIKnow.png')} style={orientationStyles.wordsIKnowImage} />
+                    <Image source={require('../assets/activitiesView/wordsIKnow.png')} style={orientationStyles.Image} />
                 </TouchableOpacity>
 
                 <View style={orientationStyles.top}>
@@ -104,7 +264,7 @@ const FlyingHighWordsView = ({ navigation, route}) => {
                 </>) : (
                         <>
                 <TouchableOpacity style={orientationStyles.wordsIKnowopacity} onPress={() => console.log('button pressed')}>
-                    <Image source={require('../assets/activitiesView/wordsIKnow.png')} style={orientationStyles.wordsIKnowImage} />
+                    <Image source={require('../assets/activitiesView/wordsIKnow.png')} style={orientationStyles.Image} />
                 </TouchableOpacity>
 
                 <View style={orientationStyles.top}>
@@ -156,157 +316,7 @@ const FlyingHighWordsView = ({ navigation, route}) => {
     );
 };
 
-const styles = StyleSheet.create({
 
-// Landscape styles
-landscape: {
-    background: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'column',
-    },
-    top: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    bottom: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    
-    wordsIKnowopacity: {
-        position: 'absolute',
-        top: 0.2,
-        right: 0,
-        zIndex: 10, 
-        
-    },
-    letterFriendsOpacity: {
-        width: '11%',
-        height: '46%',
-        marginLeft: '18%',
-        marginTop: '5%',
-    },
-    soundsOpacity: {
-        marginTop: '3%',
-        width: '16%',
-        height: '37%',
-        marginLeft: '14%',
-    },
-    traceOpacity: {
-        width: '16%',
-        height: '37%',
-        marginLeft: '14%',
-        marginTop: '5%',
-    },
-    readOpacity: {
-        marginBottom: '4%',
-        marginLeft: '15%',
-        width: '16%',
-        height: '37%',
-    },
-    flashcardsOpacity: {
-        marginBottom: '8%',
-        marginLeft: '12%',
-        width: '12%',
-        height: '48%',
-    },
-    testOpacity: {
-        width: '16%',
-        height: '37%',
-        marginLeft: '15%',
-        marginBottom: '4%',
-    },
-    Image: {
-        height: '100%',
-        width: '100%',
-    },
-},
-
-// Portrait styles
-portrait: {
-    background: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'column',
-    },
-    top: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    middle: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    bottom: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    wordsIKnowopacity: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        zIndex: 10, 
-    },
-    letterFriendsOpacity: {
-        marginLeft: '25%',
-        width: '16%',
-        height: '48%',
-        marginTop: '15%',
-    },
-    soundsOpacity: {
-        marginTop: '15%',
-        marginLeft: '19%',
-        width: '17%',
-        height: '48%',
-    },
-    traceOpacity: {
-        width: '17.5%',
-        height: '52%',
-        marginLeft: '15%',
-        marginBottom: '3%',
-    },
-    readOpacity: {
-        marginLeft: '25%',
-        width: '20%',
-        height: '33%',
-        marginBottom: '7%',
-    },
-    flashcardsOpacity: {
-        marginBottom: '20%',
-        marginLeft: '21.5%',
-        width: '18%',
-        height: '48%',
-    },
-    testOpacity: {
-        width: '21%',
-        height: '35%',
-        marginLeft: '15%',
-        marginBottom: '10%',
-    },
-    Image: {
-        height: '100%',
-        width: '100%',
-    },
-}
-});
 
 
 export default FlyingHighWordsView;
