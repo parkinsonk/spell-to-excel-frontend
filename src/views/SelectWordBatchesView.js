@@ -50,9 +50,9 @@ const SelectWordBatchesView = ({ navigation }) => {
 
             FlyingHighOpacity: {
                 marginTop: '5%',
-                marginLeft: aspectRatio > 1.5 ? '30%' : '15%',
-                height: aspectRatio > 1.5 ? '72%' : '60%',
-                width: aspectRatio > 1.5 ? '25%' : '32%',
+                marginLeft: aspectRatio > 1.5 ? '28%' : '15%',
+                height: aspectRatio > 1.5 ? '75%' : '60%',
+                width: aspectRatio > 1.5 ? '26%' : '32%',
             },
             SunnyIslandOpacity: {
                 marginTop: aspectRatio > 1.5 ? '1%': '5%',
