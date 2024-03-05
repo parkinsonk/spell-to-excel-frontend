@@ -148,9 +148,9 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   container: {
-    width: '60%', // Adjust the width as needed
-    height: '20%', // Adjust the height as needed
-    borderRadius: 3,
+    width: '50%', // Adjust the width as needed
+    height: '50%', // Adjust the height as needed
+    borderRadius: '50%',
     alignSelf: 'center',
     justifyContent: 'right',
     alignItems: 'center',
@@ -158,20 +158,21 @@ const styles = StyleSheet.create({
   input: {
     height: 9,
     width: '100%',
-    padding: 15,
+    padding: 20,
     color: 'black', 
   },
   inputBox: {
     width: '100%',
-    marginBottom: '2%',
+    marginBottom: '3%',
     borderColor: 'black', 
     borderWidth: 1.5,
-    borderRadius: 3,
+    borderRadius: '50%',
   },
   loginButtonContainer: {
     width: '20%',
     height: '40%',
     marginTop: '2%', 
+    borderRadius: '50%', // Make it a circle
   },
   loginButton: {
     width: '100%', // Adjust the width as needed
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
   },
 },
 // Portrait styles
-portrait: StyleSheet.create({
+portrait: {
   background: {
     flex: 1,
     resizeMode: 'cover',
@@ -188,10 +189,39 @@ portrait: StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-
-})
-
-
+  container: {
+    width: '30%', // Adjust the width as needed
+    height: '40%', // Adjust the height as needed
+    borderRadius: '50%',
+    alignSelf: 'center',
+    justifyContent: 'right',
+    alignItems: 'center',
+  },
+  input: {
+    height: 9,
+    width: '100%',
+    padding: 15,
+    color: 'black',
+  },
+  inputBox: {
+    width: '100%',
+    marginBottom: '3%',
+    borderColor: 'black', 
+    borderWidth: 1.5,
+    borderRadius: '50%',
+  },
+  loginButtonContainer: {
+    width: '20%',
+    height: '40%',
+    marginTop: '2%', 
+    borderRadius: '50%', // Make it a circle
+  },
+  loginButton: {
+    width: '100%', // Adjust the width as needed
+    height: '100%', // Adjust the height as needed
+    resizeMode: 'contain',
+  },
+  // Add other portrait styles here similar to landscape styles
+},
 });
-
 export default LoginScreen;
