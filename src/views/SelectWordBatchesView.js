@@ -119,7 +119,7 @@ const SelectWordBatchesView = ({ navigation }) => {
             FlyingHighOpacity: {
                 marginTop: '10%',
                 marginLeft: '-40%',
-                height: '16%',
+                height: '16.5%',
                 width: '100%',
             },
             SunnyIslandOpacity: {
