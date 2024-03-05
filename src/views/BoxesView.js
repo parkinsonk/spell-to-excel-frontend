@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Dimensions, PanResponder, useWindowDimensions, Animated} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import boxesWordMapping from '../utils/boxesWordMapping';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 // Initialize with Animated.Value for each circle position
 const initializeCirclePositions = (length) => Array.from({ length }, () => new Animated.ValueXY());
@@ -103,14 +104,13 @@ const BoxesView = ({ navigation, route  }) => {
     
 
       const styles = StyleSheet.create({
-        background: {
+        landscape: {
+          background: {
             flex: 1,
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             resizeMode: 'contain',
-            borderColor: 'blue',
-            borderWidth: 5,
             
           },
           svgContainer: {
@@ -200,16 +200,144 @@ const BoxesView = ({ navigation, route  }) => {
             zIndex: 4,
             transform: [{ translateX: 0 }, { translateY: 0 }],
           },
-    });
+    },
+    portrait: {
+      background: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        resizeMode: 'contain',
+        
+      },
+      svgContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 2,
+        borderColor: 'green',
+        borderWidth: 2,
+      },
+      eraser: {
+        position: 'absolute',
+        bottom: 0,
+        zIndex: 3,
+        left: aspectRatio > 1.5 ? screenWidth * .87 : screenWidth * .13,
+        top: aspectRatio > 1.5 ? screenHeight * .03 : screenHeight * .79,
+      },
+    crayonBox: {
+        position: 'absolute',
+        left: aspectRatio > 1.5 ? screenWidth * .8 : 0,
+        bottom: 0,
+        top: aspectRatio > 1.5 ? 0 : screenHeight * .75,
+        zIndex: 3,
+    },
+    crayonBoxImage: {
+        width: aspectRatio > 1.5 ? screenWidth * .07 : screenWidth * .08,
+        height: aspectRatio > 1.5 ? screenHeight * .15 : screenHeight * .13,
+        marginLeft: aspectRatio > 1.5 ? 0 : 50,
+        zIndex: 3,
+    },
+      eraserImage: {
+        width: aspectRatio > 1.5 ? screenWidth * .1 : screenWidth * .09,
+        height: aspectRatio > 1.5 ? screenHeight * .1 : screenHeight * .08,
+        zIndex: 3,
+    
+      },
+      colorPickerContainer: {
+        position: 'absolute',
+        padding: 20,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 10,
+      },
+      colorOption: {
+        width: 50,
+        height: 50,
+        margin: 5,
+      },
+      sound: {
+        position: 'absolute',
+        left: aspectRatio > 1.5 ? screenWidth * .08 : screenWidth * .05,
+        top: aspectRatio > 1.5 ? screenHeight * .08 :screenHeight * .18,
+        zIndex: 3,
+      },
+      soundImage: {
+        width: aspectRatio > 1.5 ?  screenWidth * .10 : screenWidth * .10,
+        height: aspectRatio > 1.5 ?  screenHeight * .15 : screenHeight * .10,
+        borderColor: 'black',
+        marginRight: 50,
+      },
+    box: {
+        position: 'absolute',
+        width: BOX_WIDTH,
+        height: BOX_HEIGHT,
+        backgroundColor: 'white',
+        borderWidth: 2,
+        borderColor: 'black',
+        borderRadius: 10,
+        margin: BOX_MARGIN, // Add margin to space out the boxes
+        zIndex: 1,
+      },
+    lettersImage: {
+        position: 'absolute',
+        width: BOX_WIDTH - screenWidth * .03, // Match the box width or adjust as needed
+        height: BOX_HEIGHT - screenHeight * .03, // Match the box height or adjust as needed
+        zIndex: 2,
+      },
+    circle: {
+        position: 'absolute',
+        width: BOX_WIDTH - screenWidth * .04,
+        height: BOX_HEIGHT - screenHeight * .05,
+        borderRadius: 100,
+        zIndex: 4,
+        transform: [{ translateX: 0 }, { translateY: 0 }],
+      },
+    }});
+
+    const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
+    const [backgroundImage, setBackgroundImage] = useState(require('../assets/boxesViews/boxesBackgroundPortrait.png'));
+    const iphoneBackground = require('../assets/boxesViews/boxesBackgroundPortrait.png');
+
+    useEffect(() => {
+      // Function to update styles based on current orientation
+      const updateOrientationStyles = async () => {
+        const orientation = await ScreenOrientation.getOrientationAsync();
+        if (orientation === ScreenOrientation.Orientation.LANDSCAPE_LEFT || orientation === ScreenOrientation.Orientation.LANDSCAPE_RIGHT) {
+          setOrientationStyles(styles.landscape);
+          setBackgroundImage(require('../assets/boxesViews/boxesBackgroundLandscape.png'));
+        } else {
+          setOrientationStyles(styles.portrait);
+          setBackgroundImage(require('../assets/boxesViews/boxesBackgroundPortrait.png'));
+        }
+      };
+  
+      // Initial update when component mounts
+      updateOrientationStyles();
+  
+      // Subscribe to orientation changes
+      const subscription = ScreenOrientation.addOrientationChangeListener(() => {
+        updateOrientationStyles();
+      });
+  
+      // Cleanup subscription on unmount
+      return () => {
+        ScreenOrientation.removeOrientationChangeListener(subscription);
+      };
+    }, []);
 
     return (
 
         <ImageBackground
-            source={require('../assets/boxesViews/boxesBackground.png')}
+            source={backgroundImage}
             resizeMode="cover"
-            style={styles.background}
+            style={orientationStyles.background}
         >
-      <View {...panResponder.panHandlers} style={styles.svgContainer}>
+      <View {...panResponder.panHandlers} style={orientationStyles.svgContainer}>
         <Svg height={screenHeight} width={screenWidth}>
           {paths.map((path, index) => (
             <Path
@@ -223,36 +351,36 @@ const BoxesView = ({ navigation, route  }) => {
         </Svg>
       </View>
       
-      <TouchableOpacity style={styles.eraser} onPress={handleClearButtonClick}>
-        <Image source={require('../assets/traceViews/eraser.png')} style={styles.eraserImage} />
+      <TouchableOpacity style={orientationStyles.eraser} onPress={handleClearButtonClick}>
+        <Image source={require('../assets/traceViews/eraser.png')} style={orientationStyles.eraserImage} />
       </TouchableOpacity>
   
-      <TouchableOpacity style={styles.crayonBox} onPress={toggleColorPicker}>
-        <Image source={require('../assets/traceViews/crayonBox.png')} style={styles.crayonBoxImage} />
+      <TouchableOpacity style={orientationStyles.crayonBox} onPress={toggleColorPicker}>
+        <Image source={require('../assets/traceViews/crayonBox.png')} style={orientationStyles.crayonBoxImage} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.sound} onPress={() => console.log('sound button pressed')}>
-        <Image source={require('../assets/traceViews/sound.png')} style={styles.soundImage} />
+      <TouchableOpacity style={orientationStyles.sound} onPress={() => console.log('sound button pressed')}>
+        <Image source={require('../assets/traceViews/sound.png')} style={orientationStyles.soundImage} />
       </TouchableOpacity>
 
     
       {lettersList.map((letter, index) => (
     <React.Fragment key={index}>
         <View
-            style={[styles.box, {
+            style={[orientationStyles.box, {
                 top: aspectRatio > 1.5 ?  screenHeight * .55 : screenHeight * .55,
                 left: calculateBoxLeftPosition(index, screenWidth),
             }]}
             onLayout={handleBoxPositioning(index)}
         />
-        <View style={[styles.box, {
+        <View style={[orientationStyles.box, {
             top: aspectRatio > 1.5 ?  screenHeight * .28 : screenHeight * .35,
             left: calculateBoxLeftPosition(index, screenWidth),
         }]} />
         {lettersList && lettersList[index] &&
             <Image
                 source={lettersList[index]}
-                style={[styles.lettersImage, { // Match the box height or adjust as needed
+                style={[orientationStyles.lettersImage, { // Match the box height or adjust as needed
                     top: aspectRatio > 1.5 ?  screenWidth * .02 : screenHeight * .18,
                     left: calculateBoxLeftPosition(index, screenWidth) + screenWidth * .015,
                     
@@ -264,7 +392,7 @@ const BoxesView = ({ navigation, route  }) => {
                     {...circlePanResponders[index].panHandlers}
                     key={index}
                     style={[
-                        styles.circle,
+                      orientationStyles.circle,
                         {
                             left: calculateBoxLeftPosition(index, screenWidth) + screenWidth * .015,
                             top: aspectRatio > 1.5 ?  screenWidth * .02 : screenHeight * .18,
@@ -281,11 +409,11 @@ const BoxesView = ({ navigation, route  }) => {
   
       {/* Color Picker Overlay */}
       {showColorPicker && (
-        <View style={styles.colorPickerContainer}>
+        <View style={orientationStyles.colorPickerContainer}>
           {colorOptions.map((optionColor, index) => (
             <TouchableOpacity
               key={index}
-              style={[styles.colorOption, {backgroundColor: optionColor}]}
+              style={[orientationStyles.colorOption, {backgroundColor: optionColor}]}
               onPress={() => {
                 handleChangeColor(optionColor);
                 toggleColorPicker(); // Hide color picker after selection

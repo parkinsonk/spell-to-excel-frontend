@@ -5,7 +5,7 @@ import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 
 
 
-const FlyingHighWordsView = ({ navigation, route}) => {
+const ActivitiesView = ({ navigation, route}) => {
     
     const { selectedWord, batch } = route.params;
     const { height: screenHeight, width: screenWidth } = useWindowDimensions();
@@ -319,4 +319,4 @@ const FlyingHighWordsView = ({ navigation, route}) => {
 
 
 
-export default FlyingHighWordsView;
+export default ActivitiesView;
