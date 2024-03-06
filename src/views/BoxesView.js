@@ -10,19 +10,232 @@ const initializeCirclePositions = (length) => Array.from({ length }, () => new A
 const BoxesView = ({ navigation, route  }) => {
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
     const aspectRatio = screenWidth / screenHeight;
+    const isLandscape = screenWidth > screenHeight;
     const { batch, activity, selectedWord } = route.params;
     const lettersList = boxesWordMapping[selectedWord]?.images || boxesWordMapping['default'].images;
     const colorsList = boxesWordMapping[selectedWord]?.colors || boxesWordMapping['default'].colors;
+    const BOX_WIDTH = aspectRatio > 1.5 ? 100: 150; // Width of each box
+    const BOX_HEIGHT = aspectRatio > 1.5 ? 100: 150; // Height of each box
+    const BOX_MARGIN = aspectRatio > 1.5 ? 5: 10; // Margin between boxes
+    const NUM_COLUMNS = lettersList.length; // Number of boxes per row
+
+    const styles = StyleSheet.create({
+      landscape: {
+        background: {
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          resizeMode: 'contain',
+          backgroundColor: 'white',
+          
+        },
+        svgContainer: {
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 2,
+        },
+        eraser: {
+          position: 'absolute',
+          bottom: 0,
+          zIndex: 3,
+          bottom: '3%',
+          right: '12%',
+          
+        },
+      crayonBox: {
+          position: 'absolute',
+          bottom: '3%',
+          right: '22%',
+          zIndex: 3,
+      },
+      crayonBoxImage: {
+          width: aspectRatio > 1.5 ? screenWidth * .07 : screenWidth * .08,
+          height: aspectRatio > 1.5 ? screenHeight * .15 : screenHeight * .13,
+          marginLeft: aspectRatio > 1.5 ? 0 : 50,
+          zIndex: 3,
+      },
+        eraserImage: {
+          width: aspectRatio > 1.5 ? screenWidth * .1 : screenWidth * .09,
+          height: aspectRatio > 1.5 ? screenHeight * .1 : screenHeight * .08,
+          zIndex: 3,
+      
+        },
+        colorPickerContainer: {
+          position: 'absolute',
+          padding: 20,
+          backgroundColor: '#fff',
+          borderRadius: 10,
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 10,
+        },
+        colorOption: {
+          width: 50,
+          height: 50,
+          margin: 5,
+        },
+        sound: {
+          position: 'absolute',
+          left: aspectRatio > 1.5 ? screenWidth * .08 : screenWidth * .05,
+          zIndex: 3,
+          bottom: '5%',
+          left: '12%',
+        },
+        soundImage: {
+          width: aspectRatio > 1.5 ?  screenWidth * .10 : screenWidth * .1,
+          height: aspectRatio > 1.5 ?  screenHeight * .15 : screenHeight * .1,
+          borderColor: 'black',
+        },
+      box: {
+          position: 'absolute',
+          width: BOX_WIDTH,
+          height: BOX_HEIGHT,
+          backgroundColor: 'white',
+          borderWidth: 2,
+          borderColor: 'black',
+          borderRadius: 10,
+          margin: BOX_MARGIN, // Add margin to space out the boxes
+          zIndex: 1,
+        },
+      lettersImage: {
+          position: 'absolute',
+          width: BOX_WIDTH - screenWidth * .03, // Match the box width or adjust as needed
+          height: BOX_HEIGHT - screenHeight * .03, // Match the box height or adjust as needed
+          zIndex: 2,
+        },
+      circle: {
+          position: 'absolute',
+          width: BOX_WIDTH - screenWidth * .04,
+          height: BOX_HEIGHT - screenHeight * .05,
+          borderRadius: 100,
+          zIndex: 4,
+          transform: [{ translateX: 0 }, { translateY: 0 }],
+        },
+        leftBackground: {
+          position: 'absolute',
+          left: 0,
+        },
+        rightBackground: {
+          position: 'absolute',
+          right: 0
+        },
+  },
+  portrait: {
+    background: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      resizeMode: 'contain',
+      backgroundColor: 'white',
+      
+    },
+    svgContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 2,
+    },
+    eraser: {
+      position: 'absolute',
+      bottom: '12%',
+      zIndex: 3,
+      right: '5%',
+
+    },
+  crayonBox: {
+      position: 'absolute',
+      right: '25%',
+      bottom: '10%',
+      zIndex: 3,
+  },
+  crayonBoxImage: {
+      width: screenWidth * .1,
+      height: screenHeight * .1,
+      marginLeft: 50,
+      zIndex: 3,
+  },
+    eraserImage: {
+      width: screenWidth * .18,
+      height: screenHeight * .06,
+      zIndex: 3,
+  
+    },
+    colorPickerContainer: {
+      position: 'absolute',
+      padding: 20,
+      backgroundColor: '#fff',
+      borderRadius: 10,
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 10,
+    },
+    colorOption: {
+      width: 50,
+      height: 50,
+      margin: 5,
+    },
+    sound: {
+      position: 'absolute',
+      bottom: '12%',
+      left: '5%',
+      zIndex: 3,
+    },
+    soundImage: {
+      width: screenWidth * .13,
+      height: screenHeight * .06,
+      borderColor: 'black',
+      marginRight: 50,
+    },
+  box: {
+      position: 'absolute',
+      width: BOX_WIDTH,
+      height: BOX_HEIGHT,
+      backgroundColor: 'white',
+      borderWidth: 2,
+      borderColor: 'black',
+      borderRadius: 10,
+      margin: BOX_MARGIN, // Add margin to space out the boxes
+      zIndex: 1,
+    },
+  lettersImage: {
+      position: 'absolute',
+      width: BOX_WIDTH - screenWidth * .03, // Match the box width or adjust as needed
+      height: BOX_HEIGHT - screenHeight * .03, // Match the box height or adjust as needed
+      zIndex: 2,
+    },
+  circle: {
+      position: 'absolute',
+      width: BOX_WIDTH - screenWidth * .04,
+      height: BOX_HEIGHT - screenHeight * .05,
+      borderRadius: 100,
+      zIndex: 4,
+      transform: [{ translateX: 0 }, { translateY: 0 }],
+    },
+    topBackground: {
+      position: 'absolute',
+      top: 0,
+    },
+    bottomBackground: {
+      position: 'absolute',
+      bottom: 0
+    },
+  }});
+
+    
+
     const [paths, setPaths] = useState([]);
     const [color, setColor] = useState("black"); // Ensure color state is defined
     const [showColorPicker, setShowColorPicker] = useState(false);
     const [boxesLayout, setBoxesLayout] = useState({});
     const [circlePositions, setCirclePositions] = useState(initializeCirclePositions(lettersList.length));
 
-    const BOX_WIDTH = aspectRatio > 1.5 ? 100: 150; // Width of each box
-    const BOX_HEIGHT = aspectRatio > 1.5 ? 100: 150; // Height of each box
-    const BOX_MARGIN = aspectRatio > 1.5 ? 5: 10; // Margin between boxes
-    const NUM_COLUMNS = lettersList.length; // Number of boxes per row
     
       const colorOptions = ["black", "red", "blue", "green", "yellow", "purple"];
     
@@ -103,205 +316,10 @@ const BoxesView = ({ navigation, route  }) => {
 
     
 
-      const styles = StyleSheet.create({
-        landscape: {
-          background: {
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            resizeMode: 'contain',
-            
-          },
-          svgContainer: {
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 2,
-            borderColor: 'green',
-            borderWidth: 2,
-          },
-          eraser: {
-            position: 'absolute',
-            bottom: 0,
-            zIndex: 3,
-            left: aspectRatio > 1.5 ? screenWidth * .87 : screenWidth * .13,
-            top: aspectRatio > 1.5 ? screenHeight * .03 : screenHeight * .79,
-          },
-        crayonBox: {
-            position: 'absolute',
-            left: aspectRatio > 1.5 ? screenWidth * .8 : 0,
-            bottom: 0,
-            top: aspectRatio > 1.5 ? 0 : screenHeight * .75,
-            zIndex: 3,
-        },
-        crayonBoxImage: {
-            width: aspectRatio > 1.5 ? screenWidth * .07 : screenWidth * .08,
-            height: aspectRatio > 1.5 ? screenHeight * .15 : screenHeight * .13,
-            marginLeft: aspectRatio > 1.5 ? 0 : 50,
-            zIndex: 3,
-        },
-          eraserImage: {
-            width: aspectRatio > 1.5 ? screenWidth * .1 : screenWidth * .09,
-            height: aspectRatio > 1.5 ? screenHeight * .1 : screenHeight * .08,
-            zIndex: 3,
-        
-          },
-          colorPickerContainer: {
-            position: 'absolute',
-            padding: 20,
-            backgroundColor: '#fff',
-            borderRadius: 10,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 10,
-          },
-          colorOption: {
-            width: 50,
-            height: 50,
-            margin: 5,
-          },
-          sound: {
-            position: 'absolute',
-            left: aspectRatio > 1.5 ? screenWidth * .08 : screenWidth * .05,
-            top: aspectRatio > 1.5 ? screenHeight * .08 :screenHeight * .18,
-            zIndex: 3,
-          },
-          soundImage: {
-            width: aspectRatio > 1.5 ?  screenWidth * .10 : screenWidth * .10,
-            height: aspectRatio > 1.5 ?  screenHeight * .15 : screenHeight * .10,
-            borderColor: 'black',
-            marginRight: 50,
-          },
-        box: {
-            position: 'absolute',
-            width: BOX_WIDTH,
-            height: BOX_HEIGHT,
-            backgroundColor: 'white',
-            borderWidth: 2,
-            borderColor: 'black',
-            borderRadius: 10,
-            margin: BOX_MARGIN, // Add margin to space out the boxes
-            zIndex: 1,
-          },
-        lettersImage: {
-            position: 'absolute',
-            width: BOX_WIDTH - screenWidth * .03, // Match the box width or adjust as needed
-            height: BOX_HEIGHT - screenHeight * .03, // Match the box height or adjust as needed
-            zIndex: 2,
-          },
-        circle: {
-            position: 'absolute',
-            width: BOX_WIDTH - screenWidth * .04,
-            height: BOX_HEIGHT - screenHeight * .05,
-            borderRadius: 100,
-            zIndex: 4,
-            transform: [{ translateX: 0 }, { translateY: 0 }],
-          },
-    },
-    portrait: {
-      background: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        resizeMode: 'contain',
-        
-      },
-      svgContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 2,
-        borderColor: 'green',
-        borderWidth: 2,
-      },
-      eraser: {
-        position: 'absolute',
-        bottom: 0,
-        zIndex: 3,
-        left: aspectRatio > 1.5 ? screenWidth * .87 : screenWidth * .13,
-        top: aspectRatio > 1.5 ? screenHeight * .03 : screenHeight * .79,
-      },
-    crayonBox: {
-        position: 'absolute',
-        left: aspectRatio > 1.5 ? screenWidth * .8 : 0,
-        bottom: 0,
-        top: aspectRatio > 1.5 ? 0 : screenHeight * .75,
-        zIndex: 3,
-    },
-    crayonBoxImage: {
-        width: aspectRatio > 1.5 ? screenWidth * .07 : screenWidth * .08,
-        height: aspectRatio > 1.5 ? screenHeight * .15 : screenHeight * .13,
-        marginLeft: aspectRatio > 1.5 ? 0 : 50,
-        zIndex: 3,
-    },
-      eraserImage: {
-        width: aspectRatio > 1.5 ? screenWidth * .1 : screenWidth * .09,
-        height: aspectRatio > 1.5 ? screenHeight * .1 : screenHeight * .08,
-        zIndex: 3,
-    
-      },
-      colorPickerContainer: {
-        position: 'absolute',
-        padding: 20,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 10,
-      },
-      colorOption: {
-        width: 50,
-        height: 50,
-        margin: 5,
-      },
-      sound: {
-        position: 'absolute',
-        left: aspectRatio > 1.5 ? screenWidth * .08 : screenWidth * .05,
-        top: aspectRatio > 1.5 ? screenHeight * .08 :screenHeight * .18,
-        zIndex: 3,
-      },
-      soundImage: {
-        width: aspectRatio > 1.5 ?  screenWidth * .10 : screenWidth * .10,
-        height: aspectRatio > 1.5 ?  screenHeight * .15 : screenHeight * .10,
-        borderColor: 'black',
-        marginRight: 50,
-      },
-    box: {
-        position: 'absolute',
-        width: BOX_WIDTH,
-        height: BOX_HEIGHT,
-        backgroundColor: 'white',
-        borderWidth: 2,
-        borderColor: 'black',
-        borderRadius: 10,
-        margin: BOX_MARGIN, // Add margin to space out the boxes
-        zIndex: 1,
-      },
-    lettersImage: {
-        position: 'absolute',
-        width: BOX_WIDTH - screenWidth * .03, // Match the box width or adjust as needed
-        height: BOX_HEIGHT - screenHeight * .03, // Match the box height or adjust as needed
-        zIndex: 2,
-      },
-    circle: {
-        position: 'absolute',
-        width: BOX_WIDTH - screenWidth * .04,
-        height: BOX_HEIGHT - screenHeight * .05,
-        borderRadius: 100,
-        zIndex: 4,
-        transform: [{ translateX: 0 }, { translateY: 0 }],
-      },
-    }});
+
 
     const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
-    const [backgroundImage, setBackgroundImage] = useState(require('../assets/boxesViews/boxesBackgroundPortrait.png'));
-    const iphoneBackground = require('../assets/boxesViews/boxesBackgroundPortrait.png');
+    
 
     useEffect(() => {
       // Function to update styles based on current orientation
@@ -309,10 +327,8 @@ const BoxesView = ({ navigation, route  }) => {
         const orientation = await ScreenOrientation.getOrientationAsync();
         if (orientation === ScreenOrientation.Orientation.LANDSCAPE_LEFT || orientation === ScreenOrientation.Orientation.LANDSCAPE_RIGHT) {
           setOrientationStyles(styles.landscape);
-          setBackgroundImage(require('../assets/boxesViews/boxesBackgroundLandscape.png'));
         } else {
           setOrientationStyles(styles.portrait);
-          setBackgroundImage(require('../assets/boxesViews/boxesBackgroundPortrait.png'));
         }
       };
   
@@ -332,11 +348,7 @@ const BoxesView = ({ navigation, route  }) => {
 
     return (
 
-        <ImageBackground
-            source={backgroundImage}
-            resizeMode="cover"
-            style={orientationStyles.background}
-        >
+      <View style={orientationStyles.background}>
       <View {...panResponder.panHandlers} style={orientationStyles.svgContainer}>
         <Svg height={screenHeight} width={screenWidth}>
           {paths.map((path, index) => (
@@ -363,6 +375,20 @@ const BoxesView = ({ navigation, route  }) => {
         <Image source={require('../assets/traceViews/sound.png')} style={orientationStyles.soundImage} />
       </TouchableOpacity>
 
+      {isLandscape ? (
+
+        <>
+          <Image source={require('../assets/boxesViews/leftBackgroundLandscape.png')} style={orientationStyles.leftBackground} />
+          <Image source={require('../assets/boxesViews/rightBackgroundLandscape.png')} style={orientationStyles.rightBackground} />
+
+        </>) : (
+
+        <>
+          <Image source={require('../assets/boxesViews/bottomBackgroundPortrait.png')} style={orientationStyles.topBackground} />
+          <Image source={require('../assets/boxesViews/topBackgroundPortrait.png')} style={orientationStyles.bottomBackground} />
+        
+        </>)}
+
     
       {lettersList.map((letter, index) => (
     <React.Fragment key={index}>
@@ -374,7 +400,7 @@ const BoxesView = ({ navigation, route  }) => {
             onLayout={handleBoxPositioning(index)}
         />
         <View style={[orientationStyles.box, {
-            top: aspectRatio > 1.5 ?  screenHeight * .28 : screenHeight * .35,
+            top: isLandscape ? (aspectRatio > 1.5 ?  screenHeight * .28 : screenHeight * .35) : (aspectRatio > 1.5 ?  screenHeight * .28 : screenHeight * .41),
             left: calculateBoxLeftPosition(index, screenWidth),
         }]} />
         {lettersList && lettersList[index] &&
@@ -422,7 +448,7 @@ const BoxesView = ({ navigation, route  }) => {
           ))}
         </View>
       )}
-      </ImageBackground>
+      </View>
 
     );
 };
