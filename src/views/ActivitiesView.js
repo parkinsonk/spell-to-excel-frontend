@@ -48,23 +48,23 @@ const ActivitiesView = ({ navigation, route}) => {
             letterFriendsOpacity: {
                 width: aspectRatio > 1.5 ? '12%': '17%',
                 height: aspectRatio > 1.5 ? '67%':'61%',
-                marginLeft: aspectRatio > 1.5 ? '26%':'15%',
-                marginTop: aspectRatio > 1.5 ? '4%':'7%',
+                marginLeft: aspectRatio > 1.5 ? '26%':'13%',
+                marginTop: aspectRatio > 1.5 ? '4%':'2%',
             },
             soundsOpacity: {
                 marginTop: '5%',
                 width: aspectRatio > 1.5 ? '14%':'22%',
                 height: aspectRatio > 1.5 ? '50%':'51%',
-                marginLeft: aspectRatio > 1.5 ? '6%':'8%',
+                marginLeft: aspectRatio > 1.5 ? '6%':'11%',
             },
             traceOpacity: {
                 width: aspectRatio > 1.5 ? '14%':'20%',
                 height: aspectRatio > 1.5 ? '50%':'47%',
-                marginLeft: aspectRatio > 1.5 ? '7%':'9%',
+                marginLeft: aspectRatio > 1.5 ? '7%':'11%',
                 marginTop: aspectRatio > 1.5 ? '7%':'12%',
             },
             readOpacity: {
-                marginBottom: aspectRatio > 1.5 ? '1%':'4%',
+                marginBottom: aspectRatio > 1.5 ? '1%':'10%',
                 marginLeft: aspectRatio > 1.5 ? '25%':'15%',
                 width: aspectRatio > 1.5 ? '14%':'18%',
                 height: aspectRatio > 1.5 ? '50%':'42%',
@@ -79,10 +79,9 @@ const ActivitiesView = ({ navigation, route}) => {
                 width: aspectRatio > 1.5 ? '18%':'25%',
                 height: aspectRatio > 1.5 ? '55%':'49%',
                 marginLeft: aspectRatio > 1.5 ? '8%':'16%',
-                marginBottom: aspectRatio > 1.5 ? '3%':'6%',
+                marginBottom: aspectRatio > 1.5 ? '3%':'12%',
             },
             Image: {
-                height: '100%',
                 width: '100%',
             },
         },
@@ -128,10 +127,10 @@ const ActivitiesView = ({ navigation, route}) => {
                 marginLeft: '16%',
                 width: '28%',
                 height: '65%',
-                marginTop: '23%',
+                marginBottom: '5%',
             },
             soundsOpacity: {
-                marginTop: '22%',
+                marginTop: '5%',
                 marginLeft: '17%',
                 width: '25%',
                 height: '68%',
@@ -140,13 +139,13 @@ const ActivitiesView = ({ navigation, route}) => {
                 width: '25%',
                 height: '62%',
                 marginLeft: '12%',
-                marginTop: '13%',
+                marginBottom: '5%',
             },
             readOpacity: {
                 marginLeft: '15%',
                 width: '31%',
                 height: '50%',
-                marginTop: '7%',
+                marginTop: '3%',
             },
             flashcardsOpacity: {
                 marginBottom: '20%',
@@ -158,10 +157,9 @@ const ActivitiesView = ({ navigation, route}) => {
                 width: '32%',
                 height: '46%',
                 marginLeft: '30%',
-                marginBottom: '15%',
+                marginBottom: '22%',
             },
             Image: {
-                height: '100%',
                 width: '100%',
             },
         }
@@ -223,16 +221,16 @@ const ActivitiesView = ({ navigation, route}) => {
                 <View style={orientationStyles.top}>
 
                     <TouchableOpacity style={orientationStyles.letterFriendsOpacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/letterFriendsLandscape.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/letterFriendsLandscape.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={orientationStyles.soundsOpacity} onPress={() => navigation.navigate('Boxes', {batch: batch, activity: 'boxes', selectedWord: selectedWord})}>
-                        <Image source={require('../assets/activitiesView/sounds.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/sounds.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
 
                     <TouchableOpacity style={orientationStyles.traceOpacity} onPress={() => navigation.navigate('Trace', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
-                        <Image source={require('../assets/activitiesView/traceLandscape.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/traceLandscape.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
 
@@ -243,11 +241,11 @@ const ActivitiesView = ({ navigation, route}) => {
 
 
                     <TouchableOpacity style={orientationStyles.readOpacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/read.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/read.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={orientationStyles.testOpacity} onPress={() => navigation.navigate('Test', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
-                        <Image source={require('../assets/activitiesView/testLandscape.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/testLandscape.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
 
@@ -258,17 +256,17 @@ const ActivitiesView = ({ navigation, route}) => {
                 </>) : (
                         <>
                 <TouchableOpacity style={orientationStyles.wordsIKnowopacity} onPress={() => console.log('button pressed')}>
-                    <Image source={require('../assets/activitiesView/wordsIKnow.png')} style={orientationStyles.Image} />
+                    <Image source={require('../assets/activitiesView/wordsIKnow.png')} resizeMode='contain' style={orientationStyles.Image} />
                 </TouchableOpacity>
 
                 <View style={orientationStyles.top}>
 
                     <TouchableOpacity style={orientationStyles.letterFriendsOpacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/letterFriendsPortrait.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/letterFriendsPortrait.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={orientationStyles.soundsOpacity} onPress={() => navigation.navigate('Boxes', {batch: batch, activity: 'boxes', selectedWord: selectedWord})}>
-                        <Image source={require('../assets/activitiesView/soundsPortrait.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/soundsPortrait.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
 
@@ -278,11 +276,11 @@ const ActivitiesView = ({ navigation, route}) => {
                 <View style={orientationStyles.middle}>
 
                     <TouchableOpacity style={orientationStyles.readOpacity} onPress={() => console.log('button pressed')}>
-                        <Image source={require('../assets/activitiesView/read.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/read.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={orientationStyles.traceOpacity} onPress={() => navigation.navigate('Trace', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
-                        <Image source={require('../assets/activitiesView/tracePortrait.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/tracePortrait.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
                     
@@ -293,7 +291,7 @@ const ActivitiesView = ({ navigation, route}) => {
                 <View style={orientationStyles.bottom}>
 
                     <TouchableOpacity style={orientationStyles.testOpacity} onPress={() => navigation.navigate('Test', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
-                        <Image source={require('../assets/activitiesView/testPortrait.png')} style={orientationStyles.Image} />
+                        <Image source={require('../assets/activitiesView/testPortrait.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
                 </View>
