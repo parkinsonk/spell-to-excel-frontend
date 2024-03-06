@@ -1,5 +1,5 @@
-import React, { useState, useEffect} from 'react';
-import { ImageBackground, View, TextInput, TouchableOpacity, StyleSheet, Alert, Image, useWindowDimensions} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { ImageBackground, View, TextInput, TouchableOpacity, StyleSheet, Alert, Image, useWindowDimensions } from 'react-native';
 import axios from 'axios';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import * as SecureStore from 'expo-secure-store';
@@ -14,22 +14,26 @@ const LoginScreen = ({ navigation }) => {
   const isLandscape = screenWidth > screenHeight;
 
   const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
-  const [backgroundImage, setBackgroundImage] = useState(require('../assets/loginview/login.gif'));
+  const [landscapeBackground, setLandscapeBackground] = useState(
+    require('../assets/loginview/login.gif')
+  );
+  const [portraitBackground, setPortraitBackground] = useState(
+    require('../assets/loginview/pbackground.gif')
+  );
 
   useEffect(() => {
     // Function to update styles based on current orientation
     const updateOrientationStyles = async () => {
       const orientation = await ScreenOrientation.getOrientationAsync();
-      if (orientation === ScreenOrientation.Orientation.LANDSCAPE_LEFT || orientation === ScreenOrientation.Orientation.LANDSCAPE_RIGHT) {
+      if (
+        orientation === ScreenOrientation.Orientation.LANDSCAPE_LEFT ||
+        orientation === ScreenOrientation.Orientation.LANDSCAPE_RIGHT
+      ) {
         setOrientationStyles(styles.landscape);
-        setBackgroundImage(require('../assets/loginview/login.gif'));
       } else {
         setOrientationStyles(styles.portrait);
-        setBackgroundImage(require('../assets/loginview/login.gif'));
       }
     };
-
-    
 
     // Initial update when component mounts
     updateOrientationStyles();
@@ -44,8 +48,6 @@ const LoginScreen = ({ navigation }) => {
       ScreenOrientation.removeOrientationChangeListener(subscription);
     };
   }, []);
-
-
 
   const handleLogin = () => {
     // Logic to handle login
@@ -74,16 +76,13 @@ const LoginScreen = ({ navigation }) => {
       });
   };
 
-    
-return (
-        <ImageBackground
-          source={backgroundImage}
-          style={orientationStyles.background}
-        >
-
-  {isLandscape ? (
-                <>
-
+  return (
+    <ImageBackground
+      source={isLandscape ? landscapeBackground : portraitBackground}
+      style={orientationStyles.background}
+    >
+      {isLandscape ? (
+        <>
           {/* Start of Landscape Views*/}
           <View style={orientationStyles.container}>
             <View style={orientationStyles.inputBox}>
@@ -125,15 +124,51 @@ return (
           </>) : (
 
                         <>
-
-                        {/* Start of Portrait Views*/}
-                        <View></View>
-
-                        </>
-                        )}
-        </ImageBackground>
-      );
-    };      
+           {/* Start of Portrait Views*/}
+           <View style={orientationStyles.container}>
+            <View style={orientationStyles.inputBox}>
+              <TextInput
+                style={[orientationStyles.input, { color: 'black', fontWeight: 'bold' }]}
+                placeholder={isStudentMode ? 'Student Email' : 'Teacher Email'}
+                value={email}
+                onChangeText={setEmail}
+                importantForAutofill="no"
+                textAlignVertical="center"
+              />
+            </View>
+            <View style={orientationStyles.inputBox}>
+              <TextInput
+                style={[orientationStyles.input, { color: 'black', fontWeight: 'bold' }]}
+                placeholder={isStudentMode ? 'Student Name' : 'Teacher Name'}
+                value={name}
+                onChangeText={setName}
+                importantForAutofill="no"
+                textAlignVertical="center"
+              />
+            </View>
+            <View style={orientationStyles.inputBox}>
+              <TextInput
+                style={[orientationStyles.input, { color: 'black', fontWeight: 'bold' }]}
+                placeholder="Pin"
+                value={pin}
+                secureTextEntry
+                onChangeText={setPin}
+                importantForAutofill="no"
+                textAlignVertical="center"
+              />
+            </View>
+            <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={handleLogin}>
+              <Image
+                source={require('../assets/welcomeView/loginp.png')}
+                style={orientationStyles.loginButton}
+              />
+            </TouchableOpacity>
+          </View>
+        </>
+      )}
+    </ImageBackground>
+  );
+};
 
 const styles = StyleSheet.create({
 
@@ -150,15 +185,15 @@ const styles = StyleSheet.create({
   container: {
     width: '50%', // Adjust the width as needed
     height: '50%', // Adjust the height as needed
-    borderRadius: '50%',
+    borderRadius: '50', // Numeric value for borderRadius
     alignSelf: 'center',
-    justifyContent: 'right',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   input: {
-    height: 9,
+    height: 50,
     width: '100%',
-    padding: 20,
+    padding: 25,
     color: 'black', 
   },
   inputBox: {
@@ -169,7 +204,7 @@ const styles = StyleSheet.create({
     borderRadius: '50%',
   },
   loginButtonContainer: {
-    width: '20%',
+    width: '30%',
     height: '40%',
     marginTop: '2%', 
     borderRadius: '50%', // Make it a circle
@@ -190,18 +225,18 @@ portrait: {
     height: '100%',
   },
   container: {
-    width: '30%', // Adjust the width as needed
-    height: '40%', // Adjust the height as needed
-    borderRadius: '50%',
+    width: '60%', // Adjust the width as needed
+    height: '50%', // Adjust the height as needed
+    borderRadius: '50', // Numeric value for borderRadius
     alignSelf: 'center',
-    justifyContent: 'right',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   input: {
-    height: 9,
+    height: 40,
     width: '100%',
-    padding: 15,
-    color: 'black',
+    padding: 25,
+    color: 'black', 
   },
   inputBox: {
     width: '100%',
@@ -211,9 +246,9 @@ portrait: {
     borderRadius: '50%',
   },
   loginButtonContainer: {
-    width: '20%',
-    height: '40%',
-    marginTop: '2%', 
+    width: '30%',
+    height: '25%',
+    marginTop: '3%', 
     borderRadius: '50%', // Make it a circle
   },
   loginButton: {
@@ -221,7 +256,6 @@ portrait: {
     height: '100%', // Adjust the height as needed
     resizeMode: 'contain',
   },
-  // Add other portrait styles here similar to landscape styles
 },
 });
 export default LoginScreen;
