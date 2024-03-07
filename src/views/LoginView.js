@@ -284,7 +284,7 @@ portrait: {
     width: '100%',
     padding: 25,
     color: 'black', 
-    fontSize: 30, // Adjust the font size as needed
+    fontSize: 25, // Adjust the font size as needed
     textAlign: 'center', 
     fontWeight: 'bold', // Make the text bold
   },
