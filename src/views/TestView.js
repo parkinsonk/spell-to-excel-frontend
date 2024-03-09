@@ -5,8 +5,9 @@ import LetterButton from '../components/LetterButton'; // Adjust the path as nec
 
 
 
-const TestView = ({ navigation }) => {
+const TestView = ({ navigation, route }) => {
 
+    const { batch, activity, selectedWord } = route.params;
     const { height: screenHeight, width: screenWidth } = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
 
@@ -14,6 +15,7 @@ const TestView = ({ navigation }) => {
     const [backgroundImage, setBackgroundImage] = useState(require('../assets/testViews/blankTestBackground.png'));
     const [fontSize, setFontSize] = useState(30);
     const [inputValue, setInputValue] = useState('');
+    const [showCorrectWord, setShowCorrectWord] = useState(false);
     const row1 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
     const row2 = ['J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
     const row3 = ['S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -51,6 +53,19 @@ const TestView = ({ navigation }) => {
     setInputValue(inputValue.slice(0, -1));
   };
 
+  const checkWord = () => {
+    if (inputValue.toLowerCase() === selectedWord.toLowerCase()) {
+        // If the word matches
+        Alert.alert("Correct!", "You've typed the correct word.");
+        setShowCorrectWord(false); // No need to show the correct word if the input is correct
+        navigation.navigate(batch, { selectedWord: selectedWord, batch: batch, activity: activity });
+    } else {
+        // If the word does not match
+        Alert.alert("Oops!", "The typed word does not match the selected word. Try again!");
+        setShowCorrectWord(true); // Show the correct word
+    }
+};
+
     return (
 
         
@@ -67,13 +82,35 @@ const TestView = ({ navigation }) => {
                 <>
 
                 {/* Start of Landscape Views */}
+
                 <View style={orientationStyles.top}>
+                      
+
+                  {/* Conditionally show the correct word if needed */}
+                  {showCorrectWord && (
+                      <Text style={orientationStyles.correctWord}>
+                          {selectedWord.toUpperCase()}
+                      </Text>
+                  )}
+                
+                </View>
+                <View style={orientationStyles.inputArea}>
+                
+                  {/* Check word button */}
+                {!showCorrectWord && (<Pressable
+                    onPress={checkWord}
+                    style={orientationStyles.checkButton}
+                >
+                    <Text style={orientationStyles.checkButtonText}>Check Word</Text>
+
+                </Pressable>)}
+
                 <TextInput
-                  style={[orientationStyles.textBox, { fontSize: fontSize }]}
-                  placeholder="Type Word Here"
-                  value={inputValue}
-                  showSoftInputOnFocus={false}
-                  autoCorrect={false} // Disables autocorrect.
+                    style={[orientationStyles.textBox, { fontSize: fontSize }]}
+                    placeholder="Type Word Here"
+                    value={inputValue}
+                    showSoftInputOnFocus={false}
+                    autoCorrect={false}
                 />
 
                 </View>
@@ -154,12 +191,22 @@ landscape: {
             height: '100%',
             flexDirection: 'column',
         },
+
         top: {
-            flex: 3,
+            flex: 1,
+            width: '100%',
+            height: '100%',
+            flexDirection: 'row',
             alignItems: 'center',
+            justifyContent: 'center',
+        },
+        inputArea: {
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'flex-end',
             justifyContent: 'flex-end',
             paddingBottom: '5%',
-
+            paddingRight: '15%',
         },
         row1: {
             flex: 1,
@@ -186,14 +233,34 @@ landscape: {
     },
         textBox: {
             width: '80%',
-            height: '40%',
-            borderColor: 'black',
-            borderWidth: 2,
+            height: '100%',
             fontSize: 100,
             textAlign: 'center',
             fontFamily: 'Futura',
 
         },
+        correctWord: {
+          color: 'red', 
+          fontSize: 100,
+          alignSelf: 'center', // Center it if the layout allows
+          padding: 10, // Add some padding for visual spacing
+      },
+        checkButton: {
+          backgroundColor: '#7ed957', // Example green color
+          padding: 10,
+          margin: 20,
+          height: '45%',
+          borderRadius: 5,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderColor: 'black',
+          borderWidth: 2,
+          marginBottom: '4%',
+      },
+      checkButtonText: {
+          color: 'black',
+          fontSize: 20,
+      },
 },
 // Portrait styles
 portrait: {
