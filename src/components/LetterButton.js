@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   letter: {
     fontSize: 45,
-    fontFamily: 'HoeflerText-Regular',
+    fontFamily: 'Futura',
   },
 });
 

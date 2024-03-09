@@ -13,6 +13,7 @@ const TestView = ({ navigation }) => {
     const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
     const [backgroundImage, setBackgroundImage] = useState(require('../assets/testViews/blankTestBackground.png'));
     const [fontSize, setFontSize] = useState(30);
+    const [inputValue, setInputValue] = useState('');
     const row1 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
     const row2 = ['J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
     const row3 = ['S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -42,6 +43,14 @@ const TestView = ({ navigation }) => {
     };
 }, []);
 
+  const handleLetterPress = (letter) => {
+    setInputValue(inputValue + letter);
+  };
+
+  const handleBackspacePress = () => {
+    setInputValue(inputValue.slice(0, -1));
+  };
+
     return (
 
         
@@ -62,6 +71,9 @@ const TestView = ({ navigation }) => {
                 <TextInput
                   style={[orientationStyles.textBox, { fontSize: fontSize }]}
                   placeholder="Type Word Here"
+                  value={inputValue}
+                  showSoftInputOnFocus={false}
+                  autoCorrect={false} // Disables autocorrect.
                 />
 
                 </View>
@@ -74,14 +86,14 @@ const TestView = ({ navigation }) => {
                     <LetterButton
                       key={letter} // Ensure each child in a list has a unique "key" prop
                       letter={letter}
-                      onPress={() => console.log(`Button ${letter} pressed`)}
-                      style={{ backgroundColor: 'skyblue' }} // Example of passing custom style
+                      onPress={() => handleLetterPress(letter)}
+                      style={{ backgroundColor: '#0cc3fb' }} // Example of passing custom style
                     />
                   ))}
 
                   <LetterButton
                     letter="⌫" // Using a common symbol for backspace
-                    onPress={() => console.log(`Back Button pressed`)}
+                    onPress={handleBackspacePress}
                     style={{ backgroundColor: 'red' }} // Example of passing custom style for the backspace button
                   />
 
@@ -95,8 +107,8 @@ const TestView = ({ navigation }) => {
                       <LetterButton
                         key={letter} // Ensure each child in a list has a unique "key" prop
                         letter={letter}
-                        onPress={() => console.log(`Button ${letter} pressed`)}
-                        style={{ backgroundColor: 'skyblue' }} // Example of passing custom style
+                        onPress={() => handleLetterPress(letter)}
+                        style={{ backgroundColor: '#0cc3fb' }} // Example of passing custom style
                       />
                     ))}
 
@@ -109,8 +121,8 @@ const TestView = ({ navigation }) => {
                       <LetterButton
                         key={letter} // Ensure each child in a list has a unique "key" prop
                         letter={letter}
-                        onPress={() => console.log(`Button ${letter} pressed`)}
-                        style={{ backgroundColor: 'skyblue' }} // Example of passing custom style
+                        onPress={() => handleLetterPress(letter)}
+                        style={{ backgroundColor: '#0cc3fb' }} // Example of passing custom style
                       />
                     ))}
 
@@ -146,14 +158,12 @@ landscape: {
             flex: 3,
             alignItems: 'center',
             justifyContent: 'flex-end',
-            boderColor: 'black',
-            borderWidth: 2,
+            paddingBottom: '5%',
+
         },
         row1: {
             flex: 1,
             flexDirection: 'row',
-            borderColor: 'black',
-            borderWidth: 2,
             justifyContent: 'space-evenly',
             alignItems: 'center',
             
@@ -161,8 +171,6 @@ landscape: {
         row2: {
           flex: 1,
           flexDirection: 'row',
-          borderColor: 'black',
-          borderWidth: 2,
           justifyContent: 'space-evenly',
           alignItems: 'center',
           paddingLeft: '2%',
@@ -171,8 +179,6 @@ landscape: {
       row3: {
         flex: 1,
         flexDirection: 'row',
-        borderColor: 'black',
-        borderWidth: 2,
         justifyContent: 'space-evenly',
         alignItems: 'center',
         paddingLeft: '6%',
@@ -185,6 +191,7 @@ landscape: {
             borderWidth: 2,
             fontSize: 100,
             textAlign: 'center',
+            fontFamily: 'Futura',
 
         },
 },
