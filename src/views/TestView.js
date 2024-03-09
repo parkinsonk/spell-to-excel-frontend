@@ -61,9 +61,16 @@ const TestView = ({ navigation, route }) => {
         navigation.navigate(batch, { selectedWord: selectedWord, batch: batch, activity: activity });
     } else {
         // If the word does not match
-        Alert.alert("Oops!", "The typed word does not match the selected word. Try again!");
+        Alert.alert(
+          "Oops!", 
+          "The typed word is incorrect. Please complete the activities for this word and try again!",
+          [
+            { text: "OK", onPress: () => navigation.goBack() }
+          ],
+          { cancelable: false } // This prevents the alert from being dismissed by tapping outside of it
+        );
         setShowCorrectWord(true); // Show the correct word
-    }
+      }
 };
 
     return (
