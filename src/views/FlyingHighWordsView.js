@@ -15,11 +15,11 @@ const FlyingHighWordsView = ({ navigation }) => {
             >
                 <View style={styles.top}>
 
-                    <TouchableOpacity style={styles.theOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'the', batch: 'FlyingHigh' })}>
+                    <TouchableOpacity style={styles.theOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'the', batch: 'Flying High Words' })}>
                         <Image source={require('../assets/flyingHighWordsView/the.png')} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.toOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'to', batch: 'FlyingHigh'  })}>
+                    <TouchableOpacity style={styles.toOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'to', batch: 'Flying High Words'  })}>
                         <Image source={require('../assets/flyingHighWordsView/to.png')} style={styles.Image} />
                     </TouchableOpacity>
 

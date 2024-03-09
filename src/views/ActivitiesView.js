@@ -244,7 +244,7 @@ const ActivitiesView = ({ navigation, route}) => {
                         <Image source={require('../assets/activitiesView/read.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={orientationStyles.testOpacity} onPress={() => navigation.navigate('Test', {batch: batch, activity: 'trace', selectedWord: selectedWord})}>
+                    <TouchableOpacity style={orientationStyles.testOpacity} onPress={() => navigation.navigate('Test', {batch: batch, activity: 'test', selectedWord: selectedWord})}>
                         <Image source={require('../assets/activitiesView/testLandscape.png')} resizeMode='contain' style={orientationStyles.Image} />
                     </TouchableOpacity>
 
