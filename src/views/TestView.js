@@ -16,9 +16,9 @@ const TestView = ({ navigation, route }) => {
     const [fontSize, setFontSize] = useState(30);
     const [inputValue, setInputValue] = useState('');
     const [showCorrectWord, setShowCorrectWord] = useState(false);
-    const row1 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
-    const row2 = ['J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
-    const row3 = ['S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    const row1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
+    const row2 = ['j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r']
+    const row3 = ['s', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     useEffect(() => {
     // Function to update styles and font size based on orientation
@@ -96,7 +96,7 @@ const TestView = ({ navigation, route }) => {
                   {/* Conditionally show the correct word if needed */}
                   {showCorrectWord && (
                       <Text style={orientationStyles.correctWord}>
-                          {selectedWord.toUpperCase()}
+                          {selectedWord.toLowerCase()}
                       </Text>
                   )}
                 
