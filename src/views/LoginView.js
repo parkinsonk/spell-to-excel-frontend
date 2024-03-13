@@ -11,8 +11,136 @@ const LoginScreen = ({ navigation }) => {
   const [isStudentMode, setStudentMode] = useState(true);
   const [getStartedPressed, setGetStartedPressed] = useState(false);
   const [forgotPasswordPressed, setForgotPasswordPressed] = useState(false);
+  const aspectRatio = screenWidth / screenHeight;
+
+  const styles = StyleSheet.create({
+
+    // Landscape styles
+      landscape:{
+        
+        background: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+      },
+      container: {
+        width: '40%', // Adjust the width as needed
+        height: '10%', // Adjust the height as needed
+        borderRadius: '50', // Numeric value for borderRadius
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: 'orange',
+        borderWidth: 4.5,
+      },
+      input: {
+        height: aspectRatio > 1.5 ? 50 : 50,
+        width: '100%',
+        padding: 25,
+        color: 'black',
+        fontSize: 25, // Adjust the font size as needed
+        textAlign: 'center', 
+        fontWeight: 'bold', // Make the text bold
+        borderColor: 'black',
+        borderWidth: 2.5,
+      },
+      inputBox: {
+        width: '100%',
+        marginBottom: '1.5%',
+        borderColor: 'black', 
+        borderWidth: aspectRatio > 1.5 ? 2.5 : 2.5,
+        borderRadius: '50%',
+        borderColor: 'green',
+        borderWidth: 2.5,
+      },
+      loginButtonContainer: {
+        width: '50%',
+        height: '75%',
+        marginTop: '2%', 
+        borderRadius: '50%', // Make it a circle
+        borderColor: 'black',
+        borderWidth: 2.5,
+      },
+      loginButton: {
+        width: '100%', // Adjust the width as needed
+        height: '95%', // Adjust the height as needed
+        resizeMode: 'contain',
+      },
+    },
+    // Portrait styles
+    portrait: {
+      background: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+      },
+      container: {
+        width: '60%', // Adjust the width as needed
+        height: '35%', // Adjust the height as needed
+        borderRadius: '50', // Numeric value for borderRadius
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      input: {
+        height:55,
+        width: '100%',
+        padding: 25,
+        color: 'black', 
+        fontSize: 25, // Adjust the font size as needed
+        textAlign: 'center', 
+        fontWeight: 'bold', // Make the text bold
+      },
+      inputBox: {
+        width: '100%',
+        marginBottom: '2%',
+        borderColor: 'black', 
+        borderWidth: 2.5,
+        borderRadius: '100%',
+      },
+      loginButtonContainer: {
+        width: '40%',
+        height: '20%',
+        marginTop: '3%', 
+        borderRadius: '50%', // Make it a circle
+      },
+      loginButton: {
+        width: '100%', // Adjust the width as needed
+        height: '100%', // Adjust the height as needed
+        resizeMode: 'contain',
+      },
+    },
+    getStartedButtonContainer: {
+      width: '30%',
+      height: '10%',
+      marginTop: '10%', // Increase marginTop to move it lower
+      borderRadius: '50%', // Make it a circle or adjust as needed
+    },
+    getStartedButton: {
+      width: '100%',
+      height: '100%',
+      resizeMode: 'contain',
+    },
+    forgotPasswordButtonContainer: {
+      width: '100%',
+      height: '5%',
+      marginTop: '5%', // Adjust the marginTop value to make it lower
+      borderRadius: '30%', // Make it a circle or adjust as needed
+    },
+    forgotPasswordButton: {
+      width: '100%',
+      height: '100%',
+      resizeMode: 'contain',
+    },
+    
+    });
 
   const { height: screenHeight, width: screenWidth } = useWindowDimensions();
+  
   const isLandscape = screenWidth > screenHeight;
 
   const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
@@ -103,6 +231,8 @@ const LoginScreen = ({ navigation }) => {
   const handleForgotPassword = () => {
     setForgotPasswordPressed(true);
   };
+
+
 
   return (
     <ImageBackground
@@ -214,121 +344,5 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
 
-// Landscape styles
-  landscape:{
-    
-    background: {
-    flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
-  },
-  container: {
-    width: '40%', // Adjust the width as needed
-    height: '10%', // Adjust the height as needed
-    borderRadius: '50', // Numeric value for borderRadius
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    height: 50,
-    width: '100%',
-    padding: 25,
-    color: 'black',
-    fontSize: 25, // Adjust the font size as needed
-    textAlign: 'center', 
-    fontWeight: 'bold', // Make the text bold
-  },
-  inputBox: {
-    width: '100%',
-    marginBottom: '1.5%',
-    borderColor: 'black', 
-    borderWidth: 2.5,
-    borderRadius: '50%',
-  },
-  loginButtonContainer: {
-    width: '50%',
-    height: '75%',
-    marginTop: '2%', 
-    borderRadius: '50%', // Make it a circle
-  },
-  loginButton: {
-    width: '100%', // Adjust the width as needed
-    height: '95%', // Adjust the height as needed
-    resizeMode: 'contain',
-  },
-},
-// Portrait styles
-portrait: {
-  background: {
-    flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
-  },
-  container: {
-    width: '60%', // Adjust the width as needed
-    height: '35%', // Adjust the height as needed
-    borderRadius: '50', // Numeric value for borderRadius
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    height:55,
-    width: '100%',
-    padding: 25,
-    color: 'black', 
-    fontSize: 25, // Adjust the font size as needed
-    textAlign: 'center', 
-    fontWeight: 'bold', // Make the text bold
-  },
-  inputBox: {
-    width: '100%',
-    marginBottom: '2%',
-    borderColor: 'black', 
-    borderWidth: 2.5,
-    borderRadius: '100%',
-  },
-  loginButtonContainer: {
-    width: '40%',
-    height: '20%',
-    marginTop: '3%', 
-    borderRadius: '50%', // Make it a circle
-  },
-  loginButton: {
-    width: '100%', // Adjust the width as needed
-    height: '100%', // Adjust the height as needed
-    resizeMode: 'contain',
-  },
-},
-getStartedButtonContainer: {
-  width: '30%',
-  height: '10%',
-  marginTop: '10%', // Increase marginTop to move it lower
-  borderRadius: '50%', // Make it a circle or adjust as needed
-},
-getStartedButton: {
-  width: '100%',
-  height: '100%',
-  resizeMode: 'contain',
-},
-forgotPasswordButtonContainer: {
-  width: '100%',
-  height: '5%',
-  marginTop: '5%', // Adjust the marginTop value to make it lower
-  borderRadius: '30%', // Make it a circle or adjust as needed
-},
-forgotPasswordButton: {
-  width: '100%',
-  height: '100%',
-  resizeMode: 'contain',
-},
-
-});
 export default LoginScreen;
