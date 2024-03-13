@@ -1,11 +1,32 @@
 import React, { useState, useEffect} from 'react';
+import { ActivityIndicator } from 'react-native';
 import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions, TouchableOpacity, Image} from 'react-native';
+import { useProgress } from '../components/ProgressContext';
+import wordImageMapping from '../utils/wordImageMapping';
 
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 
 const FlyingHighWordsView = ({ navigation }) => {
+
+    const { flyingHighStatus, isLoading } = useProgress();
+
+    const getImageSource = (word) => {
+        // Check if the word is completed using the flyingHighStatus
+        const isCompleted = flyingHighStatus[word];
+        const key = isCompleted ? `${word}Completed` : word;
+        return wordImageMapping[key];
+    };
+
+    if (isLoading) {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
+
     return (
         
             <ImageBackground
@@ -14,13 +35,14 @@ const FlyingHighWordsView = ({ navigation }) => {
                 style={styles.background}
             >
                 <View style={styles.top}>
-
+                
                     <TouchableOpacity style={styles.theOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'the', batch: 'Flying High Words' })}>
-                        <Image source={require('../assets/flyingHighWordsView/the.png')} style={styles.Image} />
+
+                        <Image source={getImageSource('the', flyingHighStatus['the'])} style={styles.Image} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.toOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'to', batch: 'Flying High Words'  })}>
-                        <Image source={require('../assets/flyingHighWordsView/to.png')} style={styles.Image} />
+                        <Image source={getImageSource('to', flyingHighStatus['the'])} style={styles.Image} />
                     </TouchableOpacity>
 
                     <View style={styles.PlaneSun}>
@@ -88,6 +110,11 @@ const FlyingHighWordsView = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     background: {
         flex: 1,
         width: '100%',

@@ -1,7 +1,10 @@
 import React, { useState, useEffect} from 'react';
 import { ImageBackground, View, TextInput, Text, StyleSheet, Alert, useWindowDimensions, Pressable, Image} from 'react-native';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store'; 
 import LetterButton from '../components/LetterButton'; // Adjust the path as necessary
+import { useProgress } from '../components/ProgressContext';
 
 
 
@@ -16,6 +19,7 @@ const TestView = ({ navigation, route }) => {
     const [fontSize, setFontSize] = useState(30);
     const [inputValue, setInputValue] = useState('');
     const [showCorrectWord, setShowCorrectWord] = useState(false);
+    const { checkFlyingHigh } = useProgress();
     const row1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
     const row2 = ['j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r']
     const row3 = ['s', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -53,12 +57,32 @@ const TestView = ({ navigation, route }) => {
     setInputValue(inputValue.slice(0, -1));
   };
 
-  const checkWord = () => {
+  const checkWord = async () => {
     if (inputValue.toLowerCase() === selectedWord.toLowerCase()) {
+
+      // If the word matches, mark it as correct in the backend
+      try {
+        const accessToken = await SecureStore.getItemAsync('access_token');
+        console.log("Retrieved access token:", accessToken);
+        
+        await axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/mark-word-correct/', {
+            word: selectedWord,
+            // Include any other necessary parameters your backend requires
+        }, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
         // If the word matches
         Alert.alert("Correct!", "You've typed the correct word.");
         setShowCorrectWord(false); // No need to show the correct word if the input is correct
+        await checkFlyingHigh('Flying High');
         navigation.navigate(batch, { selectedWord: selectedWord, batch: batch, activity: activity });
+    } catch (error){
+        console.error('Error marking word as correct:', error);}
+    
     } else {
         // If the word does not match
         Alert.alert(
