@@ -42,7 +42,7 @@ const FlyingHighWordsView = ({ navigation }) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.toOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'to', batch: 'Flying High Words'  })}>
-                        <Image source={require('../assets/flyingHighWordsView/to.png')} style={styles.Image} />
+                        <Image source={getImageSource('to', flyingHighStatus['the'])} style={styles.Image} />
                     </TouchableOpacity>
 
                     <View style={styles.PlaneSun}>
