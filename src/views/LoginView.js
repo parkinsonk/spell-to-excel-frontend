@@ -2,13 +2,15 @@
     import { ImageBackground, View, TextInput, Button, StyleSheet, Alert} from 'react-native';
     import axios from 'axios';
     import * as SecureStore from 'expo-secure-store'; // Import SecureStore from expo-secure-store
-
+    import { useProgress } from '../components/ProgressContext';
+    
 
     /* Start of Login Logic. Sends a message over to the backend to authenticate student */
     const LoginScreen = ({ navigation }) => {
         const [email, setEmail] = useState('');
         const [studentName, setStudentName] = useState('');
         const [pin, setPin] = useState('');
+        const { checkFlyingHigh } = useProgress();
 
         const handleLogin = () => {
             // Logic to handle login
@@ -26,7 +28,8 @@
 
             await SecureStore.setItemAsync('access_token', access);
             await SecureStore.setItemAsync('refresh_token', refresh);
-
+            await checkFlyingHigh('Flying High');
+            
             navigation.navigate('Word Batches');
 
         })

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import AppNavigator from './src/navigation/AppNavigator';
-import * as ScreenOrientation from 'expo-screen-orientation';
+import { ProgressProvider } from './src/components/ProgressContext';
 
 const App = () => {
-
-  return <AppNavigator />;
+  return(
+  <ProgressProvider>
+    <AppNavigator/>
+  </ProgressProvider>
+  );
 };
 
 export default App;
