@@ -11,6 +11,8 @@ const LoginScreen = ({ navigation }) => {
   const [isStudentMode, setStudentMode] = useState(true);
   const [getStartedPressed, setGetStartedPressed] = useState(false);
   const [forgotPasswordPressed, setForgotPasswordPressed] = useState(false);
+
+  const { height: screenHeight, width: screenWidth } = useWindowDimensions();
   const aspectRatio = screenWidth / screenHeight;
 
   const styles = StyleSheet.create({
@@ -55,7 +57,7 @@ const LoginScreen = ({ navigation }) => {
       input: {
         width: '100%',
         color: 'black', 
-        fontSize: aspectRatio > 1.5 ? 25 : 25, // Adjust the font size as needed
+        fontSize: aspectRatio > 1.5 ? 15 : 25, // Adjust the font size as needed
         textAlign: 'center', 
         fontWeight: 'bold', // Make the text bold
       },
@@ -170,8 +172,6 @@ const LoginScreen = ({ navigation }) => {
     },
     
     });
-
-  const { height: screenHeight, width: screenWidth } = useWindowDimensions();
   
   const isLandscape = screenWidth > screenHeight;
 
@@ -326,7 +326,7 @@ const LoginScreen = ({ navigation }) => {
 
             </View>
 
-            <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={console.log(aspectRatio)}>
+            <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={() => console.log(aspectRatio)}>
               <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
             </TouchableOpacity>
 
