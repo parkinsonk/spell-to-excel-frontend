@@ -24,35 +24,36 @@ const LoginScreen = ({ navigation }) => {
         justifyContent: 'center',
         width: '100%',
         height: '100%',
+        flexDirection: 'row',
       },
-      container: {
-        width: '40%', // Adjust the width as needed
-        height: '10%', // Adjust the height as needed
-        borderRadius: '50', // Numeric value for borderRadius
-        alignSelf: 'center',
+      leftSide: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: 'orange',
-        borderWidth: 4.5,
+        borderColor: 'green',
+        borderWidth: 2.5,
       },
-      input: {
-        height: aspectRatio > 1.5 ? 50 : 50,
-        width: '100%',
-        padding: 25,
-        color: 'black',
-        fontSize: 25, // Adjust the font size as needed
-        textAlign: 'center', 
-        fontWeight: 'bold', // Make the text bold
+      middleSide: {
+        flex: 1.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: 'black',
+        borderWidth: 2.5,
+        flexDirection: 'column',
+        justifyContent: 'space-evenly'
+      },
+      rightSide: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         borderColor: 'black',
         borderWidth: 2.5,
       },
-      inputBox: {
+      letterImage: {
         width: '100%',
-        marginBottom: '1.5%',
-        borderColor: 'black', 
-        borderWidth: aspectRatio > 1.5 ? 2.5 : 2.5,
-        borderRadius: '50%',
-        borderColor: 'green',
+        height: '35%',
+        resizeMode: 'contain',
+        borderColor: 'black',
         borderWidth: 2.5,
       },
       loginButtonContainer: {
@@ -145,7 +146,7 @@ const LoginScreen = ({ navigation }) => {
 
   const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
   const [landscapeBackground, setLandscapeBackground] = useState(
-    require('../assets/loginview/login.gif')
+    require('../assets/loginview/loginBackground.gif')
   );
   const [portraitBackground, setPortraitBackground] = useState(
     require('../assets/loginview/pbackground.gif')
@@ -242,41 +243,19 @@ const LoginScreen = ({ navigation }) => {
       {isLandscape ? (
         <>
           {/* Start of Landscape Views*/}
-          <View style={orientationStyles.container}>
-            <View style={orientationStyles.inputBox}>
-              <TextInput
-                style={[orientationStyles.input, { color: 'black' }]}
-                placeholder={isStudentMode ? 'Student Email' : 'Teacher Email'}
-                value={email}
-                onChangeText={setEmail}
-                importantForAutofill="no"
-                textAlignVertical="center"
-                placeholderTextColor="black" // placeholder text color
-              />
+
+            <View style={orientationStyles.leftSide}> 
+
             </View>
-            <View style={orientationStyles.inputBox}>
-              <TextInput
-                style={[orientationStyles.input, { color: 'black' }]}
-                placeholder={isStudentMode ? 'Student Name' : 'Teacher Name'}
-                value={name}
-                onChangeText={setName}
-                importantForAutofill="no"
-                textAlignVertical="center"
-                placeholderTextColor="black" // placeholder text color
-              />
-            </View>
-            <View style={orientationStyles.inputBox}>
-              <TextInput
-                style={[orientationStyles.input, { color: 'black' }]}
-                placeholder="Pin"
-                value={pin}
-                secureTextEntry
-                onChangeText={setPin}
-                importantForAutofill="no"
-                textAlignVertical="center"
-                placeholderTextColor="black" //placeholder text color
-              />
-            </View>
+            
+          <View style={orientationStyles.middleSide}>
+
+            <Image source={require('../assets/loginview/letter.png')} style={orientationStyles.letterImage} />
+
+            <View style={orientationStyles.inputBoxContainer}>
+
+            
+
             <TouchableOpacity style={orientationStyles.forgotPasswordButtonContainer} onPress={handleForgotPassword}>
               <Image source={require('../assets/loginview/fpass.png')} style={orientationStyles.forgotPasswordButton} />
             </TouchableOpacity>
@@ -286,8 +265,12 @@ const LoginScreen = ({ navigation }) => {
             <TouchableOpacity style={orientationStyles.getStartedButtonContainer} onPress={handleGetStarted}>
               <Image source={require('../assets/loginview/gets.png')} style={orientationStyles.getStartedButton} />
             </TouchableOpacity>
-           
+
           </View>
+
+          <View style={orientationStyles.rightSide}>
+          </View>
+           
         </>
       ) : (
         <>
