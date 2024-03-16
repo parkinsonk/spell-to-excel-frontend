@@ -30,46 +30,77 @@ const LoginScreen = ({ navigation }) => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: 'green',
-        borderWidth: 2.5,
+
       },
       middleSide: {
         flex: 1.5,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: 'black',
-        borderWidth: 2.5,
+
         flexDirection: 'column',
-        justifyContent: 'space-evenly'
+        justifyContent: 'flex-start',
       },
       rightSide: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: 'black',
-        borderWidth: 2.5,
+
       },
       letterImage: {
         width: '100%',
-        height: '35%',
+        height: '30%',
         resizeMode: 'contain',
+
+      },
+      input: {
+        width: '100%',
+        color: 'black', 
+        fontSize: aspectRatio > 1.5 ? 25 : 25, // Adjust the font size as needed
+        textAlign: 'center', 
+        fontWeight: 'bold', // Make the text bold
+      },
+      inputBox: {
+        width: '90%',
+        height: aspectRatio > 1.5 ? '35%' : '28%',
+        marginBottom: '2%',
         borderColor: 'black',
         borderWidth: 2.5,
+        borderRadius: '100%',
+        
+      },
+      inputBoxContainer: {
+        width: '100%',
+        height: '20%',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        
       },
       loginButtonContainer: {
         width: '50%',
-        height: '75%',
-        marginTop: '2%', 
+        height: '10%', 
         borderRadius: '50%', // Make it a circle
-        borderColor: 'black',
-        borderWidth: 2.5,
+
       },
       loginButton: {
         width: '100%', // Adjust the width as needed
         height: '95%', // Adjust the height as needed
         resizeMode: 'contain',
       },
+      forgotPasswordButtonContainer: {
+        width: '50%',
+        height: '6%',
+        marginTop: '5%', // Adjust the marginTop value to make it lower
+        borderRadius: '30%', // Make it a circle or adjust as needed
+      },
+      forgotPasswordButton: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain',
+      },
+
     },
+
     // Portrait styles
     portrait: {
       background: {
@@ -105,7 +136,7 @@ const LoginScreen = ({ navigation }) => {
       },
       loginButtonContainer: {
         width: '40%',
-        height: '20%',
+        height: '50%',
         marginTop: '3%', 
         borderRadius: '50%', // Make it a circle
       },
@@ -252,19 +283,59 @@ const LoginScreen = ({ navigation }) => {
 
             <Image source={require('../assets/loginview/letter.png')} style={orientationStyles.letterImage} />
 
+
             <View style={orientationStyles.inputBoxContainer}>
 
-            
+              <View style={orientationStyles.inputBox}>
+                <TextInput
+                  style={orientationStyles.input}
+                  placeholder={'Teacher Email'}
+                  value={email}
+                  onChangeText={setEmail}
+                  importantForAutofill="no"
+                  textAlignVertical="center"
+                  placeholderTextColor="black" // placeholder text color
+                />
+
+              </View>
+
+              <View style={orientationStyles.inputBox}>
+                <TextInput
+                  style={orientationStyles.input}
+                  placeholder={'Student Name'}
+                  value={name}
+                  onChangeText={setName}
+                  importantForAutofill="no"
+                  textAlignVertical="center"
+                  placeholderTextColor="black" // placeholder text color
+                />
+              </View>
+
+              <View style={orientationStyles.inputBox}>
+                <TextInput
+                  style={orientationStyles.input}
+                  placeholder={'Student PIN'}
+                  value={pin}
+                  onChangeText={setPin}
+                  importantForAutofill="no"
+                  textAlignVertical="center"
+                  placeholderTextColor="black" // placeholder text color
+                />
+
+            </View>
+
+            </View>
+
+            <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={console.log(aspectRatio)}>
+              <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
+            </TouchableOpacity>
+
+            <Image source={require('../assets/loginview/friend.png')} style={orientationStyles.letterImage} />
 
             <TouchableOpacity style={orientationStyles.forgotPasswordButtonContainer} onPress={handleForgotPassword}>
               <Image source={require('../assets/loginview/fpass.png')} style={orientationStyles.forgotPasswordButton} />
             </TouchableOpacity>
-            <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={handleLogin}>
-              <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
-            </TouchableOpacity>
-            <TouchableOpacity style={orientationStyles.getStartedButtonContainer} onPress={handleGetStarted}>
-              <Image source={require('../assets/loginview/gets.png')} style={orientationStyles.getStartedButton} />
-            </TouchableOpacity>
+           
 
           </View>
 
