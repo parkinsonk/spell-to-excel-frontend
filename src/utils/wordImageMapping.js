@@ -1,8 +1,9 @@
 const wordImageMapping = {
+    // Flying High Words
     'the': require('../assets/flyingHighWordsView/the.png'),
-    'theCompleted': require('../assets/flyingHighWordsView/theCompleted.png'),
+    'thecompleted': require('../assets/flyingHighWordsView/thecompleted.png'),
     'to': require('../assets/flyingHighWordsView/to.png'),
-    'toCompleted': require('../assets/flyingHighWordsView/toCompleted.png'),
+    'tocompleted': require('../assets/flyingHighWordsView/tocompleted.png'),
     'a': require('../assets/flyingHighWordsView/a.png'),
     'acompleted': require('../assets/flyingHighWordsView/acompleted.png'),
     'and': require('../assets/flyingHighWordsView/and.png'),
