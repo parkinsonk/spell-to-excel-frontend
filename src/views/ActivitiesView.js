@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, useWindowDimensions, TouchableOpacity, Image} from 'react-native';
 import * as ScreenOrientation from 'expo-screen-orientation';
-import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 
 
 

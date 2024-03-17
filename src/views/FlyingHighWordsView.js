@@ -14,8 +14,8 @@ const FlyingHighWordsView = ({ navigation }) => {
 
     const getImageSource = (word) => {
         // Check if the word is completed using the flyingHighStatus
-        const isCompleted = flyingHighStatus[word];
-        const key = isCompleted ? `${word}Completed` : word;
+        const isCompleted = flyingHighStatus[word] ? flyingHighStatus[word].test_correct : false;
+        const key = isCompleted ? `${word}completed` : word;
         return wordImageMapping[key];
     };
 
@@ -42,63 +42,63 @@ const FlyingHighWordsView = ({ navigation }) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.toOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'to', batch: 'Flying High Words'  })}>
-                        <Image source={getImageSource('to', flyingHighStatus['the'])} style={styles.Image} />
+                        <Image source={getImageSource('to', flyingHighStatus['to'])} style={styles.Image} />
                     </TouchableOpacity>
 
                     <View style={styles.PlaneSun}>
                         <Image source={require('../assets/flyingHighWordsView/planeSun.png')} style={styles.Image} />
                     </View>
 
-                    <TouchableOpacity style={styles.ofOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'of' })}>
-                        <Image source={require('../assets/flyingHighWordsView/of.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.ofOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'of', batch: 'Flying High Words'})}>
+                        <Image source={getImageSource('of', flyingHighStatus['of'])} style={styles.Image} />
                     </TouchableOpacity>
 
                 </View>
 
                 <View style={styles.middle}>
 
-                    <TouchableOpacity style={styles.isOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'is' })}>
-                        <Image source={require('../assets/flyingHighWordsView/is.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.isOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'is', batch: 'Flying High Words'})}>
+                        <Image source={getImageSource('is', flyingHighStatus['is'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.inOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'in' })}>
-                        <Image source={require('../assets/flyingHighWordsView/in.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.inOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'in', batch: 'Flying High Words'})}>
+                        <Image source={getImageSource('in', flyingHighStatus['in'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.youOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'you' })}>
-                        <Image source={require('../assets/flyingHighWordsView/you.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.youOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'you', batch: 'Flying High Words'})}>
+                        <Image source={getImageSource('you', flyingHighStatus['you'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.andOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'and' })}>
-                        <Image source={require('../assets/flyingHighWordsView/and.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.andOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'and', batch: 'Flying High Words'})}>
+                        <Image source={getImageSource('and', flyingHighStatus['and'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.thatOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'that' })}>
-                        <Image source={require('../assets/flyingHighWordsView/that.png')} style={styles.Image} />
+                    <TouchableOpacity style={styles.thatOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'that', batch: 'Flying High Words'})}>
+                        <Image source={getImageSource('that', flyingHighStatus['that'])} style={styles.Image} />
                     </TouchableOpacity>
 
                 </View>
 
                 <View style={styles.bottom}>
 
-                <TouchableOpacity style={styles.itOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'it' })}>
-                        <Image source={require('../assets/flyingHighWordsView/it.png')} style={styles.Image} />
+                <TouchableOpacity style={styles.itOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'it', batch: 'Flying High Words'})}>
+                        <Image source={getImageSource('it', flyingHighStatus['it'])} style={styles.Image} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.heOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'he' })}>
-                        <Image source={require('../assets/flyingHighWordsView/he.png')} style={styles.Image} />
+                <TouchableOpacity style={styles.heOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'he', batch: 'Flying High Words'})}>
+                        <Image source={getImageSource('he', flyingHighStatus['he'])} style={styles.Image} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.wasOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'was' })}>
-                        <Image source={require('../assets/flyingHighWordsView/was.png')} style={styles.Image} />
+                <TouchableOpacity style={styles.wasOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'was', batch: 'Flying High Words'})}>
+                        <Image source={getImageSource('was', flyingHighStatus['was'])} style={styles.Image} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.aOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'a' })}>
-                        <Image source={require('../assets/flyingHighWordsView/a.png')} style={styles.Image} />
+                <TouchableOpacity style={styles.aOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'a', batch: 'Flying High Words'})}>
+                        <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.forOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'for' })}>
-                        <Image source={require('../assets/flyingHighWordsView/for.png')} style={styles.Image} />
+                <TouchableOpacity style={styles.forOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'for', batch: 'Flying High Words'})}>
+                        <Image source={getImageSource('to', flyingHighStatus['to'])} style={styles.Image} />
                 </TouchableOpacity>
                 
                 </View>
