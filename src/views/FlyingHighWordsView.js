@@ -98,7 +98,7 @@ const FlyingHighWordsView = ({ navigation }) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.forOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'for', batch: 'Flying High Words'})}>
-                        <Image source={getImageSource('to', flyingHighStatus['to'])} style={styles.Image} />
+                        <Image source={getImageSource('for', flyingHighStatus['for'])} style={styles.Image} />
                 </TouchableOpacity>
                 
                 </View>
