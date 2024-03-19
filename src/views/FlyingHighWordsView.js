@@ -14,8 +14,8 @@ const FlyingHighWordsView = ({ navigation }) => {
 
     const getImageSource = (word) => {
         // Check if the word is completed using the flyingHighStatus
-        const isCompleted = flyingHighStatus[word] ? flyingHighStatus[word].test_correct : false;
-        const key = isCompleted ? `${word}completed` : word;
+        const isCompleted = flyingHighStatus[word] ? flyingHighStatus[word].test_correct : false; // Check if word exists.
+        const key = isCompleted ? `${word}completed` : word; // If word is completed, append 'completed' to the word to get the image key.
         return wordImageMapping[key];
     };
 

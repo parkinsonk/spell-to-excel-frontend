@@ -224,7 +224,7 @@ const ActivitiesView = ({ navigation, route}) => {
                                 </TouchableOpacity>
                             </View>
 
-
+ 
 
                         </View>
 
@@ -234,7 +234,7 @@ const ActivitiesView = ({ navigation, route}) => {
                                     <Image source={require('../assets/activitiesView/letterFriends.png')} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
-                                <TouchableOpacity style={orientationStyles.soundsOpacity} onPress={() => console.log('button pressed')}>
+                                <TouchableOpacity style={orientationStyles.soundsOpacity} onPress={() => navigation.navigate('Boxes', { batch: batch, selectedWord: selectedWord, activity: 'Boxes' } )}>
                                     <Image source={require('../assets/activitiesView/sounds.png')} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
@@ -243,7 +243,7 @@ const ActivitiesView = ({ navigation, route}) => {
 
                         <View style={orientationStyles.bottom}>
 
-                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => console.log('button pressed')}>
+                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => navigation.navigate('Trace', { batch: batch, selectedWord: selectedWord, activity: 'Trace' } )}>
                                     <Image source={require('../assets/activitiesView/trace.png')} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
@@ -251,7 +251,7 @@ const ActivitiesView = ({ navigation, route}) => {
                                     <Image source={require('../assets/activitiesView/read.png')} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
-                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => console.log('button pressed')}>
+                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => navigation.navigate('Test', { batch: batch, selectedWord: selectedWord, activity: 'Test' } )}>
                                     <Image source={require('../assets/activitiesView/test.png')} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
