@@ -82,6 +82,7 @@ const LoginScreen = ({ navigation }) => {
         width: '50%',
         height: '10%', 
         borderRadius: '50%', // Make it a circle
+        marginTop: aspectRatio > 1.5 ? '10%' : '3%',
 
       },
       loginButton: {
