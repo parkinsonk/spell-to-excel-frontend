@@ -119,6 +119,13 @@ const ActivitiesView = ({ navigation, route}) => {
                 borderWidth: 2,
                 marginLeft: '5%',
             },
+            otherOpacity: {
+                width: '20%',
+                height: '70%',
+                borderColor: 'black',
+                borderWidth: 2,
+                marginLeft: '5%',
+            }
         },
         
         // Portrait styles
@@ -129,74 +136,23 @@ const ActivitiesView = ({ navigation, route}) => {
                 height: '100%',
                 flexDirection: 'column',
             },
-            top: {
+            contentContainer: {
+                width: '90%',
+                height: '90%',
+            },
+            posterBoard: {
                 flex: 1,
                 width: '100%',
                 height: '100%',
-                flexDirection: 'row',
-                alignItems: 'center',
-            },
-            middle: {
-                flex: 1,
-                width: '100%',
-                height: '100%',
-                flexDirection: 'row',
-                alignItems: 'center',
-            },
-            bottom: {
-                flex: 1,
-                width: '100%',
-                height: '100%',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-evenly',
-            },
-            wordsIKnowopacity: {
-                position: 'absolute',
-                top: 0,
-                right: '0%',
-                zIndex: 10, 
-                width: '35%',
-                height: '5%',
-            },
-            letterFriendsOpacity: {
-                marginLeft: '16%',
-                width: '28%',
-                height: '65%',
-                marginBottom: '5%',
-            },
-            soundsOpacity: {
-                marginTop: '5%',
-                marginLeft: '17%',
-                width: '25%',
-                height: '68%',
-            },
-            traceOpacity: {
-                width: '25%',
-                height: '62%',
-                marginLeft: '12%',
-                marginBottom: '5%',
-            },
-            readOpacity: {
-                marginLeft: '15%',
-                width: '31%',
-                height: '50%',
-                marginTop: '3%',
-            },
-            flashcardsOpacity: {
-                marginBottom: '20%',
-                marginLeft: '21.5%',
-                width: '18%',
-                height: '48%',
-            },
-            testOpacity: {
-                width: '32%',
-                height: '46%',
-                marginLeft: '30%',
-                marginBottom: '22%',
+                borderColor: 'black',
+                borderWidth: 15,
+                borderRadius: 30,
+                flexDirection: 'column',
+                
             },
             Image: {
                 width: '100%',
+                height: '100%',
             },
         }
         });
@@ -287,15 +243,15 @@ const ActivitiesView = ({ navigation, route}) => {
 
                         <View style={orientationStyles.bottom}>
 
-                                <TouchableOpacity style={orientationStyles.soundsOpacity} onPress={() => console.log('button pressed')}>
+                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => console.log('button pressed')}>
                                     <Image source={require('../assets/activitiesView/trace.png')} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
-                                <TouchableOpacity style={orientationStyles.soundsOpacity} onPress={() => console.log('button pressed')}>
+                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => console.log('button pressed')}>
                                     <Image source={require('../assets/activitiesView/read.png')} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
-                                <TouchableOpacity style={orientationStyles.soundsOpacity} onPress={() => console.log('button pressed')}>
+                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => console.log('button pressed')}>
                                     <Image source={require('../assets/activitiesView/test.png')} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
@@ -309,29 +265,40 @@ const ActivitiesView = ({ navigation, route}) => {
                 {/* Start of Portrait Views*/}
                 </>) : (
                         <>
-                <TouchableOpacity style={orientationStyles.wordsIKnowopacity} onPress={() => console.log('button pressed')}>
-                    <Image source={require('../assets/activitiesView/wordsIKnow.png')} resizeMode='contain' style={orientationStyles.Image} />
-                </TouchableOpacity>
 
-                <View style={orientationStyles.top}>
+                <View style={orientationStyles.contentContainer}>
 
+                    <ImageBackground 
+                        source={require('../assets/activitiesView/posterBoard.png')}
+                        style={orientationStyles.posterBoard}
+                        >
+                        <TouchableOpacity style={orientationStyles.wordsIKnowopacity} onPress={() => console.log('button pressed')}>
+                            <Image source={require('../assets/activitiesView/wordsIKnow.png')} resizeMode='contain' style={orientationStyles.Image} />
+                        </TouchableOpacity>
 
-
-                </View>
-
-
-                <View style={orientationStyles.middleTop}>
-
-
-                </View>
-
-                <View style={orientationStyles.middleBottom}>
+                        <View style={orientationStyles.top}>
 
 
-                </View>
 
-                <View style={orientationStyles.bottom}>
+                        </View>
 
+
+                        <View style={orientationStyles.middleTop}>
+
+
+                        </View>
+
+                        <View style={orientationStyles.middleBottom}>
+
+
+                        </View>
+
+                        <View style={orientationStyles.bottom}>
+
+
+                        </View>
+
+                    </ImageBackground>
 
                 </View>
                         
