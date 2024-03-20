@@ -19,7 +19,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Welcome" component={WelcomeView} />
         <Stack.Screen name="Login" component={LoginView} />
         <Stack.Screen name="Word Batches" component={SelectWordBatchesView} />
-        <Stack.Screen name="Flying High Words" component={FlyingHighWordsView} />
+        <Stack.Screen name="Flying High" component={FlyingHighWordsView} />
         <Stack.Screen name="Activities" component={ActivtiesView} />
         <Stack.Screen name="Trace" component={TraceView} />
         <Stack.Screen name="Boxes" component={BoxesView} />

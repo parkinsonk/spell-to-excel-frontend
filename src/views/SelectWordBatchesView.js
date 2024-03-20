@@ -261,7 +261,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                             {/* Flying High Batch */}
 
                             <Pressable
-                                onPress={() => navigation.navigate('Flying High Words')}
+                                onPress={() => navigation.navigate('Flying High')}
                                 style={({ pressed }) => [
                                     orientationStyles.FlyingHighOpacity, // Your existing styles
                                     {
@@ -410,7 +410,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                         <View style={orientationStyles.middlePortrait}>
                             {/* Flying High Batch */}
                             <Pressable
-                                onPress={() => navigation.navigate('Flying High Words')}
+                                onPress={() => navigation.navigate('Flying High')}
                                 style={({ pressed }) => [
                                     orientationStyles.FlyingHighOpacity, // Your existing styles
                                     {
