@@ -11,6 +11,8 @@ const LoginScreen = ({ navigation }) => {
   const [isStudentMode, setStudentMode] = useState(true);
   const [getStartedPressed, setGetStartedPressed] = useState(false);
   const [forgotPasswordPressed, setForgotPasswordPressed] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // State for managing password visibility
+
 
   const { height: screenHeight, width: screenWidth } = useWindowDimensions();
   const aspectRatio = screenWidth / screenHeight;
@@ -50,20 +52,21 @@ const LoginScreen = ({ navigation }) => {
       },
       letterImage: {
         width: '100%',
-        height: '30%',
+        height: '20%',
         resizeMode: 'contain',
 
       },
       input: {
         width: '100%',
+        height: '100%',
         color: 'black', 
-        fontSize: aspectRatio > 1.5 ? 15 : 25, // Adjust the font size as needed
+        fontSize: aspectRatio > 1.5 ? 20 : 30, // Adjust the font size as needed
         textAlign: 'center', 
         fontWeight: 'bold', // Make the text bold
       },
       inputBox: {
-        width: '90%',
-        height: aspectRatio > 1.5 ? '35%' : '28%',
+        width: '100%',
+        height: aspectRatio > 1.5 ? '40%' : '30%',
         marginBottom: '2%',
         borderColor: 'black',
         borderWidth: 2.5,
@@ -72,7 +75,7 @@ const LoginScreen = ({ navigation }) => {
       },
       inputBoxContainer: {
         width: '100%',
-        height: '20%',
+        height: '25%',
         justifyContent: 'center',
         alignItems: 'center',
 
@@ -82,18 +85,18 @@ const LoginScreen = ({ navigation }) => {
         width: '50%',
         height: '10%', 
         borderRadius: '50%', // Make it a circle
-        marginTop: aspectRatio > 1.5 ? '10%' : '3%',
+        marginTop: aspectRatio > 1.5 ? '5%' : '5%',
 
       },
       loginButton: {
         width: '100%', // Adjust the width as needed
-        height: '95%', // Adjust the height as needed
+        height: '100%', // Adjust the height as needed
         resizeMode: 'contain',
       },
       forgotPasswordButtonContainer: {
-        width: '50%',
-        height: '6%',
-        marginTop: '5%', // Adjust the marginTop value to make it lower
+        width: '40%',
+        height: '100%',
+        marginTop: '10%', // Adjust the marginTop value to make it lower
         borderRadius: '30%', // Make it a circle or adjust as needed
       },
       forgotPasswordButton: {
@@ -112,65 +115,72 @@ const LoginScreen = ({ navigation }) => {
         justifyContent: 'center',
         width: '100%',
         height: '100%',
+        flexDirection: 'column',
       },
-      container: {
-        width: '60%', // Adjust the width as needed
-        height: '35%', // Adjust the height as needed
-        borderRadius: '50', // Numeric value for borderRadius
-        alignSelf: 'center',
+      leftSide: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      middleSide: {
+        flex: 1.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      },
+      rightSide: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
       },
       input: {
-        height:55,
         width: '100%',
-        padding: 25,
         color: 'black', 
-        fontSize: 25, // Adjust the font size as needed
+        fontSize: 35, // Adjust the font size as needed
         textAlign: 'center', 
         fontWeight: 'bold', // Make the text bold
       },
       inputBox: {
-        width: '100%',
+        width: '70%',
+        height: '50%',
         marginBottom: '2%',
-        borderColor: 'black', 
+        borderColor: 'black',
         borderWidth: 2.5,
-        borderRadius: '100%',
+        borderRadius: 500, // Use a large value to make it circular
+
+      },
+      inputBoxContainer: {
+        width: '100%',
+        height: '20%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '10%', 
       },
       loginButtonContainer: {
-        width: '40%',
-        height: '50%',
-        marginTop: '3%', 
+        width: '50%',
+        height: '20%', // Increase the height to make the container higher
         borderRadius: '50%', // Make it a circle
+        marginTop: '10%', // Adjust the marginTop value to raise the button
       },
       loginButton: {
         width: '100%', // Adjust the width as needed
-        height: '100%', // Adjust the height as needed
+        height: '80%', // Decrease the height to make the button smaller
         resizeMode: 'contain',
       },
-    },
-    getStartedButtonContainer: {
-      width: '30%',
-      height: '10%',
-      marginTop: '10%', // Increase marginTop to move it lower
-      borderRadius: '50%', // Make it a circle or adjust as needed
-    },
-    getStartedButton: {
-      width: '100%',
-      height: '100%',
-      resizeMode: 'contain',
-    },
-    forgotPasswordButtonContainer: {
-      width: '100%',
-      height: '5%',
-      marginTop: '5%', // Adjust the marginTop value to make it lower
-      borderRadius: '30%', // Make it a circle or adjust as needed
-    },
-    forgotPasswordButton: {
-      width: '100%',
-      height: '100%',
-      resizeMode: 'contain',
-    },
+      forgotPasswordButtonContainer: {
+        width: '100%',
+        height: '10%',
+        marginTop: '3%', // Adjust the marginTop value to make it lower
+        borderRadius: '30%', // Make it a circle or adjust as needed
+      },
+      forgotPasswordButton: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain',
+      },
+    }
+    
     
     });
   
@@ -211,15 +221,6 @@ const LoginScreen = ({ navigation }) => {
       ScreenOrientation.removeOrientationChangeListener(subscription);
     };
   }, []);
-
-  useEffect(() => {
-    if (getStartedPressed) {
-      // Add functionality for the "Get Started" button here
-      console.log("Get Started button pressed!");
-      // Reset the state to handle future presses
-      setGetStartedPressed(false);
-    }
-  }, [getStartedPressed]);
 
   useEffect(() => {
     if (forgotPasswordPressed) {
@@ -264,6 +265,10 @@ const LoginScreen = ({ navigation }) => {
   const handleForgotPassword = () => {
     setForgotPasswordPressed(true);
   };
+  // Function to toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
 
 
@@ -293,6 +298,7 @@ const LoginScreen = ({ navigation }) => {
                   placeholder={'Teacher Email'}
                   value={email}
                   onChangeText={setEmail}
+                  secureTextEntry={!showPassword}
                   importantForAutofill="no"
                   textAlignVertical="center"
                   placeholderTextColor="black" // placeholder text color
@@ -318,6 +324,7 @@ const LoginScreen = ({ navigation }) => {
                   placeholder={'Student PIN'}
                   value={pin}
                   onChangeText={setPin}
+                  secureTextEntry={!showPassword}
                   importantForAutofill="no"
                   textAlignVertical="center"
                   placeholderTextColor="black" // placeholder text color
@@ -330,12 +337,14 @@ const LoginScreen = ({ navigation }) => {
             <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={() => console.log(aspectRatio)}>
               <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
             </TouchableOpacity>
-
             <Image source={require('../assets/loginview/friend.png')} style={orientationStyles.letterImage} />
-
             <TouchableOpacity style={orientationStyles.forgotPasswordButtonContainer} onPress={handleForgotPassword}>
               <Image source={require('../assets/loginview/fpass.png')} style={orientationStyles.forgotPasswordButton} />
             </TouchableOpacity>
+
+            
+
+           
            
 
           </View>
@@ -347,52 +356,70 @@ const LoginScreen = ({ navigation }) => {
       ) : (
         <>
           {/* Start of Portrait Views*/}
-          <View style={orientationStyles.container}>
-            <View style={orientationStyles.inputBox}>
-              <TextInput
-                style={[orientationStyles.input, { color: 'black' }]}
-                placeholder={isStudentMode ? 'Student Email' : 'Teacher Email'}
-                value={email}
-                onChangeText={setEmail}
-                importantForAutofill="no"
-                textAlignVertical="center"
-                placeholderTextColor="black" //placeholder text color
-                
-              />
-            </View>
-            <View style={orientationStyles.inputBox}>
-              <TextInput
-                style={[orientationStyles.input, { color: 'black' }]}
-                placeholder={isStudentMode ? 'Student Name' : 'Teacher Name'}
-                value={name}
-                onChangeText={setName}
-                importantForAutofill="no"
-                textAlignVertical="center"
-                placeholderTextColor="black" //placeholder text color
-              />
-            </View>
-            <View style={orientationStyles.inputBox}>
-              <TextInput
-                style={[orientationStyles.input, { color: 'black' }]}
-                placeholder="Pin"
-                value={pin}
-                secureTextEntry
-                onChangeText={setPin}
-                importantForAutofill="no"
-                textAlignVertical="center"
-                placeholderTextColor="black" //placeholder text color
-              />
-            </View>
-            <TouchableOpacity style={orientationStyles.forgotPasswordButtonContainer} onPress={handleForgotPassword}>
-              <Image source={require('../assets/loginview/fpass.png')} style={orientationStyles.forgotPasswordButton} />
-            </TouchableOpacity>
-            <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={handleLogin}>
-              <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
-            </TouchableOpacity>
-            <TouchableOpacity style={orientationStyles.getStartedButtonContainer} onPress={handleGetStarted}>
-              <Image source={require('../assets/loginview/gets.png')} style={orientationStyles.getStartedButton} />
-            </TouchableOpacity>
-          </View>
+          
+          <View style={orientationStyles.leftSide}> 
+
+</View>
+
+<View style={orientationStyles.middleSide}>
+
+
+<View style={orientationStyles.inputBoxContainer}>
+
+  <View style={orientationStyles.inputBox}>
+    <TextInput
+      style={orientationStyles.input}
+      placeholder={'Teacher Email'}
+      value={email}
+      onChangeText={setEmail}
+      importantForAutofill="no"
+      textAlignVertical="center"
+      placeholderTextColor="black" // placeholder text color
+    />
+
+  </View>
+
+  <View style={orientationStyles.inputBox}>
+    <TextInput
+      style={orientationStyles.input}
+      placeholder={'Student Name'}
+      value={name}
+      onChangeText={setName}
+      importantForAutofill="no"
+      textAlignVertical="center"
+      placeholderTextColor="black" // placeholder text color
+    />
+  </View>
+
+  <View style={orientationStyles.inputBox}>
+    <TextInput
+      style={orientationStyles.input}
+      placeholder={'Student PIN'}
+      value={pin}
+      onChangeText={setPin}
+      secureTextEntry={!showPassword}
+      importantForAutofill="no"
+      textAlignVertical="center"
+      placeholderTextColor="black" // placeholder text color
+    />
+
+</View>
+
+</View>
+
+<TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={() => console.log(aspectRatio)}>
+  <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
+</TouchableOpacity>
+
+<TouchableOpacity style={orientationStyles.forgotPasswordButtonContainer} onPress={handleForgotPassword}>
+  <Image source={require('../assets/loginview/fpass.png')} style={orientationStyles.forgotPasswordButton} />
+</TouchableOpacity>
+
+
+</View>
+
+<View style={orientationStyles.rightSide}>
+</View>
         </>
       )}
     </ImageBackground>
