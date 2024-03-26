@@ -52,7 +52,7 @@ const LoginScreen = ({ navigation }) => {
       },
       letterImage: {
         width: '100%',
-        height: '20%',
+        height: '29%',
         resizeMode: 'contain',
 
       },
@@ -66,10 +66,10 @@ const LoginScreen = ({ navigation }) => {
       },
       inputBox: {
         width: '100%',
-        height: aspectRatio > 1.5 ? '40%' : '30%',
+        height: aspectRatio > 1.5 ? '35%' : '30%',
         marginBottom: '2%',
         borderColor: 'black',
-        borderWidth: 2.5,
+        borderWidth: 2.3,
         borderRadius: '100%',
         
       },
@@ -85,7 +85,7 @@ const LoginScreen = ({ navigation }) => {
         width: '50%',
         height: '10%', 
         borderRadius: '50%', // Make it a circle
-        marginTop: aspectRatio > 1.5 ? '5%' : '5%',
+        marginTop: aspectRatio > 1.5 ? '4%' : '5%',
 
       },
       loginButton: {
@@ -94,15 +94,13 @@ const LoginScreen = ({ navigation }) => {
         resizeMode: 'contain',
       },
       forgotPasswordButtonContainer: {
-        width: '40%',
-        height: '100%',
-        marginTop: '10%', // Adjust the marginTop value to make it lower
-        borderRadius: '30%', // Make it a circle or adjust as needed
+        width: '100%',
+        height: '80%',
       },
       forgotPasswordButton: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'contain',
+        width: aspectRatio > 1.5 ? '45%' : '35%',
+        height: '10%',
+        marginTop: '3.5%'
       },
 
     },
@@ -337,9 +335,9 @@ const LoginScreen = ({ navigation }) => {
             <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={() => console.log(aspectRatio)}>
               <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
             </TouchableOpacity>
-            <Image source={require('../assets/loginview/friend.png')} style={orientationStyles.letterImage} />
+            <Image source={require('../assets/loginview/fpass.png')} style={orientationStyles.forgotPasswordButton} />
             <TouchableOpacity style={orientationStyles.forgotPasswordButtonContainer} onPress={handleForgotPassword}>
-              <Image source={require('../assets/loginview/fpass.png')} style={orientationStyles.forgotPasswordButton} />
+              <Image source={require('../assets/loginview/friend.png')} style={orientationStyles.letterImage} />
             </TouchableOpacity>
 
             
