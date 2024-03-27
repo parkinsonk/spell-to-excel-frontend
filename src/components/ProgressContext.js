@@ -191,10 +191,34 @@ const checkDivingDeep = async (batch) => {
     }
     }
 
+const markActivtyCompleted = async (activity, word) => {
+    setIsLoading(true); // Start loading
+    try {
+        const accessToken = await SecureStore.getItemAsync('access_token');
+        
+        const response = await axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/mark-activity-completed/', {
+            activity: activity,
+            word: word,
+        },
+        {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+        });
+    } catch (error) {
+        console.error('Error marking activity as complete:', error);
+        // Handle errors appropriately
+    } finally {
+        setIsLoading(false); // End loading
+    }
+    }
+
+
   return (
     <ProgressContext.Provider value={{ flyingHighStatus, springtimeFunStatus, sunnyIslandStatus, alienAdventureStatus, outerSpaceStatus,
                                      planetsAndBeyondStatus, divingDeepStatus, isLoading, checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
-                                     checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep }}>
+                                     checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep, markActivtyCompleted }}>
         {children}
     </ProgressContext.Provider>
   );

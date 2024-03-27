@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Dimensions, PanResponder, useWindowDimensions} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import traceWordMapping from '../utils/traceWordMapping';
+import { useProgress } from '../components/ProgressContext';
 
 
 const TraceView = ({ navigation, route }) => {
@@ -14,6 +15,17 @@ const TraceView = ({ navigation, route }) => {
   const [showBackground, setBackground] = useState(traceBackground);
   const {width: screenWidth, height: screenHeight} = useWindowDimensions();
   const aspectRatio = screenWidth / screenHeight;
+  const { markActivtyCompleted, checkFlyingHigh, isLoading } = useProgress();
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', async () => { // Mark this function as async
+        // Now you can use await inside this function
+        await markActivtyCompleted(activity, selectedWord);
+        await checkFlyingHigh('Flying High');
+    });
+
+    return unsubscribe;
+}, [navigation, markActivtyCompleted, checkFlyingHigh, activity, selectedWord]);
   
   const setTraceBackground = () => {
     setBackground(traceBackground); // Set the background to trace image
