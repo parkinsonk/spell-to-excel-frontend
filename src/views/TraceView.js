@@ -15,17 +15,28 @@ const TraceView = ({ navigation, route }) => {
   const [showBackground, setBackground] = useState(traceBackground);
   const {width: screenWidth, height: screenHeight} = useWindowDimensions();
   const aspectRatio = screenWidth / screenHeight;
-  const { markActivtyCompleted, checkFlyingHigh, isLoading } = useProgress();
+  const { markActivityCompleted, checkFlyingHigh, isLoading } = useProgress();
+
+  const handleCustomBackAction = async () => {
+    // Call your function before navigating back
+    await markActivityCompleted(activity, selectedWord);
+    await checkFlyingHigh('Flying High');
+    
+    // Then navigate back
+    navigation.goBack();
+  };
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('blur', async () => { // Mark this function as async
-        // Now you can use await inside this function
-        await markActivtyCompleted(activity, selectedWord);
-        await checkFlyingHigh('Flying High');
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity onPress={handleCustomBackAction} style={{ marginLeft: 10 }}>
+          {/* Custom back button icon */}
+          <Image source={require('../assets/back.png')} style={{ width: 20, height: 20 }} />
+        </TouchableOpacity>
+      ),
     });
+  }, [navigation]);
 
-    return unsubscribe;
-}, [navigation, markActivtyCompleted, checkFlyingHigh, activity, selectedWord]);
   
   const setTraceBackground = () => {
     setBackground(traceBackground); // Set the background to trace image

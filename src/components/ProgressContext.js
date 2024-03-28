@@ -191,7 +191,7 @@ const checkDivingDeep = async (batch) => {
     }
     }
 
-const markActivtyCompleted = async (activity, word) => {
+const markActivityCompleted = async (activity, word) => {
     setIsLoading(true); // Start loading
     try {
         const accessToken = await SecureStore.getItemAsync('access_token');
@@ -218,7 +218,7 @@ const markActivtyCompleted = async (activity, word) => {
   return (
     <ProgressContext.Provider value={{ flyingHighStatus, springtimeFunStatus, sunnyIslandStatus, alienAdventureStatus, outerSpaceStatus,
                                      planetsAndBeyondStatus, divingDeepStatus, isLoading, checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
-                                     checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep, markActivtyCompleted }}>
+                                     checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep, markActivityCompleted }}>
         {children}
     </ProgressContext.Provider>
   );

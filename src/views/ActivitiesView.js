@@ -324,7 +324,7 @@ const ActivitiesView = ({ navigation, route}) => {
                                     <Image source={getLetterFriendsImage(selectedWord, batchStatus[selectedWord])} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
-                                <TouchableOpacity style={orientationStyles.soundsOpacity} onPress={() => navigation.navigate('Boxes', { batch: batch, selectedWord: selectedWord, activity: 'Boxes' } )}>
+                                <TouchableOpacity style={orientationStyles.soundsOpacity} onPress={() => navigation.navigate('Boxes', { batch: batch, selectedWord: selectedWord, activity: 'sounds' } )}>
                                     <Image source={getSoundsImage(selectedWord, batchStatus[selectedWord])} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
@@ -333,7 +333,7 @@ const ActivitiesView = ({ navigation, route}) => {
 
                         <View style={orientationStyles.bottom}>
 
-                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => navigation.navigate('Trace', { batch: batch, selectedWord: selectedWord, activity: 'Trace' } )}>
+                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => navigation.navigate('Trace', { batch: batch, selectedWord: selectedWord, activity: 'trace' } )}>
                                     <Image source={getTraceImage(selectedWord, batchStatus[selectedWord])} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
@@ -341,7 +341,7 @@ const ActivitiesView = ({ navigation, route}) => {
                                     <Image source={getReadImage(selectedWord, batchStatus[selectedWord])} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
-                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => navigation.navigate('Test', { batch: batch, selectedWord: selectedWord, activity: 'Test' } )}>
+                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => navigation.navigate('Test', { batch: batch, selectedWord: selectedWord, activity: 'test' } )}>
                                     <Image source={getTestImage(selectedWord, batchStatus[selectedWord])} resizeMode='contain' style={orientationStyles.wordsIKnowImage} />
                                 </TouchableOpacity>
 
