@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Dimensions, PanResponder, useWindowDimensions, Animated} from 'react-native';
+import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Alert, Dimensions, PanResponder, useWindowDimensions, Animated} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import boxesWordMapping from '../utils/boxesWordMapping';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import { useProgress } from '../components/ProgressContext';
 
 // Initialize with Animated.Value for each circle position
 const initializeCirclePositions = (length) => Array.from({ length }, () => new Animated.ValueXY());
@@ -18,6 +19,31 @@ const BoxesView = ({ navigation, route  }) => {
     const BOX_HEIGHT = aspectRatio > 1.5 ? 100: 150; // Height of each box
     const BOX_MARGIN = aspectRatio > 1.5 ? 5: 10; // Margin between boxes
     const NUM_COLUMNS = lettersList.length; // Number of boxes per row
+    const { markActivityCompleted, checkFlyingHigh, isLoading } = useProgress();
+
+
+    const handleCustomBackAction = async () => {
+      // Call your function before navigating back
+      Alert.alert("Congrats!", "You've completed the Sounds activity.");
+  
+      await markActivityCompleted(activity, selectedWord);
+      await checkFlyingHigh('Flying High');
+      
+      // Then navigate back
+      
+      navigation.goBack();
+    };
+  
+    useEffect(() => {
+      navigation.setOptions({
+        headerLeft: () => (
+          <TouchableOpacity onPress={handleCustomBackAction} style={{ marginLeft: 10 }}>
+            {/* Custom back button icon */}
+            <Image source={require('../assets/back.png')} style={{ width: 60, height: 60 }} />
+          </TouchableOpacity>
+        ),
+      });
+    }, [navigation]);
 
     const styles = StyleSheet.create({
       landscape: {
