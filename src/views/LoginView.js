@@ -98,7 +98,7 @@ const LoginScreen = ({ navigation }) => {
         height: '80%',
       },
       forgotPasswordButton: {
-        width: aspectRatio > 1.5 ? '45%' : '35%',
+        width: aspectRatio > 1.5 ? '45%' : '55%',
         height: '10%',
         marginTop: '3.5%'
       },
@@ -189,7 +189,7 @@ const LoginScreen = ({ navigation }) => {
     require('../assets/loginview/loginBackground.gif')
   );
   const [portraitBackground, setPortraitBackground] = useState(
-    require('../assets/loginview/pbackground.gif')
+    require('../assets/loginview/loginportrait.gif')
   );
 
   useEffect(() => {
@@ -296,7 +296,6 @@ const LoginScreen = ({ navigation }) => {
                   placeholder={'Teacher Email'}
                   value={email}
                   onChangeText={setEmail}
-                  secureTextEntry={!showPassword}
                   importantForAutofill="no"
                   textAlignVertical="center"
                   placeholderTextColor="black" // placeholder text color
