@@ -9,6 +9,8 @@ import ActivtiesView from '../views/ActivitiesView';
 import TraceView from '../views/TraceView';
 import BoxesView from '../views/BoxesView';
 import TestView from '../views/TestView';
+import LetterFriendsView from '../views/LetterFriendsView';
+import ReadView from '../views/ReadView';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +26,8 @@ const AppNavigator = () => {
         <Stack.Screen name="Trace" component={TraceView} />
         <Stack.Screen name="Boxes" component={BoxesView} />
         <Stack.Screen name="Test" component={TestView} />
+        <Stack.Screen name="Letter Friends" component={LetterFriendsView} />
+        <Stack.Screen name="Read" component={ReadView} />
       </Stack.Navigator>
     </NavigationContainer>
   );
