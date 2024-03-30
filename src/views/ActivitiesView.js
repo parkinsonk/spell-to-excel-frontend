@@ -170,31 +170,32 @@ const ActivitiesView = ({ navigation, route}) => {
                 height: '100%',
             },
             activityBoardImage: {
-                marginTop: '5%',
-                width: '60%',
-                height: '70%',
+                marginTop: aspectRatio > 1.75 ? '0%': '5%',
+                width: aspectRatio > 1.75 ? '50%': '60%',
+                height: aspectRatio > 1.75 ? '100%': '80%',
+                marginRight: aspectRatio > 1.75 ? '3%': '0%',
             },
             wordsIKnowImage: {
                 width: '100%',
                 height: '100%',
             },
             wordsIKnowopacity: {
-                width: '80%',
-                height: '35%',
+                width: aspectRatio > 1.75 ? '80%': '80%',
+                height: aspectRatio > 1.75 ? '50%': '35%',
             },
             letterFriendsOpacity: {
-                width: '20%',
-                height: '70%',
+                width: aspectRatio > 1.75 ? '15%': '20%',
+                height: aspectRatio > 1.75 ? '80%': '70%',
                 marginRight: '5%',
             },
             soundsOpacity: {
-                width: '20%',
-                height: '70%',
+                width: aspectRatio > 1.75 ? '15%': '20%',
+                height: aspectRatio > 1.75 ? '80%': '70%',
                 marginLeft: '5%',
             },
             otherOpacity: {
-                width: '20%',
-                height: '70%',
+                width: aspectRatio > 1.75 ? '15%': '20%',
+                height: aspectRatio > 1.75 ? '80%': '70%',
                 marginLeft: '5%',
             },
             loadingContainer: {
@@ -359,7 +360,7 @@ const ActivitiesView = ({ navigation, route}) => {
                             </View>
 
                             <View style={orientationStyles.topRight}>
-                                <TouchableOpacity style={orientationStyles.wordsIKnowopacity} onPress={() => console.log('button pressed')}>
+                                <TouchableOpacity style={orientationStyles.wordsIKnowopacity} onPress={() => console.log(aspectRatio)}>
                                     <Image source={require('../assets/activitiesView/wordsIKnow.png')} resizeMode='contain' style={orientationStyles.Image} />
                                 </TouchableOpacity>
                             </View>
