@@ -9,7 +9,6 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 const ActivitiesView = ({ navigation, route}) => {
     
     const { selectedWord, batch } = route.params;
-    console.log(batch);
     const { height: screenHeight, width: screenWidth } = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
@@ -45,11 +44,7 @@ const ActivitiesView = ({ navigation, route}) => {
     // Get the image for the letterFriends activity
     const getLetterFriendsImage = (word) => {
         // Check if the word is completed using the flyingHighStatus
-        console.log(batchStatus);
-        console.log(word);
-        console.log(batchStatus[word]);
         const isCompleted = batchStatus[word] ? batchStatus[word].letter_friends_completed : false; // Check if word exists.
-        console.log(isCompleted);
         const image = isCompleted ? require('../assets/activitiesView/letterFriendscompleted.png') : require('../assets/activitiesView/letterFriends.png'); // If word is completed, append 'completed' to the word to get the image key.
         return image;
     };
@@ -60,33 +55,44 @@ const ActivitiesView = ({ navigation, route}) => {
         const isSoundsCompleted = batchStatus[word] ? batchStatus[word].sounds_completed : false;
         const image = isSoundsCompleted ? require('../assets/activitiesView/soundscompleted.png') : require('../assets/activitiesView/sounds.png');
         return {
-            soundsImage: image,
-            isLetterFriendsCompleted: isLetterFriendsCompleted // Add this to determine if the activity should be clickable or not
+            image,
+            isPrerequisiteCompleted: isLetterFriendsCompleted // Add this to determine if the activity should be clickable or not
         };
     };
     
     // Get the image for the trace activity
-    const getTraceImage = (word) => {
-        // Check if the word is completed using the batchStatus
-        const isCompleted = batchStatus[word] ? batchStatus[word].trace_completed : false; // Check if word exists.
-        const image = isCompleted ? require('../assets/activitiesView/tracecompleted.png') : require('../assets/activitiesView/trace.png'); // If word is completed, append 'completed' to the word to get the image key.
-        return image;
+    const getTraceImageAndStatus = (word) => {
+        
+        const isSoundsCompleted = batchStatus[word] ? batchStatus[word].sounds_completed : false;
+        
+        const isTraceCompleted = batchStatus[word] ? batchStatus[word].trace_completed : false;
+        const image = isTraceCompleted ? require('../assets/activitiesView/tracecompleted.png') : require('../assets/activitiesView/trace.png');
+        return {
+            image,
+            isPrerequisiteCompleted: isSoundsCompleted
+        };
     };
 
     // Get the image for the read activity
-    const getReadImage = (word) => {
-        // Check if the word is completed using the batchStatus
-        const isCompleted = batchStatus[word] ? batchStatus[word].read_completed : false; // Check if word exists.
-        const image = isCompleted ? require('../assets/activitiesView/readcompleted.png') : require('../assets/activitiesView/read.png'); // If word is completed, append 'completed' to the word to get the image key.
-        return image;
+    const getReadImageAndStatus = (word) => {
+        const isTraceCompleted = batchStatus[word] ? batchStatus[word].trace_completed : false;
+        const isReadCompleted = batchStatus[word] ? batchStatus[word].read_completed : false;
+        const image = isReadCompleted ? require('../assets/activitiesView/readcompleted.png') : require('../assets/activitiesView/read.png');
+        return {
+            image,
+            isPrerequisiteCompleted: isTraceCompleted
+        };
     };
 
     // Get the image for the test activity
-    const getTestImage = (word) => {
-        // Check if the word is completed using the batchStatus
-        const isCompleted = batchStatus[word] ? batchStatus[word].test_correct : false; // Check if word exists.
-        const image = isCompleted ? require('../assets/activitiesView/testcompleted.png') : require('../assets/activitiesView/test.png'); // If word is completed, append 'completed' to the word to get the image key.
-        return image;
+    const getTestImageAndStatus = (word) => {
+        const isReadCompleted = batchStatus[word] ? batchStatus[word].read_completed : false;
+        const isTestCompleted = batchStatus[word] ? batchStatus[word].test_correct : false; // Assuming 'test_correct' indicates completion
+        const image = isTestCompleted ? require('../assets/activitiesView/testcompleted.png') : require('../assets/activitiesView/test.png');
+        return {
+            image,
+            isPrerequisiteCompleted: isReadCompleted
+        };
     };
 
     
@@ -123,8 +129,6 @@ const ActivitiesView = ({ navigation, route}) => {
                 height: '100%',
                 flexDirection: 'row',
                 alignItems: 'center',
-                borderColor: 'black',
-                borderWidth: 2,
                 justifyContent: 'center',
                 alignItems: 'center',
                 flexDirection: 'row',
@@ -134,8 +138,6 @@ const ActivitiesView = ({ navigation, route}) => {
                 width: '100%',
                 height: '100%',
                 flexDirection: 'row',
-                borderColor: 'black',
-                borderWidth: 2,
                 justifyContent: 'flex-end',
             },
             topRight: {
@@ -143,8 +145,6 @@ const ActivitiesView = ({ navigation, route}) => {
                 width: '100%',
                 height: '100%',
                 flexDirection: 'row',
-                borderColor: 'black',
-                borderWidth: 2,
                 justifyContent: 'flex-end',
                 alignItems: 'flex-start ',
             },
@@ -155,8 +155,6 @@ const ActivitiesView = ({ navigation, route}) => {
                 height: '100%',
                 flexDirection: 'row',
                 alignItems: 'center',
-                borderColor: 'black',
-                borderWidth: 2,
                 justifyContent: 'center',
             },
             bottom: {
@@ -182,28 +180,20 @@ const ActivitiesView = ({ navigation, route}) => {
             wordsIKnowopacity: {
                 width: '80%',
                 height: '35%',
-                borderColor: 'black',
-                borderWidth: 2,
             },
             letterFriendsOpacity: {
                 width: '20%',
                 height: '70%',
                 marginRight: '5%',
-                borderColor: 'black',
-                borderWidth: 2,
             },
             soundsOpacity: {
                 width: '20%',
                 height: '70%',
-                borderColor: 'black',
-                borderWidth: 2,
                 marginLeft: '5%',
             },
             otherOpacity: {
                 width: '20%',
                 height: '70%',
-                borderColor: 'black',
-                borderWidth: 2,
                 marginLeft: '5%',
             },
             loadingContainer: {
@@ -283,7 +273,10 @@ const ActivitiesView = ({ navigation, route}) => {
         );
     }
 
-    const { soundsImage, isLetterFriendsCompleted } = getSoundsImageAndStatus(selectedWord);
+    const { image: soundsImage, isPrerequisiteCompleted: isLetterFriendsCompletedForSounds } = getSoundsImageAndStatus(selectedWord);
+    const { image: traceImage, isPrerequisiteCompleted: isSoundsCompletedForTrace } = getTraceImageAndStatus(selectedWord);
+    const { image: readImage, isPrerequisiteCompleted: isTraceCompletedForRead } = getReadImageAndStatus(selectedWord);
+    const { image: testImage, isPrerequisiteCompleted: isReadCompletedForTest } = getTestImageAndStatus(selectedWord);
 
     return (
         
@@ -330,8 +323,8 @@ const ActivitiesView = ({ navigation, route}) => {
                                 </TouchableOpacity>
 
                                 <TouchableOpacity
-                                        style={[orientationStyles.soundsOpacity, {opacity: isLetterFriendsCompleted ? 1 : 0.5}]} // Adjust opacity based on completion status
-                                        disabled={!isLetterFriendsCompleted} // Disable if Letter Friends is not completed
+                                        style={[orientationStyles.soundsOpacity, {opacity: isLetterFriendsCompletedForSounds ? 1 : 0.5}]} // Adjust opacity based on completion status
+                                        disabled={!isLetterFriendsCompletedForSounds} // Disable if Letter Friends is not completed
                                         onPress={() => navigation.navigate('Boxes', { batch: batch, selectedWord: selectedWord, activity: 'sounds' })}
                                     >
                                     <Image source={soundsImage} resizeMode='contain' style={orientationStyles.Image} />
@@ -343,17 +336,29 @@ const ActivitiesView = ({ navigation, route}) => {
 
                         <View style={orientationStyles.bottom}>
 
-                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => navigation.navigate('Trace', { batch: batch, selectedWord: selectedWord, activity: 'trace' } )}>
-                                    <Image source={getTraceImage(selectedWord, batchStatus[selectedWord])} resizeMode='contain' style={orientationStyles.Image} />
-                                </TouchableOpacity>
+                            <TouchableOpacity
+                                style={[orientationStyles.otherOpacity, {opacity: isSoundsCompletedForTrace ? 1 : 0.5}]}
+                                disabled={!isSoundsCompletedForTrace}
+                                onPress={() => navigation.navigate('Trace', { batch: batch, selectedWord: selectedWord, activity: 'trace' })}
+                            >
+                                <Image source={traceImage} resizeMode='contain' style={orientationStyles.Image} />
+                            </TouchableOpacity>
 
-                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => navigation.navigate('Read', { batch: batch, selectedWord: selectedWord, activity: 'read' } )}>
-                                    <Image source={getReadImage(selectedWord, batchStatus[selectedWord])} resizeMode='contain' style={orientationStyles.Image} />
-                                </TouchableOpacity>
+                            <TouchableOpacity
+                                style={[orientationStyles.otherOpacity, {opacity: isTraceCompletedForRead ? 1 : 0.5}]}
+                                disabled={!isTraceCompletedForRead}
+                                onPress={() => navigation.navigate('Read', { batch: batch, selectedWord: selectedWord, activity: 'read' })}
+                            >
+                                <Image source={readImage} resizeMode='contain' style={orientationStyles.Image} />
+                            </TouchableOpacity>
 
-                                <TouchableOpacity style={orientationStyles.otherOpacity} onPress={() => navigation.navigate('Test', { batch: batch, selectedWord: selectedWord, activity: 'test' } )}>
-                                    <Image source={getTestImage(selectedWord, batchStatus[selectedWord])} resizeMode='contain' style={orientationStyles.Image} />
-                                </TouchableOpacity>
+                            <TouchableOpacity
+                                style={[orientationStyles.otherOpacity, {opacity: isReadCompletedForTest ? 1 : 0.5}]}
+                                disabled={!isReadCompletedForTest}
+                                onPress={() => navigation.navigate('Test', { batch: batch, selectedWord: selectedWord, activity: 'test' })}
+                            >
+                                <Image source={testImage} resizeMode='contain' style={orientationStyles.Image} />
+                            </TouchableOpacity>
 
                         </View>
 
