@@ -171,7 +171,7 @@ const ActivitiesView = ({ navigation, route}) => {
             },
             activityBoardImage: {
                 marginTop: aspectRatio > 1.75 ? '0%': '5%',
-                width: aspectRatio > 1.75 ? '50%': '60%',
+                width: aspectRatio > 1.75 ? '50%': '65%',
                 height: aspectRatio > 1.75 ? '100%': '80%',
                 marginRight: aspectRatio > 1.75 ? '3%': '0%',
             },

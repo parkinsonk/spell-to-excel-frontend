@@ -35,7 +35,7 @@ const TestView = ({ navigation, route }) => {
       } else {
         setOrientationStyles(styles.portrait);
         setBackgroundImage(require('../assets/testViews/blankTestBackground.png'));
-        setFontSize(30); // Adjust font size for portrait
+        setFontSize(65); // Adjust font size for portrait
       }
     };
 
@@ -201,6 +201,88 @@ const TestView = ({ navigation, route }) => {
 
                         {/* Start of Portrait Views */}
 
+                        <View style={orientationStyles.top}>
+                      
+
+                          {/* Conditionally show the correct word if needed */}
+                          {showCorrectWord && (
+                              <Text style={orientationStyles.correctWord}>
+                                  {selectedWord.toLowerCase()}
+                              </Text>
+                          )}
+                        
+                        </View>
+                        <View style={orientationStyles.inputArea}>
+                        
+                          {/* Check word button */}
+                        {!showCorrectWord && (<Pressable
+                            onPress={checkWord}
+                            style={orientationStyles.checkButton}
+                        >
+                            <Text style={orientationStyles.checkButtonText}>Check Word</Text>
+
+                        </Pressable>)}
+
+                        <TextInput
+                            style={[orientationStyles.textBox, { fontSize: fontSize }]}
+                            placeholder="Type Word Here"
+                            value={inputValue}
+                            showSoftInputOnFocus={false}
+                            autoCorrect={false}
+                        />
+
+                      </View>
+
+                      {/* Row 1 of alphabet letters */}
+                <View style={orientationStyles.row1}>
+                  
+                  {row1.map((letter) => (
+                    <LetterButton
+                      key={letter} // Ensure each child in a list has a unique "key" prop
+                      letter={letter}
+                      onPress={() => handleLetterPress(letter)}
+                      style={{ backgroundColor: '#0cc3fb' }} // Example of passing custom style
+                    />
+                  ))}
+
+                  <LetterButton
+                    letter="⌫" // Using a common symbol for backspace
+                    onPress={handleBackspacePress}
+                    style={{ backgroundColor: 'red' }} // Example of passing custom style for the backspace button
+                  />
+
+                </View>
+
+
+                {/* Row 2 of alphabet letters */}
+                <View style={orientationStyles.row2}>
+
+                  {row2.map((letter) => (
+                      <LetterButton
+                        key={letter} // Ensure each child in a list has a unique "key" prop
+                        letter={letter}
+                        onPress={() => handleLetterPress(letter)}
+                        style={{ backgroundColor: '#0cc3fb' }} // Example of passing custom style
+                      />
+                    ))}
+
+                </View>
+                
+                {/* Row 3 of alphabet letters */}
+                <View style={orientationStyles.row3}>
+
+                  {row3.map((letter) => (
+                      <LetterButton
+                        key={letter} // Ensure each child in a list has a unique "key" prop
+                        letter={letter}
+                        onPress={() => handleLetterPress(letter)}
+                        style={{ backgroundColor: '#0cc3fb' }} // Example of passing custom style
+                      />
+                    ))}
+
+                </View>
+                      
+
                         </>
                         
                         
@@ -306,17 +388,71 @@ portrait: {
         width: '100%',
         height: '100%',
         flexDirection: 'row',
-        borderColor: 'black',
-        borderWidth: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    row1: {
-        flex: 1.5,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
-        borderColor: 'black',
-        borderWidth: 2,
-    },
+    inputArea: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      justifyContent: 'flex-end',
+      paddingBottom: '5%',
+      paddingRight: '15%',
+  },
+  row1: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'flex-end',
+
+    
+},
+  row2: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingLeft: '2%',
+    paddingRight: '2%',
+  },
+  row3: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'flex-start',
+    paddingLeft: '6%',
+    paddingRight: '6%',
+  },
+  textBox: {
+    width: '75%',
+    height: '90%',
+    fontSize: 100,
+    textAlign: 'center',
+    fontFamily: 'Futura',
+
+  },
+  correctWord: {
+    color: 'red', 
+    fontSize: 100,
+    alignSelf: 'center', // Center it if the layout allows
+    padding: 10, // Add some padding for visual spacing
+  },
+  checkButton: {
+    backgroundColor: '#7ed957', // Example green color
+    padding: 10,
+    margin: 10,
+    height: '35%',
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 'black',
+    borderWidth: 2,
+    marginBottom: '7%',
+  },
+  checkButtonText: {
+    color: 'black',
+    fontSize: 20,
+  },
 }
 });
 
