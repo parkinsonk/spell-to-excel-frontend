@@ -228,45 +228,40 @@ const LoginScreen = ({ navigation }) => {
       setForgotPasswordPressed(false);
     }
   }, [forgotPasswordPressed]);
+/* Start of Login Logic. Sends a message over to the backend to authenticate student */
+
 
   const handleLogin = () => {
-    // Logic to handle login
-    const apiEndpoint = isStudentMode
-      ? 'https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/student-login/'
-      : 'https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/teacher-login/';
+      // Logic to handle login
+  axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/student-login/', {
+      email: email,
+      student_name: studentName, 
+      pin: pin 
+  })
+  .then(async response => {
+      // Handle success
+      console.log(response.data);
+      const { refresh, access } = response.data;
+      // You can store these tokens in AsyncStorage or your state management solution
+      // Navigate to next screen or show success message
 
-    axios
-      .post(apiEndpoint, {
-        email: email,
-        student_name: name,
-        pin: pin,
-      })
-      .then(async (response) => {
-        // Handle success
-        console.log(response.data);
-        const { refresh, access } = response.data;
-        await SecureStore.setItemAsync('access_token', access);
-        await SecureStore.setItemAsync('refresh_token', refresh);
-        navigation.navigate('Word Batches');
-      })
-      .catch((error) => {
-        // Handle error
-        console.log(error);
-        Alert.alert('Login failed', 'Invalid credentials');
-      });
-  };
+      await SecureStore.setItemAsync('access_token', access);
+      await SecureStore.setItemAsync('refresh_token', refresh);
+     
+      
+      navigation.navigate('Word Batches');
 
-  const handleGetStarted = () => {
-    setGetStartedPressed(true);
+  })
+  .catch(error => {
+      // Handle error
+      console.log(error);
+      
+      // Show error message
+      Alert.alert("Login failed", "Invalid credentials")
+  });
+      
   };
-
-  const handleForgotPassword = () => {
-    setForgotPasswordPressed(true);
-  };
-  // Function to toggle password visibility
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  /* End of Login Logic. */
 
 
 
@@ -408,7 +403,7 @@ const LoginScreen = ({ navigation }) => {
   <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
 </TouchableOpacity>
 
-<TouchableOpacity style={orientationStyles.forgotPasswordButtonContainer} onPress={handleForgotPassword}>
+<TouchableOpacity style={orientationStyles.forgotPasswordButtonContainer} >
   <Image source={require('../assets/loginview/fpass.png')} style={orientationStyles.forgotPasswordButton} />
 </TouchableOpacity>
 
