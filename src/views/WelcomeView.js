@@ -103,7 +103,7 @@ const WelcomeScreen = ({ navigation }) => {
       <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Login')}>
         <Image source={require('../assets/welcomeView/loginp.png')} style={styles.buttonImage} />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.learnMoreButton} onPress={handleLearnMorePress}>
+      <TouchableOpacity style={styles.learnMoreButton} onPress={() => navigation.navigate('GetStarted')}>
         <Image source={require('../assets/welcomeView/learnMore.png')} style={styles.buttonImage} />
       </TouchableOpacity>
     </ImageBackground>

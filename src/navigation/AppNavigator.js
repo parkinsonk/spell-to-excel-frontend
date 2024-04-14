@@ -7,6 +7,7 @@ import WelcomeView from '../views/WelcomeView';
 import FlyingHighWordsView from '../views/FlyingHighWordsView';
 import ActivtiesView from '../views/ActivitiesView';
 import TraceView from '../views/TraceView';
+import GetStartedView from '../views/GetStartedView';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Flying High Words" component={FlyingHighWordsView} />
         <Stack.Screen name="Activities" component={ActivtiesView} />
         <Stack.Screen name="Trace" component={TraceView} />
+        <Stack.Screen name="GetStarted" component={GetStartedView} />
       </Stack.Navigator>
     </NavigationContainer>
   );

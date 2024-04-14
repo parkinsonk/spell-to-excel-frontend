@@ -6,10 +6,8 @@ import * as SecureStore from 'expo-secure-store';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [studentName, setStudentName] = useState('');
   const [pin, setPin] = useState('');
-  const [isStudentMode, setStudentMode] = useState(true);
-  const [getStartedPressed, setGetStartedPressed] = useState(false);
   const [forgotPasswordPressed, setForgotPasswordPressed] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // State for managing password visibility
 
@@ -236,6 +234,7 @@ const LoginScreen = ({ navigation }) => {
   axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/student-login/', {
       email: email,
       student_name: studentName, 
+
       pin: pin 
   })
   .then(async response => {
@@ -302,8 +301,8 @@ const LoginScreen = ({ navigation }) => {
                 <TextInput
                   style={orientationStyles.input}
                   placeholder={'Student Name'}
-                  value={name}
-                  onChangeText={setName}
+                  value={studentName}
+                  onChangeText={setStudentName}
                   importantForAutofill="no"
                   textAlignVertical="center"
                   placeholderTextColor="black" // placeholder text color
@@ -326,11 +325,11 @@ const LoginScreen = ({ navigation }) => {
 
             </View>
 
-            <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={() => console.log(aspectRatio)}>
+            <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={handleLogin}>
               <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
             </TouchableOpacity>
-            <Image source={require('../assets/loginview/fpass.png')} style={orientationStyles.forgotPasswordButton} />
-            <TouchableOpacity style={orientationStyles.forgotPasswordButtonContainer} onPress={handleForgotPassword}>
+           
+            <TouchableOpacity style={orientationStyles.forgotPasswordButtonContainer} >
               <Image source={require('../assets/loginview/friend.png')} style={orientationStyles.letterImage} />
             </TouchableOpacity>
 
