@@ -36,9 +36,9 @@ const GetStartedView = ({ navigation }) => {
         },
         loginButton: {
             position: 'absolute',
-            right: 180,
+            right: 150,
             bottom: 150,
-            width: '20%',
+            width: '30%',
             height: '15%',
             zIndex: 2,
             justifyContent: 'center',
@@ -46,9 +46,9 @@ const GetStartedView = ({ navigation }) => {
         },
         learnMoreButton: {
             position: 'absolute',
-            left: 180,
+            left: 150,
             bottom: 150,
-            width: '20%',
+            width: '30%',
             height: '15%',
             zIndex: 2,
             justifyContent: 'center',
