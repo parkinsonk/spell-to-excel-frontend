@@ -336,8 +336,16 @@ const TestView = ({ navigation, route }) => {
 
                       {/* Sound Button */}
                       <Pressable
-                          onPress={console.log("Sound Button Pressed")}
-                          style={orientationStyles.sound}
+                          onPress={() => console.log('Sound Button Pressed')}
+                          style={({ pressed }) => [
+                            {
+                              opacity: pressed ? 0.5 : 1, // Change opacity when pressed
+                              width: '100%',
+                              height: '100%',
+                              // Any other styles you need
+                            },
+                            orientationStyles.sound
+                          ]}
                       >
                           <Image source={require('../assets/testViews/sound.png')} style={{ width: '100%', height: '100%' }} />
 
