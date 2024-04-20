@@ -43,7 +43,7 @@ const TestView = ({ navigation, route }) => {
                   flex: 1,
                   flexDirection: 'row',
                   alignItems: 'flex-end',
-                  justifyContent: 'flex-end',
+                  justifyContent: 'center', // This helps the incorrect and correct words line up when a word is spelled incorrectly
                   paddingBottom: aspectRatio > 1.7 ? '0%': '5%',
               },
               row1: {
@@ -69,7 +69,7 @@ const TestView = ({ navigation, route }) => {
               paddingRight: '6%',
           },
             textBox: {
-                width: '70%',
+                width: aspectRatio > 1.7 ? '70%' : '70%',
                 height: '100%',
                 fontSize: 100,
                 textAlign: 'center',
@@ -81,11 +81,11 @@ const TestView = ({ navigation, route }) => {
               fontSize: aspectRatio > 1.7 ? 50 : 100,
               alignSelf: 'center', // Center it if the layout allows
               padding: 10, // Add some padding for visual spacing
+  
           },
             checkButton: {
               backgroundColor: '#7ed957', // Example green color
               padding: aspectRatio > 1.7 ? 5 : 10,
-              margin: aspectRatio > 1.7 ? 0 : 20,
               height: aspectRatio > 1.7 ? '80%' : '45%',
               borderRadius: 5,
               justifyContent: 'center',
@@ -93,16 +93,17 @@ const TestView = ({ navigation, route }) => {
               borderColor: 'black',
               borderWidth: 2,
               marginBottom: aspectRatio > 1.7 ? '1%' : '4%',
+              marginLeft: aspectRatio > 1.7 ? '0%' : '4%',
           },
           checkButtonText: {
               color: 'black',
               fontSize: 20,
           },
           sound: {
-              width: aspectRatio > 1.7 ? '10%' : '20%',
-              height: aspectRatio > 1.7 ? '80%' : '80%',
+              width: aspectRatio > 1.7 ? '10%' : '10%',
+              height: aspectRatio > 1.7 ? '80%' : '60%',
+              marginRight: aspectRatio > 1.7 ? '0%' :'4%',
               marginBottom: '1%',
-
           },
       },
       // Portrait styles
@@ -130,17 +131,15 @@ const TestView = ({ navigation, route }) => {
             flex: 1,
             flexDirection: 'row',
             alignItems: 'flex-end',
-            justifyContent: 'flex-end',
+            justifyContent: 'center',
             paddingBottom: '5%',
-            paddingRight: '15%',
+
         },
         row1: {
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-evenly',
           alignItems: 'flex-end',
-      
-          
       },
         row2: {
           flex: 1,
@@ -159,13 +158,11 @@ const TestView = ({ navigation, route }) => {
           paddingRight: '6%',
         },
         textBox: {
-          width: '75%',
+          width: '60%',
           height: '90%',
           fontSize: 100,
           textAlign: 'center',
           fontFamily: 'Futura',
-
-      
         },
         correctWord: {
           color: 'red', 
@@ -183,11 +180,17 @@ const TestView = ({ navigation, route }) => {
           alignItems: 'center',
           borderColor: 'black',
           borderWidth: 2,
-          marginBottom: '7%',
+          marginBottom: '6%',
+
         },
         checkButtonText: {
           color: 'black',
           fontSize: 20,
+        },
+        sound: {
+          width: '10%',
+          height:'30%',
+          marginBottom: '6%',
         },
       }
       });
@@ -216,7 +219,7 @@ const TestView = ({ navigation, route }) => {
       } else {
         setOrientationStyles(styles.portrait);
         setBackgroundImage(require('../assets/testViews/blankTestBackground.png'));
-        setFontSize(65); // Adjust font size for portrait
+        setFontSize(55); // Adjust font size for portrait
       }
     };
 
@@ -335,7 +338,7 @@ const TestView = ({ navigation, route }) => {
                       />
 
                       {/* Sound Button */}
-                      <Pressable
+                      {!showCorrectWord && (<Pressable
                           onPress={() => console.log('Sound Button Pressed')}
                           style={({ pressed }) => [
                             {
@@ -349,7 +352,7 @@ const TestView = ({ navigation, route }) => {
                       >
                           <Image source={require('../assets/testViews/sound.png')} style={{ width: '100%', height: '100%' }} />
 
-                      </Pressable>
+                      </Pressable>)}
 
                     </View>
 
@@ -437,26 +440,43 @@ const TestView = ({ navigation, route }) => {
                             </View>
                             <View style={orientationStyles.inputArea}>
                             
-                              {/* Check word button */}
-                            {!showCorrectWord && (<Pressable
-                                onPress={checkWord}
-                                style={orientationStyles.checkButton}
-                            >
-                                <Text style={orientationStyles.checkButtonText}>Check Word</Text>
+                                {/* Check word button */}
+                              {!showCorrectWord && (<Pressable
+                                  onPress={checkWord}
+                                  style={orientationStyles.checkButton}
+                              >
+                                  <Text style={orientationStyles.checkButtonText}>Check Word</Text>
 
-                            </Pressable>)}
+                              </Pressable>)}
 
-                            <TextInput
-                                style={[orientationStyles.textBox, { fontSize: fontSize }]}
-                                placeholder="Type Word Here"
-                                value={inputValue}
-                                showSoftInputOnFocus={false}
-                                autoCorrect={false}
-                            />
+                              <TextInput
+                                  style={[orientationStyles.textBox, { fontSize: fontSize }]}
+                                  placeholder="Type Word Here"
+                                  value={inputValue}
+                                  showSoftInputOnFocus={false}
+                                  autoCorrect={false}
+                              />
 
-                          </View>
+                              {/* Sound Button */}
+                              {!showCorrectWord && (<Pressable
+                                  onPress={() => console.log('Sound Button Pressed')}
+                                  style={({ pressed }) => [
+                                    {
+                                      opacity: pressed ? 0.5 : 1, // Change opacity when pressed
+                                      width: '100%',
+                                      height: '100%',
+                                      // Any other styles you need
+                                    },
+                                    orientationStyles.sound
+                                  ]}
+                              >
+                                  <Image source={require('../assets/testViews/sound.png')} style={{ width: '100%', height: '100%' }} />
 
-                          {/* Row 1 of alphabet letters */}
+                              </Pressable>)}
+
+                            </View>
+
+                    {/* Row 1 of alphabet letters */}
                     <View style={orientationStyles.row1}>
                       
                       {row1.map((letter) => (
@@ -464,14 +484,21 @@ const TestView = ({ navigation, route }) => {
                           key={letter} // Ensure each child in a list has a unique "key" prop
                           letter={letter}
                           onPress={() => handleLetterPress(letter)}
-                          style={{ backgroundColor: '#0cc3fb' }} // Example of passing custom style
+                          style={{ backgroundColor: '#0cc3fb', 
+                          width: aspectRatio > 1.7 ? 50 : 65, 
+                          height: aspectRatio > 1.7 ? 50 : 65}} 
+                          textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
+                        
                         />
                       ))}
 
                       <LetterButton
                         letter="⌫" // Using a common symbol for backspace
                         onPress={handleBackspacePress}
-                        style={{ backgroundColor: 'red' }} // Example of passing custom style for the backspace button
+                        style={{ backgroundColor: 'red',
+                        width: aspectRatio > 1.7 ? 50 : 65, 
+                        height: aspectRatio > 1.7 ? 50 : 65}}
+                        textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
                       />
 
                     </View>
@@ -480,28 +507,34 @@ const TestView = ({ navigation, route }) => {
                     {/* Row 2 of alphabet letters */}
                     <View style={orientationStyles.row2}>
 
-                      {row2.map((letter) => (
-                          <LetterButton
-                            key={letter} // Ensure each child in a list has a unique "key" prop
-                            letter={letter}
-                            onPress={() => handleLetterPress(letter)}
-                            style={{ backgroundColor: '#0cc3fb' }} // Example of passing custom style
-                          />
-                        ))}
+                    {row2.map((letter) => (
+                        <LetterButton
+                          key={letter} // Ensure each child in a list has a unique "key" prop
+                          letter={letter}
+                          onPress={() => handleLetterPress(letter)}
+                          style={{ backgroundColor: '#0cc3fb', 
+                          width: aspectRatio > 1.7 ? 50 : 65, 
+                          height: aspectRatio > 1.7 ? 50 : 65}} // Example of passing custom style
+                          textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
+                        />
+                      ))}
 
                     </View>
                     
                     {/* Row 3 of alphabet letters */}
                     <View style={orientationStyles.row3}>
 
-                      {row3.map((letter) => (
-                          <LetterButton
-                            key={letter} // Ensure each child in a list has a unique "key" prop
-                            letter={letter}
-                            onPress={() => handleLetterPress(letter)}
-                            style={{ backgroundColor: '#0cc3fb' }} // Example of passing custom style
-                          />
-                        ))}
+                    {row3.map((letter) => (
+                        <LetterButton
+                          key={letter} // Ensure each child in a list has a unique "key" prop
+                          letter={letter}
+                          onPress={() => handleLetterPress(letter)}
+                          style={{ backgroundColor: '#0cc3fb', 
+                          width: aspectRatio > 1.7 ? 50 : 65, 
+                          height: aspectRatio > 1.7 ? 50 : 65}} // Example of passing custom style
+                          textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
+                        />
+                      ))}
 
                     </View>
                   </SafeAreaView>
