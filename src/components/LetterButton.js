@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, Text, StyleSheet } from 'react-native';
 
-const LetterButton = ({ letter, onPress, style }) => {
+const LetterButton = ({ letter, onPress, style, textStyle }) => {
   return (
     <Pressable
       onPress={onPress}
@@ -13,15 +13,13 @@ const LetterButton = ({ letter, onPress, style }) => {
         },
       ]}
     >
-      <Text style={styles.letter}>{letter}</Text>
+      <Text style={[styles.letter, textStyle]}>{letter}</Text>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   circle: {
-    width: 75,
-    height: 75,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 50,
@@ -29,7 +27,6 @@ const styles = StyleSheet.create({
     borderColor: '#000',
   },
   letter: {
-    fontSize: 45,
     fontFamily: 'Futura',
   },
 });

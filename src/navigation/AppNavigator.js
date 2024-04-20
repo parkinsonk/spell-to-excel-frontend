@@ -9,6 +9,8 @@ import ActivtiesView from '../views/ActivitiesView';
 import TraceView from '../views/TraceView';
 import BoxesView from '../views/BoxesView';
 import TestView from '../views/TestView';
+import LetterFriendsView from '../views/LetterFriendsView';
+import ReadView from '../views/ReadView';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,11 +21,13 @@ const AppNavigator = () => {
         <Stack.Screen name="Welcome" component={WelcomeView} />
         <Stack.Screen name="Login" component={LoginView} />
         <Stack.Screen name="Word Batches" component={SelectWordBatchesView} />
-        <Stack.Screen name="Flying High Words" component={FlyingHighWordsView} />
+        <Stack.Screen name="Flying High" component={FlyingHighWordsView} />
         <Stack.Screen name="Activities" component={ActivtiesView} />
         <Stack.Screen name="Trace" component={TraceView} />
         <Stack.Screen name="Boxes" component={BoxesView} />
         <Stack.Screen name="Test" component={TestView} />
+        <Stack.Screen name="Letter Friends" component={LetterFriendsView} />
+        <Stack.Screen name="Read" component={ReadView} />
       </Stack.Navigator>
     </NavigationContainer>
   );
