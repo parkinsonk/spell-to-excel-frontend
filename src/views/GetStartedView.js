@@ -8,7 +8,7 @@ const GetStartedView = ({ navigation }) => {
     const landscapeBackgroundGif = require('../assets/getstarted/getstarted.gif');
     const portraitBackgroundGif = require('../assets/getstarted/getstartedp.gif');
 
-    const styles = StyleSheet.create({
+    const portraitStyles = StyleSheet.create({
         background: {
             flex: 1,
             resizeMode: 'cover',
@@ -61,20 +61,46 @@ const GetStartedView = ({ navigation }) => {
         },
     });
 
-    const orientationStyles = aspectRatio > 1.5 ? styles.landscape : styles.portrait;
+    const landscapeStyles = StyleSheet.create({
+        background: {
+            flex: 1,
+            resizeMode: 'cover',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+            flexDirection: 'row',
+            // Landscape-specific styles can be added here
+        },
+        // Additional landscape-specific styles can be defined here
+    });
+
+    const orientationStyles = aspectRatio > 1.5 ? landscapeStyles : portraitStyles;
+    const backgroundSource = aspectRatio > 1.5 ? landscapeBackgroundGif : portraitBackgroundGif;
 
     return (
         <ImageBackground
-            source={aspectRatio > 1.5 ? landscapeBackgroundGif : portraitBackgroundGif}
+            source={backgroundSource}
             resizeMode="cover"
-            style={[styles.background, orientationStyles]}
+            style={[orientationStyles.background]}
         >
-            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('artists')}>
-                <Image source={require('../assets/getstarted/artists.png')} style={styles.buttonImage} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.learnMoreButton} onPress={() => navigation.navigate('leaRnMoree')}>
-                <Image source={require('../assets/getstarted/leaRnMoree.png')} style={styles.buttonImage} />
-            </TouchableOpacity>
+            {/* Your portrait-specific components */}
+            {aspectRatio <= 1.5 && (
+                <>
+                    <TouchableOpacity style={portraitStyles.loginButton} onPress={() => navigation.navigate('artists')}>
+                        <Image source={require('../assets/getstarted/artists.png')} style={portraitStyles.buttonImage} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={portraitStyles.learnMoreButton} onPress={() => navigation.navigate('leaRnMoree')}>
+                        <Image source={require('../assets/getstarted/leaRnMoree.png')} style={portraitStyles.buttonImage} />
+                    </TouchableOpacity>
+                </>
+            )}
+
+            {/* Your landscape-specific components */}
+            {aspectRatio > 1.5 && (
+                <>
+                    {/* Add landscape-specific components here */}
+                </>
+            )}
         </ImageBackground>
     );
 };

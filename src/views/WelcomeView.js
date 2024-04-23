@@ -6,7 +6,7 @@ const WelcomeScreen = ({ navigation }) => {
   const aspectRatio = screenWidth / screenHeight;
 
   const handleLearnMorePress = () => {
-    navigation.navigate('LearnMoreScreen');
+    navigation.navigate('Login');
   };
 
   const landscapeBackgroundGif = require('../assets/welcomeView/welcomeBlueWB.gif');
