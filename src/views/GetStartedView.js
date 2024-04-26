@@ -1,44 +1,24 @@
-import React from 'react';
-import { View, ImageBackground, StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, ImageBackground, StyleSheet, Dimensions, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 
 const GetStartedView = ({ navigation }) => {
-    const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+    const { height: screenHeight, width: screenWidth } = useWindowDimensions();
     const aspectRatio = screenWidth / screenHeight;
-
-    const landscapeBackgroundGif = require('../assets/getstarted/getstarted.gif');
-    const portraitBackgroundGif = require('../assets/getstarted/getstartedp.gif');
 
     const portraitStyles = StyleSheet.create({
         background: {
             flex: 1,
-            resizeMode: 'cover',
+            resizeMode: 'contain',
             justifyContent: 'center',
             width: '100%',
             height: '100%',
             flexDirection: 'row',
         },
-        leftSide: {
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        middleSide: {
-            flex: 1.5,
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
-        },
-        rightSide: {
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
         loginButton: {
             position: 'absolute',
-            right: 150,
+            right: 180,
             bottom: 150,
-            width: '30%',
+            width: '25%',
             height: '15%',
             zIndex: 2,
             justifyContent: 'center',
@@ -46,9 +26,9 @@ const GetStartedView = ({ navigation }) => {
         },
         learnMoreButton: {
             position: 'absolute',
-            left: 150,
+            left: 180,
             bottom: 150,
-            width: '30%',
+            width: '25%',
             height: '15%',
             zIndex: 2,
             justifyContent: 'center',
@@ -62,29 +42,70 @@ const GetStartedView = ({ navigation }) => {
     });
 
     const landscapeStyles = StyleSheet.create({
+      
         background: {
-            flex: 1,
-            resizeMode: 'cover',
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+      },
+          middleSide: {
+            flex: 1.5,
             justifyContent: 'center',
-            width: '100%',
-            height: '100%',
-            flexDirection: 'row',
-            // Landscape-specific styles can be added here
+            alignItems: 'center',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+          },
+          rightSide: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+    
+          },
+        loginButton: {
+            position: 'absolute',
+            right: aspectRatio > 1.5 ? screenWidth * 0.39 : screenWidth * 0.3, // Adjust position based on aspect ratio
+            bottom: aspectRatio > 1.5 ? screenHeight * 0.35 : screenHeight * 0.3, // Adjust position based on aspect ratio
+            width: aspectRatio > 1.5 ? screenWidth * 0.1 : screenWidth * 0.9, // Adjust width based on aspect ratio
+            height: aspectRatio > 1.5 ? screenHeight * 0.1 : screenHeight * 0.15, // Adjust height based on aspect ratio
+            zIndex: 2,
+            justifyContent: 'center',
+            alignItems: 'center',
         },
-        // Additional landscape-specific styles can be defined here
+        learnMoreButton: {
+            position: 'absolute',
+            left: aspectRatio > 1.5 ? screenWidth * 0.72 : screenWidth * 0.3, // Adjust position based on aspect ratio
+            bottom: aspectRatio > 1.5 ? screenHeight * 0.35 : screenHeight * 0.3, // Adjust position based on aspect ratio
+            width: aspectRatio > 1.5 ? screenWidth * 0.1 : screenWidth * 0.12, // Adjust width based on aspect ratio
+            height: aspectRatio > 1.5 ? screenHeight * 0.1 : screenHeight * 0.15, // Adjust height based on aspect ratio
+            zIndex: 2,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        buttonImage: {
+            width: '75%',
+            height: '100%',
+            resizeMode: 'contain',
+        },
     });
+    
+    const isLandscape = screenWidth > screenHeight;
 
-    const orientationStyles = aspectRatio > 1.5 ? landscapeStyles : portraitStyles;
-    const backgroundSource = aspectRatio > 1.5 ? landscapeBackgroundGif : portraitBackgroundGif;
+    const styles = isLandscape ? landscapeStyles : portraitStyles;
+    const backgroundSource = isLandscape
+        ? require('../assets/getstarted/getstarted.gif')
+        : require('../assets/getstarted/getstartedp.gif');
 
     return (
         <ImageBackground
             source={backgroundSource}
-            resizeMode="cover"
-            style={[orientationStyles.background]}
+            resizeMode= "stretch"
+            style={styles.background}
         >
             {/* Your portrait-specific components */}
-            {aspectRatio <= 1.5 && (
+            {!isLandscape && (
                 <>
                     <TouchableOpacity style={portraitStyles.loginButton} onPress={() => navigation.navigate('artists')}>
                         <Image source={require('../assets/getstarted/artists.png')} style={portraitStyles.buttonImage} />
@@ -96,9 +117,14 @@ const GetStartedView = ({ navigation }) => {
             )}
 
             {/* Your landscape-specific components */}
-            {aspectRatio > 1.5 && (
+            {isLandscape && (
                 <>
-                    {/* Add landscape-specific components here */}
+                    <TouchableOpacity style={landscapeStyles.loginButton} onPress={() => navigation.navigate('artists')}>
+                        <Image source={require('../assets/getstarted/artists.png')} style={landscapeStyles.buttonImage} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={landscapeStyles.learnMoreButton} onPress={() => navigation.navigate('leaRnMoree')}>
+                        <Image source={require('../assets/getstarted/leaRnMoree.png')} style={landscapeStyles.buttonImage} />
+                    </TouchableOpacity>
                 </>
             )}
         </ImageBackground>

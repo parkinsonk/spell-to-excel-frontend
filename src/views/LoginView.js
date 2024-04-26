@@ -1,116 +1,391 @@
-import React from 'react';
-import { View, ImageBackground, StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { ImageBackground, View, TextInput, TouchableOpacity, StyleSheet, Alert, Image, useWindowDimensions } from 'react-native';
+import axios from 'axios';
+import * as ScreenOrientation from 'expo-screen-orientation';
+import * as SecureStore from 'expo-secure-store';
 
-const GetStartedView = ({ navigation }) => {
-    const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [studentName, setStudentName] = useState('');
+  const [pin, setPin] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // State for managing password visibility
 
-    const landscapeBackgroundGif = require('../assets/getstarted/getstarted.gif');
-    const portraitBackgroundGif = require('../assets/getstarted/getstartedp.gif');
 
-    const portraitStyles = StyleSheet.create({
+  const { height: screenHeight, width: screenWidth } = useWindowDimensions();
+  const aspectRatio = screenWidth / screenHeight;
+
+  const styles = StyleSheet.create({
+
+    // Landscape styles
+      landscape:{
+        
         background: {
-            flex: 1,
-            resizeMode: 'cover',
-            justifyContent: 'center',
-            width: '100%',
-            height: '100%',
-            flexDirection: 'row',
-        },
-        leftSide: {
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        middleSide: {
-            flex: 1.5,
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
-        },
-        rightSide: {
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        loginButton: {
-            position: 'absolute',
-            right: 150,
-            bottom: 150,
-            width: '30%',
-            height: '15%',
-            zIndex: 2,
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        learnMoreButton: {
-            position: 'absolute',
-            left: 150,
-            bottom: 150,
-            width: '30%',
-            height: '15%',
-            zIndex: 2,
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        buttonImage: {
-            width: '75%',
-            height: '100%',
-            resizeMode: 'contain',
-        },
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+      },
+      leftSide: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+      },
+      middleSide: {
+        flex: 1.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+      },
+      rightSide: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+      },
+      letterImage: {
+        width: '100%',
+        height: '29%',
+        resizeMode: 'contain',
+
+      },
+      input: {
+        width: '100%',
+        height: '100%',
+        color: 'black', 
+        fontSize: aspectRatio > 1.5 ? 20 : 30, // Adjust the font size as needed
+        textAlign: 'center', 
+        fontWeight: 'bold', // Make the text bold
+      },
+      inputBox: {
+        width: '100%',
+        height: aspectRatio > 1.5 ? '35%' : '30%',
+        marginBottom: '2%',
+        borderColor: 'black',
+        borderWidth: 2.3,
+        borderRadius: '100%',
+        
+      },
+      inputBoxContainer: {
+        width: '100%',
+        height: '25%',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        
+      },
+      loginButtonContainer: {
+        width: '50%',
+        height: '10%', 
+        borderRadius: '50%', // Make it a circle
+        marginTop: aspectRatio > 1.5 ? '4%' : '5%',
+
+      },
+      loginButton: {
+        width: '100%', // Adjust the width as needed
+        height: '100%', // Adjust the height as needed
+        resizeMode: 'contain',
+      },
+     
+    },
+
+    // Portrait styles
+    portrait: {
+      background: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        flexDirection: 'column',
+      },
+      leftSide: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      middleSide: {
+        flex: 1.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      },
+      rightSide: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      input: {
+        width: '100%',
+        color: 'black', 
+        fontSize: 35, // Adjust the font size as needed
+        textAlign: 'center', 
+        fontWeight: 'bold', // Make the text bold
+      },
+      inputBox: {
+        width: '70%',
+        height: '50%',
+        marginBottom: '2%',
+        borderColor: 'black',
+        borderWidth: 2.5,
+        borderRadius: 500, // Use a large value to make it circular
+
+      },
+      inputBoxContainer: {
+        width: '100%',
+        height: '20%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '10%', 
+      },
+      loginButtonContainer: {
+        width: '50%',
+        height: '20%', // Increase the height to make the container higher
+        borderRadius: '50%', // Make it a circle
+        marginTop: '10%', // Adjust the marginTop value to raise the button
+      },
+      loginButton: {
+        width: '100%', // Adjust the width as needed
+        height: '80%', // Decrease the height to make the button smaller
+        resizeMode: 'contain',
+      },
+      
+    }
+    
+    
+    });
+  
+  const isLandscape = screenWidth > screenHeight;
+
+  const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
+  const [landscapeBackground, setLandscapeBackground] = useState(
+    require('../assets/loginview/loginBackground.gif')
+  );
+  const [portraitBackground, setPortraitBackground] = useState(
+    require('../assets/loginview/loginportrait.gif')
+  );
+
+  useEffect(() => {
+    // Function to update styles based on current orientation
+    const updateOrientationStyles = async () => {
+      const orientation = await ScreenOrientation.getOrientationAsync();
+      if (
+        orientation === ScreenOrientation.Orientation.LANDSCAPE_LEFT ||
+        orientation === ScreenOrientation.Orientation.LANDSCAPE_RIGHT
+      ) {
+        setOrientationStyles(styles.landscape);
+      } else {
+        setOrientationStyles(styles.portrait);
+      }
+    };
+
+    // Initial update when component mounts
+    updateOrientationStyles();
+
+    // Subscribe to orientation changes
+    const subscription = ScreenOrientation.addOrientationChangeListener(() => {
+      updateOrientationStyles();
     });
 
-    const landscapeStyles = StyleSheet.create({
-        background: {
-            flex: 1,
-            resizeMode: 'cover',
-            justifyContent: 'center',
-            width: '100%',
-            height: '100%',
-            flexDirection: 'column',
-            // Landscape-specific styles can be added here
-        },
-        // Additional landscape-specific styles can be defined here
-    });
+    // Cleanup subscription on unmount
+    return () => {
+      ScreenOrientation.removeOrientationChangeListener(subscription);
+    };
+  }, []);
 
-    // Determine whether to use portrait or landscape styles based on the screen width
-    const styles = screenWidth > screenHeight ? landscapeStyles : portraitStyles;
+  
+/* Start of Login Logic. Sends a message over to the backend to authenticate student */
 
-    const backgroundSource = screenWidth > screenHeight ? landscapeBackgroundGif : portraitBackgroundGif;
 
-    return (
-        <ImageBackground
-            source={backgroundSource}
-            resizeMode="cover"
-            style={[styles.background]}
-        >
-            {/* Your portrait-specific components */}
-            {screenWidth <= screenHeight && (
-                <>
-                    <TouchableOpacity style={portraitStyles.loginButton} onPress={() => navigation.navigate('artists')}>
-                        <Image source={require('../assets/getstarted/artists.png')} style={portraitStyles.buttonImage} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={portraitStyles.learnMoreButton} onPress={() => navigation.navigate('leaRnMoree')}>
-                        <Image source={require('../assets/getstarted/leaRnMoree.png')} style={portraitStyles.buttonImage} />
-                    </TouchableOpacity>
-                </>
-            )}
+  const handleLogin = () => {
+      // Logic to handle login
+  axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/student-login/', {
+      email: email,
+      student_name: studentName, 
 
-            {/* Your landscape-specific components */}
-            {screenWidth > screenHeight && (
-                <>
-                    {/* Add landscape-specific components here */}
-                    {/* For example: */}
-                    <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('artists')}>
-                        <Image source={require('../assets/getstarted/artists.png')} style={styles.buttonImage} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.learnMoreButton} onPress={() => navigation.navigate('leaRnMoree')}>
-                        <Image source={require('../assets/getstarted/leaRnMoree.png')} style={styles.buttonImage} />
-                    </TouchableOpacity>
-                </>
-            )}
-        </ImageBackground>
-    );
+      pin: pin 
+  })
+  .then(async response => {
+      // Handle success
+      console.log(response.data);
+      const { refresh, access } = response.data;
+      // You can store these tokens in AsyncStorage or your state management solution
+      // Navigate to next screen or show success message
+
+      await SecureStore.setItemAsync('access_token', access);
+      await SecureStore.setItemAsync('refresh_token', refresh);
+     
+      
+      navigation.navigate('Word Batches');
+
+  })
+  .catch(error => {
+      // Handle error
+      console.log(error);
+      
+      // Show error message
+      Alert.alert("Login failed", "Invalid credentials")
+  });
+      
+  };
+  /* End of Login Logic. */
+
+
+
+  return (
+    <ImageBackground
+      source={isLandscape ? landscapeBackground : portraitBackground}
+      style={orientationStyles.background}
+    >
+      {isLandscape ? (
+        <>
+          {/* Start of Landscape Views*/}
+
+            <View style={orientationStyles.leftSide}> 
+
+            </View>
+            
+          <View style={orientationStyles.middleSide}>
+
+            <Image source={require('../assets/loginview/letter.png')} style={orientationStyles.letterImage} />
+
+
+            <View style={orientationStyles.inputBoxContainer}>
+
+              <View style={orientationStyles.inputBox}>
+                <TextInput
+                  style={orientationStyles.input}
+                  placeholder={'Teacher Email'}
+                  value={email}
+                  onChangeText={setEmail}
+                  importantForAutofill="no"
+                  textAlignVertical="center"
+                  placeholderTextColor="black" // placeholder text color
+                />
+
+              </View>
+
+              <View style={orientationStyles.inputBox}>
+                <TextInput
+                  style={orientationStyles.input}
+                  placeholder={'Student Name'}
+                  value={studentName}
+                  onChangeText={setStudentName}
+                  importantForAutofill="no"
+                  textAlignVertical="center"
+                  placeholderTextColor="black" // placeholder text color
+                />
+              </View>
+
+              <View style={orientationStyles.inputBox}>
+                <TextInput
+                  style={orientationStyles.input}
+                  placeholder={'Student PIN'}
+                  value={pin}
+                  onChangeText={setPin}
+                  secureTextEntry={!showPassword}
+                  importantForAutofill="no"
+                  textAlignVertical="center"
+                  placeholderTextColor="black" // placeholder text color
+                />
+
+            </View>
+
+            </View>
+
+            <TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={handleLogin}>
+              <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
+            </TouchableOpacity>
+           
+            <TouchableOpacity style={orientationStyles.forgotPasswordButtonContainer} >
+              <Image source={require('../assets/loginview/friend.png')} style={orientationStyles.letterImage} />
+            </TouchableOpacity>
+
+            
+
+           
+           
+
+          </View>
+
+          <View style={orientationStyles.rightSide}>
+          </View>
+           
+        </>
+      ) : (
+        <>
+          {/* Start of Portrait Views*/}
+          
+          <View style={orientationStyles.leftSide}> 
+
+</View>
+
+<View style={orientationStyles.middleSide}>
+
+
+<View style={orientationStyles.inputBoxContainer}>
+
+  <View style={orientationStyles.inputBox}>
+    <TextInput
+      style={orientationStyles.input}
+      placeholder={'Teacher Email'}
+      value={email}
+      onChangeText={setEmail}
+      importantForAutofill="no"
+      textAlignVertical="center"
+      placeholderTextColor="black" // placeholder text color
+    />
+
+  </View>
+
+  <View style={orientationStyles.inputBox}>
+    <TextInput
+      style={orientationStyles.input}
+      placeholder={'Student Name'}
+      value={studentName}
+      onChangeText={studentName}
+      importantForAutofill="no"
+      textAlignVertical="center"
+      placeholderTextColor="black" // placeholder text color
+    />
+  </View>
+
+  <View style={orientationStyles.inputBox}>
+    <TextInput
+      style={orientationStyles.input}
+      placeholder={'Student PIN'}
+      value={pin}
+      onChangeText={setPin}
+      secureTextEntry={!showPassword}
+      importantForAutofill="no"
+      textAlignVertical="center"
+      placeholderTextColor="black" // placeholder text color
+    />
+
+</View>
+
+</View>
+
+<TouchableOpacity style={orientationStyles.loginButtonContainer} onPress={() => console.log(aspectRatio)}>
+  <Image source={require('../assets/welcomeView/loginp.png')} style={orientationStyles.loginButton} />
+</TouchableOpacity>
+
+
+
+</View>
+
+<View style={orientationStyles.rightSide}>
+</View>
+        </>
+      )}
+    </ImageBackground>
+  );
 };
 
-export default GetStartedView;
+
+export default LoginScreen;
