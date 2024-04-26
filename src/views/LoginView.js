@@ -49,7 +49,7 @@ const LoginScreen = ({ navigation }) => {
       },
       letterImage: {
         width: '100%',
-        height: '29%',
+        height: '30%',
         resizeMode: 'contain',
 
       },
@@ -63,7 +63,7 @@ const LoginScreen = ({ navigation }) => {
       },
       inputBox: {
         width: '100%',
-        height: aspectRatio > 1.5 ? '35%' : '30%',
+        height: aspectRatio > 1.5 ? '35%' : '55%',
         marginBottom: '2%',
         borderColor: 'black',
         borderWidth: 2.3,
@@ -89,8 +89,18 @@ const LoginScreen = ({ navigation }) => {
         width: '100%', // Adjust the width as needed
         height: '100%', // Adjust the height as needed
         resizeMode: 'contain',
+        marginTop: aspectRatio > 1.5 ? '3%' : '55%',
       },
-     
+      forgotPasswordButtonContainer: {
+        width: '100%',
+        height: '80%',
+      },
+      forgotPasswordButton: {
+        width: aspectRatio > 1.5 ? '45%' : '55%',
+        height: '10%',
+        marginTop: '3.5%'
+      },
+
     },
 
     // Portrait styles
