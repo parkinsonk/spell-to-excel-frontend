@@ -17,6 +17,8 @@ const TraceView = ({ navigation, route }) => {
   const aspectRatio = screenWidth / screenHeight;
   const { markActivityCompleted, checkFlyingHigh, isLoading } = useProgress();
 
+
+  // Back Button Functionality
   const handleCustomBackAction = async () => {
     // Call your function before navigating back
     Alert.alert("Congrats!", "You've completed the Trace, Copy, Cover activity.");
@@ -39,14 +41,16 @@ const TraceView = ({ navigation, route }) => {
       ),
     });
   }, [navigation]);
+  // End Of Back Button Functionality
 
-  
+  // Set the background to trace image
   const setTraceBackground = () => {
-    setBackground(traceBackground); // Set the background to trace image
+    setBackground(traceBackground); 
   };
   
+  // Set the background to cover image
   const setCoverBackground = () => {
-    setBackground(coverBackground); // Set the background to cover image
+    setBackground(coverBackground); 
   };
 
   const colorOptions = ["black", "red", "blue", "green", "yellow", "purple"];
@@ -59,14 +63,14 @@ const TraceView = ({ navigation, route }) => {
     onStartShouldSetPanResponder: () => true,
     onPanResponderGrant: (evt, gestureState) => {
       // Start a new path with M command    
-      correctionFactor = 20;
+      aspectRatio > 1.7 ? correctionFactor = -20 : correctionFactor = -50;
       const correctedY0 = gestureState.y0 - correctionFactor;
       const newPoint = `M${gestureState.x0},${correctedY0}`;
       setPaths((prevPaths) => [...prevPaths, newPoint]);
     },
     onPanResponderMove: (evt, gestureState) => {
       // Add line to command to the current path
-      correctionFactor = 20;
+      aspectRatio > 1.7 ? correctionFactor = -20 : correctionFactor = -50;
       const correctedMoveY = gestureState.moveY - correctionFactor;
       const newPoint = `L${gestureState.moveX},${correctedMoveY}`;
       setPaths((prevPaths) => [...prevPaths.slice(0, -1), prevPaths[prevPaths.length - 1] + ' ' + newPoint]);
@@ -91,35 +95,53 @@ const TraceView = ({ navigation, route }) => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      resizeMode: 'contain',
-      
     },
     svgContainer: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
     },
-    eraser: {
-      position: 'absolute',
-      left: 200,
-      bottom: 20,
+    lowerContainer: {
+      flex: .25,
+      flexDirection: 'row',
+
     },
-  crayonBox: {
-      position: 'absolute',
-      left: 0,
-      bottom: 20,
-  },
-  crayonBoxImage: {
-      width: 100,
-      height: 100,
-      borderColor: 'black',
-      marginLeft: 50,
-  },
+    lowerContainerLeft: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    },
+    lowerContainerMiddle: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    lowerContainerRight: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+    },
+    eraser: {
+      width: aspectRatio > 1.75 ? '27%': '40%',
+      height: aspectRatio > 1.75 ? '70%': '60%',
+      marginLeft: '5%',
+    },
     eraserImage: {
-      width: 100,
-      height: 50,
-      borderColor: 'black',
-  
+      width: '100%',
+      height: '100%',
+    },
+    crayonBox: {
+      width: aspectRatio > 1.75 ? '16%': '25%',
+      height: aspectRatio > 1.75 ? '90%': '85%',
+      marginLeft: '15%',
+      
+    },
+    crayonBoxImage: {
+      width: '100%',
+      height: '100%',
     },
     colorPickerContainer: {
       position: 'absolute',
@@ -137,48 +159,31 @@ const TraceView = ({ navigation, route }) => {
       margin: 5,
     },
     trace: {
-      position: 'absolute',
-      right: screenWidth * .05,
-      top: screenHeight * .2,
+      width: aspectRatio > 1.75 ? '35%': '43%',
+      height: aspectRatio > 1.75 ? '90%': '74%',
+      marginRight: '5%',
     },
     traceImage: {
-      width: aspectRatio > 1.5 ?  screenWidth * .12 : screenWidth * .15,
-      height: aspectRatio > 1.5 ?  screenHeight * .16 : screenHeight * .14,
-      borderColor: 'black',
-      marginRight: 50,
-    },
-    copy: {
-      position: 'absolute',
-      right: screenWidth * .05,
-      top: screenHeight * .45,
-    },
-    copyImage: {
-      width: aspectRatio > 1.5 ?  screenWidth * .11 : screenWidth * .14,
-      height: aspectRatio > 1.5 ?  screenHeight * .17 : screenHeight * .143,
-      borderColor: 'black',
-      marginRight: 50,
+      width: '100%',
+      height: '100%',
     },
     cover: {
-      position: 'absolute',
-      right: screenWidth * .05,
-      top: screenHeight * .7,
+      width: aspectRatio > 1.75 ? '32%': '40%',
+      height: aspectRatio > 1.75 ? '94%': '75%',
+      marginRight: '15%',
     },
     coverImage: {
-      width: aspectRatio > 1.5 ?  screenWidth * .11 : screenWidth * .13,
-      height: aspectRatio > 1.5 ?  screenHeight * .18 : screenHeight * .14,
-      borderColor: 'black',
-      marginRight: 50,
+      width: '100%',
+      height: '100%',
     },
     sound: {
-      position: 'absolute',
-      left: screenWidth * .17,
-      top: screenHeight * .20,
+      width: aspectRatio > 1.75 ? '20%': '20%',
+      height: aspectRatio > 1.75 ? '50%': '35%',
+      marginLeft: '5%',
     },
     soundImage: {
-      width: aspectRatio > 1.5 ?  screenWidth * .10 : screenWidth * .10,
-      height: aspectRatio > 1.5 ?  screenHeight * .15 : screenHeight * .10,
-      borderColor: 'black',
-      marginRight: 50,
+      width: '100%',
+      height: '100%',
     },
   });
 
@@ -198,29 +203,6 @@ const TraceView = ({ navigation, route }) => {
         </Svg>
       </View>
       
-      <TouchableOpacity style={styles.eraser} onPress={handleClearButtonClick}>
-        <Image source={require('../assets/traceViews/eraser.png')} style={styles.eraserImage} />
-      </TouchableOpacity>
-  
-      <TouchableOpacity style={styles.crayonBox} onPress={toggleColorPicker}>
-        <Image source={require('../assets/traceViews/crayonBox.png')} style={styles.crayonBoxImage} />
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.trace} onPress={setTraceBackground}>
-        <Image source={require('../assets/traceViews/trace.png')} style={styles.traceImage} />
-      </TouchableOpacity>
-
-      <View style={styles.copy}>  
-        <Image source={require('../assets/traceViews/copy.png')} style={styles.copyImage} />
-      </View>
-
-      <TouchableOpacity style={styles.cover} onPress={() => {setCoverBackground(); handleClearButtonClick();}}>
-        <Image source={require('../assets/traceViews/cover.png')} style={styles.coverImage} />
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.sound} onPress={() => console.log('Sound button pressed')}>
-        <Image source={require('../assets/traceViews/sound.png')} style={styles.soundImage} />
-      </TouchableOpacity>
   
       {/* Color Picker Overlay */}
       {showColorPicker && (
@@ -231,12 +213,51 @@ const TraceView = ({ navigation, route }) => {
               style={[styles.colorOption, {backgroundColor: optionColor}]}
               onPress={() => {
                 handleChangeColor(optionColor);
+
                 toggleColorPicker(); // Hide color picker after selection
               }}
             />
           ))}
         </View>
       )}
+
+      
+
+      <View style={styles.lowerContainer}>
+
+        <View style={styles.lowerContainerLeft}>
+
+          <TouchableOpacity style={styles.eraser} onPress={handleClearButtonClick}>
+            <Image source={require('../assets/traceViews/eraser.png')} style={styles.eraserImage} />
+          </TouchableOpacity>
+      
+          <TouchableOpacity style={styles.crayonBox} onPress={toggleColorPicker}>
+            <Image source={require('../assets/traceViews/crayonBox.png')} style={styles.crayonBoxImage} />
+          </TouchableOpacity>
+
+        </View>
+
+        <View style={styles.lowerContainerMiddle}>
+
+          <TouchableOpacity style={styles.sound} onPress={() => console.log('Sound button pressed')}>
+            <Image source={require('../assets/traceViews/sound.png')} style={styles.soundImage} />
+          </TouchableOpacity>
+
+        </View>
+
+        <View style={styles.lowerContainerRight}>
+
+          <TouchableOpacity style={styles.trace} onPress={setTraceBackground}>
+            <Image source={require('../assets/traceViews/trace.png')} style={styles.traceImage} />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.cover} onPress={() => {setCoverBackground(); handleClearButtonClick();}}>
+            <Image source={require('../assets/traceViews/try.png')} style={styles.coverImage} />
+          </TouchableOpacity>
+
+        </View>
+
+      </View>
   
       {/* Additional buttons for changing color */}
     </ImageBackground>
