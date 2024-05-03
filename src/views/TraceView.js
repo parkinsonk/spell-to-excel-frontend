@@ -3,6 +3,7 @@ import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Dimensions,
 import Svg, { Path } from 'react-native-svg';
 import traceWordMapping from '../utils/traceWordMapping';
 import { useProgress } from '../components/ProgressContext';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 
 const TraceView = ({ navigation, route }) => {
@@ -14,6 +15,7 @@ const TraceView = ({ navigation, route }) => {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [showBackground, setBackground] = useState(traceBackground);
   const {width: screenWidth, height: screenHeight} = useWindowDimensions();
+  const isLandscape = screenWidth > screenHeight;
   const aspectRatio = screenWidth / screenHeight;
   const { markActivityCompleted, checkFlyingHigh, isLoading } = useProgress();
 
@@ -101,6 +103,105 @@ const TraceView = ({ navigation, route }) => {
 
   const styles = StyleSheet.create({
 
+    landscape: {
+      background: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      svgContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      lowerContainer: {
+        flex: .25,
+        flexDirection: 'row',
+
+      },
+      lowerContainerLeft: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+      },
+      lowerContainerMiddle: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      lowerContainerRight: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+      },
+      eraser: {
+        width: aspectRatio > 1.75 ? '27%': '40%',
+        height: aspectRatio > 1.75 ? '70%': '60%',
+        marginLeft: '5%',
+      },
+      eraserImage: {
+        width: '100%',
+        height: '100%',
+      },
+      crayonBox: {
+        width: aspectRatio > 1.75 ? '16%': '25%',
+        height: aspectRatio > 1.75 ? '90%': '85%',
+        marginLeft: '15%',
+        
+      },
+      crayonBoxImage: {
+        width: '100%',
+        height: '100%',
+      },
+      colorPickerContainer: {
+        position: 'absolute',
+        padding: 20,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      colorOption: {
+        width: 50,
+        height: 50,
+        margin: 5,
+      },
+      trace: {
+        width: aspectRatio > 1.75 ? '35%': '43%',
+        height: aspectRatio > 1.75 ? '90%': '74%',
+        marginRight: '5%',
+      },
+      traceImage: {
+        width: '100%',
+        height: '100%',
+      },
+      cover: {
+        width: aspectRatio > 1.75 ? '32%': '40%',
+        height: aspectRatio > 1.75 ? '94%': '75%',
+        marginRight: '15%',
+      },
+      coverImage: {
+        width: '100%',
+        height: '100%',
+      },
+      sound: {
+        width: aspectRatio > 1.75 ? '20%': '20%',
+        height: aspectRatio > 1.75 ? '50%': '35%',
+        marginLeft: '5%',
+      },
+      soundImage: {
+        width: '100%',
+        height: '100%',
+      },
+    },
+
+  portrait: {
     background: {
       flex: 1,
       flexDirection: 'column',
@@ -137,7 +238,7 @@ const TraceView = ({ navigation, route }) => {
     },
     eraser: {
       width: aspectRatio > 1.75 ? '27%': '40%',
-      height: aspectRatio > 1.75 ? '70%': '60%',
+      height: aspectRatio > 1.75 ? '70%': '30%',
       marginLeft: '5%',
     },
     eraserImage: {
@@ -145,8 +246,8 @@ const TraceView = ({ navigation, route }) => {
       height: '100%',
     },
     crayonBox: {
-      width: aspectRatio > 1.75 ? '16%': '25%',
-      height: aspectRatio > 1.75 ? '90%': '85%',
+      width: aspectRatio > 1.75 ? '16%': '35%',
+      height: aspectRatio > 1.75 ? '90%': '45%',
       marginLeft: '15%',
       
     },
@@ -170,8 +271,8 @@ const TraceView = ({ navigation, route }) => {
       margin: 5,
     },
     trace: {
-      width: aspectRatio > 1.75 ? '35%': '43%',
-      height: aspectRatio > 1.75 ? '90%': '74%',
+      width: aspectRatio > 1.75 ? '35%': '48%',
+      height: aspectRatio > 1.75 ? '90%': '45%',
       marginRight: '5%',
     },
     traceImage: {
@@ -179,8 +280,8 @@ const TraceView = ({ navigation, route }) => {
       height: '100%',
     },
     cover: {
-      width: aspectRatio > 1.75 ? '32%': '40%',
-      height: aspectRatio > 1.75 ? '94%': '75%',
+      width: aspectRatio > 1.75 ? '32%': '45%',
+      height: aspectRatio > 1.75 ? '94%': '46%',
       marginRight: '15%',
     },
     coverImage: {
@@ -188,19 +289,56 @@ const TraceView = ({ navigation, route }) => {
       height: '100%',
     },
     sound: {
-      width: aspectRatio > 1.75 ? '20%': '20%',
-      height: aspectRatio > 1.75 ? '50%': '35%',
+      width: aspectRatio > 1.75 ? '20%': '30%',
+      height: aspectRatio > 1.75 ? '50%': '30%',
       marginLeft: '5%',
     },
     soundImage: {
       width: '100%',
       height: '100%',
     },
-  });
+  }});
+
+
+  const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
+
+    
+
+    useEffect(() => {
+        // Function to update styles based on current orientation
+        const updateOrientationStyles = async () => {
+          const orientation = await ScreenOrientation.getOrientationAsync();
+          if (orientation === ScreenOrientation.Orientation.LANDSCAPE_LEFT || orientation === ScreenOrientation.Orientation.LANDSCAPE_RIGHT) {
+            setOrientationStyles(styles.landscape);
+          } else {
+            setOrientationStyles(styles.portrait);
+          }
+        };
+
+        
+    
+        // Initial update when component mounts
+        updateOrientationStyles();
+    
+        // Subscribe to orientation changes
+        const subscription = ScreenOrientation.addOrientationChangeListener(() => {
+          updateOrientationStyles();
+        });
+    
+        // Cleanup subscription on unmount
+        return () => {
+          ScreenOrientation.removeOrientationChangeListener(subscription);
+        };
+      }, []);
 
   return (
-    <ImageBackground source={showBackground} resizeMode="cover" style={styles.background}>
-      <View {...panResponder.panHandlers} style={styles.svgContainer}>
+    <ImageBackground source={showBackground} resizeMode="cover" style={orientationStyles.background}>
+
+    {isLandscape ? (
+
+    <>
+    {/* Start of Landscape Views*/}
+      <View {...panResponder.panHandlers} style={orientationStyles.svgContainer}>
         <Svg height={screenHeight} width={screenWidth}>
           {paths.map((path, index) => (
             <Path
@@ -217,11 +355,11 @@ const TraceView = ({ navigation, route }) => {
   
       {/* Color Picker Overlay */}
       {showColorPicker && (
-        <View style={styles.colorPickerContainer}>
+        <View style={orientationStyles.colorPickerContainer}>
           {colorOptions.map((optionColor, index) => (
             <TouchableOpacity
               key={index}
-              style={[styles.colorOption, {backgroundColor: optionColor}]}
+              style={[orientationStyles.colorOption, {backgroundColor: optionColor}]}
               onPress={() => {
                 handleChangeColor(optionColor);
 
@@ -234,36 +372,36 @@ const TraceView = ({ navigation, route }) => {
 
       
 
-      <View style={styles.lowerContainer}>
+      <View style={orientationStyles.lowerContainer}>
 
-        <View style={styles.lowerContainerLeft}>
+        <View style={orientationStyles.lowerContainerLeft}>
 
-          <TouchableOpacity style={styles.eraser} onPress={handleClearButtonClick}>
-            <Image source={require('../assets/traceViews/eraser.png')} style={styles.eraserImage} />
+          <TouchableOpacity style={orientationStyles.eraser} onPress={handleClearButtonClick}>
+            <Image source={require('../assets/traceViews/eraser.png')} style={orientationStyles.eraserImage} />
           </TouchableOpacity>
       
-          <TouchableOpacity style={styles.crayonBox} onPress={toggleColorPicker}>
-            <Image source={require('../assets/traceViews/crayonBox.png')} style={styles.crayonBoxImage} />
+          <TouchableOpacity style={orientationStyles.crayonBox} onPress={toggleColorPicker}>
+            <Image source={require('../assets/traceViews/crayonBox.png')} style={orientationStyles.crayonBoxImage} />
           </TouchableOpacity>
 
         </View>
 
-        <View style={styles.lowerContainerMiddle}>
+        <View style={orientationStyles.lowerContainerMiddle}>
 
-          <TouchableOpacity style={styles.sound} onPress={() => console.log('Sound button pressed')}>
-            <Image source={require('../assets/traceViews/sound.png')} style={styles.soundImage} />
+          <TouchableOpacity style={orientationStyles.sound} onPress={() => console.log('Sound button pressed')}>
+            <Image source={require('../assets/traceViews/sound.png')} style={orientationStyles.soundImage} />
           </TouchableOpacity>
 
         </View>
 
-        <View style={styles.lowerContainerRight}>
+        <View style={orientationStyles.lowerContainerRight}>
 
-          <TouchableOpacity style={styles.trace} onPress={setTraceBackground}>
-            <Image source={require('../assets/traceViews/trace.png')} style={styles.traceImage} />
+          <TouchableOpacity style={orientationStyles.trace} onPress={setTraceBackground}>
+            <Image source={require('../assets/traceViews/trace.png')} style={orientationStyles.traceImage} />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.cover} onPress={() => {setCoverBackground(); handleClearButtonClick();}}>
-            <Image source={require('../assets/traceViews/try.png')} style={styles.coverImage} />
+          <TouchableOpacity style={orientationStyles.cover} onPress={() => {setCoverBackground(); handleClearButtonClick();}}>
+            <Image source={require('../assets/traceViews/try.png')} style={orientationStyles.coverImage} />
           </TouchableOpacity>
 
         </View>
@@ -271,6 +409,88 @@ const TraceView = ({ navigation, route }) => {
       </View>
   
       {/* Additional buttons for changing color */}
+
+      
+
+      
+      </>) : (
+
+          <>
+            {/* Start of Portrait Views*/}
+
+      <View {...panResponder.panHandlers} style={orientationStyles.svgContainer}>
+              <Svg height={screenHeight} width={screenWidth}>
+                {paths.map((path, index) => (
+                  <Path
+                    key={index}
+                    d={path}
+                    stroke={color}
+                    fill="none"
+                    strokeWidth={15}
+                  />
+                ))}
+              </Svg>
+            </View>
+            
+        
+            {/* Color Picker Overlay */}
+            {showColorPicker && (
+              <View style={orientationStyles.colorPickerContainer}>
+                {colorOptions.map((optionColor, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={[orientationStyles.colorOption, {backgroundColor: optionColor}]}
+                    onPress={() => {
+                      handleChangeColor(optionColor);
+
+                      toggleColorPicker(); // Hide color picker after selection
+                    }}
+                  />
+                ))}
+              </View>
+            )}
+
+            
+
+            <View style={orientationStyles.lowerContainer}>
+
+              <View style={orientationStyles.lowerContainerLeft}>
+
+                <TouchableOpacity style={orientationStyles.eraser} onPress={handleClearButtonClick}>
+                  <Image source={require('../assets/traceViews/eraser.png')} style={orientationStyles.eraserImage} />
+                </TouchableOpacity>
+            
+                <TouchableOpacity style={orientationStyles.crayonBox} onPress={toggleColorPicker}>
+                  <Image source={require('../assets/traceViews/crayonBox.png')} style={orientationStyles.crayonBoxImage} />
+                </TouchableOpacity>
+
+              </View>
+
+              <View style={orientationStyles.lowerContainerMiddle}>
+
+                <TouchableOpacity style={orientationStyles.sound} onPress={() => console.log('Sound button pressed')}>
+                  <Image source={require('../assets/traceViews/sound.png')} style={orientationStyles.soundImage} />
+                </TouchableOpacity>
+
+              </View>
+
+              <View style={orientationStyles.lowerContainerRight}>
+
+                <TouchableOpacity style={orientationStyles.trace} onPress={setTraceBackground}>
+                  <Image source={require('../assets/traceViews/trace.png')} style={orientationStyles.traceImage} />
+                </TouchableOpacity>
+
+                <TouchableOpacity style={orientationStyles.cover} onPress={() => {setCoverBackground(); handleClearButtonClick();}}>
+                  <Image source={require('../assets/traceViews/try.png')} style={orientationStyles.coverImage} />
+                </TouchableOpacity>
+
+              </View>
+
+            </View>
+
+
+            </>)}
+
     </ImageBackground>
   );
 };
