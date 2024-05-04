@@ -272,7 +272,7 @@ const TraceView = ({ navigation, route }) => {
     },
     trace: {
       width: aspectRatio > 1.75 ? '35%': '48%',
-      height: aspectRatio > 1.75 ? '90%': '45%',
+      height: aspectRatio > 1.75 ? '90%': '40%',
       marginRight: '5%',
     },
     traceImage: {
@@ -281,7 +281,7 @@ const TraceView = ({ navigation, route }) => {
     },
     cover: {
       width: aspectRatio > 1.75 ? '32%': '45%',
-      height: aspectRatio > 1.75 ? '94%': '46%',
+      height: aspectRatio > 1.75 ? '94%': '41%',
       marginRight: '15%',
     },
     coverImage: {

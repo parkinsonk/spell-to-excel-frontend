@@ -351,12 +351,7 @@ const BoxesView = ({ navigation, route  }) => {
         return startX + (BOX_WIDTH + BOX_MARGIN) * rowPosition; // Calculate left position
     };
 
-    
-
-
-
     const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
-    
 
     useEffect(() => {
       // Function to update styles based on current orientation
