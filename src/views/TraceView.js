@@ -66,10 +66,10 @@ const TraceView = ({ navigation, route }) => {
     onPanResponderGrant: (evt, gestureState) => {
       // Start a new path with M command    
       if (screenHeight > screenWidth) {
-        correctionFactor = -70;
+        correctionFactor = aspectRatio < 1.4 ? -100 : -70;
       } 
       else {
-      aspectRatio > 1.7 ? correctionFactor = -20 : correctionFactor = -50;
+        aspectRatio < 1.4 ? -60 : aspectRatio > 1.7 ? correctionFactor = -20 : correctionFactor = -50;
     }
 
       const correctedY0 = gestureState.y0 - correctionFactor;
@@ -79,10 +79,10 @@ const TraceView = ({ navigation, route }) => {
     onPanResponderMove: (evt, gestureState) => {
       // Add line to command to the current path
       if (screenHeight > screenWidth) {
-        correctionFactor = -70;
+        correctionFactor = aspectRatio < 1.4 ? -100 : -70;
       } 
       else {
-      aspectRatio > 1.7 ? correctionFactor = -20 : correctionFactor = -50;
+        aspectRatio < 1.4 ? -60 : aspectRatio > 1.7 ? correctionFactor = -20 : correctionFactor = -50;
     }
       const correctedMoveY = gestureState.moveY - correctionFactor;
       const newPoint = `L${gestureState.moveX},${correctedMoveY}`;
