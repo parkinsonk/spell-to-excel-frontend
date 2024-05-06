@@ -15,9 +15,9 @@ const BoxesView = ({ navigation, route  }) => {
     const { batch, activity, selectedWord } = route.params;
     const lettersList = boxesWordMapping[selectedWord]?.images || boxesWordMapping['default'].images;
     const colorsList = boxesWordMapping[selectedWord]?.colors || boxesWordMapping['default'].colors;
-    const BOX_WIDTH = aspectRatio > 1.5 ? 100 : 130; // Width of each box
-    const BOX_HEIGHT = aspectRatio > 1.5 ? 100 : 130; // Height of each box
-    const BOX_MARGIN = aspectRatio > 1.5 ? 5: 10; // Margin between boxes
+    const BOX_WIDTH = aspectRatio < 1.4 ? 145 : aspectRatio > 1.7 ? 75 : 130; // Width of each box
+    const BOX_HEIGHT = aspectRatio < 1.4 ? 145 : aspectRatio > 1.7 ? 75 : 130; // Height of each box
+    const BOX_MARGIN = aspectRatio < 1.4 ? 15 :aspectRatio > 1.7 ? 5: 10; // Margin between boxes
     const NUM_COLUMNS = lettersList.length; // Number of boxes per row
     const { markActivityCompleted, checkFlyingHigh, isLoading } = useProgress();
 
@@ -57,30 +57,28 @@ const BoxesView = ({ navigation, route  }) => {
         },
         leftBackground: {
           flex: .1,
-          borderColor: 'blue',
-          borderWidth: 5,
           alignItems: 'flex-start',
+          height: '100%',
         },
         middleBackground: {
           flex: .8,
+          alignItems: 'center',
+          justifyContent: 'center',
         },
         rightBackground: {
           flex: .1,
           alignItems: 'flex-end',
+          height: '100%',
         },
         svgContainer: {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
           zIndex: 2,
-          borderColor: 'green',
-          borderWidth: 3,
         },
         lowerContainer: {
           flex: .25,
           flexDirection: 'row',
-          borderColor: 'black',
-          borderWidth: 3,
         },
         lowerContainerLeft: {
           flex: 1,
@@ -174,9 +172,24 @@ const BoxesView = ({ navigation, route  }) => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      resizeMode: 'contain',
       backgroundColor: 'white',
       
+    },
+    topBackground: {
+      flex: .1,
+      width: '125%',
+      alignItems: 'center',
+
+    },
+    middleBackground: {
+      flex: .8,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    bottomBackground: {
+      flex: .1,
+      width: '125%',
+      alignItems: 'center',
     },
     svgContainer: {
       flex: 1,
@@ -184,33 +197,41 @@ const BoxesView = ({ navigation, route  }) => {
       alignItems: 'center',
       zIndex: 2,
     },
-    eraser: {
-      position: 'absolute',
-      bottom: '9%',
-      zIndex: 3,
-      right: '1%',
-      width: 160,
-      height: 100,
-
+    lowerContainer: {
+      flex: .25,
+      flexDirection: 'row',
     },
-  crayonBox: {
-      position: 'absolute',
-      right: '23%',
-      bottom: '10%',
-      width: 100,
-      height: 100,
-      zIndex: 3,
-  },
-  crayonBoxImage: {
+    lowerContainerLeft: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    },
+    lowerContainerRight: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+    },
+    eraser: {
+      width: aspectRatio > 1.7 ? '27%': '35%',
+      height: aspectRatio > 1.7 ? '70%': '50%',
+      marginLeft: '5%',
+    },
+    eraserImage: {
       width: '100%',
       height: '100%',
-      zIndex: 3,
-  },
-    eraserImage: {
-      width: '80%',
-      height: '80%',
-      zIndex: 3,
-  
+    },
+    crayonBox: {
+      width: aspectRatio > 1.7 ? '16%': '25%',
+      height: aspectRatio > 1.7 ? '90%': '80%',
+      marginLeft: '15%',
+      marginRight: '5%',
+      
+    },
+    crayonBoxImage: {
+      width: '100%',
+      height: '100%',
     },
     colorPickerContainer: {
       position: 'absolute',
@@ -229,18 +250,13 @@ const BoxesView = ({ navigation, route  }) => {
       margin: 5,
     },
     sound: {
-      position: 'absolute',
-      bottom: '12%',
-      left: '5%',
-      width: 116,
-      height: 100,
-      zIndex: 3,
+      width: aspectRatio > 1.7 ? '20%': '22%',
+      height: aspectRatio > 1.7 ? '50%': '40%',
+      marginLeft: '5%',
     },
     soundImage: {
       width: '100%',
       height: '100%',
-      borderColor: 'black',
-      marginRight: 50,
     },
   box: {
       position: 'absolute',
@@ -267,15 +283,11 @@ const BoxesView = ({ navigation, route  }) => {
       zIndex: 4,
       transform: [{ translateX: 0 }, { translateY: 0 }],
     },
-    topBackground: {
-      position: 'absolute',
-      top: 0,
+    landscapeBackgroundImage: {
+      height: '100%',
+      width: '80%',
     },
-    bottomBackground: {
-      position: 'absolute',
-      bottom: 0
-    },
-  }});
+}});
 
 
     const [paths, setPaths] = useState([]);
@@ -295,14 +307,14 @@ const BoxesView = ({ navigation, route  }) => {
         onStartShouldSetPanResponder: () => true,
         onPanResponderGrant: (evt, gestureState) => {
           // Start a new path with M command    
-          correctionFactor = -40;
+          correctionFactor = aspectRatio < 1.4 ? -60 : aspectRatio > 1.7 ? -20 : -40;
           const correctedY0 = gestureState.y0 - correctionFactor;
           const newPoint = `M${gestureState.x0},${correctedY0}`;
           setPaths((prevPaths) => [...prevPaths, newPoint]);
         },
         onPanResponderMove: (evt, gestureState) => {
           // Add line to command to the current path
-          correctionFactor = -40;
+          correctionFactor = aspectRatio < 1.4 ? -60 : aspectRatio > 1.7 ? -20 : -40;
           const correctedMoveY = gestureState.moveY - correctionFactor;
           const newPoint = `L${gestureState.moveX},${correctedMoveY}`;
           setPaths((prevPaths) => [...prevPaths.slice(0, -1), prevPaths[prevPaths.length - 1] + ' ' + newPoint]);
@@ -404,6 +416,8 @@ const BoxesView = ({ navigation, route  }) => {
       {isLandscape ? (
 
         <>
+
+        {/*Start of Landscape View*/}
         <View style={orientationStyles.leftBackground}>
 
         <Image source={require('../assets/boxesViews/landscapeBackgroundImage.png')} style={orientationStyles.landscapeBackgroundImage} />
@@ -420,7 +434,7 @@ const BoxesView = ({ navigation, route  }) => {
                   d={path}
                   stroke={color}
                   fill="none"
-                  strokeWidth={15}
+                  strokeWidth={aspectRatio > 1.7 ? 7 : 12}
                 />
               ))}
             </Svg>
@@ -431,14 +445,14 @@ const BoxesView = ({ navigation, route  }) => {
                     <React.Fragment key={index}>
                         <View
                             style={[orientationStyles.box, {
-                                top: aspectRatio > 1.5 ? '0%' : '50%',
+                                top: aspectRatio < 1.4 ? '50%' : aspectRatio > 1.7 ? '50%' : '40%',
                                 left: calculateBoxLeftPosition(index),
                             }]}
                             onLayout={handleBoxPositioning(index)}
                         />
                         <View
                             style={[orientationStyles.box, {
-                              top: aspectRatio > 1.5 ? '0%' : '30%',
+                              top: aspectRatio < 1.4 ? '33%' : aspectRatio > 1.7 ? '27%' : '30%',
                                 left: calculateBoxLeftPosition(index),
                             }]}
                             onLayout={handleBoxPositioning(index)}
@@ -449,7 +463,7 @@ const BoxesView = ({ navigation, route  }) => {
                         source={lettersList[index]}
                         style={[orientationStyles.lettersImage, { // Match the box height or adjust as needed
                           left: calculateBoxLeftPosition(index) + screenWidth * .02,
-                          top: aspectRatio > 1.5 ?  '0%' : '15%',
+                          top: aspectRatio < 1.4 ? '20%' : aspectRatio > 1.7 ?  '10%' : '15%',
                         }]}
                     />}
 
@@ -462,7 +476,7 @@ const BoxesView = ({ navigation, route  }) => {
                       orientationStyles.circle,
                         {
                             left: calculateBoxLeftPosition(index) + screenWidth * .02,
-                            top: aspectRatio > 1.5 ?  '0%' : '15%',
+                            top: aspectRatio < 1.4 ? '20%' : aspectRatio > 1.7 ?  '10%' : '15%',
                             transform: pos.getTranslateTransform(), // Use the Animated.Value for smooth animation
                             fill: colorsList[index],
                             backgroundColor: colorsList[index],
@@ -526,8 +540,125 @@ const BoxesView = ({ navigation, route  }) => {
         </>) : (
 
         <>
-          <Image source={require('../assets/boxesViews/bottomBackgroundPortrait.png')} style={orientationStyles.topBackground} />
-          <Image source={require('../assets/boxesViews/topBackgroundPortrait.png')} style={orientationStyles.bottomBackground} />
+
+        {/*Start of Portrait View*/}
+        <View style={orientationStyles.topBackground}>
+
+        <Image source={require('../assets/boxesViews/portraitBackgroundImage.png')} style={orientationStyles.landscapeBackgroundImage} />
+
+        </View>
+
+        <View style={orientationStyles.middleBackground} onLayout={handleMiddleContainerLayout}>
+
+        <View {...panResponder.panHandlers} style={orientationStyles.svgContainer}>
+            <Svg height={screenHeight} width={screenWidth}>
+              {paths.map((path, index) => (
+                <Path
+                  key={index}
+                  d={path}
+                  stroke={color}
+                  fill="none"
+                  strokeWidth={aspectRatio < 1.4 ? 12 : aspectRatio > 1.7 ? 7 : 12}
+                />
+              ))}
+            </Svg>
+          </View>
+
+          {/* Other code remains unchanged */}
+          {lettersList.map((letter, index) => (
+                    <React.Fragment key={index}>
+                        <View
+                            style={[orientationStyles.box, {
+                                top: aspectRatio < 1.4 ? '47%' :aspectRatio > 1.7 ? '0%' : '50%',
+                                left: calculateBoxLeftPosition(index),
+                            }]}
+                            onLayout={handleBoxPositioning(index)}
+                        />
+                        <View
+                            style={[orientationStyles.box, {
+                              top: aspectRatio < 1.4 ? '32%' : aspectRatio > 1.7 ? '0%' : '32%',
+                                left: calculateBoxLeftPosition(index),
+                            }]}
+                            onLayout={handleBoxPositioning(index)}
+                        />
+
+        {lettersList && lettersList[index] &&
+                    <Image
+                        source={lettersList[index]}
+                        style={[orientationStyles.lettersImage, { // Match the box height or adjust as needed
+                          left: calculateBoxLeftPosition(index) + screenWidth * .02,
+                          top: aspectRatio < 1.4 ? '20%' : aspectRatio > 1.7 ?  '0%' : '15%',
+                        }]}
+                    />}
+
+      
+        {circlePositions.map((pos, index) => (
+                <Animated.View
+                    {...circlePanResponders[index].panHandlers}
+                    key={index}
+                    style={[
+                      orientationStyles.circle,
+                        {
+                            left: calculateBoxLeftPosition(index) + screenWidth * .02,
+                            top: aspectRatio < 1.4 ? '20%' : aspectRatio > 1.7 ?  '0%' : '15%',
+                            transform: pos.getTranslateTransform(), // Use the Animated.Value for smooth animation
+                            fill: colorsList[index],
+                            backgroundColor: colorsList[index],
+                        },
+                    ]}
+                />
+            ))}
+    </React.Fragment>
+    ))}
+
+  
+      {/* Color Picker Overlay */}
+      {showColorPicker && (
+        <View style={orientationStyles.colorPickerContainer}>
+          {colorOptions.map((optionColor, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[orientationStyles.colorOption, {backgroundColor: optionColor}]}
+              onPress={() => {
+                handleChangeColor(optionColor);
+                toggleColorPicker(); // Hide color picker after selection
+              }}
+            />
+          ))}
+        </View>
+      )}
+
+          <View style={orientationStyles.lowerContainer}>
+
+            <View style={orientationStyles.lowerContainerLeft}>
+          
+              <TouchableOpacity style={orientationStyles.sound} onPress={() => console.log('sound button pressed')}>
+                <Image source={require('../assets/traceViews/sound.png')} style={orientationStyles.soundImage} />
+              </TouchableOpacity>
+
+            </View>
+
+            <View style={orientationStyles.lowerContainerRight}>
+
+              <TouchableOpacity style={orientationStyles.eraser} onPress={handleClearButtonClick}>
+                <Image source={require('../assets/traceViews/eraser.png')} style={orientationStyles.eraserImage} />
+              </TouchableOpacity>
+          
+              <TouchableOpacity style={orientationStyles.crayonBox} onPress={toggleColorPicker}>
+                <Image source={require('../assets/traceViews/crayonBox.png')} style={orientationStyles.crayonBoxImage} />
+              </TouchableOpacity>
+            
+            </View>
+
+          </View>
+
+        </View>
+
+        <View style={orientationStyles.bottomBackground}>
+
+          <Image source={require('../assets/boxesViews/portraitBackgroundImage.png')} style={orientationStyles.landscapeBackgroundImage} />
+
+        </View>
         
         </>)}
 
