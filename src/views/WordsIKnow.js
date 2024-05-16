@@ -47,7 +47,7 @@ const WordsIKnow = ({ navigation }) => {
     return wordsIKnowList.map((word, index) => (
         console.log('Word:', word),
       <View key={index} style={styles.flashcard}>
-        <Image source={flashcardMapping[word].flashcard} />
+        <Image source={flashcardMapping[word].flashcard} style={styles.flashcardImage} />
       </View>
     ));
   };
@@ -93,10 +93,15 @@ const styles = StyleSheet.create({
       borderWidth: 2,
     },
     flashcard: {
-      padding: 20,
+      padding: 5,
       borderBottomWidth: 1,
       borderBottomColor: '#CCCCCC',
     },
+    flashcardImage: {
+        width: '100%',
+        height: 300, // fixed height
+        resizeMode: 'contain',
+      },
     flashcardText: {
       fontWeight: 'bold',
       fontSize: 18,
