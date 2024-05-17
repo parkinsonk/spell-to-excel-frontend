@@ -15,13 +15,10 @@ const WordsIKnow = ({ navigation }) => {
   const { flyingHighStatus, springtimeFunStatus, sunnyIslandStatus, alienAdventureStatus, outerSpaceStatus,
     planetsAndBeyondStatus, divingDeepStatus, isLoading } = useProgress();
 
-    // Add words from each batch that the student knows to the wordsIKnowList
-
     // Create an array of all the status objects
     const allStatuses = [flyingHighStatus, springtimeFunStatus, sunnyIslandStatus, alienAdventureStatus, outerSpaceStatus, planetsAndBeyondStatus, divingDeepStatus];
 
     
-    // Iterate over each status object in the array
     // Iterate over each status object in the array
     for (let i = 0; i < allStatuses.length; i++) {
         const status = allStatuses[i];

@@ -15,9 +15,9 @@ const BoxesView = ({ navigation, route  }) => {
     const { batch, activity, selectedWord } = route.params;
     const lettersList = boxesWordMapping[selectedWord]?.images || boxesWordMapping['default'].images;
     const colorsList = boxesWordMapping[selectedWord]?.colors || boxesWordMapping['default'].colors;
-    const BOX_WIDTH = aspectRatio < 1.4 ? 145 : aspectRatio > 1.7 ? 75 : 130; // Width of each box
-    const BOX_HEIGHT = aspectRatio < 1.4 ? 145 : aspectRatio > 1.7 ? 75 : 130; // Height of each box
-    const BOX_MARGIN = aspectRatio < 1.4 ? 15 :aspectRatio > 1.7 ? 5: 10; // Margin between boxes
+    const BOX_WIDTH = aspectRatio < 1.4 ? 145 : 75; // Width of each box
+    const BOX_HEIGHT = aspectRatio < 1.4 ? 145 : 75; // Height of each box
+    const BOX_MARGIN = aspectRatio < 1.4 ? 15 : 5; // Margin between boxes
     const NUM_COLUMNS = lettersList.length; // Number of boxes per row
     const { markActivityCompleted, checkFlyingHigh, isLoading } = useProgress();
 
@@ -307,14 +307,14 @@ const BoxesView = ({ navigation, route  }) => {
         onStartShouldSetPanResponder: () => true,
         onPanResponderGrant: (evt, gestureState) => {
           // Start a new path with M command    
-          correctionFactor = aspectRatio < 1.4 ? -60 : aspectRatio > 1.7 ? -20 : -40;
+          correctionFactor = aspectRatio < 1.4 ? -55 : -20;
           const correctedY0 = gestureState.y0 - correctionFactor;
           const newPoint = `M${gestureState.x0},${correctedY0}`;
           setPaths((prevPaths) => [...prevPaths, newPoint]);
         },
         onPanResponderMove: (evt, gestureState) => {
           // Add line to command to the current path
-          correctionFactor = aspectRatio < 1.4 ? -60 : aspectRatio > 1.7 ? -20 : -40;
+          correctionFactor = aspectRatio < 1.4 ? -55 : -20;
           const correctedMoveY = gestureState.moveY - correctionFactor;
           const newPoint = `L${gestureState.moveX},${correctedMoveY}`;
           setPaths((prevPaths) => [...prevPaths.slice(0, -1), prevPaths[prevPaths.length - 1] + ' ' + newPoint]);
@@ -445,14 +445,14 @@ const BoxesView = ({ navigation, route  }) => {
                     <React.Fragment key={index}>
                         <View
                             style={[orientationStyles.box, {
-                                top: aspectRatio < 1.4 ? '50%' : aspectRatio > 1.7 ? '50%' : '40%',
+                                top: aspectRatio < 1.4 ? '55%' : '50%',
                                 left: calculateBoxLeftPosition(index),
                             }]}
                             onLayout={handleBoxPositioning(index)}
                         />
                         <View
                             style={[orientationStyles.box, {
-                              top: aspectRatio < 1.4 ? '33%' : aspectRatio > 1.7 ? '27%' : '30%',
+                              top: aspectRatio < 1.4 ? '33%' : '27%',
                                 left: calculateBoxLeftPosition(index),
                             }]}
                             onLayout={handleBoxPositioning(index)}
@@ -463,7 +463,7 @@ const BoxesView = ({ navigation, route  }) => {
                         source={lettersList[index]}
                         style={[orientationStyles.lettersImage, { // Match the box height or adjust as needed
                           left: calculateBoxLeftPosition(index) + screenWidth * .02,
-                          top: aspectRatio < 1.4 ? '20%' : aspectRatio > 1.7 ?  '10%' : '15%',
+                          top: aspectRatio < 1.4 ? '15%' : '10%',
                         }]}
                     />}
 
@@ -476,7 +476,7 @@ const BoxesView = ({ navigation, route  }) => {
                       orientationStyles.circle,
                         {
                             left: calculateBoxLeftPosition(index) + screenWidth * .02,
-                            top: aspectRatio < 1.4 ? '20%' : aspectRatio > 1.7 ?  '10%' : '15%',
+                            top: aspectRatio < 1.4 ? '15%' : '10%',
                             transform: pos.getTranslateTransform(), // Use the Animated.Value for smooth animation
                             fill: colorsList[index],
                             backgroundColor: colorsList[index],
@@ -558,7 +558,7 @@ const BoxesView = ({ navigation, route  }) => {
                   d={path}
                   stroke={color}
                   fill="none"
-                  strokeWidth={aspectRatio < 1.4 ? 12 : aspectRatio > 1.7 ? 7 : 12}
+                  strokeWidth={aspectRatio < 1.4 ? 12 : 7}
                 />
               ))}
             </Svg>
@@ -569,14 +569,14 @@ const BoxesView = ({ navigation, route  }) => {
                     <React.Fragment key={index}>
                         <View
                             style={[orientationStyles.box, {
-                                top: aspectRatio < 1.4 ? '47%' :aspectRatio > 1.7 ? '0%' : '50%',
+                                top: aspectRatio < 1.4 ? '47%' : '0%',
                                 left: calculateBoxLeftPosition(index),
                             }]}
                             onLayout={handleBoxPositioning(index)}
                         />
                         <View
                             style={[orientationStyles.box, {
-                              top: aspectRatio < 1.4 ? '32%' : aspectRatio > 1.7 ? '0%' : '32%',
+                              top: aspectRatio < 1.4 ? '32%' : '0%',
                                 left: calculateBoxLeftPosition(index),
                             }]}
                             onLayout={handleBoxPositioning(index)}
@@ -587,7 +587,7 @@ const BoxesView = ({ navigation, route  }) => {
                         source={lettersList[index]}
                         style={[orientationStyles.lettersImage, { // Match the box height or adjust as needed
                           left: calculateBoxLeftPosition(index) + screenWidth * .02,
-                          top: aspectRatio < 1.4 ? '20%' : aspectRatio > 1.7 ?  '0%' : '15%',
+                          top: aspectRatio < 1.4 ? '20%' : '0%',
                         }]}
                     />}
 
@@ -600,7 +600,7 @@ const BoxesView = ({ navigation, route  }) => {
                       orientationStyles.circle,
                         {
                             left: calculateBoxLeftPosition(index) + screenWidth * .02,
-                            top: aspectRatio < 1.4 ? '20%' : aspectRatio > 1.7 ?  '0%' : '15%',
+                            top: aspectRatio < 1.4 ? '20%' : '0%',
                             transform: pos.getTranslateTransform(), // Use the Animated.Value for smooth animation
                             fill: colorsList[index],
                             backgroundColor: colorsList[index],
