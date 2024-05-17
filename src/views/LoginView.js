@@ -10,7 +10,8 @@ const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [studentName, setStudentName] = useState('');
     const [pin, setPin] = useState('');
-    const { checkFlyingHigh } = useProgress();
+    const { checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
+        checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep } = useProgress();
 
     const handleLogin = () => {
         // Logic to handle login
@@ -29,6 +30,12 @@ const LoginScreen = ({ navigation }) => {
         await SecureStore.setItemAsync('access_token', access);
         await SecureStore.setItemAsync('refresh_token', refresh);
         await checkFlyingHigh('Flying High');
+        await checkSpringtimeFun('SpringTime Fun');
+        await checkSunnyIsland('Sunny Island');
+        await checkAlienAdventure('Alien Adventures');
+        await checkOuterSpace('Outer Space');
+        await checkPlanetsAndBeyond('Planets and Beyond');
+        await checkDivingDeep('Diving Deep');
         
         navigation.navigate('Word Batches');
 

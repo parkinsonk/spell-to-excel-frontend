@@ -360,7 +360,7 @@ const ActivitiesView = ({ navigation, route}) => {
                             </View>
 
                             <View style={orientationStyles.topRight}>
-                                <TouchableOpacity style={orientationStyles.wordsIKnowopacity} onPress={() => console.log(aspectRatio)}>
+                                <TouchableOpacity style={orientationStyles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>
                                     <Image source={require('../assets/activitiesView/wordsIKnow.png')} resizeMode='contain' style={orientationStyles.Image} />
                                 </TouchableOpacity>
                             </View>
