@@ -30,7 +30,7 @@ const SunnyIslandWordsView = ({ navigation }) => {
     return (
         
             <ImageBackground
-                source={require('../assets/sunnyIslandWordsView/sunnyIslandLandscapeBackground.png')}
+                source={require('../assets/sunnyIslandView/sunnyIslandLandscapeBackground.png')}
                 resizeMode="cover"
                 style={styles.background}
             >
@@ -45,10 +45,19 @@ const SunnyIslandWordsView = ({ navigation }) => {
                 <View style={styles.bottom}>
 
                     <View style={styles.bottomLeft}>
-                        <Image source={require('../assets/sunnyIslandWordsView/surferDude.gif')} style={styles.surferImage} resizeMode='contain' />
+                        <Image source={require('../assets/sunnyIslandView/surferDude.gif')} style={styles.surferImage} resizeMode='contain' />
                     </View>
 
                     <View style={styles.bottomMiddle}>
+
+                        <TouchableOpacity style={styles.iOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'I', batch: 'Sunny Island'})}>
+                            <Image source={getImageSource('I', sunnyIslandStatus['I'])} style={styles.iImage} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.fromOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'from', batch: 'Sunny Island'})}>
+                            <Image source={getImageSource('from', sunnyIslandStatus['from'])} style={styles.fromImage} />
+                        </TouchableOpacity>
+
                     </View>
 
                     <View style={styles.bottomRight}>
@@ -70,41 +79,33 @@ const styles = StyleSheet.create({
     },
     background: {
         flex: 1,
-        width: '100%',
-        height: '100%',
-        
         flexDirection: 'column',
     },
     top: {
         flex: 1,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
     },
     middle: {
         flex: 1,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
+        borderColor: 'black',
+        borderWidth: 2,
+
     },
     bottom: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
+        flex: .7,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
     },
     bottomLeft: {
         flex: 1,
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
+        borderColor: 'black',
+        borderWidth: 2,
     },
     bottomMiddle: {
         flex: 1,
+        borderColor: 'black',
+        borderWidth: 2,
+        flexDirection: 'row',
     },
     surferImage: {
         width: '100%',
@@ -112,109 +113,33 @@ const styles = StyleSheet.create({
     },
     bottomRight: {
         flex: 1,
+        borderColor: 'black',
+        borderWidth: 2,
     },
-    theOpacity: {
-        height: '55%',
-        width: '15%',
-        resizeMode: 'contain',
-        marginTop: '6%',
-        marginLeft: '15%',
-    },
-    toOpacity: {
-        height: '60%',
-        width: '15%',
-        resizeMode: 'contain',
-        marginLeft: '8%',
-        marginTop: '1%'
-    },
-    PlaneSun: {
-        height: '90%',
-        width: '30%',
-        resizeMode: 'contain',
-        marginLeft: '4%',
-        marginTop: '1%',
-    },
-    ofOpacity: {
-        height: '50%',
-        width: '12%',
-        resizeMode: 'contain',
-        marginLeft: '1%',
+    iOpacity: {
+        height: '23%',
+        width: '40%',
+        borderColor: 'black',
+        borderWidth: 2,
         marginTop: '10%',
     },
-    isOpacity: {
-        height: '70%',
-        width: '15%',
-        resizeMode: 'contain',
-        marginLeft: '2%',
-        marginTop: '1%',
+    iImage: {
+        width: '100%',
+        height: '100%',
     },
-
-    youOpacity: {
-        height: '70%',
-        width: '17%',
-        resizeMode: 'contain',
-        marginLeft: '5%',
-        marginTop: '1%',
-    },
-
-    inOpacity: {
-        height: '70%',
-        width: '15%',
-        resizeMode: 'contain',
-        marginLeft: '5%',
-        marginTop: '5%',
-    },
-    andOpacity: {
-        height: '70%',
-        width: '15%',
-        resizeMode: 'contain',
-        marginLeft: '5%',
-        marginTop: '4%',
-    },
-    thatOpacity: { 
-        height: '60%',
-        width: '15%',
-        resizeMode: 'contain',
-        marginLeft: '3%',
+    fromOpacity: {
+        height: '23%',
+        width: '40%',
+        borderColor: 'black',
+        borderWidth: 2,
         marginTop: '8%',
-    },
-    itOpacity: {
-        height: '50%',
-        width: '15%',
-        resizeMode: 'contain',
         marginLeft: '5%',
-        marginTop: '1%',
-    },
-    heOpacity: {
-        height: '40%',
-        width: '13%',
-        resizeMode: 'contain',
-        marginLeft: '10%',
-        marginTop: '3%',
-    },
-    wasOpacity: {
-        height: '50%',
-        width: '15%',
-        resizeMode: 'contain',
-        marginLeft: '5%',
-        marginTop: '1%',
-    },
-    aOpacity: {
-        height: '50%',
-        width: '13%',
-        resizeMode: 'contain',
-        marginLeft: '5%',
-        marginTop: '3%',
-    },
-    forOpacity: {
-        height: '60%',
-        width: '15%',
-        resizeMode: 'contain',
-        marginLeft: '3%',
-        marginTop: '6%',
-    },
 
-
+    },
+    fromImage: {
+        width: '100%',
+        height: '100%',
+    },
 });
 
 export default SunnyIslandWordsView;
