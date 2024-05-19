@@ -50,6 +50,8 @@ const wordImageMapping = {
     'hiscompleted': require('../assets/sunnyIslandView/hiscompleted.png'),
     'I': require('../assets/sunnyIslandView/I.png'),
     'Icompleted': require('../assets/sunnyIslandView/Icompleted.png'),
+    'on': require('../assets/sunnyIslandView/on.png'),
+    'oncompleted': require('../assets/sunnyIslandView/oncompleted.png'),
     'one': require('../assets/sunnyIslandView/one.png'),
     'onecompleted': require('../assets/sunnyIslandView/onecompleted.png'),
     'or': require('../assets/sunnyIslandView/or.png'),
