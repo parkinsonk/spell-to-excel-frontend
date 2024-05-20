@@ -1,16 +1,16 @@
 import React, { useState, useEffect} from 'react';
 import { ActivityIndicator } from 'react-native';
-import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions, TouchableOpacity, Image} from 'react-native';
+import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
 import { useProgress } from '../components/ProgressContext';
 import wordImageMapping from '../utils/wordImageMapping';
 
 
-const screenHeight = Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-
 const SunnyIslandWordsView = ({ navigation }) => {
 
     const { sunnyIslandStatus, isLoading } = useProgress();
+    const { height: screenHeight, width: screenWidth } = useWindowDimensions();
+    const isLandscape = screenWidth > screenHeight;
+    const aspectRatio = screenWidth / screenHeight;
 
     const getImageSource = (word) => {
         // Check if the word is completed using the flyingHighStatus
@@ -27,6 +27,161 @@ const SunnyIslandWordsView = ({ navigation }) => {
         );
     }
 
+    const styles = StyleSheet.create({
+        loadingContainer: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        background: {
+            flex: 1,
+            flexDirection: 'column',
+        },
+        top: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        middle: {
+            flex: 1,
+            flexDirection: 'row',
+        },
+        middleLeft: {
+            flex: 1,
+        },
+        middleMiddle: {
+            flex: 1,
+        },
+        middleRight: {
+            flex: 1,
+        },
+        middleBottomSection: {
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+        },
+        middleTopSection: {
+            flex: 3,
+            justifyContent: 'flex-start',
+            alignItems: 'flex-end',
+            flexDirection: 'row',
+        },
+        bottom: {
+            flex: .7,
+            flexDirection: 'row',
+        },
+        bottomLeft: {
+            flex: 1,
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+        },
+        bottomMiddle: {
+            flex: 1,
+            flexDirection: 'row',
+        },
+        bottomRight: {
+            flex: 1,
+            flexDirection: 'row',
+        },
+        iOpacity: {
+            height: isLandscape ? '23%' : '15%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '10%',
+        },
+        fromOpacity: {
+            height: isLandscape ? '23%' : '15%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '8%',
+            marginLeft: '5%',
+    
+        },
+        atOpacity: {
+            height: isLandscape ? '23%' : '15%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '10%',
+        },
+        hisOpacity: {
+            height: isLandscape ? '23%' : '15%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '5%',
+            marginLeft: '5%',
+        },
+        thisOpacity: {
+            height: isLandscape ? '65%' : '45%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '4%',
+
+        },
+        theyOpacity: {
+            height: isLandscape ? '65%' : '45%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '2%',
+            marginLeft: '5%',
+            
+        },
+        withOpacity: {
+            height: isLandscape ? '23%' : '15%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '10%',
+        },
+        asOpacity: {
+            height: isLandscape ? '23%' : '15%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '8%',
+            marginLeft: '10%',
+        },
+        onOpacity: {
+            height: isLandscape ? '23%' : '15%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '10%',
+            marginTop: '2%',
+    
+        },
+        haveOpacity: {
+            height: isLandscape ? '23%' : '15%',
+            width: isLandscape ? '40%' : '45%',
+            marginBottom: '3%',
+            marginLeft: '5%',
+        },
+        oneOpacity: {
+            height: isLandscape ? '65%' : '45%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '4%',
+        },
+        areOpacity: {
+            height: isLandscape ? '65%' : '45%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '6%',
+            marginLeft: '5%',
+        },
+        orOpacity: {
+            height: isLandscape ? '23%' : '15%',
+            width: isLandscape ? '40%' : '45%',
+            marginLeft: '15%',
+            marginTop: '10%',
+        },
+        beOpacity: {
+            height: isLandscape ? '65%' : '45%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '8%',
+            marginLeft: '5%',
+        },
+        hadOpacity: {
+            height: isLandscape ? '65%' : '45%',
+            width: isLandscape ? '40%' : '45%',
+            marginTop: '5%',
+            marginLeft: '5%',
+        },
+        cloudSunImage: {
+            width: '30%',
+            height: '50%',
+        },
+        Image: {
+            width: '100%',
+            height: '100%',
+        },
+    });
+
     return (
         
             <ImageBackground
@@ -35,6 +190,8 @@ const SunnyIslandWordsView = ({ navigation }) => {
                 style={styles.background}
             >
                 <View style={styles.top}>
+
+                    <Image source={require('../assets/sunnyIslandView/cloudSun.png')} resizeMode="contain" style={styles.cloudSunImage} />
 
                 </View>
 
@@ -143,198 +300,6 @@ const SunnyIslandWordsView = ({ navigation }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    loadingContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    background: {
-        flex: 1,
-        flexDirection: 'column',
-    },
-    top: {
-        flex: 1,
-    },
-    middle: {
-        flex: 1,
-        borderColor: 'black',
-        borderWidth: 2,
-        flexDirection: 'row',
-    },
-    middleLeft: {
-        flex: 1,
-        borderColor: 'black',
-        borderWidth: 2,
-    },
-    middleMiddle: {
-        flex: 1,
-        borderColor: 'black',
-        borderWidth: 2,
-    },
-    middleRight: {
-        flex: 1,
-        borderColor: 'black',
-        borderWidth: 2,
-    },
-    middleBottomSection: {
-        flex: 1,
-        borderColor: 'black',
-        borderWidth: 2,
-        flexDirection: 'row',
-    },
-    middleTopSection: {
-        flex: 3,
-        borderColor: 'black',
-        borderWidth: 2,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-end',
-        flexDirection: 'row'
-    },
-    bottom: {
-        flex: .7,
-        flexDirection: 'row',
-    },
-    bottomLeft: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
-        borderColor: 'black',
-        borderWidth: 2,
-    },
-    bottomMiddle: {
-        flex: 1,
-        borderColor: 'black',
-        borderWidth: 2,
-        flexDirection: 'row',
-    },
-    bottomRight: {
-        flex: 1,
-        borderColor: 'black',
-        borderWidth: 2,
-        flexDirection: 'row',
-    },
-    iOpacity: {
-        height: '23%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '10%',
-    },
-    fromOpacity: {
-        height: '23%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '8%',
-        marginLeft: '5%',
 
-    },
-    atOpacity: {
-        height: '23%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '10%',
-    },
-    hisOpacity: {
-        height: '23%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '5%',
-        marginLeft: '5%',
-    },
-    thisOpacity: {
-        height: '60%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '4%',
-        marginLeft: '10%',
-    },
-    theyOpacity: {
-        height: '60%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '2%',
-        marginLeft: '5%',
-    },
-    withOpacity: {
-        height: '23%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '10%',
-    },
-    asOpacity: {
-        height: '23%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '8%',
-        marginLeft: '10%',
-    },
-    onOpacity: {
-        height: '23%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '10%',
-        marginTop: '2%',
-
-    },
-    haveOpacity: {
-        height: '23%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginBottom: '3%',
-        marginLeft: '5%',
-    },
-    oneOpacity: {
-        height: '60%',
-        width: '40%',
-        borderColor: 'black',
-        marginTop: '4%',
-        borderWidth: 2,
-    },
-    areOpacity: {
-        height: '60%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '6%',
-        marginLeft: '5%',
-    },
-    orOpacity: {
-        height: '23%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '10%',
-    },
-    beOpacity: {
-        height: '60%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '8%',
-        marginLeft: '5%',
-    },
-    hadOpacity: {
-        height: '60%',
-        width: '40%',
-        borderColor: 'black',
-        borderWidth: 2,
-        marginTop: '5%',
-        marginLeft: '5%',
-    },
-    Image: {
-        width: '100%',
-        height: '100%',
-    },
-});
 
 export default SunnyIslandWordsView;
