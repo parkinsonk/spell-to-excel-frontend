@@ -569,7 +569,7 @@ const BoxesView = ({ navigation, route  }) => {
                     <React.Fragment key={index}>
                         <View
                             style={[orientationStyles.box, {
-                                top: aspectRatio < 1.4 ? '47%' : '0%',
+                                top: aspectRatio < 1.4 ? '52%' : '0%',
                                 left: calculateBoxLeftPosition(index),
                             }]}
                             onLayout={handleBoxPositioning(index)}
@@ -587,7 +587,7 @@ const BoxesView = ({ navigation, route  }) => {
                         source={lettersList[index]}
                         style={[orientationStyles.lettersImage, { // Match the box height or adjust as needed
                           left: calculateBoxLeftPosition(index) + screenWidth * .02,
-                          top: aspectRatio < 1.4 ? '20%' : '0%',
+                          top: aspectRatio < 1.4 ? '15%' : '0%',
                         }]}
                     />}
 
@@ -600,7 +600,7 @@ const BoxesView = ({ navigation, route  }) => {
                       orientationStyles.circle,
                         {
                             left: calculateBoxLeftPosition(index) + screenWidth * .02,
-                            top: aspectRatio < 1.4 ? '20%' : '0%',
+                            top: aspectRatio < 1.4 ? '15%' : '0%',
                             transform: pos.getTranslateTransform(), // Use the Animated.Value for smooth animation
                             fill: colorsList[index],
                             backgroundColor: colorsList[index],

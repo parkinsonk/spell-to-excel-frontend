@@ -275,7 +275,7 @@ const SelectWordBatchesView = ({ navigation }) => {
 
                             {/* Sunny Island */}
                             <Pressable
-                                onPress={() => console.log('Button 1 pressed')}
+                                onPress={() => navigation.navigate('Sunny Island')}
                                 style={({ pressed }) => [
                                     orientationStyles.SunnyIslandOpacity, // Your existing styles
                                     {
