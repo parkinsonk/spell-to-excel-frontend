@@ -84,8 +84,8 @@ const SunnyIslandWordsView = ({ navigation }) => {
             flexDirection: 'row',
         },
         iOpacity: {
-            height: isLandscape ? aspectRatio > 1.7 ? '30%' : '23%' : '15%',
-            width: isLandscape ? aspectRatio > 1.7 ? '30%' : '40%' : '45%',
+            height: isLandscape ? aspectRatio > 1.7 ? '30%' : '23%' : '15%', // If landscape and aspect ratio is greater than 1.7, set height to 30%, else set height to 23%. If portrait, set height to 15%.
+            width: isLandscape ? aspectRatio > 1.7 ? '30%' : '40%' : '45%', 
             marginTop: '10%',
         },
         fromOpacity: {
@@ -154,7 +154,7 @@ const SunnyIslandWordsView = ({ navigation }) => {
             marginLeft: aspectRatio > 1.7 ? '10%' : '5%',
         },
         orOpacity: {
-            height: isLandscape ? aspectRatio > 1.7 ? '30%' : '23%' : '15%',
+            height: isLandscape ? aspectRatio > 1.7 ? '30%' : '23%' : '15%', 
             width: isLandscape ? aspectRatio > 1.7 ? '30%' : '40%' : '45%',
             marginLeft: aspectRatio > 1.7 ? '20%' : '15%',
             marginTop: '10%',
