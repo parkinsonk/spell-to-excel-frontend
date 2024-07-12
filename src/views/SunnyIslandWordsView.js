@@ -19,14 +19,6 @@ const SunnyIslandWordsView = ({ navigation }) => {
         return wordImageMapping[key];
     };
 
-    if (isLoading) {
-        return (
-            <View style={styles.loadingContainer}>
-                <ActivityIndicator size="large" color="#0000ff" />
-            </View>
-        );
-    }
-
     const styles = StyleSheet.create({
         loadingContainer: {
             flex: 1,
@@ -180,6 +172,14 @@ const SunnyIslandWordsView = ({ navigation }) => {
             height: '100%',
         },
     });
+
+    if (isLoading) {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
 
     return (
         

@@ -35,8 +35,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             width: '100%',
             height: '100%',
             flexDirection: 'row',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         middle: {
             flex: 1,
@@ -44,8 +42,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             height: '100%',
             flexDirection: 'row',
             justifyContent: 'space-between',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         bottom: {
             flex: 1,
@@ -53,8 +49,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             height: '100%',
             flexDirection: 'row',
             justifyContent: 'space-between',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         theOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '50%', // If landscape and aspect ratio is greater than 1.7, set height to 55%, else set height to 55%. If portrait, set height to 55%.
@@ -62,8 +56,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             resizeMode: 'contain',
             marginTop: '6%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '10%' : '10%' : '5%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         toOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '60%' : '60%' : '40%',
@@ -71,8 +63,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             resizeMode: 'contain',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '8%' : '8%' : '1%',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '15%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         PlaneSun: {
             height: isLandscape ? aspectRatio > 1.7 ? '90%' : '90%' : '40%',
@@ -80,8 +70,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             resizeMode: 'contain',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '4%' : '4%' : '1%',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '5%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         ofOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '40%',
@@ -89,16 +77,12 @@ const FlyingHighWordsView = ({ navigation }) => {
             resizeMode: 'contain',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '5%' : '5%' : '15%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         isOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '10%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
     
         youOpacity: {
@@ -106,8 +90,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '0%' : '0%' : '12%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
     
         inOpacity: {
@@ -115,66 +97,49 @@ const FlyingHighWordsView = ({ navigation }) => {
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '3%' : '3%' : '6%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         andOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '2%' : '2%' : '8%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         thatOpacity: { 
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '4%' : '4%' : '14%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         itOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '0%' : '0%' : '0%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         heOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '2%' : '2%' : '3%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         wasOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         aOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '0%' : '0%' : '0%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         forOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '3%' : '3%' : '4%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
-    
         Image: {
             height: '100%',
             width: '100%',
