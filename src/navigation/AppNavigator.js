@@ -13,6 +13,7 @@ import LetterFriendsView from '../views/LetterFriendsView';
 import ReadView from '../views/ReadView';
 import WordsIKnow from '../views/WordsIKnow';
 import SunnyIslandWordsView from '../views/SunnyIslandWordsView';
+import SpringtimeFundWordsView from '../views/SpringtimeFunWordsView';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Word Batches" component={SelectWordBatchesView} />
         <Stack.Screen name="Flying High" component={FlyingHighWordsView} />
         <Stack.Screen name="Sunny Island" component={SunnyIslandWordsView} />
+        <Stack.Screen name="Springtime Fun" component={SpringtimeFundWordsView} />
         <Stack.Screen name="Activities" component={ActivtiesView} />
         <Stack.Screen name="Trace" component={TraceView} />
         <Stack.Screen name="Boxes" component={BoxesView} />

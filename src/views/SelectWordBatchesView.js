@@ -291,7 +291,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                         <View style={orientationStyles.bottomHalfLeft}>
                             {/* Springtime Fun */}
                             <Pressable
-                                onPress={() => console.log('Button 1 pressed')}
+                                onPress={() => navigation.navigate('Springtime Fun')}
                                 style={({ pressed }) => [
                                     orientationStyles.SpringtimeFunOpacity, // Your existing styles
                                     {
@@ -380,7 +380,7 @@ const SelectWordBatchesView = ({ navigation }) => {
 
                             {/* Springtime Fun */}
                             <Pressable
-                                onPress={() => console.log('Button 1 pressed')}
+                                onPress={() => navigation.navigate('Springtime Fun')}
                                 style={({ pressed }) => [
                                     orientationStyles.SpringtimeFunOpacity, // Your existing styles
                                     {
