@@ -28,7 +28,7 @@ const ActivitiesView = ({ navigation, route}) => {
     else if (batch == 'Springtime Fun') {
         batchStatus = springtimeFunStatus;
     }
-    else if (batch == 'Alien Adventure') {
+    else if (batch == 'Alien Adventures') {
         batchStatus = alienAdventureStatus;
     }
     else if (batch == 'Outer Space') {
