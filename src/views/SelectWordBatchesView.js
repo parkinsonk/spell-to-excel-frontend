@@ -304,7 +304,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                             </Pressable>
                             {/* Alien Adventures */}
                             <Pressable
-                                onPress={() => console.log('Button 1 pressed')}
+                                onPress={() => navigation.navigate('Alien Adventures')}
                                 style={({ pressed }) => [
                                     orientationStyles.AlienAdventuresOpacity, // Your existing styles
                                     {
