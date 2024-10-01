@@ -201,8 +201,6 @@ const OuterSpaceWordsView = ({ navigation }) => {
 
                 </SafeAreaView>
 
-        
-
                 <SafeAreaView style={styles.middleTop}>
                     <TouchableOpacity style={styles.timeOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'time', batch: 'Outer Space' })}>
                         <Image source={getImageSource('time', outerSpaceStatus['time'])} style={styles.Image} resizeMode='contain'/>
