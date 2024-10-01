@@ -318,7 +318,7 @@ const SelectWordBatchesView = ({ navigation }) => {
 
                             {/* Outer Space */}
                             <Pressable
-                                onPress={() => console.log('Button 1 pressed')}
+                                onPress={() => navigation.navigate('Outer Space')}
                                 style={({ pressed }) => [
                                     orientationStyles.OuterSpaceOpacity, // Your existing styles
                                     {
