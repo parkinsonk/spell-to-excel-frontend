@@ -48,8 +48,6 @@ const OuterSpaceWordsView = ({ navigation }) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'flex-end',
-            borderColor: 'green',
-            borderWidth: 2,
         },
         middleTop: {
             flex: 1,
@@ -58,8 +56,6 @@ const OuterSpaceWordsView = ({ navigation }) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'flex-end',
-            borderColor: 'green',
-            borderWidth: 2,
         },
         middleBottom: {
             flex: 1,
@@ -68,8 +64,6 @@ const OuterSpaceWordsView = ({ navigation }) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'flex-end',
-            borderColor: 'green',
-            borderWidth: 2,
         },
         bottom: {
             flex: 1,
@@ -78,121 +72,93 @@ const OuterSpaceWordsView = ({ navigation }) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'flex-end',
-            borderColor: 'green',
-            borderWidth: 2,
         },
         twoOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '50%', '70%') : calculateImageDimensions(aspectRatio, '25%', '25%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '17%', '17%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '0%', '0%', '0%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         herOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '80%', '70%') : calculateImageDimensions(aspectRatio, '35%', '35%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '13%') : calculateImageDimensions(aspectRatio, '9%', '15%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '2%', '3%') : calculateImageDimensions(aspectRatio, '5%', '20%', '10%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         himOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '55%', '70%') : calculateImageDimensions(aspectRatio, '35%', '35%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '13%') : calculateImageDimensions(aspectRatio, '9%', '17%', '17%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '0%', '5%') : calculateImageDimensions(aspectRatio, '5%', '5%', '15%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         soOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '50%', '70%') : calculateImageDimensions(aspectRatio, '35%', '30%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '9%', '19%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '8%', '3%') : calculateImageDimensions(aspectRatio, '5%', '20%', '10%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         hasOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '65%', '70%') : calculateImageDimensions(aspectRatio, '35%', '35%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '9%', '17%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '2%', '0%') : calculateImageDimensions(aspectRatio, '5%', '10%', '0%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         timeOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '50%', '70%') : calculateImageDimensions(aspectRatio, '35%', '35%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '9%', '20%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '0%', '0%') : calculateImageDimensions(aspectRatio, '5%', '0%', '0%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         intoOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '60%', '70%') : calculateImageDimensions(aspectRatio, '35%', '35%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '9%', '17%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '5%', '5%') : calculateImageDimensions(aspectRatio, '5%', '15%', '10%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         likeOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '55%', '70%') : calculateImageDimensions(aspectRatio, '35%', '35%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '9%', '17%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '0%', '5%') : calculateImageDimensions(aspectRatio, '5%', '5%', '10%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         moreOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '50%', '70%') : calculateImageDimensions(aspectRatio, '35%', '25%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '20%', '12%') : calculateImageDimensions(aspectRatio, '9%', '26%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '3%', '0%') : calculateImageDimensions(aspectRatio, '5%', '20%', '0%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         makeOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '50%', '70%') : calculateImageDimensions(aspectRatio, '40%', '35%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '25%', '22%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '9%', '0%') : calculateImageDimensions(aspectRatio, '20%', '5%', '0%'),
             marginLeft: isLandscape ? calculateImageDimensions(aspectRatio, '5%', '0%', '0%') : calculateImageDimensions(aspectRatio, '5%', '0%', '0%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         someOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '45%', '70%') : calculateImageDimensions(aspectRatio, '40%', '25%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '25%', '20%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '0%', '5%') : calculateImageDimensions(aspectRatio, '10%', '0%', '10%'),
             marginRight: isLandscape ? calculateImageDimensions(aspectRatio, '15%', '0%', '10%') : calculateImageDimensions(aspectRatio, '15%', '0%', '30%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         lookOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '65%', '70%') : calculateImageDimensions(aspectRatio, '40%', '35%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '25%', '17%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '5%', '5%') : calculateImageDimensions(aspectRatio, '20%', '15%', '10%'),
             marginLeft: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '10%') : calculateImageDimensions(aspectRatio, '10%', '0%', '5%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         writeOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '45%', '70%') : calculateImageDimensions(aspectRatio, '40%', '35%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '25%', '20%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '8%', '5%', '0%'),
             marginRight: isLandscape ? calculateImageDimensions(aspectRatio, '5%', '0%', '0%') : calculateImageDimensions(aspectRatio, '5%', '0%', '0%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         theseOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '45%', '70%') : calculateImageDimensions(aspectRatio, '40%', '35%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '25%', '22%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '10%', '0%') : calculateImageDimensions(aspectRatio, '8%', '15%', '0%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         wouldOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '45%', '70%') : calculateImageDimensions(aspectRatio, '40%', '35%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '12%') : calculateImageDimensions(aspectRatio, '25%', '22%', '16%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '1%', '0%') : calculateImageDimensions(aspectRatio, '15%', '0%', '0%'),
-            borderColor: 'red',
-            borderWidth: 2,
         },
         Image: {
             height: '100%',
             width: '100%',
+        },
+        astronautImage: {
+            height: '100%',
+            width: '20%',
         },
     });
 
@@ -283,9 +249,13 @@ const OuterSpaceWordsView = ({ navigation }) => {
                         <Image source={getImageSource('these', outerSpaceStatus['these'])} style={styles.Image} resizeMode='contain' />
                     </TouchableOpacity>
 
+                    <Image source={require('../assets/outerSpaceView/astronauts.png')} resizeMode="contain" style={styles.astronautImage}/>
+
                     <TouchableOpacity style={styles.wouldOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'would', batch: 'Outer Space' })}>
                         <Image source={getImageSource('would', outerSpaceStatus['would'])} style={styles.Image} resizeMode='contain'/>
                     </TouchableOpacity>
+
+                    
 
                 </SafeAreaView>
             
