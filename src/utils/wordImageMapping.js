@@ -158,6 +158,42 @@ const wordImageMapping = {
     'wouldcompleted': require('../assets/outerSpaceView/wouldcompleted.png'),
     'write': require('../assets/outerSpaceView/write.png'),
     'writecompleted': require('../assets/outerSpaceView/writecompleted.png'),
+
+    // Planets And Beyond Words
+    'been': require('../assets/planetsAndBeyondView/been.png'),
+    'beencompleted': require('../assets/planetsAndBeyondView/beencompleted.png'),
+    'called': require('../assets/planetsAndBeyondView/called.png'),
+    'calledcompleted': require('../assets/planetsAndBeyondView/calledcompleted.png'),
+    'could': require('../assets/planetsAndBeyondView/could.png'),
+    'couldcompleted': require('../assets/planetsAndBeyondView/couldcompleted.png'),
+    'first': require('../assets/planetsAndBeyondView/first.png'),
+    'firstcompleted': require('../assets/planetsAndBeyondView/firstcompleted.png'),
+    'go': require('../assets/planetsAndBeyondView/go.png'),
+    'gocompleted': require('../assets/planetsAndBeyondView/gocompleted.png'),
+    'my': require('../assets/planetsAndBeyondView/my.png'),
+    'mycompleted': require('../assets/planetsAndBeyondView/mycompleted.png'),
+    'no': require('../assets/planetsAndBeyondView/no.png'),
+    'nocompleted': require('../assets/planetsAndBeyondView/nocompleted.png'),
+    'number': require('../assets/planetsAndBeyondView/number.png'),
+    'numbercompleted': require('../assets/planetsAndBeyondView/numbercompleted.png'),
+    'oil': require('../assets/planetsAndBeyondView/oil.png'),
+    'oilcompleted': require('../assets/planetsAndBeyondView/oilcompleted.png'),
+    'people': require('../assets/planetsAndBeyondView/people.png'),
+    'peoplecompleted': require('../assets/planetsAndBeyondView/peoplecompleted.png'),
+    'see': require('../assets/planetsAndBeyondView/see.png'),
+    'seecompleted': require('../assets/planetsAndBeyondView/seecompleted.png'),
+    'than': require('../assets/planetsAndBeyondView/than.png'),
+    'thancompleted': require('../assets/planetsAndBeyondView/thancompleted.png'),
+    'these': require('../assets/planetsAndBeyondView/these.png'),
+    'thesecompleted': require('../assets/planetsAndBeyondView/thesecompleted.png'),
+    'water': require('../assets/planetsAndBeyondView/water.png'),
+    'watercompleted': require('../assets/planetsAndBeyondView/watercompleted.png'),
+    'way': require('../assets/planetsAndBeyondView/way.png'),
+    'waycompleted': require('../assets/planetsAndBeyondView/waycompleted.png'),
+    'who': require('../assets/planetsAndBeyondView/who.png'),
+    'whocompleted': require('../assets/planetsAndBeyondView/whocompleted.png'),
 };
+
+    
 
 export default wordImageMapping;

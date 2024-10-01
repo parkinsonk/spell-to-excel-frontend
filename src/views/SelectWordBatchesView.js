@@ -339,7 +339,7 @@ const SelectWordBatchesView = ({ navigation }) => {
 
                             {/* Planets and Beyond */}
                             <Pressable
-                                onPress={() => console.log('Button 1 pressed')}
+                                onPress={() => navigation.navigate('Planets and Beyond')}
                                 style={({ pressed }) => [
                                     orientationStyles.PlanetsAndBeyondOpacity, // Your existing styles
                                     {
