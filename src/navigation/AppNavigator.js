@@ -17,6 +17,7 @@ import SpringtimeFundWordsView from '../views/SpringtimeFunWordsView';
 import AlienAdventuresWordsView from '../views/AlienAdventuresWordsView';
 import OuterSpaceWordsView from '../views/OuterSpaceWordsView';
 import PlanetsAndBeyondView from '../views/PlanetsAndBeyondView';
+import DivingDeepWordsView from '../views/DivingDeepWordsView';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Alien Adventures" component={AlienAdventuresWordsView} />
         <Stack.Screen name="Outer Space" component={OuterSpaceWordsView} />
         <Stack.Screen name="Planets and Beyond" component={PlanetsAndBeyondView} />
+        <Stack.Screen name="Diving Deep" component={DivingDeepWordsView} />
         <Stack.Screen name="Activities" component={ActivtiesView} />
         <Stack.Screen name="Trace" component={TraceView} />
         <Stack.Screen name="Boxes" component={BoxesView} />

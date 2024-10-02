@@ -356,7 +356,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                         <View style={orientationStyles.bottomHalfRight}>
                             {/* Diving Deep */}
                             <Pressable
-                                onPress={() => console.log('Button 1 pressed')}
+                                onPress={() => navigation.navigate('Diving Deep')}
                                 style={({ pressed }) => [
                                     orientationStyles.DivingDeepOpacity, // Your existing styles
                                     {
