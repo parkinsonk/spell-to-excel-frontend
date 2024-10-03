@@ -1,24 +1,16 @@
-const { getDefaultConfig } = require("metro-config");
+const { getDefaultConfig } = require('@expo/metro-config'); // Use @expo/metro-config instead of metro-config
 
 module.exports = (async () => {
-  const {
-    resolver: { sourceExts, assetExts },
-  } = await getDefaultConfig();
+  const defaultConfig = await getDefaultConfig(__dirname); // Get Expo's default config
 
   return {
     transformer: {
-      babelTransformerPath: require.resolve("react-native-svg-transformer"),
-      getTransformOptions: async () => ({
-        transform: {
-          experimentalImportSupport: false,
-          inlineRequires: true,
-        },
-      }),
+      babelTransformerPath: require.resolve('react-native-svg-transformer'),
+      ...defaultConfig.transformer, // Extend default transformer config from Expo
     },
     resolver: {
-      // Add support for PNG, JPG, and other formats as well as SVG
-      assetExts: assetExts.filter(ext => ext !== "svg"), // Handle SVG separately
-      sourceExts: [...sourceExts, "svg"], // Add SVG support
+      assetExts: defaultConfig.resolver.assetExts.filter(ext => ext !== 'svg'), // Remove 'svg' from assetExts
+      sourceExts: [...defaultConfig.resolver.sourceExts, 'svg'], // Add 'svg' to sourceExts
     },
   };
 })();
