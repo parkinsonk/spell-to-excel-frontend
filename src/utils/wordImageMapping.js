@@ -192,6 +192,32 @@ const wordImageMapping = {
     'waycompleted': require('../assets/planetsAndBeyondView/waycompleted.png'),
     'who': require('../assets/planetsAndBeyondView/who.png'),
     'whocompleted': require('../assets/planetsAndBeyondView/whocompleted.png'),
+
+    // Diving Deep Words
+    'come': require('../assets/divingDeepView/come.png'),
+    'comecompleted': require('../assets/divingDeepView/comecompleted.png'),
+    'day': require('../assets/divingDeepView/day.png'),
+    'daycompleted': require('../assets/divingDeepView/daycompleted.png'),
+    'did': require('../assets/divingDeepView/did.png'),
+    'didcompleted': require('../assets/divingDeepView/didcompleted.png'),
+    'down': require('../assets/divingDeepView/down.png'),
+    'downcompleted': require('../assets/divingDeepView/downcompleted.png'),
+    'find': require('../assets/divingDeepView/find.png'),
+    'findcompleted': require('../assets/divingDeepView/findcompleted.png'),
+    'get': require('../assets/divingDeepView/get.png'),
+    'getcompleted': require('../assets/divingDeepView/getcompleted.png'),
+    'long': require('../assets/divingDeepView/long.png'),
+    'longcompleted': require('../assets/divingDeepView/longcompleted.png'),
+    'made': require('../assets/divingDeepView/made.png'),
+    'madecompleted': require('../assets/divingDeepView/madecompleted.png'),
+    'may': require('../assets/divingDeepView/may.png'),
+    'maycompleted': require('../assets/divingDeepView/maycompleted.png'),
+    'now': require('../assets/divingDeepView/now.png'),
+    'nowcompleted': require('../assets/divingDeepView/nowcompleted.png'),
+    'part': require('../assets/divingDeepView/part.png'),
+    'partcompleted': require('../assets/divingDeepView/partcompleted.png'),
+    'sit': require('../assets/divingDeepView/sit.png'),
+    'sitcompleted': require('../assets/divingDeepView/sitcompleted.png'),
 };
 
     
