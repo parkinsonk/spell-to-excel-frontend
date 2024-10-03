@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image} from 'react-native';
+import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'; // Import SecureStore from expo-secure-store
 import { useProgress } from '../components/ProgressContext';
@@ -12,6 +12,7 @@ const LoginScreen = ({ navigation }) => {
     const [studentName, setStudentName] = useState('');
     const [pin, setPin] = useState('');
     const [showPin, setShowPin] = useState(false); // Toggle PIN visibility
+    const {width: screenWidth, height: screenHeight} = useWindowDimensions();
     const { checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
         checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep } = useProgress();
 
@@ -51,6 +52,16 @@ const LoginScreen = ({ navigation }) => {
         
     };
     /* End of Login Logic. */
+
+    const calculateImageDimensions = (aspectRatio, iPhoneValue, iPadMiniValue, iPadValue) => {
+        if (aspectRatio > 1.7) {
+            return iPhoneValue;
+        } else if (aspectRatio > 1.4 && aspectRatio < 1.7) {
+            return iPadMiniValue;
+        } else {
+            return iPadValue;
+        }
+    };
 
     const styles = StyleSheet.create({
         background: {
@@ -95,6 +106,8 @@ const LoginScreen = ({ navigation }) => {
             padding: 10,
             borderRadius: 20,
             fontWeight: 'bold',
+            borderColor: 'green',
+            borderWidth: 2,
         },
         textStyles: {
             color: 'black',
@@ -183,7 +196,7 @@ const LoginScreen = ({ navigation }) => {
 
             <SafeAreaView style={styles.left}>
 
-                <Image source={require('../assets/loginView/sunAndCloud.png')} style={styles.sunAndCloudImage} resizeMode='contain'/>
+               <Image source={require('../assets/loginView/sunAndCloud.png')} style={styles.sunAndCloudImage} resizeMode='contain'/>
 
             </SafeAreaView>
 
