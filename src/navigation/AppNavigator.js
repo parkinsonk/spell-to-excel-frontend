@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginView from '../views/LoginView';
 import GetStartedView from '../views/GetStartedView';
+import CreateStudentAccountView from '../views/CreateStudentAccountView';
 import SelectWordBatchesView from '../views/SelectWordBatchesView';
 import WelcomeView from '../views/WelcomeView';
 import FlyingHighWordsView from '../views/FlyingHighWordsView';
@@ -29,6 +30,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Welcome" component={WelcomeView} />
         <Stack.Screen name="Login" component={LoginView} />
         <Stack.Screen name="Get Started" component={GetStartedView} />
+        <Stack.Screen name="Create Letter Friends Account" component={CreateStudentAccountView} />
         <Stack.Screen name="Word Batches" component={SelectWordBatchesView} />
         <Stack.Screen name="Flying High" component={FlyingHighWordsView} />
         <Stack.Screen name="Sunny Island" component={SunnyIslandWordsView} />

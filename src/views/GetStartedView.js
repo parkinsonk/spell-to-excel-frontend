@@ -63,7 +63,7 @@ const GetStartedView = ({ navigation }) => {
     </View>
 
     <View style={styles.bottom}>
-        <TouchableOpacity style={styles.getStartedOpacity} onPress={() => navigation.navigate('Login')}>
+        <TouchableOpacity style={styles.getStartedOpacity} onPress={() => navigation.navigate('Create Letter Friends Account')}>
             <Image source={require('../assets/getStartedView/createAccount.png')} style={styles.image} resizeMode='contain'/>
         </TouchableOpacity>
     </View>
