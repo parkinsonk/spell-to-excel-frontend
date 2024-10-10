@@ -21,7 +21,17 @@ const WelcomeScreen = ({ navigation }) => {
         },
         loginButton: {
           position: 'absolute',
-          right: 50,
+          right: 15,
+          bottom: 5,
+          width: aspectRatio > 1.5 ? screenWidth * 0.2: screenWidth * 0.2, 
+          height: aspectRatio > 1.5 ? screenHeight * 0.15: screenHeight * 0.15,
+          zIndex: 2,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        getStartedButton: {
+          position: 'absolute',
+          left: 15,
           bottom: 5,
           width: aspectRatio > 1.5 ? screenWidth * 0.2: screenWidth * 0.2, 
           height: aspectRatio > 1.5 ? screenHeight * 0.15: screenHeight * 0.15,
@@ -45,6 +55,10 @@ const WelcomeScreen = ({ navigation }) => {
 
     <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Login')}>
       <Image source={require('../assets/welcomeView/loginp.png')} style={styles.buttonImage} />
+    </TouchableOpacity>
+
+    <TouchableOpacity style={styles.getStartedButton} onPress={() => navigation.navigate('Get Started')}>
+      <Image source={require('../assets/welcomeView/getStarted.png')} style={styles.buttonImage} />
     </TouchableOpacity>
 
     <Image source={require('../assets/welcomeView/letterFriends.png')} style={styles.image} />
