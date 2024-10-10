@@ -9,9 +9,9 @@ import { Ionicons } from '@expo/vector-icons'; // Assuming you're using Expo and
 /* Start of Login Logic. Sends a message over to the backend to authenticate student */
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
-    const [studentName, setStudentName] = useState('');
-    const [pin, setPin] = useState('');
-    const [showPin, setShowPin] = useState(false); // Toggle PIN visibility
+    //const [studentName, setStudentName] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
     const { checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
         checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep } = useProgress();
@@ -20,8 +20,8 @@ const LoginScreen = ({ navigation }) => {
         // Logic to handle login
     axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/student-login/', {
         email: email,
-        student_name: studentName, 
-        pin: pin 
+        student_name: 'Student Placeholder', // Hardcoded for now
+        password: password
     })
     .then(async response => {
         // Handle success
@@ -168,7 +168,7 @@ const LoginScreen = ({ navigation }) => {
             borderColor: 'blue',
             borderWidth: 2,
         },
-        pinInput: {
+        passwordInput: {
             flexDirection: 'row', // To place the eye icon next to the TextInput
             height: '6%',
             marginVertical: '1%',
@@ -177,7 +177,7 @@ const LoginScreen = ({ navigation }) => {
             borderRadius: 20,
             padding: 10,
         },
-        pinText: {
+        passwordText: {
             flex: 1, // Take up all available space
             borderColor: 'red',
             borderWidth: 2,
@@ -204,31 +204,24 @@ const LoginScreen = ({ navigation }) => {
 
                 <Image source={require('../assets/loginView/letter.png')} style={styles.letterImage} resizeMode='contain'/>
 
-                <Text style={styles.textStyles}>Teacher or Parent Email</Text>
+                <Text style={styles.textStyles}>Email</Text>
                 <TextInput
                     style={styles.input}
                     value={email}
                     onChangeText={setEmail}
                 />
 
-                <Text style={styles.textStyles}>Student Name</Text>
-                <TextInput
-                    style={styles.input}
-                    value={studentName}
-                    onChangeText={setStudentName}
-                />
-
-                <Text style={styles.textStyles}>Pin</Text>
-                <View style={styles.pinInput}>
+                <Text style={styles.textStyles}>Password</Text>
+                <View style={styles.passwordInput}>
                     <TextInput
-                        value={pin}
-                        onChangeText={setPin}
-                        secureTextEntry={!showPin} // Toggle between hidden and visible PIN
-                        style={styles.pinText} // Take up all available space
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry={!showPassword} // Toggle between hidden and visible Password
+                        style={styles.passwordText} // Take up all available space
                     />
-                    <TouchableOpacity onPress={() => setShowPin(!showPin)}>
+                    <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                         <Ionicons
-                            name={showPin ? 'eye' : 'eye-off'}
+                            name={showPassword ? 'eye' : 'eye-off'}
                             color="black"
                             style={styles.eyeIcon}
                             size={20}
