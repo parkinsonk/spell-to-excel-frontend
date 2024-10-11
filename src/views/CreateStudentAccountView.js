@@ -36,6 +36,9 @@ const RegisterScreen = () => {
         axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/create-student-account/', {
             email: email,
             password: password,
+            teacher_name: 'Teacher Placeholder', // Hardcoded for now
+            classroom_name: 'Classroom Placeholder', // Hardcoded for now
+            student_name: 'Student Placeholder', // Hardcoded for now
         })
         .then(response => {
             Alert.alert("Success", "Account created successfully!");
