@@ -1,9 +1,7 @@
 import React, { useState, useEffect} from 'react';
-import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions, Image, useWindowDimensions, Pressable} from 'react-native';
-import * as ScreenOrientation from 'expo-screen-orientation';
-import axios from 'axios';
-import * as Keychain from 'react-native-keychain';
-import Svg, { Path } from 'react-native-svg';
+import { ImageBackground, View, TouchableOpacity, Image, useWindowDimensions, Pressable} from 'react-native';
+import * as SecureStore from 'expo-secure-store';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -12,6 +10,25 @@ const SelectWordBatchesView = ({ navigation }) => {
     const { height: screenHeight, width: screenWidth } = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
+
+    const logout = async () => {
+        // Remove tokens or any authentication information
+        await SecureStore.deleteItemAsync('access_token');
+        await SecureStore.deleteItemAsync('refresh_token');
+        
+        // Navigate back to the login screen
+        navigation.navigate('Login');
+    };
+
+    const calculateImageDimensions = (aspectRatio, iPhoneValue, iPadMiniValue, iPadValue) => {
+        if (aspectRatio > 1.7) {
+            return iPhoneValue;
+        } else if (aspectRatio > 1.4 && aspectRatio < 1.7) {
+            return iPadMiniValue;
+        } else {
+            return iPadValue;
+        }
+    };
 
     const styles = {
         // Landscape styles
@@ -24,141 +41,123 @@ const SelectWordBatchesView = ({ navigation }) => {
             top: {
                 flex: 1,
                 flexDirection: 'row',
-                borderColor: 'red',
-                borderWidth: 2,
             },
             topLeft: {
                 flex: 1,
                 flexDirection: 'row',
-                borderColor: 'red',
-                borderWidth: 2,
+                justifyContent: 'flex-start',
+                alignItems: 'flex-start',
+                
             },
             topRight: {
                 flex: 1,
                 flexDirection: 'row',
-                borderColor: 'red',
-                borderWidth: 2,
+                justifyContent: 'flex-end',
+                alignItems: 'flex-start',
+            },
+            topMiddle: {
+                flex: 1,
+                flexDirection: 'row',
             },
             bottom: {
                 flex: 10,
-                flexDirection: 'column',
-                borderColor: 'green',
-                borderWidth: 4,
-            },
-            bottomTop: {
-                flex: 1,
                 flexDirection: 'row',
-                borderColor: 'blue',
-                borderWidth: 2,
+            },
+            bottomLeft: {
+                flex: 1,
+                flexDirection: 'column',
+                justifyContent: 'space-around',
+                alignItems: 'center',
             },
             bottomMiddle: {
                 flex: 1,
-                flexDirection: 'row',
+                flexDirection: 'column',
                 borderColor: 'orange',
-                borderWidth: 2,
+                justifyContent: 'space-around',
             },
-            bottomBottom: {
+            bottomRight: {
                 flex: 1,
-                flexDirection: 'row',
-                borderColor: 'purple',
-                borderWidth: 2,
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
             },
             FlyingHighOpacity: {
-                marginTop: '5%',
-                marginLeft: aspectRatio > 1.5 ? '20%' : '20%',
-                height: aspectRatio > 1.5 ? 120 : 165,
-                width: aspectRatio > 1.5 ? 150 : 250,
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '30%', '25%', '25%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '80%', '80%', '80%') : calculateImageDimensions(aspectRatio, '100%', '100%', '100%'),
             },
             SunnyIslandOpacity: {
-                marginLeft: '15%',
-                height: aspectRatio > 1.5 ? 125: 265,
-                width: aspectRatio > 1.5 ? 110: 200,
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '30%', '25%', '35%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '80%', '80%', '80%') : calculateImageDimensions(aspectRatio, '100%', '100%', '100%'),
             },
             SpringtimeFunOpacity: {
-                marginLeft: '-3%',
-                height: aspectRatio > 1.5 ? 125: 200,
-                width: aspectRatio > 1.5 ? 200 : 350,
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '35%', '30%', '30%') : calculateImageDimensions(aspectRatio, '20%', '20%', '18%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '100%', '100%') : calculateImageDimensions(aspectRatio, '100%', '100%', '100%'),
+                marginRight: isLandscape ? calculateImageDimensions(aspectRatio, '45%', '25%', '25%') : calculateImageDimensions(aspectRatio, '100%', '100%', '20%'),
             },
             AlienAdventuresOpacity: {
-                marginTop: aspectRatio > 1.5 ? '15%' : '25%',
-                marginLeft: aspectRatio > 1.5 ? '5%' : '-15%',
-                height: aspectRatio > 1.5 ? 120:200,
-                width: aspectRatio > 1.5 ? 150:250,
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '30%', '25%', '25%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '80%', '80%', '80%') : calculateImageDimensions(aspectRatio, '100%', '100%', '100%'),
+                marginTop: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '25%', '25%', '25%'),
             },
             OuterSpaceOpacity: {
-                marginTop: aspectRatio > 1.5 ? '5%' :'10%',
-                marginLeft: aspectRatio > 1.5 ? '4%' : '6%',
-                height: aspectRatio > 1.5 ? 175 : 300,
-                width: aspectRatio > 1.5 ? 100: 200,
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '30%', '30%', '35%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '80%', '80%', '80%') : calculateImageDimensions(aspectRatio, '100%', '100%', '100%'),
             },
 
             PlanetsAndBeyondOpacity: {
-                marginLeft: '8%',
-                height: 150,
-                width: 150,
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '30%', '25%', '30%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '80%', '80%', '80%') : calculateImageDimensions(aspectRatio, '100%', '100%', '100%'),
+                marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '25%', '25%', '25%'),
             },
 
             DivingDeepOpacity: {
-                marginLeft: aspectRatio > 1.5 ? '30%' : '13%',
-                height: aspectRatio > 1.5 ? 115 : 250,
-                width: aspectRatio > 1.5 ? 115 : 250,
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '35%', '25%', '35%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '80%', '80%', '80%') : calculateImageDimensions(aspectRatio, '100%', '100%', '100%'),
             },
-            SunnyIslandImage: {
-                height: aspectRatio > 1.5 ? 125 : 265,
-                width: aspectRatio > 1.5 ? 110 :200,
-            },
-            FlyingHighImage: {
-                height: aspectRatio > 1.5 ? 120 :165,
-                width: aspectRatio > 1.5 ? 150 :250,
-            },
-            SpringTimeFunImage: {
-                height: aspectRatio > 1.5 ? 125 :200,
-                width: aspectRatio > 1.5 ? 200 :350,
-            },
-            OuterSpaceImage: {
-                height: aspectRatio > 1.5 ? 175 :300,
-                width: aspectRatio > 1.5 ? 100 :200,
-            },
-            AlienAdventuresImage: {
-                height: aspectRatio > 1.5 ? 120 :200,
-                width: aspectRatio > 1.5 ? 150 :250,
-            },
-            PlanetsAndBeyondImage: {
-                height: aspectRatio > 1.5 ? 150 :250,
-                width: aspectRatio > 1.5 ? 150 :250,
-            },
-            DivingDeepImage: {
-                height: aspectRatio > 1.5 ? 115 :200,
-                width: aspectRatio > 1.5 ? 115 :200,
-            },
-
-            Image: {
-                width: '100%',
+            image: {
                 height: '100%',
+                width: '100%',
+            },
+            wordsIKnowopacity: {
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '40%', '40%', '40%') : calculateImageDimensions(aspectRatio, '60%', '60%', '65%'),
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '80%', '80%') : calculateImageDimensions(aspectRatio, '65%', '65%', '65%'),
             },
         };       
  
     return (
         
             <ImageBackground
-                source={require('../assets/selectWordBatchesView/batchesBackgroundLandscape.png')}
+                source={require('../assets/selectWordBatchesView/batchesBlueBackground.png')}
                 resizeMode="cover"
                 style={styles.background}>
 
-                    <View style={styles.top}>
+                    <SafeAreaView style={styles.top}>
                         <View style={styles.topLeft}>
 
+                            <TouchableOpacity style={styles.wordsIKnowopacity} onPress={logout}>
+
+                                <Image source={require('../assets/selectWordBatchesView/logout.png')}  resizeMode='contain' style={styles.image} />
+                            </TouchableOpacity>
+
                         </View>
+
+
 
                         <View style={styles.topRight}>
-                        
+
+                            <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>
+                                <Image source={require('../assets/selectWordBatchesView/wordsIKnow.png')}  resizeMode='contain' style={styles.image} />
+                            </TouchableOpacity>
                         </View>
                     
-                    </View>
+                    </SafeAreaView>
 
-                    <View style={styles.bottom}>
+                    <SafeAreaView style={styles.bottom}>
                                 {/* Flying High Batch */}
-                            <View style={styles.bottomTop}>
+                            <ImageBackground
+                            source={require('../assets/selectWordBatchesView/batchesBlueBackground.png')}
+                            resizeMode="cover"
+                            style={styles.bottomLeft}>
 
                                 <Pressable
                                     onPress={() => navigation.navigate('Flying High')}
@@ -170,26 +169,8 @@ const SelectWordBatchesView = ({ navigation }) => {
                                 
                                     ]}
                                 >
-                                    <Image source={require('../assets/selectWordBatchesView/flyingHigh.png')}  resizeMode='contain' style={styles.FlyingHighImage} />
+                                    <Image source={require('../assets/selectWordBatchesView/flyingHigh.png')}  resizeMode='contain' style={styles.image} />
                                 </Pressable>
-
-                                {/* Sunny Island */}
-                                <Pressable
-                                    onPress={() => navigation.navigate('Sunny Island')}
-                                    style={({ pressed }) => [
-                                        styles.SunnyIslandOpacity, // Your existing styles
-                                        {
-                                        opacity: pressed ? 0.5 : 1, // Dynamically adjust opacity
-                                        },
-                                
-                                    ]}
-                                >
-                                    <Image source={require('../assets/selectWordBatchesView/sunnyIsland.gif')}  resizeMode='contain' style={styles.SunnyIslandImage} />
-                                </Pressable>
-                            </View>
-
-                            <View style={styles.bottomMiddle}>
-
 
                                 {/* Springtime Fun */}
                                 <Pressable
@@ -203,8 +184,42 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     ]}
                                 >
 
-                                <Image source={require('../assets/selectWordBatchesView/springtimeFun.png')}  resizeMode='contain' style={styles.SpringTimeFunImage} />
+                                    <Image source={require('../assets/selectWordBatchesView/springtimeFun.png')}  resizeMode='contain' style={styles.image} />
                                 </Pressable>
+
+                                {/* Sunny Island */}
+                                <Pressable
+                                    onPress={() => navigation.navigate('Sunny Island')}
+                                    style={({ pressed }) => [
+                                        styles.SunnyIslandOpacity, // Your existing styles
+                                        {
+                                        opacity: pressed ? 0.5 : 1, // Dynamically adjust opacity
+                                        },
+                                
+                                    ]}
+                                >
+                                    <Image source={require('../assets/selectWordBatchesView/sunnyIsland.gif')}  resizeMode='contain' style={styles.image} />
+                                </Pressable>
+                            </ImageBackground>
+
+                            <ImageBackground
+                            source={require('../assets/selectWordBatchesView/spaceBackground.png')}
+                            resizeMode="cover"
+                            style={styles.bottomMiddle}>
+
+                                    {/* Alien Adventures */}
+                                    <Pressable
+                                        onPress={() => navigation.navigate('Alien Adventures')}
+                                        style={({ pressed }) => [
+                                            styles.AlienAdventuresOpacity, // Your existing styles
+                                            {
+                                            opacity: pressed ? 0.5 : 1, // Dynamically adjust opacity
+                                            },
+                                    
+                                        ]}
+                                    >
+                                        <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')}  resizeMode='contain' style={styles.image} />
+                                    </Pressable>
 
                                 {/* Outer Space */}
                                 <Pressable
@@ -217,7 +232,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                 
                                     ]}
                                 >
-                                    <Image source={require('../assets/selectWordBatchesView/outerSpace.png')}  resizeMode='contain' style={styles.OuterSpaceImage} />
+                                    <Image source={require('../assets/selectWordBatchesView/outerSpace.png')}  resizeMode='contain' style={styles.image} />
                                 </Pressable>
 
                                 {/* Planets and Beyond */}
@@ -231,26 +246,16 @@ const SelectWordBatchesView = ({ navigation }) => {
                                 
                                     ]}
                                 >
-                                    <Image source={require('../assets/selectWordBatchesView/planetsAndBeyond.png')}  resizeMode='contain' style={styles.PlanetsAndBeyondImage} />
+                                    <Image source={require('../assets/selectWordBatchesView/planetsAndBeyond.png')}  resizeMode='contain' style={styles.image} />
                                 </Pressable>
 
-                            </View>
+                            </ImageBackground>
 
-                            <View style={styles.bottomTop}>
+                            <ImageBackground
+                            source={require('../assets/selectWordBatchesView/batchesBlueBackground.png')}
+                            resizeMode="cover"
+                            style={styles.bottomRight}>
                                     
-                                    {/* Alien Adventures */}
-                                    <Pressable
-                                        onPress={() => navigation.navigate('Alien Adventures')}
-                                        style={({ pressed }) => [
-                                            styles.AlienAdventuresOpacity, // Your existing styles
-                                            {
-                                            opacity: pressed ? 0.5 : 1, // Dynamically adjust opacity
-                                            },
-                                    
-                                        ]}
-                                    >
-                                        <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')}  resizeMode='contain' style={styles.AlienAdventuresImage} />
-                                    </Pressable>
 
                                     
 
@@ -266,12 +271,12 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     
                                         ]}
                                     >
-                                        <Image source={require('../assets/selectWordBatchesView/divingDeep.png')}  resizeMode='contain' style={styles.DivingDeepImage} />
+                                        <Image source={require('../assets/selectWordBatchesView/divingDeep.png')}  resizeMode='contain' style={styles.image} />
                                     </Pressable>
 
-                                </View>
+                                </ImageBackground>
                             
-                        </View>
+                        </SafeAreaView>
 
             </ImageBackground>
 

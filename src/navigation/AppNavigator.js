@@ -31,7 +31,9 @@ const AppNavigator = () => {
         <Stack.Screen name="Login" component={LoginView} />
         <Stack.Screen name="Get Started" component={GetStartedView} />
         <Stack.Screen name="Create Letter Friends Account" component={CreateStudentAccountView} />
-        <Stack.Screen name="Word Batches" component={SelectWordBatchesView} />
+        <Stack.Screen name="Word Batches" component={SelectWordBatchesView} options={{
+      headerShown: false, // Hides the header entirely
+    }} />
         <Stack.Screen name="Flying High" component={FlyingHighWordsView} />
         <Stack.Screen name="Sunny Island" component={SunnyIslandWordsView} />
         <Stack.Screen name="Springtime Fun" component={SpringtimeFundWordsView} />
