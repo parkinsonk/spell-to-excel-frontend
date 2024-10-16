@@ -19,7 +19,7 @@ const ForgotPasswordView = ({ navigation }) => {
         }
 
         // Send password reset request
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/forgot-password', { email })
+        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/forgot-password/', { email })
             .then(response => {
                 Alert.alert('Success', 'Password reset link has been sent to your email');
                 navigation.goBack();  // Go back to the login screen
