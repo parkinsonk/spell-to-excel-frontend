@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { ImageBackground, View, TouchableOpacity, Image, Text, StyleSheet, Dimensions, Alert, PanResponder, useWindowDimensions} from 'react-native';
-import Svg, { Path } from 'react-native-svg';
+import React, { useState, useEffect, useRef } from 'react';
+import { ImageBackground, View, TouchableOpacity, Image, StyleSheet, Alert, useWindowDimensions} from 'react-native';
+import { Video } from 'expo-av';
 import { useProgress } from '../components/ProgressContext';
-import readWordMapping from '../utils/readWordMapping';
+import readVideoMapping from '../utils/readVideoMapping';
 
 
 
@@ -12,10 +12,11 @@ const ReadView = ({ navigation, route }) => {
   const { batch, activity, selectedWord } = route.params;
   const { markActivityCompleted, checkFlyingHigh, isLoading } = useProgress();
   const { height: screenHeight, width: screenWidth } = useWindowDimensions();
-    const isLandscape = screenWidth > screenHeight;
-    const aspectRatio = screenWidth / screenHeight;
+  const isLandscape = screenWidth > screenHeight;
+  const aspectRatio = screenWidth / screenHeight;
+  const videoRef = useRef(null); // Create a ref for the video
 
-  const readingImage = readWordMapping[selectedWord]?.image || readWordMapping.default.image;
+  const readingVideo = readVideoMapping[selectedWord] || readVideoMapping.default;
 
   const handleCustomBackAction = async () => {
     // Call your function before navigating back
@@ -61,35 +62,50 @@ const ReadView = ({ navigation, route }) => {
     });
   }, [navigation]);
 
+    // Use useEffect to start the video automatically on mount
+    useEffect(() => {
+      if (videoRef.current) {
+        videoRef.current.playAsync();
+      }
+    }, []); // Empty dependency array to run only once on mount
+
   const styles = StyleSheet.create({
     background: {
       flex: 1,
-      width: '100%', // Ensure it covers the full width
-      height: '100%' // Ensure it covers the full height
+      width: '100%',
+      height: '100%',
     },
-    imageContainer: {
+    videoContainer: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
     },
-    image: {
-      width: isLandscape ? '80%' : '85%',
-      height: isLandscape ? '80%' : '50%',
+    video: {
+      width: '100%',
+      height: '100%',
     },
   });
 
   return (
-    <ImageBackground
-      source={require('../assets/readView/readBackground.png')}
-      style={styles.background}
-    >
-      <View style={styles.imageContainer}>
-        <Image source={readingImage} style={styles.image} resizeMode='contain' />
+      <View style={styles.videoContainer}>
+        <Video
+          ref={videoRef}
+          source={readingVideo}
+          style={styles.video}
+          resizeMode="contain"
+          useNativeControls
+          onError={(error) => {
+            console.log("Error loading video:", error);
+          }}
+          onPlaybackStatusUpdate={(status) => {
+            if (status.didJustFinish) {
+              console.log("Video finished");
+              videoRef.current.setPositionAsync(0); // Reset video to the start
+            }
+          }}
+        />
       </View>
-    </ImageBackground>
   );
 };
-
-
 
 export default ReadView;
