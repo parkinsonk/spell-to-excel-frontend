@@ -68,14 +68,14 @@ const RegisterScreen = () => {
             flexDirection: 'column',
         },
         title: {
-            fontSize: calculateImageDimensions(aspectRatio, 24, 24, 40),
+            fontSize: calculateImageDimensions(aspectRatio, 24, 40, 40),
             fontWeight: 'bold',
             marginBottom: 20,
         },
         input: {
             width: '80%',
             height: '12%',
-            fontSize: calculateImageDimensions(aspectRatio, 12, 24, 35),
+            fontSize: calculateImageDimensions(aspectRatio, 12, 35, 35),
             padding: 10,
             borderWidth: 1,
             borderRadius: 8,
@@ -102,7 +102,7 @@ const RegisterScreen = () => {
         },
         passwordText: {
             flex: 1,
-            fontSize: calculateImageDimensions(aspectRatio, 12, 24, 35),
+            fontSize: calculateImageDimensions(aspectRatio, 12, 35, 35),
         }
     });
 

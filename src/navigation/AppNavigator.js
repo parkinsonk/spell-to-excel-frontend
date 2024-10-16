@@ -20,6 +20,7 @@ import AlienAdventuresWordsView from '../views/AlienAdventuresWordsView';
 import OuterSpaceWordsView from '../views/OuterSpaceWordsView';
 import PlanetsAndBeyondView from '../views/PlanetsAndBeyondView';
 import DivingDeepWordsView from '../views/DivingDeepWordsView';
+import ForgotPasswordView from '../views/ForgotPasswordView';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Login" component={LoginView} />
         <Stack.Screen name="Get Started" component={GetStartedView} />
         <Stack.Screen name="Create Letter Friends Account" component={CreateStudentAccountView} />
+        <Stack.Screen name="Forgot Password" component={ForgotPasswordView} />
         <Stack.Screen name="Word Batches" component={SelectWordBatchesView} options={{
       headerShown: false, // Hides the header entirely
     }} />
