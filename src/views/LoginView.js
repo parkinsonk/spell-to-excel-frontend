@@ -232,9 +232,12 @@ const LoginScreen = ({ navigation }) => {
                     <Image source={require('../assets/loginView/loginButton.png')} style={styles.Image} resizeMode='contain'/>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.forgotLogin}>
-                    <Text style={styles.forgotLoginText}> Don't have an account or</Text>
-                    <Text style={styles.forgotLoginText}> forgot your login information?</Text>
+                <TouchableOpacity style={styles.forgotLogin} onPress={() => navigation.navigate('Create Letter Friends Account')}>
+                    <Text style={styles.forgotLoginText}> Don't have an account?</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.forgotLogin} onPress={() => navigation.navigate('Forgot Password')}>
+                    <Text style={styles.forgotLoginText}> Forgot Password?</Text>
                 </TouchableOpacity>
 
                 <Image source={require('../assets/loginView/friends.png')} style={styles.letterImage} resizeMode='contain'/>
