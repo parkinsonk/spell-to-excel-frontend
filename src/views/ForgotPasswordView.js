@@ -19,13 +19,19 @@ const ForgotPasswordView = ({ navigation }) => {
         }
 
         // Send password reset request
-        axios.post('https://your-api-url.com/api/forgot-password', { email })
+        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/forgot-password', { email })
             .then(response => {
                 Alert.alert('Success', 'Password reset link has been sent to your email');
                 navigation.goBack();  // Go back to the login screen
             })
             .catch(error => {
-                Alert.alert('Error', 'Failed to send reset link. Please try again.');
+                if (error.response && error.response.data) {
+                    // Use backend's error message if available
+                    Alert.alert('Error', error.response.data.error || 'Failed to send reset link. Please try again.');
+                } else {
+                    // Generic fallback error message
+                    Alert.alert('Error', 'Failed to send reset link. Please try again.');
+                }
                 console.error(error);
             });
     };
