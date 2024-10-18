@@ -21,7 +21,7 @@ const ForgotPasswordView = ({ navigation }) => {
         axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/forgot-password/', { email })
             .then(response => {
                 Alert.alert('Success', 'Password reset link has been sent to your email');
-                navigation.goBack();
+                navigation.navigate('Password Reset Code');
             })
             .catch(error => {
                 if (error.response) {
@@ -41,6 +41,16 @@ const ForgotPasswordView = ({ navigation }) => {
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     isLandscape ? aspectRatio = screenWidth / screenHeight : aspectRatio = screenHeight / screenWidth;
+
+    const calculateImageDimensions = (aspectRatio, iPhoneValue, iPadMiniValue, iPadValue) => {
+        if (aspectRatio > 1.7) {
+            return iPhoneValue;
+        } else if (aspectRatio > 1.4 && aspectRatio < 1.7) {
+            return iPadMiniValue;
+        } else {
+            return iPadValue;
+        }
+    };
 
     const styles = StyleSheet.create({
         background: {
@@ -67,7 +77,7 @@ const ForgotPasswordView = ({ navigation }) => {
             borderWidth: 1,
             borderColor: '#ddd',
             padding: 10,
-            fontSize: calculateImageDimensions(aspectRatio, 12, 24, 35),
+            fontSize: calculateImageDimensions(aspectRatio, 12, 35, 35),
             borderRadius: 8,
             marginBottom: 20,
         },
@@ -103,16 +113,6 @@ const ForgotPasswordView = ({ navigation }) => {
 
         </ImageBackground>
     );
-};
-
-const calculateImageDimensions = (aspectRatio, iPhoneValue, iPadMiniValue, iPadValue) => {
-    if (aspectRatio > 1.7) {
-        return iPhoneValue;
-    } else if (aspectRatio > 1.4 && aspectRatio < 1.7) {
-        return iPadMiniValue;
-    } else {
-        return iPadValue;
-    }
 };
 
 export default ForgotPasswordView;

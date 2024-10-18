@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginView from '../views/LoginView';
 import GetStartedView from '../views/GetStartedView';
 import CreateStudentAccountView from '../views/CreateStudentAccountView';
+import ForgotPasswordView from '../views/ForgotPasswordView';
+import PasswordResetCodeView from '../views/PasswordResetCodeView';
 import SelectWordBatchesView from '../views/SelectWordBatchesView';
 import WelcomeView from '../views/WelcomeView';
 import FlyingHighWordsView from '../views/FlyingHighWordsView';
@@ -20,7 +22,7 @@ import AlienAdventuresWordsView from '../views/AlienAdventuresWordsView';
 import OuterSpaceWordsView from '../views/OuterSpaceWordsView';
 import PlanetsAndBeyondView from '../views/PlanetsAndBeyondView';
 import DivingDeepWordsView from '../views/DivingDeepWordsView';
-import ForgotPasswordView from '../views/ForgotPasswordView';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +35,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Get Started" component={GetStartedView} />
         <Stack.Screen name="Create Letter Friends Account" component={CreateStudentAccountView} />
         <Stack.Screen name="Forgot Password" component={ForgotPasswordView} />
+        <Stack.Screen name="Password Reset Code" component={PasswordResetCodeView} />
         <Stack.Screen name="Word Batches" component={SelectWordBatchesView} options={{
       headerShown: false, // Hides the header entirely
     }} />
