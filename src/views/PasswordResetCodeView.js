@@ -3,7 +3,8 @@ import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ImageBackgr
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for the eye icon
 
-const PasswordResetCodeView = ({ navigation }) => {
+const PasswordResetCodeView = ({ navigation, route }) => {
+    const { email } = route.params;
     const [resetCode, setResetCode] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -21,7 +22,7 @@ const PasswordResetCodeView = ({ navigation }) => {
             return;
         }
 
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/confirm-reset/', { reset_code: resetCode, new_password: newPassword })
+        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/reset-password/', { reset_code: resetCode, new_password: newPassword, email: email })
             .then(response => {
                 Alert.alert('Success', 'Your password has been reset.');
                 navigation.navigate('Login');

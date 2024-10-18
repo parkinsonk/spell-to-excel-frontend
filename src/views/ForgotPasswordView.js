@@ -21,7 +21,7 @@ const ForgotPasswordView = ({ navigation }) => {
         axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/forgot-password/', { email })
             .then(response => {
                 Alert.alert('Success', 'Password reset link has been sent to your email');
-                navigation.navigate('Password Reset Code');
+                navigation.navigate('Password Reset Code', { email });
             })
             .catch(error => {
                 if (error.response) {
