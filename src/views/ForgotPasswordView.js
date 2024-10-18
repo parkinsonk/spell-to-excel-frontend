@@ -11,22 +11,30 @@ const ForgotPasswordView = ({ navigation }) => {
             return;
         }
     
-        // Email validation regex
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             Alert.alert('Error', 'Please enter a valid email address');
             return;
         }
-
-        // Send password reset request
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/forgot-password/', { email }, { headers: { 'X-CSRFToken': csrfToken } })
+    
+        // Using axios without CSRF
+        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/forgot-password/', { email })
             .then(response => {
                 Alert.alert('Success', 'Password reset link has been sent to your email');
-                navigation.goBack();  // Go back to the login screen
+                navigation.goBack();
             })
             .catch(error => {
-                Alert.alert('Error', 'Failed to send reset link. Please try again.');
-                console.error(error);
+                if (error.response) {
+                    const errorMessage = error.response.data.error || 'Failed to send reset link';
+                    Alert.alert('Error', errorMessage);
+                    console.error('Response error:', error.response.data);
+                } else if (error.request) {
+                    Alert.alert('Error', 'No response from server. Please try again.');
+                    console.error('Request error:', error.request);
+                } else {
+                    Alert.alert('Error', 'Failed to send reset link. Please try again.');
+                    console.error('Error:', error.message);
+                }
             });
     };
 
