@@ -101,6 +101,7 @@ const CreateStudentAccountCodeView = ({ navigation, route }) => {
         >
             <Text style={styles.title}>Account Confirmation Code</Text>
             <Text style={styles.instructions}>Enter the confirmation code sent to your email to finish setting up your account.</Text>
+
             <TextInput
                 style={styles.input}
                 value={accountConfirmationCode}
@@ -109,8 +110,8 @@ const CreateStudentAccountCodeView = ({ navigation, route }) => {
                 keyboardType="numeric"
             />
 
-            <TouchableOpacity style={styles.resetButtonOpacity} onPress={handleResetPassword}>
-                <Image source={require('../assets/passwordResetCodeView/resetPassword.png')} style={styles.image} resizeMode='contain'/>
+            <TouchableOpacity style={styles.confirmationButtonOpacity} onPress={handleResetPassword}>
+                <Image source={require('../assets/createStudentAccountCodeView/validateConfirmationCode.png')} style={styles.image} resizeMode='contain'/>
             </TouchableOpacity>
         </ImageBackground>
     );
