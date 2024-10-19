@@ -33,16 +33,12 @@ const RegisterScreen = () => {
             return;
         }
 
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/create-student-account/', {
+        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/send-account-creation-code/', {
             email: email,
-            password: password,
-            teacher_name: 'Teacher Placeholder', // Hardcoded for now
-            classroom_name: 'Classroom Placeholder', // Hardcoded for now
-            student_name: 'Student Placeholder', // Hardcoded for now
         })
         .then(response => {
             Alert.alert("Success", "Account created successfully!");
-            navigation.navigate('Login');
+            navigation.navigate('Create Letter Friends Account Code' , { email: email , password: password , teacher_name: 'Teacher Placeholder' , classroom_name: 'Classroom Placeholder' , student_name: 'Student Placeholder' });
         })
         .catch(error => {
             console.error(error);
