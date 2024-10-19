@@ -33,20 +33,21 @@ const RegisterScreen = () => {
             return;
         }
 
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/create-student-account/', {
+        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/send-account-creation-code/', {
             email: email,
-            password: password,
-            teacher_name: 'Teacher Placeholder', // Hardcoded for now
-            classroom_name: 'Classroom Placeholder', // Hardcoded for now
-            student_name: 'Student Placeholder', // Hardcoded for now
         })
         .then(response => {
-            Alert.alert("Success", "Account created successfully!");
-            navigation.navigate('Login');
+            Alert.alert("Success!", "Account Creation Code has been sent to your email.");
+            navigation.navigate('Create Letter Friends Account Code' , { email: email , password: password , teacher_name: 'Teacher Placeholder' , classroom_name: 'Classroom Placeholder' , student_name: 'Student Placeholder' });
         })
         .catch(error => {
-            console.error(error);
-            Alert.alert("Registration failed", "Please try again.");
+            if (error.response && error.response.data) {
+                // Display the error message from the backend
+                Alert.alert("Error", error.response.data.error || "Registration failed. Please try again.");
+            } else {
+                Alert.alert("Error", "An unknown error occurred. Please try again.");
+            }
+            console.error("Registration error:", error);
         });
     };
 
@@ -68,8 +69,14 @@ const RegisterScreen = () => {
             flexDirection: 'column',
         },
         title: {
-            fontSize: calculateImageDimensions(aspectRatio, 24, 40, 40),
+            fontSize: calculateImageDimensions(aspectRatio, 24, 50, 50),
             fontWeight: 'bold',
+            marginBottom: 20,
+        },
+        subtitle: {
+            fontSize: calculateImageDimensions(aspectRatio, 12, 20, 20),
+            width: '80%',
+            textAlign: 'center',
             marginBottom: 20,
         },
         input: {
@@ -113,6 +120,7 @@ const RegisterScreen = () => {
                 style={styles.background}
         >
             <Text style={styles.title}>Create Letter Friends Account</Text>
+            <Text style={styles.subtitle}>Input your email and a password. After you have created your account, a confirmation code will be sent to your email.</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Email"

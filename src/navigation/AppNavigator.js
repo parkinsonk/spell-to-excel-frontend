@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginView from '../views/LoginView';
 import GetStartedView from '../views/GetStartedView';
 import CreateStudentAccountView from '../views/CreateStudentAccountView';
+import CreateStudentAccountCodeView from '../views/CreateStudentAccountCodeView';
 import ForgotPasswordView from '../views/ForgotPasswordView';
 import PasswordResetCodeView from '../views/PasswordResetCodeView';
 import SelectWordBatchesView from '../views/SelectWordBatchesView';
@@ -34,6 +35,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Login" component={LoginView} />
         <Stack.Screen name="Get Started" component={GetStartedView} />
         <Stack.Screen name="Create Letter Friends Account" component={CreateStudentAccountView} />
+        <Stack.Screen name="Create Letter Friends Account Code" component={CreateStudentAccountCodeView} />
         <Stack.Screen name="Forgot Password" component={ForgotPasswordView} />
         <Stack.Screen name="Password Reset Code" component={PasswordResetCodeView} />
         <Stack.Screen name="Word Batches" component={SelectWordBatchesView} options={{
