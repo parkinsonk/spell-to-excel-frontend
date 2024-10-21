@@ -10,14 +10,29 @@ import { useProgress } from '../components/ProgressContext';
 const LetterFriendsView = ({ navigation, route }) => {
 
   const { batch, activity, selectedWord } = route.params;
-  const { markActivityCompleted, checkFlyingHigh, isLoading } = useProgress();
+  const { markActivityCompleted, checkFlyingHigh, checkSunnyIsland, checkSpringtimeFun, checkAlienAdventure, 
+    checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep, isLoading } = useProgress();
 
   const handleCustomBackAction = async () => {
     // Call your function before navigating back
     Alert.alert("Congrats!", "You've completed the Letter Friends activity.");
 
     await markActivityCompleted(activity, selectedWord);
-    await checkFlyingHigh('Flying High');
+    if (batch == 'Flying High') {
+      await checkFlyingHigh('Flying High');
+    } else if (batch == 'Sunny Island') {
+      await checkSunnyIsland('Sunny Island');
+    } else if (batch == 'SpringTime Fun') {
+      await checkSpringtimeFun('SpringTime Fun');
+    } else if (batch == 'Alien Adventures') {
+      await checkAlienAdventure('Alien Adventures');
+    } else if (batch == 'Outer Space') {
+      await checkOuterSpace('Outer Space');
+    } else if (batch == 'Planets and Beyond') {
+      await checkPlanetsAndBeyond('Planets and Beyond');
+    } else if (batch == 'Diving Deep') {
+      await checkDivingDeep('Diving Deep');
+    }
     
     // Then navigate back
     

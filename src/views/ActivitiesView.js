@@ -25,7 +25,7 @@ const ActivitiesView = ({ navigation, route}) => {
     else if (batch == 'Sunny Island') {
         batchStatus = sunnyIslandStatus;
     }
-    else if (batch == 'Springtime Fun') {
+    else if (batch == 'SpringTime Fun') {
         batchStatus = springtimeFunStatus;
     }
     else if (batch == 'Alien Adventures') {
