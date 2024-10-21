@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { ImageBackground, View, TouchableOpacity, Image, useWindowDimensions, Pressable} from 'react-native';
+import { useProgress } from '../components/ProgressContext';
 import * as SecureStore from 'expo-secure-store';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -10,6 +11,16 @@ const SelectWordBatchesView = ({ navigation }) => {
     const { height: screenHeight, width: screenWidth } = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
+    const { flyingHighStatus, sunnyIslandStatus, springtimeFunStatus, alienAdventureStatus, 
+        outerSpaceStatus, planetsAndBeyondStatus, divingDeepStatus, isLoading } = useProgress();
+
+    let flyingHighCompleted;
+    let sunnyIslandCompleted;
+    let springtimeFunCompleted;
+    let alienAdventureCompleted;
+    let outerSpaceCompleted;
+    let planetsAndBeyondCompleted;
+    let divingDeepCompleted;
 
     const logout = async () => {
         // Remove tokens or any authentication information
@@ -29,6 +40,63 @@ const SelectWordBatchesView = ({ navigation }) => {
             return iPadValue;
         }
     };
+
+    for (let word in flyingHighStatus) {
+        if (!flyingHighStatus[word].test_correct) {
+            flyingHighCompleted = false;
+            break;
+        }
+        flyingHighCompleted = true;
+    }
+
+    for (let word in sunnyIslandStatus) {
+        if (!sunnyIslandStatus[word].test_correct) {
+            sunnyIslandCompleted = false;
+            break;
+        }
+        sunnyIslandCompleted = true;
+    }
+
+    for (let word in springtimeFunStatus) {
+        if (!springtimeFunStatus[word].test_correct) {
+            springtimeFunCompleted = false;
+            break;
+        }
+        springtimeFunCompleted = true;
+    }
+
+    for (let word in alienAdventureStatus) {
+        if (!alienAdventureStatus[word].test_correct) {
+            alienAdventureCompleted = false;
+            break;
+        }
+        alienAdventureCompleted = true;
+    }
+
+    for (let word in outerSpaceStatus) {
+        if (!outerSpaceStatus[word].test_correct) {
+            outerSpaceCompleted = false;
+            break;
+        }
+        outerSpaceCompleted = true;
+    }
+
+    for (let word in planetsAndBeyondStatus) {
+        if (!planetsAndBeyondStatus[word].test_correct) {
+            planetsAndBeyondCompleted = false;
+            break;
+        }
+        planetsAndBeyondCompleted = true;
+    }
+
+    for (let word in divingDeepStatus) {
+        if (!divingDeepStatus[word].test_correct) {
+            divingDeepCompleted = false;
+            break;
+        }
+        divingDeepCompleted = true;
+    }
+
 
     const styles = {
         // Landscape styles
@@ -193,7 +261,11 @@ const SelectWordBatchesView = ({ navigation }) => {
 
                                     {/* Sunny Island */}
                                     <Pressable
-                                        onPress={() => navigation.navigate('Sunny Island')}
+                                        onPress={() => {
+                                            if (springtimeFunCompleted) {
+                                                navigation.navigate('Sunny Island'); // Only navigate if flyingHighCompleted is true
+                                            }
+                                        }}
                                         style={({ pressed }) => [
                                             styles.SunnyIslandOpacity, // Your existing styles
                                             {
@@ -202,12 +274,16 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     
                                         ]}
                                     >
-                                        <Image source={require('../assets/selectWordBatchesView/sunnyIsland.gif')}  resizeMode='contain' style={styles.image} />
+                                        <Image source={require('../assets/selectWordBatchesView/sunnyIsland.gif')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: springtimeFunCompleted ? 1 : .5}} flying />
                                     </Pressable>
 
                                     {/* Springtime Fun */}
                                     <Pressable
-                                        onPress={() => navigation.navigate('Springtime Fun')}
+                                        onPress={() => {
+                                            if (flyingHighCompleted) {
+                                                navigation.navigate('Springtime Fun'); // Only navigate if flyingHighCompleted is true
+                                            }
+                                        }}
                                         style={({ pressed }) => [
                                             styles.SpringtimeFunOpacity, // Your existing styles
                                             {
@@ -217,7 +293,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                         ]}
                                     >
 
-                                        <Image source={require('../assets/selectWordBatchesView/springtimeFun.png')}  resizeMode='contain' style={styles.image} />
+                                        <Image source={require('../assets/selectWordBatchesView/springtimeFun.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: flyingHighCompleted ? 1 : .5}} />
                                     </Pressable>
 
                               
@@ -233,7 +309,11 @@ const SelectWordBatchesView = ({ navigation }) => {
 
                                     {/* Alien Adventures */}
                                     <Pressable
-                                        onPress={() => navigation.navigate('Alien Adventures')}
+                                        onPress={() => {
+                                            if (sunnyIslandCompleted) {
+                                                navigation.navigate('Alien Adventures'); // Only navigate if sunnyIslandCompleted is true
+                                            }
+                                        }}
                                         style={({ pressed }) => [
                                             styles.AlienAdventuresOpacity, // Your existing styles
                                             {
@@ -242,12 +322,16 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     
                                         ]}
                                     >
-                                        <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')}  resizeMode='contain' style={styles.image} />
+                                        <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: sunnyIslandCompleted ? 1 : .5}} />
                                     </Pressable>
 
                                 {/* Outer Space */}
                                 <Pressable
-                                    onPress={() => navigation.navigate('Outer Space')}
+                                    onPress={() => {
+                                        if (alienAdventureCompleted) {
+                                            navigation.navigate('Outer Space');  // Only navigate if alienAdventureCompleted is true
+                                        }
+                                    }}
                                     style={({ pressed }) => [
                                         styles.OuterSpaceOpacity, // Your existing styles
                                         {
@@ -256,12 +340,16 @@ const SelectWordBatchesView = ({ navigation }) => {
                                 
                                     ]}
                                 >
-                                    <Image source={require('../assets/selectWordBatchesView/outerSpace.png')}  resizeMode='contain' style={styles.image} />
+                                    <Image source={require('../assets/selectWordBatchesView/outerSpace.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: alienAdventureCompleted ? 1 : .5}} />
                                 </Pressable>
 
                                 {/* Planets and Beyond */}
                                 <Pressable
-                                    onPress={() => navigation.navigate('Planets and Beyond')}
+                                    onPress={() => {
+                                            if (outerSpaceCompleted) {
+                                                navigation.navigate('Planets and Beyond'); // Only navigate if outerSpaceCompleted is true
+                                            }
+                                        }}
                                     style={({ pressed }) => [
                                         styles.PlanetsAndBeyondOpacity, // Your existing styles
                                         {
@@ -270,7 +358,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                 
                                     ]}
                                 >
-                                    <Image source={require('../assets/selectWordBatchesView/planetsAndBeyond.png')}  resizeMode='contain' style={styles.image} />
+                                    <Image source={require('../assets/selectWordBatchesView/planetsAndBeyond.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: outerSpaceCompleted ? 1 : .5}} />
                                 </Pressable>
 
                             </ImageBackground>
@@ -283,7 +371,11 @@ const SelectWordBatchesView = ({ navigation }) => {
 
                                     {/* Diving Deep */}
                                     <Pressable
-                                        onPress={() => navigation.navigate('Diving Deep')}
+                                        onPress={() => {
+                                            if (planetsAndBeyondCompleted) {
+                                                navigation.navigate('Diving Deep'); // Only navigate if planetsAndBeyond is true
+                                            }
+                                        }}
                                         style={({ pressed }) => [
                                             styles.DivingDeepOpacity, // Your existing styles
                                             {
@@ -292,7 +384,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     
                                         ]}
                                     >
-                                        <Image source={require('../assets/selectWordBatchesView/divingDeep.png')}  resizeMode='contain' style={styles.image} />
+                                        <Image source={require('../assets/selectWordBatchesView/divingDeep.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: planetsAndBeyondCompleted ? 1 : .5}} />
                                     </Pressable>
 
                                 </ImageBackground>
