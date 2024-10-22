@@ -19,7 +19,8 @@ const BoxesView = ({ navigation, route  }) => {
     const BOX_HEIGHT = aspectRatio < 1.4 ? 145 : 75; // Height of each box
     const BOX_MARGIN = aspectRatio < 1.4 ? 15 : 5; // Margin between boxes
     const NUM_COLUMNS = lettersList.length; // Number of boxes per row
-    const { markActivityCompleted, checkFlyingHigh, isLoading } = useProgress();
+    const { markActivityCompleted, checkFlyingHigh, checkSunnyIsland, checkSpringtimeFun, checkAlienAdventure, 
+      checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep, isLoading } = useProgress();
 
 
     const handleCustomBackAction = async () => {
@@ -27,7 +28,21 @@ const BoxesView = ({ navigation, route  }) => {
       Alert.alert("Congrats!", "You've completed the Sounds activity.");
   
       await markActivityCompleted(activity, selectedWord);
-      await checkFlyingHigh('Flying High');
+      if (batch == 'Flying High') {
+        await checkFlyingHigh('Flying High');
+      } else if (batch == 'Sunny Island') {
+        await checkSunnyIsland('Sunny Island');
+      } else if (batch == 'SpringTime Fun') {
+        await checkSpringtimeFun('SpringTime Fun');
+      } else if (batch == 'Alien Adventures') {
+        await checkAlienAdventure('Alien Adventures');
+      } else if (batch == 'Outer Space') {
+        await checkOuterSpace('Outer Space');
+      } else if (batch == 'Planets and Beyond') {
+        await checkPlanetsAndBeyond('Planets and Beyond');
+      } else if (batch == 'Diving Deep') {
+        await checkDivingDeep('Diving Deep');
+      }
       
       // Then navigate back
       

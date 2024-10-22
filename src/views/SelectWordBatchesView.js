@@ -49,6 +49,8 @@ const SelectWordBatchesView = ({ navigation }) => {
         flyingHighCompleted = true;
     }
 
+    console.log(flyingHighCompleted);
+
     for (let word in sunnyIslandStatus) {
         if (!sunnyIslandStatus[word].test_correct) {
             sunnyIslandCompleted = false;
@@ -281,7 +283,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     <Pressable
                                         onPress={() => {
                                             if (flyingHighCompleted) {
-                                                navigation.navigate('Springtime Fun'); // Only navigate if flyingHighCompleted is true
+                                                navigation.navigate('SpringTime Fun'); // Only navigate if flyingHighCompleted is true
                                             }
                                         }}
                                         style={({ pressed }) => [

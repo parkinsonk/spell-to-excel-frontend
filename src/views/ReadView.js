@@ -10,11 +10,13 @@ import readVideoMapping from '../utils/readVideoMapping';
 const ReadView = ({ navigation, route }) => {
 
   const { batch, activity, selectedWord } = route.params;
-  const { markActivityCompleted, checkFlyingHigh, isLoading } = useProgress();
+  const { markActivityCompleted, checkFlyingHigh, checkSunnyIsland, checkSpringtimeFun, checkAlienAdventure, 
+    checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep, isLoading } = useProgress();
   const { height: screenHeight, width: screenWidth } = useWindowDimensions();
   const isLandscape = screenWidth > screenHeight;
   const aspectRatio = screenWidth / screenHeight;
   const videoRef = useRef(null); // Create a ref for the video
+  console.log(batch);
 
   const readingVideo = readVideoMapping[selectedWord] || readVideoMapping.default;
 
