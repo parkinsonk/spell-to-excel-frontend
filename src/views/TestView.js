@@ -73,7 +73,6 @@ const TestView = ({ navigation, route }) => {
                 height: '100%',
                 fontSize: 100,
                 textAlign: 'center',
-                fontFamily: 'Futura',
 
             },
             correctWord: {
@@ -162,7 +161,6 @@ const TestView = ({ navigation, route }) => {
           height: '90%',
           fontSize: 100,
           textAlign: 'center',
-          fontFamily: 'Futura',
         },
         correctWord: {
           color: 'red', 
@@ -199,7 +197,8 @@ const TestView = ({ navigation, route }) => {
     const [backgroundImage, setBackgroundImage] = useState(require('../assets/testViews/blankTestBackground.png'));
     const [inputValue, setInputValue] = useState('');
     const [showCorrectWord, setShowCorrectWord] = useState(false);
-    const { checkFlyingHigh } = useProgress();
+    const { checkFlyingHigh, checkSunnyIsland, checkSpringtimeFun, checkAlienAdventure, 
+      checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep } = useProgress();
     const row1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
     const row2 = ['j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r']
     const row3 = ['s', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -262,7 +261,21 @@ const TestView = ({ navigation, route }) => {
         // If the word matches
         Alert.alert("Correct!", "You've typed the correct word.");
         setShowCorrectWord(false); // No need to show the correct word if the input is correct
-        await checkFlyingHigh('Flying High');
+        if (batch == 'Flying High') {
+          await checkFlyingHigh('Flying High');
+        } else if (batch == 'Sunny Island') {
+          await checkSunnyIsland('Sunny Island');
+        } else if (batch == 'SpringTime Fun') {
+          await checkSpringtimeFun('SpringTime Fun');
+        } else if (batch == 'Alien Adventures') {
+          await checkAlienAdventure('Alien Adventures');
+        } else if (batch == 'Outer Space') {
+          await checkOuterSpace('Outer Space');
+        } else if (batch == 'Planets and Beyond') {
+          await checkPlanetsAndBeyond('Planets and Beyond');
+        } else if (batch == 'Diving Deep') {
+          await checkDivingDeep('Diving Deep');
+        }
         navigation.navigate(batch, { selectedWord: selectedWord, batch: batch, activity: activity });
     } catch (error){
         console.error('Error marking word as correct:', error);}

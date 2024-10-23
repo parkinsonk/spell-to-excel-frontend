@@ -171,15 +171,15 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             >
                 <View style={styles.top}>
 
-                    <TouchableOpacity style={styles.whenOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'when', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.whenOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'when', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('when', springtimeFunStatus['when'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.thereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'there', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.thereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'there', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('there', springtimeFunStatus['there'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.wordsOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'words', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.wordsOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'words', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('words', springtimeFunStatus['words'])} style={styles.Image} />
                     </TouchableOpacity>
 
@@ -191,15 +191,15 @@ const SpringtimeFundWordsView = ({ navigation }) => {
 
                     <Image source={require('../assets/springtimeFunView/bird.png')} style={styles.birdImage} />
 
-                    <TouchableOpacity style={styles.butOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'but', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.butOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'but', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('but', springtimeFunStatus['but'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.wereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'were', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.wereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'were', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('were', springtimeFunStatus['were'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.useOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'use', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.useOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'use', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('use', springtimeFunStatus['use'])} style={styles.Image} />
                     </TouchableOpacity>
 
@@ -208,39 +208,39 @@ const SpringtimeFundWordsView = ({ navigation }) => {
 
                 <View style={styles.bottom}>
 
-                    <TouchableOpacity style={styles.yourOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'your', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.yourOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'your', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('your', springtimeFunStatus['your'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.byOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'by', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.byOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'by', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('by', springtimeFunStatus['by'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.saidOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'said', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.saidOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'said', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('said', springtimeFunStatus['said'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.weOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'we', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.weOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'we', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('we', springtimeFunStatus['we'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.anOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'an', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.anOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'an', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('an', springtimeFunStatus['an'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.allOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'all', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.allOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'all', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('all', springtimeFunStatus['all'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.whatOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'what', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.whatOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'what', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('what', springtimeFunStatus['what'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.canOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'can', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.canOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'can', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('can', springtimeFunStatus['can'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.notOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'not', batch: 'Springtime Fun'})}>
+                    <TouchableOpacity style={styles.notOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'not', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('not', springtimeFunStatus['not'])} style={styles.Image} />
                     </TouchableOpacity>
 

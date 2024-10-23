@@ -43,7 +43,7 @@ const AppNavigator = () => {
     }} />
         <Stack.Screen name="Flying High" component={FlyingHighWordsView} />
         <Stack.Screen name="Sunny Island" component={SunnyIslandWordsView} />
-        <Stack.Screen name="Springtime Fun" component={SpringtimeFundWordsView} />
+        <Stack.Screen name="SpringTime Fun" component={SpringtimeFundWordsView} />
         <Stack.Screen name="Alien Adventures" component={AlienAdventuresWordsView} />
         <Stack.Screen name="Outer Space" component={OuterSpaceWordsView} />
         <Stack.Screen name="Planets and Beyond" component={PlanetsAndBeyondView} />

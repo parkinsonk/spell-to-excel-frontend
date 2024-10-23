@@ -17,7 +17,8 @@ const TraceView = ({ navigation, route }) => {
   const {width: screenWidth, height: screenHeight} = useWindowDimensions();
   const isLandscape = screenWidth > screenHeight;
   const aspectRatio = screenWidth / screenHeight;
-  const { markActivityCompleted, checkFlyingHigh, isLoading } = useProgress();
+  const { markActivityCompleted, checkFlyingHigh, checkSunnyIsland, checkSpringtimeFun, checkAlienAdventure, 
+    checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep, isLoading } = useProgress();
 
 
   // Back Button Functionality
@@ -26,7 +27,21 @@ const TraceView = ({ navigation, route }) => {
     Alert.alert("Congrats!", "You've completed the Trace, Copy, Cover activity.");
 
     await markActivityCompleted(activity, selectedWord);
-    await checkFlyingHigh('Flying High');
+    if (batch == 'Flying High') {
+      await checkFlyingHigh('Flying High');
+    } else if (batch == 'Sunny Island') {
+      await checkSunnyIsland('Sunny Island');
+    } else if (batch == 'SpringTime Fun') {
+      await checkSpringtimeFun('SpringTime Fun');
+    } else if (batch == 'Alien Adventures') {
+      await checkAlienAdventure('Alien Adventures');
+    } else if (batch == 'Outer Space') {
+      await checkOuterSpace('Outer Space');
+    } else if (batch == 'Planets and Beyond') {
+      await checkPlanetsAndBeyond('Planets and Beyond');
+    } else if (batch == 'Diving Deep') {
+      await checkDivingDeep('Diving Deep');
+    }
     
     // Then navigate back
     
