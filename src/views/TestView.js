@@ -281,6 +281,54 @@ const TestView = ({ navigation, route }) => {
         console.error('Error marking word as correct:', error);}
     
     } else {
+
+      setShowCorrectWord(true); // Show the correct word
+
+      if (batch == 'Flying High') {
+        await checkFlyingHigh('Flying High');
+      } else if (batch == 'Sunny Island') {
+        await checkSunnyIsland('Sunny Island');
+      } else if (batch == 'SpringTime Fun') {
+        await checkSpringtimeFun('SpringTime Fun');
+      } else if (batch == 'Alien Adventures') {
+        await checkAlienAdventure('Alien Adventures');
+      } else if (batch == 'Outer Space') {
+        await checkOuterSpace('Outer Space');
+      } else if (batch == 'Planets and Beyond') {
+        await checkPlanetsAndBeyond('Planets and Beyond');
+      } else if (batch == 'Diving Deep') {
+        await checkDivingDeep('Diving Deep');
+      }
+      try {
+        const accessToken = await SecureStore.getItemAsync('access_token');
+        console.log("Retrieved access token:", accessToken);
+        
+        await axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/mark-word-incorrect/', {
+            word: selectedWord,
+            // Include any other necessary parameters your backend requires
+        }, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (batch == 'Flying High') {
+          await checkFlyingHigh('Flying High');
+        } else if (batch == 'Sunny Island') {
+          await checkSunnyIsland('Sunny Island');
+        } else if (batch == 'SpringTime Fun') {
+          await checkSpringtimeFun('SpringTime Fun');
+        } else if (batch == 'Alien Adventures') {
+          await checkAlienAdventure('Alien Adventures');
+        } else if (batch == 'Outer Space') {
+          await checkOuterSpace('Outer Space');
+        } else if (batch == 'Planets and Beyond') {
+          await checkPlanetsAndBeyond('Planets and Beyond');
+        } else if (batch == 'Diving Deep') {
+          await checkDivingDeep('Diving Deep');
+        }
+        
         // If the word does not match
         Alert.alert(
           "Oops!", 
@@ -290,7 +338,9 @@ const TestView = ({ navigation, route }) => {
           ],
           { cancelable: false } // This prevents the alert from being dismissed by tapping outside of it
         );
-        setShowCorrectWord(true); // Show the correct word
+      } catch (error){
+        console.error('Error marking word as correct:', error);}
+    
       }
 };
 
