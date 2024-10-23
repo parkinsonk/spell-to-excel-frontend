@@ -33,10 +33,10 @@ const ReadView = ({ navigation, route }) => {
   else if (batch == 'Sunny Island') {
     await checkSunnyIsland('Sunny Island');
   }
-  else if (batch == 'Springtime Fun') {
+  else if (batch == 'SpringTime Fun') {
     await checkSpringtimeFun('SpringTime Fun');
   }
-  else if (batch == 'Alien Adventure') {
+  else if (batch == 'Alien Adventures') {
     await checkAlienAdventure('Alien Adventures');
   }
   else if (batch == 'Outer Space') {
