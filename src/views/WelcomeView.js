@@ -10,6 +10,8 @@ const WelcomeScreen = ({ navigation }) => {
           flex: 1,
           width: '100%',
           height: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
       
         },
         image: {
@@ -39,6 +41,16 @@ const WelcomeScreen = ({ navigation }) => {
           justifyContent: 'center',
           alignItems: 'center',
         },
+        artistCredits: {
+          position: 'absolute',
+          right: 15,
+          top: 5,
+          width: aspectRatio > 1.5 ? screenWidth * 0.2: screenWidth * 0.2, 
+          height: aspectRatio > 1.5 ? screenHeight * 0.15: screenHeight * 0.15,
+          zIndex: 2,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
         buttonImage: {
           width: '100%',
           height: '100%',
@@ -48,10 +60,15 @@ const WelcomeScreen = ({ navigation }) => {
 
   return (
     <ImageBackground
-  source={require('../assets/welcomeView/welcomeBlueWB.gif')}
+  source={require('../assets/welcomeView/blueBackground.png')}
   resizeMode="cover"
   style={styles.background}
 >
+
+
+    <TouchableOpacity style={styles.artistCredits} onPress={() => navigation.navigate('Artist Credits')}>
+      <Image source={require('../assets/welcomeView/artistCredits.png')} style={styles.buttonImage} />
+    </TouchableOpacity>
 
     <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Login')}>
       <Image source={require('../assets/welcomeView/loginp.png')} style={styles.buttonImage} />
@@ -61,7 +78,7 @@ const WelcomeScreen = ({ navigation }) => {
       <Image source={require('../assets/welcomeView/getStarted.png')} style={styles.buttonImage} />
     </TouchableOpacity>
 
-    <Image source={require('../assets/welcomeView/letterFriends.png')} style={styles.image} />
+    <Image source={require('../assets/welcomeView/letterFriendsImage.png')} style={styles.image} />
 
 
 </ImageBackground>

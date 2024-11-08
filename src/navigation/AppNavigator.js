@@ -23,6 +23,7 @@ import AlienAdventuresWordsView from '../views/AlienAdventuresWordsView';
 import OuterSpaceWordsView from '../views/OuterSpaceWordsView';
 import PlanetsAndBeyondView from '../views/PlanetsAndBeyondView';
 import DivingDeepWordsView from '../views/DivingDeepWordsView';
+import ArtistCredits from '../views/AristsCredits';
 
 
 const Stack = createNativeStackNavigator();
@@ -36,6 +37,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Get Started" component={GetStartedView} />
         <Stack.Screen name="Create Letter Friends Account" component={CreateStudentAccountView} />
         <Stack.Screen name="Create Letter Friends Account Code" component={CreateStudentAccountCodeView} />
+        <Stack.Screen name="Artist Credits" component={ArtistCredits} />
         <Stack.Screen name="Forgot Password" component={ForgotPasswordView} />
         <Stack.Screen name="Password Reset Code" component={PasswordResetCodeView} />
         <Stack.Screen name="Word Batches" component={SelectWordBatchesView} options={{
