@@ -120,7 +120,7 @@ const RegisterScreen = () => {
                 style={styles.background}
         >
             <Text style={styles.title}>Create Letter Friends Account</Text>
-            <Text style={styles.subtitle}>Input your email and a password. After you have created your account, a confirmation code will be sent to your email.</Text>
+            <Text style={styles.subtitle}>Input your email and a password. After you have created an account, a confirmation code will be sent to your email.</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Email"
