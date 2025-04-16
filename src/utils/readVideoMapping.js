@@ -1,4 +1,4 @@
-const traceWordMapping = {
+const readVideoMapping = {
 
     // Flying High Words
     'the': require('../assets/readView/flyingHighReading/theRead.mp4'),
@@ -6,4 +6,4 @@ const traceWordMapping = {
     default: require('../assets/readView/flyingHighReading/theRead.mp4')
   };
 
-  export default traceWordMapping;
+  export default readVideoMapping;
