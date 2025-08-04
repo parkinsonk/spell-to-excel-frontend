@@ -15,7 +15,7 @@ const WelcomeScreen = ({ navigation }) => {
         image: {
           width: '80%', 
           height: '80%', 
-          marginTop: screenHeight * 0.1,
+          marginBottom: screenHeight * 0.1,
           resizeMode: 'contain',
           alignSelf: 'center',
         },
@@ -48,7 +48,7 @@ const WelcomeScreen = ({ navigation }) => {
 
   return (
     <ImageBackground
-  source={require('../assets/welcomeView/welcomeBlueWB.gif')}
+  source={require('../assets/welcomeView/blueBackground.png')}
   resizeMode="cover"
   style={styles.background}
 >
@@ -61,7 +61,7 @@ const WelcomeScreen = ({ navigation }) => {
       <Image source={require('../assets/welcomeView/getStarted.png')} style={styles.buttonImage} />
     </TouchableOpacity>
 
-    <Image source={require('../assets/welcomeView/letterFriends.png')} style={styles.image} />
+    <Image source={require('../assets/welcomeView/trickyWords.png')} style={styles.image} />
 
 
 </ImageBackground>
