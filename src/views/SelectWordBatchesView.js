@@ -276,7 +276,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     
                                         ]}
                                     >
-                                        <Image source={require('../assets/selectWordBatchesView/sunnyIsland.gif')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: springtimeFunCompleted ? 1 : .5}} flying />
+                                        <Image source={require('../assets/selectWordBatchesView/sunnyIsland.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: springtimeFunCompleted ? 1 : .5}} flying />
                                     </Pressable>
 
                                     {/* Springtime Fun */}

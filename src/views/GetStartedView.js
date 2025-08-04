@@ -28,6 +28,7 @@ const GetStartedView = ({ navigation }) => {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
+          marginTop: screenHeight * 0.02,
         },
         bottom: {
           flex: 1,

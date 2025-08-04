@@ -202,7 +202,7 @@ const LoginScreen = ({ navigation }) => {
 
             <View style={styles.middle}>
 
-                <Image source={require('../assets/loginView/letter.png')} style={styles.letterImage} resizeMode='contain'/>
+                <Image source={require('../assets/loginView/tricky.png')} style={styles.letterImage} resizeMode='contain'/>
 
                 <Text style={styles.textStyles}>Email</Text>
                 <TextInput
@@ -240,7 +240,7 @@ const LoginScreen = ({ navigation }) => {
                     <Text style={styles.forgotLoginText}> Forgot Password?</Text>
                 </TouchableOpacity>
 
-                <Image source={require('../assets/loginView/friends.png')} style={styles.letterImage} resizeMode='contain'/>
+                <Image source={require('../assets/loginView/words.png')} style={styles.letterImage} resizeMode='contain'/>
 
             </View>
 
