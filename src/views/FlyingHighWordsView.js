@@ -70,7 +70,7 @@ const FlyingHighWordsView = ({ navigation }) => {
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '8%' : '8%' : '1%',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '15%',
         },
-        PlaneSun: {
+        helicopter: {
             height: isLandscape ? aspectRatio > 1.7 ? '90%' : '90%' : '40%',
             width: isLandscape ? aspectRatio > 1.7 ? '30%' : '30%' : '25%',
             resizeMode: 'contain',
@@ -182,12 +182,16 @@ const FlyingHighWordsView = ({ navigation }) => {
                         <Image source={getImageSource('to', flyingHighStatus['to'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <View style={styles.PlaneSun}>
+                    <View style={styles.helicopter}>
                         <Image source={require('../assets/flyingHighWordsView/helicopter.png')} style={styles.Image} />
                     </View>
 
                     <TouchableOpacity style={styles.ofOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'of', batch: 'Flying High'})}>
-                        <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
+                        <Image source={getImageSource('see', flyingHighStatus['see'])} style={styles.Image} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.ofOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'of', batch: 'Flying High'})}>
+                        <Image source={getImageSource('of', flyingHighStatus['of'])} style={styles.Image} />
                     </TouchableOpacity>
 
                 </View>
