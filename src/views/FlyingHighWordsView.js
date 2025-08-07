@@ -118,7 +118,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             borderColor: 'red',
             borderWidth: 2,
         },
-    
         youOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
@@ -127,7 +126,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             borderColor: 'red',
             borderWidth: 2,
         },
-        
         saidOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
