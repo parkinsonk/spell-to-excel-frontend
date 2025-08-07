@@ -13,6 +13,8 @@ const LoginScreen = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
+    const isLandscape = screenWidth > screenHeight;
+    const aspectRatio = screenWidth / screenHeight;
     const { checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
         checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep } = useProgress();
 
@@ -99,7 +101,7 @@ const LoginScreen = ({ navigation }) => {
             alignItems: 'flex-end',
         },
         input: {
-            height: '12%',
+            height: isLandscape ? aspectRatio > 1.7 ? '12%' : '8%' : '5%',
             marginVertical: '1%',
             borderWidth: 2,
             fontSize: 15,
@@ -127,7 +129,7 @@ const LoginScreen = ({ navigation }) => {
         },
         trickyImage: {
             width: '100%',
-            height: '20%',
+            height: isLandscape ? aspectRatio > 1.7 ? '20%' : '30%' : '30%',
             borderColor: 'green',
             borderWidth: 2,
         },
@@ -147,7 +149,7 @@ const LoginScreen = ({ navigation }) => {
         },
         forgotLoginText: {
             color: 'black',
-            fontSize: 10,
+            fontSize: isLandscape ? aspectRatio > 1.7 ? 10 : 15 : 15,
             fontWeight: 'bold',
             textAlign: 'center',
             textDecorationLine: 'underline',
@@ -170,7 +172,7 @@ const LoginScreen = ({ navigation }) => {
         },
         passwordInput: {
             flexDirection: 'row', // To place the eye icon next to the TextInput
-            height: '12%',
+            height: isLandscape ? aspectRatio > 1.7 ? '12%' : '8%' : '5%',
             marginVertical: '1%',
             alignItems: 'center',
             borderWidth: 2,
