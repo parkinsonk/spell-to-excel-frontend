@@ -99,7 +99,7 @@ const LoginScreen = ({ navigation }) => {
             alignItems: 'flex-end',
         },
         input: {
-            height: '6%',
+            height: '12%',
             marginVertical: '1%',
             borderWidth: 2,
             fontSize: 15,
@@ -125,9 +125,9 @@ const LoginScreen = ({ navigation }) => {
             width: '100%',
             height: '100%',
         },
-        letterImage: {
+        trickyImage: {
             width: '100%',
-            height: '30%',
+            height: '20%',
             borderColor: 'green',
             borderWidth: 2,
         },
@@ -147,7 +147,7 @@ const LoginScreen = ({ navigation }) => {
         },
         forgotLoginText: {
             color: 'black',
-            fontSize: 15,
+            fontSize: 10,
             fontWeight: 'bold',
             textAlign: 'center',
             textDecorationLine: 'underline',
@@ -170,7 +170,7 @@ const LoginScreen = ({ navigation }) => {
         },
         passwordInput: {
             flexDirection: 'row', // To place the eye icon next to the TextInput
-            height: '6%',
+            height: '12%',
             marginVertical: '1%',
             alignItems: 'center',
             borderWidth: 2,
@@ -202,7 +202,7 @@ const LoginScreen = ({ navigation }) => {
 
             <View style={styles.middle}>
 
-                <Image source={require('../assets/loginView/tricky.png')} style={styles.letterImage} resizeMode='contain'/>
+                <Image source={require('../assets/loginView/tricky.png')} style={styles.trickyImage} resizeMode='contain'/>
 
                 <Text style={styles.textStyles}>Email</Text>
                 <TextInput
@@ -240,7 +240,7 @@ const LoginScreen = ({ navigation }) => {
                     <Text style={styles.forgotLoginText}> Forgot Password?</Text>
                 </TouchableOpacity>
 
-                <Image source={require('../assets/loginView/words.png')} style={styles.letterImage} resizeMode='contain'/>
+                <Image source={require('../assets/loginView/words.png')} style={styles.trickyImage} resizeMode='contain'/>
 
             </View>
 

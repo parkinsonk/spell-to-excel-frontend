@@ -56,39 +56,58 @@ const FlyingHighWordsView = ({ navigation }) => {
             borderColor: 'red',
             borderWidth: 2,
         },
-        theOpacity: {
-            height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '50%', // If landscape and aspect ratio is greater than 1.7, set height to 55%, else set height to 55%. If portrait, set height to 55%.
-            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '20%' : '20%', 
+        IOpacity: {
+            height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '30%', // If landscape and aspect ratio is greater than 1.7, set height to 55%, else set height to 55%. If portrait, set height to 55%.
+            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '15%', 
             resizeMode: 'contain',
             marginTop: '6%',
-            marginLeft: isLandscape ? aspectRatio > 1.7 ? '10%' : '10%' : '5%',
+            marginLeft: isLandscape ? aspectRatio > 1.7 ? '10%' : '1%' : '1%',
+            borderColor: 'red',
+            borderWidth: 2,
+        },
+        theOpacity: {
+            height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '30%', // If landscape and aspect ratio is greater than 1.7, set height to 55%, else set height to 55%. If portrait, set height to 55%.
+            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '15%', 
+            resizeMode: 'contain',
+            marginTop: '10%',
+            marginLeft: isLandscape ? aspectRatio > 1.7 ? '10%' : '1%' : '1%',
+            borderColor: 'red',
+            borderWidth: 2,
         },
         toOpacity: {
-            height: isLandscape ? aspectRatio > 1.7 ? '60%' : '60%' : '40%',
-            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '25%',
+            height: isLandscape ? aspectRatio > 1.7 ? '60%' : '60%' : '30%',
+            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
-            marginLeft: isLandscape ? aspectRatio > 1.7 ? '8%' : '8%' : '1%',
+            marginLeft: isLandscape ? aspectRatio > 1.7 ? '8%' : '1%' : '1%',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '15%',
+            borderColor: 'red',
+            borderWidth: 2,
         },
         helicopter: {
             height: isLandscape ? aspectRatio > 1.7 ? '90%' : '90%' : '40%',
-            width: isLandscape ? aspectRatio > 1.7 ? '30%' : '30%' : '25%',
+            width: isLandscape ? aspectRatio > 1.7 ? '30%' : '20%' : '15%',
             resizeMode: 'contain',
-            marginLeft: isLandscape ? aspectRatio > 1.7 ? '4%' : '4%' : '1%',
+            marginLeft: isLandscape ? aspectRatio > 1.7 ? '4%' : '1%' : '1%',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '5%',
+            borderColor : 'red',
+            borderWidth: 2,
         },
         ofOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '40%',
-            width: isLandscape ? aspectRatio > 1.7 ? '12%' : '12%' : '20%',
+            width: isLandscape ? aspectRatio > 1.7 ? '12%' : '12%' : '15%',
             resizeMode: 'contain',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '5%' : '5%' : '15%',
+            borderColor: 'red',
+            borderWidth: 2,
         },
-        isOpacity: {
+        andOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '10%',
+            borderColor: 'red',
+            borderWidth: 2,
         },
     
         youOpacity: {
@@ -96,49 +115,71 @@ const FlyingHighWordsView = ({ navigation }) => {
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '0%' : '0%' : '12%',
+            borderColor: 'red',
+            borderWidth: 2,
         },
-    
-        inOpacity: {
-            height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
-            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
+        seeOpacity: {
+            height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '35%',
+            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '15%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '3%' : '3%' : '6%',
+            marginLeft: isLandscape ? aspectRatio > 1.7 ? '2%' : '1%' : '1%',
+            borderColor: 'red',
+            borderWidth: 2,
         },
-        andOpacity: {
+        saidOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '2%' : '2%' : '8%',
+            borderColor: 'red',
+            borderWidth: 2,
         },
-        thatOpacity: { 
+        weOpacity: { 
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '4%' : '4%' : '14%',
+            borderColor: 'red',
+            borderWidth: 2,
         },
-        itOpacity: {
+        goOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '0%' : '0%' : '0%',
         },
-        heOpacity: {
+        areOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '2%' : '2%' : '3%',
+            borderColor: 'red',
+            borderWidth: 2,
         },
         wasOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
+            borderColor: 'red',
+            borderWidth: 2,
         },
         aOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '0%' : '0%' : '0%',
+            borderColor: 'red',
+            borderWidth: 2,
+        },
+        heOpacity: {
+            height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
+            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
+            resizeMode: 'contain',
+            marginTop: isLandscape ? aspectRatio > 1.7 ? '0%' : '0%' : '0%',
+            borderColor: 'red',
+            borderWidth: 2,
         },
         forOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
@@ -170,7 +211,7 @@ const FlyingHighWordsView = ({ navigation }) => {
             >
                 <View style={styles.top}>
 
-                    <TouchableOpacity style={styles.ofOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'I', batch: 'Flying High'})}>
+                    <TouchableOpacity style={styles.IOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'I', batch: 'Flying High'})}>
                         <Image source={getImageSource('I', flyingHighStatus['I'])} style={styles.Image} />
                     </TouchableOpacity>
                 
@@ -186,7 +227,7 @@ const FlyingHighWordsView = ({ navigation }) => {
                         <Image source={require('../assets/flyingHighWordsView/helicopter.png')} style={styles.Image} />
                     </View>
 
-                    <TouchableOpacity style={styles.ofOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'of', batch: 'Flying High'})}>
+                    <TouchableOpacity style={styles.seeOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'of', batch: 'Flying High'})}>
                         <Image source={getImageSource('see', flyingHighStatus['see'])} style={styles.Image} />
                     </TouchableOpacity>
 
@@ -198,48 +239,48 @@ const FlyingHighWordsView = ({ navigation }) => {
 
                 <View style={styles.middle}>
 
-                    <TouchableOpacity style={styles.isOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'is', batch: 'Flying High'})}>
-                        <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
+                    <TouchableOpacity style={styles.andOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'is', batch: 'Flying High'})}>
+                        <Image source={getImageSource('and', flyingHighStatus['and'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.inOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'in', batch: 'Flying High'})}>
+                    <TouchableOpacity style={styles.aOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'in', batch: 'Flying High'})}>
                         <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.youOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'you', batch: 'Flying High'})}>
-                        <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
+                        <Image source={getImageSource('you', flyingHighStatus['you'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.andOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'and', batch: 'Flying High'})}>
-                        <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
+                    <TouchableOpacity style={styles.saidOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'and', batch: 'Flying High'})}>
+                        <Image source={getImageSource('said', flyingHighStatus['said'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.thatOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'that', batch: 'Flying High'})}>
-                        <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
+                    <TouchableOpacity style={styles.weOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'that', batch: 'Flying High'})}>
+                        <Image source={getImageSource('we', flyingHighStatus['we'])} style={styles.Image} />
                     </TouchableOpacity>
 
                 </View>
 
                 <View style={styles.bottom}>
 
-                    <TouchableOpacity style={styles.itOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'it', batch: 'Flying High'})}>
-                            <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
+                    <TouchableOpacity style={styles.wasOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'it', batch: 'Flying High'})}>
+                            <Image source={getImageSource('was', flyingHighStatus['was'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.heOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'he', batch: 'Flying High'})}>
-                            <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
+                    <TouchableOpacity style={styles.forOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'he', batch: 'Flying High'})}>
+                            <Image source={getImageSource('for', flyingHighStatus['for'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.wasOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'was', batch: 'Flying High'})}>
-                            <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
+                    <TouchableOpacity style={styles.goOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'was', batch: 'Flying High'})}>
+                            <Image source={getImageSource('go', flyingHighStatus['go'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.aOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'a', batch: 'Flying High'})}>
-                            <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
+                    <TouchableOpacity style={styles.heOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'a', batch: 'Flying High'})}>
+                            <Image source={getImageSource('he', flyingHighStatus['he'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.forOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'for', batch: 'Flying High'})}>
-                            <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
+                    <TouchableOpacity style={styles.areOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'for', batch: 'Flying High'})}>
+                            <Image source={getImageSource('are', flyingHighStatus['are'])} style={styles.Image} />
                     </TouchableOpacity>
                 
                 </View>
