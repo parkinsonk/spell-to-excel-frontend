@@ -138,19 +138,19 @@ const SunnyIslandWordsView = ({ navigation }) => {
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '10%' : '10%'
         },
         theyOpacity: {
-            height: isLandscape ? aspectRatio > 1.7 ? '45%' : '45%' : '25%',
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '25%' : '35%',
+            height: isLandscape ? aspectRatio > 1.7 ? '45%' : '44%' : '25%',
+            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '31%' : '35%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '2%' : '2%' : '1%',
             marginBottom: '2%'
         },
         whereOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '45%' : '45%' : '25%',
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '25%' : '35%',
-            marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '5%' : '5%',
+            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '30%' : '35%',
+            marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '20%' : '5%',
         },
         haveOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '100%' : '100%' : '80%',
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '20%' : '40%',
+            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '25%' : '40%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '10%' : '10%',
 
         },
@@ -162,7 +162,7 @@ const SunnyIslandWordsView = ({ navigation }) => {
         },
         funnyOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '35%' : '25%' : '15%', // If landscape and aspect ratio is greater than 1.7, set height to 30%, else set height to 23%. If portrait, set height to 15%.
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '20%' : '35%', 
+            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '25%' : '35%', 
             marginTop: '5%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '10%' : '10%',
         },
@@ -187,7 +187,7 @@ const SunnyIslandWordsView = ({ navigation }) => {
         },
         fromOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '35%' : '25%' : '15%',
-            width: isLandscape ? aspectRatio > 1.7 ? '25%' : '20%' : '35%',
+            width: isLandscape ? aspectRatio > 1.7 ? '25%' : '27%' : '35%',
             marginTop: '8%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '10%' : '15%' : '10%',
     
