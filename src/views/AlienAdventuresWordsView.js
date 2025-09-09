@@ -65,12 +65,12 @@ const AlienAdventuresWordsView = ({ navigation }) => {
             alignItems: 'flex-end',
         },
         allOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '50%', '35%') : calculateImageDimensions(aspectRatio, '25%', '25%', '20%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '40%', '35%') : calculateImageDimensions(aspectRatio, '25%', '20%', '20%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '12%', '15%', '15%') : calculateImageDimensions(aspectRatio, '17%', '17%', '15%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '0%', '0%', '0%'),
         },
         lookOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '80%', '80%', '45%') : calculateImageDimensions(aspectRatio, '35%', '35%', '30%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '80%', '60%', '45%') : calculateImageDimensions(aspectRatio, '35%', '25%', '30%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '10%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '15%', '15%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '2%', '5%') : calculateImageDimensions(aspectRatio, '5%', '20%', '20%'),
         },
@@ -80,17 +80,17 @@ const AlienAdventuresWordsView = ({ navigation }) => {
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '5%', '5%', '5%'),
         },
         wereOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '50%', '45%') : calculateImageDimensions(aspectRatio, '35%', '30%', '33%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '52%', '45%') : calculateImageDimensions(aspectRatio, '35%', '28%', '33%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '10%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '19%', '20%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '4%', '8%', '8%') : calculateImageDimensions(aspectRatio, '5%', '20%', '20%'),
         },
         yourOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '65%', '35%') : calculateImageDimensions(aspectRatio, '35%', '35%', '20%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '40%', '35%') : calculateImageDimensions(aspectRatio, '35%', '20%', '20%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '10%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '17%', '15%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '2%', '3%') : calculateImageDimensions(aspectRatio, '5%', '10%', '10%'),
         },
         downOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '50%', '45%') : calculateImageDimensions(aspectRatio, '35%', '35%', '35%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '56%', '45%') : calculateImageDimensions(aspectRatio, '35%', '35%', '35%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '10%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '20%', '20%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '0%', '0%') : calculateImageDimensions(aspectRatio, '5%', '0%', '0%'),
         },
@@ -100,13 +100,13 @@ const AlienAdventuresWordsView = ({ navigation }) => {
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '4%', '5%', '8%') : calculateImageDimensions(aspectRatio, '5%', '15%', '15%'),
         },
         doOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '55%', '35%') : calculateImageDimensions(aspectRatio, '35%', '35%', '20%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '39%', '35%') : calculateImageDimensions(aspectRatio, '35%', '20%', '20%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '10%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '17%', '15%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '5%', '5%', '5%'),
         },
         theirOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '50%', '55%') : calculateImageDimensions(aspectRatio, '35%', '25%', '35%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '20%', '15%') : calculateImageDimensions(aspectRatio, '9%', '26%', '15%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '61%', '55%') : calculateImageDimensions(aspectRatio, '35%', '26%', '35%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '15%', '15%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '3%', '3%') : calculateImageDimensions(aspectRatio, '5%', '20%', '20%'),
         },
         hereOpacity: {
@@ -115,7 +115,7 @@ const AlienAdventuresWordsView = ({ navigation }) => {
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '4%', '9%', '9%') : calculateImageDimensions(aspectRatio, '20%', '5%', '5%'),
         },
         otherOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '45%', '55%') : calculateImageDimensions(aspectRatio, '40%', '25%', '31%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '50%', '55%') : calculateImageDimensions(aspectRatio, '40%', '27%', '31%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '14%', '15%', '19%') : calculateImageDimensions(aspectRatio, '25%', '20%', '20%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '10%', '0%', '0%'),
         },
@@ -125,7 +125,7 @@ const AlienAdventuresWordsView = ({ navigation }) => {
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '4%', '5%', '5%') : calculateImageDimensions(aspectRatio, '20%', '15%', '15%'),
         },
         wantOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '45%', '40%') : calculateImageDimensions(aspectRatio, '40%', '35%', '30%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '45%', '40%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '10%', '15%', '15%') : calculateImageDimensions(aspectRatio, '25%', '20%', '20%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '2%') : calculateImageDimensions(aspectRatio, '8%', '5%', '5%'),
         },
@@ -135,7 +135,7 @@ const AlienAdventuresWordsView = ({ navigation }) => {
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '4%', '10%', '10%') : calculateImageDimensions(aspectRatio, '8%', '15%', '15%'),
         },
         manyOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '45%', '45%') : calculateImageDimensions(aspectRatio, '40%', '35%', '35%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '52%', '45%') : calculateImageDimensions(aspectRatio, '40%', '32%', '35%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '12%', '15%', '15%') : calculateImageDimensions(aspectRatio, '25%', '22%', '20%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '1%', '1%') : calculateImageDimensions(aspectRatio, '15%', '0%', '0%'),
         },
