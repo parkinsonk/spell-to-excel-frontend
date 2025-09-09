@@ -38,7 +38,7 @@ const RegisterScreen = () => {
         })
         .then(response => {
             Alert.alert("Success!", "Account Creation Code has been sent to your email.");
-            navigation.navigate('Create Letter Friends Account Code' , { email: email , password: password , teacher_name: 'Teacher Placeholder' , classroom_name: 'Classroom Placeholder' , student_name: 'Student Placeholder' });
+            navigation.navigate('Create Letter Friends Account Code' , { email: email , password: password , teacher_name: 'Teacher Placeholder' , classroom_name: 'Classroom Placeholder' , student_name: 'Student Placeholder', grade: 4 });
         })
         .catch(error => {
             if (error.response && error.response.data) {

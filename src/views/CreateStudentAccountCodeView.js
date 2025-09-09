@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for the eye icon
 
 const CreateStudentAccountCodeView = ({ navigation, route }) => {
-    const { email, password, teacher_name, classroom_name, student_name} = route.params;
+    const { email, password, teacher_name, classroom_name, student_name, grade} = route.params;
     const [accountConfirmationCode, setAccountConfirmationCode] = useState('');
 
     const handleResetPassword = () => {
@@ -19,7 +19,8 @@ const CreateStudentAccountCodeView = ({ navigation, route }) => {
             teacher_name: teacher_name,
             classroom_name: classroom_name,
             student_name: student_name,
-            confirmation_code: accountConfirmationCode
+            confirmation_code: accountConfirmationCode,
+            grade: grade
         })
             .then(response => {
                 Alert.alert('Success!', 'Your account has been set up.');
