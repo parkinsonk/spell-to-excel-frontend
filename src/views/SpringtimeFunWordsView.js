@@ -73,43 +73,51 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             borderWidth: 2,
         },
         oneOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '45%', '32%') : calculateImageDimensions(aspectRatio, '40%', '35%', '30%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '15%', '21%', '15%') : calculateImageDimensions(aspectRatio, '25%', '26%', '26%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '2%') : calculateImageDimensions(aspectRatio, '8%', '8%', '8%'),
+            marginRight: '5%'
             
         },
         twoOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '69%', '32%') : calculateImageDimensions(aspectRatio, '40%', '35%', '30%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '15%', '21%', '15%') : calculateImageDimensions(aspectRatio, '25%', '26%', '26%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '2%', '5%', '5%') : calculateImageDimensions(aspectRatio, '15%', '15%', '15%'),
+            marginRight: '5%'
         },
         blueOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '69%', '32%') : calculateImageDimensions(aspectRatio, '40%', '35%', '30%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '15%', '21%', '15%') : calculateImageDimensions(aspectRatio, '25%', '26%', '26%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '2%') : calculateImageDimensions(aspectRatio, '8%', '8%', '8%'),
         },
         threeOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '69%', '32%') : calculateImageDimensions(aspectRatio, '40%', '35%', '30%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '15%', '21%', '15%') : calculateImageDimensions(aspectRatio, '25%', '26%', '26%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '2%', '5%', '5%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
-            marginRight: 25
+            marginRight: '5%'
         },
         yellowOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '69%', '32%') : calculateImageDimensions(aspectRatio, '40%', '35%', '30%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '15%', '21%', '15%') : calculateImageDimensions(aspectRatio, '25%', '26%', '26%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '2%') : calculateImageDimensions(aspectRatio, '10%', '10%', '10%'),
+            marginRight: '5%'
         },
         nineOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '69%', '32%') : calculateImageDimensions(aspectRatio, '40%', '35%', '30%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '15%', '21%', '15%') : calculateImageDimensions(aspectRatio, '25%', '26%', '26%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '2%', '5%', '5%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
+        },
+        greenOpacity: {
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '50%', '60%') : calculateImageDimensions(aspectRatio, '35%', '30%', '35%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '7%', '8%', '9%') : calculateImageDimensions(aspectRatio, '10%', '10%', '10%'),
+
         },
         fourOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '50%', '60%') : calculateImageDimensions(aspectRatio, '35%', '30%', '35%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '6%', '7%', '8%') : calculateImageDimensions(aspectRatio, '9%', '9%', '9%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '5%', '3%') : calculateImageDimensions(aspectRatio, '5%', '5%', '5%'),
         },
-        byOpacity: {
+        purpleOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '50%', '60%') : calculateImageDimensions(aspectRatio, '35%', '30%', '35%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '6%', '7%', '8%') : calculateImageDimensions(aspectRatio, '9%', '9%', '9%'),
         },
@@ -130,15 +138,15 @@ const SpringtimeFundWordsView = ({ navigation }) => {
         whiteOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '50%', '60%') : calculateImageDimensions(aspectRatio, '35%', '30%', '35%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '6%', '7%', '8%') : calculateImageDimensions(aspectRatio, '9%', '9%', '9%'),
-        },
-        eightOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '50%', '60%') : calculateImageDimensions(aspectRatio, '35%', '30%', '35%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '6%', '7%', '8%') : calculateImageDimensions(aspectRatio, '9%', '9%', '9%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '5%', '3%') : calculateImageDimensions(aspectRatio, '5%', '5%', '5%'),
         },
         blackOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '50%', '60%') : calculateImageDimensions(aspectRatio, '35%', '30%', '35%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '6%', '7%', '8%') : calculateImageDimensions(aspectRatio, '9%', '9%', '9%'),
+        },
+        eightOpacity: {
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '50%', '60%') : calculateImageDimensions(aspectRatio, '35%', '30%', '35%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '8%', '9%', '10%') : calculateImageDimensions(aspectRatio, '10%', '10%', '10%'),
         },
         notOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '50%', '60%') : calculateImageDimensions(aspectRatio, '35%', '30%', '35%'),
@@ -213,11 +221,15 @@ const SpringtimeFundWordsView = ({ navigation }) => {
 
                 <View style={styles.bottom}>
 
+                    <TouchableOpacity style={styles.greenOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'four', batch: 'SpringTime Fun'})}>
+                        <Image source={getImageSource('green', springtimeFunStatus['green'])} style={styles.Image} />
+                    </TouchableOpacity>
+
                     <TouchableOpacity style={styles.fourOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'four', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('four', springtimeFunStatus['four'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.byOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'by', batch: 'SpringTime Fun'})}>
+                    <TouchableOpacity style={styles.purpleOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'by', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('purple', springtimeFunStatus['purple'])} style={styles.Image} />
                     </TouchableOpacity>
 
@@ -233,12 +245,12 @@ const SpringtimeFundWordsView = ({ navigation }) => {
                         <Image source={getImageSource('seven', springtimeFunStatus['seven'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.whiteOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'all', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('white', springtimeFunStatus['white'])} style={styles.Image} />
-                    </TouchableOpacity>
-
                     <TouchableOpacity style={styles.eightOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'eight', batch: 'SpringTime Fun'})}>
                         <Image source={getImageSource('eight', springtimeFunStatus['eight'])} style={styles.Image} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.whiteOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'all', batch: 'SpringTime Fun'})}>
+                        <Image source={getImageSource('white', springtimeFunStatus['white'])} style={styles.Image} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.blackOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'can', batch: 'SpringTime Fun'})}>
