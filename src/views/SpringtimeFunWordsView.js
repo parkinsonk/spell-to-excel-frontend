@@ -154,17 +154,6 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '5%', '3%') : calculateImageDimensions(aspectRatio, '5%', '5%', '5%'),
         },
         
-        
-        
-        birdImage: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '75%', '80%', '80%') : calculateImageDimensions(aspectRatio, '50%', '50%', '50%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '12%', '18%', '22%') : calculateImageDimensions(aspectRatio, '22%', '27%', '24%'),
-        },
-        sunImage: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '100%', '100%') : calculateImageDimensions(aspectRatio, '50%', '50%', '50%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '15%', '20%', '22%') : calculateImageDimensions(aspectRatio, '22%', '22%', '22%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '10%', '10%', '10%'),
-        },
         Image: {
             height: '100%',
             width: '100%',
