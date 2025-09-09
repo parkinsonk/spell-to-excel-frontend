@@ -96,6 +96,8 @@ const wordImageMapping = {
     'whitecompleted': require('../assets/springtimeFunView/whitecompleted.png'),
     'black': require('../assets/springtimeFunView/black.png'),
     'blackcompleted': require('../assets/springtimeFunView/blackcompleted.png'),
+    'blue': require('../assets/springtimeFunView/blue.png'),
+    'bluecompleted': require('../assets/springtimeFunView/bluecompleted.png'),
 
 
     // Alien Adventure Words
@@ -153,8 +155,6 @@ const wordImageMapping = {
     'thesecompleted': require('../assets/outerSpaceView/thesecompleted.png'),
     'time': require('../assets/outerSpaceView/time.png'),
     'timecompleted': require('../assets/outerSpaceView/timecompleted.png'),
-    'two': require('../assets/outerSpaceView/two.png'),
-    'twocompleted': require('../assets/outerSpaceView/twocompleted.png'),
     'would': require('../assets/outerSpaceView/would.png'),
     'wouldcompleted': require('../assets/outerSpaceView/wouldcompleted.png'),
     'write': require('../assets/outerSpaceView/write.png'),
