@@ -28,8 +28,8 @@ const wordImageMapping = {
     'gocompleted': require('../assets/flyingHighWordsView/gocompleted.png'),
     'he': require('../assets/flyingHighWordsView/he.png'),
     'hecompleted': require('../assets/flyingHighWordsView/hecompleted.png'),
-    'are': require('../assets/flyingHighWordsView/we.png'),
-    'arecompleted': require('../assets/flyingHighWordsView/wecompleted.png'),
+    'are': require('../assets/flyingHighWordsView/are.png'),
+    'arecompleted': require('../assets/flyingHighWordsView/arecompleted.png'),
 
 
     // Sunny Island Words
