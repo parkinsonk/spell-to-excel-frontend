@@ -274,7 +274,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     
                                         ]}
                                     >
-                                        <Image source={require('../assets/selectWordBatchesView/sunnyIsland.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: springtimeFunCompleted ? 1 : .5}} flying />
+                                        <Image source={require('../assets/selectWordBatchesView/sunnyIsland.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: flyingHighCompleted ? 1 : .5}} flying />
                                     </Pressable>
 
                                     {/* Springtime Fun */}
@@ -293,7 +293,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                         ]}
                                     >
 
-                                        <Image source={require('../assets/selectWordBatchesView/springtimeFun.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: flyingHighCompleted ? 1 : .5}} />
+                                        <Image source={require('../assets/selectWordBatchesView/springtimeFun.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: sunnyIslandCompleted ? 1 : .5}} />
                                     </Pressable>
 
                               
@@ -322,7 +322,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     
                                         ]}
                                     >
-                                        <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: sunnyIslandCompleted ? 1 : .5}} />
+                                        <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')}  resizeMode='contain' style={{ height: '100%', width: '100%', opacity: springtimeFunCompleted ? 1 : .5}} />
                                     </Pressable>
 
                                 {/* Outer Space */}
