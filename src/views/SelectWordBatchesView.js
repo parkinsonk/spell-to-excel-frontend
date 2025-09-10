@@ -49,8 +49,6 @@ const SelectWordBatchesView = ({ navigation }) => {
         flyingHighCompleted = true;
     }
 
-    console.log(flyingHighCompleted);
-
     for (let word in sunnyIslandStatus) {
         if (!sunnyIslandStatus[word].test_correct) {
             sunnyIslandCompleted = false;
@@ -264,7 +262,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     {/* Sunny Island */}
                                     <Pressable
                                         onPress={() => {
-                                            if (springtimeFunCompleted) {
+                                            if (flyingHighCompleted) {
                                                 navigation.navigate('Sunny Island'); // Only navigate if flyingHighCompleted is true
                                             }
                                         }}
@@ -282,7 +280,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     {/* Springtime Fun */}
                                     <Pressable
                                         onPress={() => {
-                                            if (flyingHighCompleted) {
+                                            if (sunnyIslandCompleted) {
                                                 navigation.navigate('SpringTime Fun'); // Only navigate if flyingHighCompleted is true
                                             }
                                         }}
@@ -312,7 +310,7 @@ const SelectWordBatchesView = ({ navigation }) => {
                                     {/* Alien Adventures */}
                                     <Pressable
                                         onPress={() => {
-                                            if (sunnyIslandCompleted) {
+                                            if (springtimeFunCompleted) {
                                                 navigation.navigate('Alien Adventures'); // Only navigate if sunnyIslandCompleted is true
                                             }
                                         }}
