@@ -65,85 +65,69 @@ const PlanetsAndBeyondView = ({ navigation }) => {
             justifyContent: 'space-between',
             alignItems: 'flex-end',
         },
-        goOpacity: {
+        pleaseOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '25%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '17%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '5%', '5%') : calculateImageDimensions(aspectRatio, '10%', '10%', '10%'),
         },
-        theseOpacity: {
+        herOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '35%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '5%', '5%', '5%'),
         },
-        peopleOpacity: {
+        waterOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '35%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '16%', '17%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '3%', '3%') : calculateImageDimensions(aspectRatio, '12%', '12%', '12%'),
         },
-        myOpacity: {
+        beenOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '35%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '5%', '5%') : calculateImageDimensions(aspectRatio, '9%', '9%', '9%'),
         },
-        thanOpacity: {
+        ourOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '35%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '2%', '2%') : calculateImageDimensions(aspectRatio, '6%', '6%', '6%'),
         },
         calledOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '35%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '0%', '0%', '0%'),
         },
-        couldOpacity: {
+        askOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '35%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '5%', '5%') : calculateImageDimensions(aspectRatio, '15%', '15%', '15%'),
         },
-        oilOpacity: {
+        anyOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '35%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '4%', '4%') : calculateImageDimensions(aspectRatio, '8%', '8%', '8%'),
         },
-        firstOpacity: {
+        longOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '35%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '9%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '2%', '2%') : calculateImageDimensions(aspectRatio, '4%', '4%', '4%'),
         },
-        waterOpacity: {
+        knowOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '40%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '25%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '12%', '12%', '12%'),
         },
-        noOpacity: {
+        putOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '40%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '25%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '0%') : calculateImageDimensions(aspectRatio, '15%', '15%', '15%'),
         },
-        seeOpacity: {
+        everyOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '40%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '25%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '5%', '5%') : calculateImageDimensions(aspectRatio, '10%', '10%', '10%'),
         },
-        whoOpacity: {
+        thinkOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '40%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '25%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '2%', '2%') : calculateImageDimensions(aspectRatio, '4%', '4%', '4%'),
         },
-        numberOpacity: {
+        flyOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '40%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '25%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '6%', '6%') : calculateImageDimensions(aspectRatio, '12%', '12%', '12%'),
         },
-        beenOpacity: {
+        giveOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '40%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '14%') : calculateImageDimensions(aspectRatio, '25%', '16%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '3%', '3%') : calculateImageDimensions(aspectRatio, '6%', '6%', '6%'),
         },
         wayOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '90%', '70%', '70%') : calculateImageDimensions(aspectRatio, '40%', '50%', '50%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '11%', '15%', '15%') : calculateImageDimensions(aspectRatio, '25%', '22%', '16%'),
-            marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '2%', '2%') : calculateImageDimensions(aspectRatio, '10%', '10%', '10%'),
         },
         Image: {
             height: '100%',
@@ -168,24 +152,24 @@ const PlanetsAndBeyondView = ({ navigation }) => {
             >
                 <SafeAreaView style={styles.top}>
 
-                    <TouchableOpacity style={styles.goOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'go', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('go', planetsAndBeyondStatus['go'])}  style={styles.Image} resizeMode='contain' />
+                    <TouchableOpacity style={styles.pleaseOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'please', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('please', planetsAndBeyondStatus['please'])}  style={styles.Image} resizeMode='contain' />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.theseOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'these', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('these', planetsAndBeyondStatus['these'])} style={styles.Image} resizeMode='contain'/>
+                    <TouchableOpacity style={styles.herOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'her', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('her', planetsAndBeyondStatus['her'])} style={styles.Image} resizeMode='contain'/>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.peopleOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'people', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('people', planetsAndBeyondStatus['people'])} style={styles.Image} resizeMode='contain'/>
+                    <TouchableOpacity style={styles.waterOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'water', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('water', planetsAndBeyondStatus['water'])} style={styles.Image} resizeMode='contain'/>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.myOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'my', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('my', planetsAndBeyondStatus['my'])} style={styles.Image} resizeMode='contain'/>
+                    <TouchableOpacity style={styles.beenOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'been', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('been', planetsAndBeyondStatus['been'])} style={styles.Image} resizeMode='contain'/>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.thanOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'than', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('than', planetsAndBeyondStatus['than'])} style={styles.Image} resizeMode='contain'/>
+                    <TouchableOpacity style={styles.ourOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'our', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('our', planetsAndBeyondStatus['our'])} style={styles.Image} resizeMode='contain'/>
                     </TouchableOpacity>
 
                 </SafeAreaView>
@@ -195,47 +179,43 @@ const PlanetsAndBeyondView = ({ navigation }) => {
                         <Image source={getImageSource('called', planetsAndBeyondStatus['called'])} style={styles.Image} resizeMode='contain'/>
                     </TouchableOpacity>
                 
-                    <TouchableOpacity style={styles.couldOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'could', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('could', planetsAndBeyondStatus['could'])} style={styles.Image} resizeMode='contain'/>
+                    <TouchableOpacity style={styles.askOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'ask', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('ask', planetsAndBeyondStatus['ask'])} style={styles.Image} resizeMode='contain'/>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.oilOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'oil', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('oil', planetsAndBeyondStatus['oil'])} style={styles.Image} resizeMode='contain'/>
+                    <TouchableOpacity style={styles.anyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'any', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('any', planetsAndBeyondStatus['any'])} style={styles.Image} resizeMode='contain'/>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.firstOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'first', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('first', planetsAndBeyondStatus['first'])} style={styles.Image} resizeMode='contain'/>
+                    <TouchableOpacity style={styles.longOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'long', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('long', planetsAndBeyondStatus['long'])} style={styles.Image} resizeMode='contain'/>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.waterOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'water', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('water', planetsAndBeyondStatus['water'])} style={styles.Image} resizeMode='contain'/>
+                    <TouchableOpacity style={styles.knowOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'know', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('know', planetsAndBeyondStatus['know'])} style={styles.Image} resizeMode='contain'/>
                     </TouchableOpacity>
                 </SafeAreaView>
 
                 <SafeAreaView style={styles.bottom}>
                 
-                    <TouchableOpacity style={styles.noOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'no', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('no', planetsAndBeyondStatus['no'])} style={styles.Image} resizeMode='contain' />
+                    <TouchableOpacity style={styles.putOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'put', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('put', planetsAndBeyondStatus['put'])} style={styles.Image} resizeMode='contain' />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.seeOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'see', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('see', planetsAndBeyondStatus['see'])} style={styles.Image} resizeMode='contain' />
+                    <TouchableOpacity style={styles.everyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'every', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('every', planetsAndBeyondStatus['every'])} style={styles.Image} resizeMode='contain' />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.whoOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'who', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('who', planetsAndBeyondStatus['who'])} style={styles.Image} resizeMode='contain' />
+                    <TouchableOpacity style={styles.thinkOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'think', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('think', planetsAndBeyondStatus['think'])} style={styles.Image} resizeMode='contain' />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.numberOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'number', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('number', planetsAndBeyondStatus['number'])} style={styles.Image} resizeMode='contain' />
+                    <TouchableOpacity style={styles.flyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'fly', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('fly', planetsAndBeyondStatus['fly'])} style={styles.Image} resizeMode='contain' />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.beenOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'been', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('been', planetsAndBeyondStatus['been'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.wayOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'way', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('way', planetsAndBeyondStatus['way'])} style={styles.Image} resizeMode='contain' />
+                    <TouchableOpacity style={styles.giveOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'give', batch: 'Planets and Beyond' })}>
+                        <Image source={getImageSource('give', planetsAndBeyondStatus['give'])} style={styles.Image} resizeMode='contain' />
                     </TouchableOpacity>
 
                 </SafeAreaView>
