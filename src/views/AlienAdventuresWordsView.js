@@ -163,19 +163,19 @@ const AlienAdventuresWordsView = ({ navigation }) => {
             >
                 <SafeAreaView style={styles.top}>
 
-                    <TouchableOpacity style={styles.allOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'about', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.allOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'all', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('all', alienAdventureStatus['all'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.lookOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'do', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.lookOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'look', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('look', alienAdventureStatus['look'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.littleOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'she', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.littleOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'little', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('little', alienAdventureStatus['little'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.wereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'their', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.wereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'were', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('were', alienAdventureStatus['were'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.yourOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'if', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.yourOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'your', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('your', alienAdventureStatus['your'])} style={styles.Image} />
                     </TouchableOpacity>
 
@@ -183,19 +183,19 @@ const AlienAdventuresWordsView = ({ navigation }) => {
 
                 <SafeAreaView style={styles.middle}>
 
-                    <TouchableOpacity style={styles.downOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'other', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.downOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'down', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('down', alienAdventureStatus['down'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.thereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'up', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.thereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'there', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('there', alienAdventureStatus['there'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.doOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'will', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.doOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'do', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('do', alienAdventureStatus['do'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.theirOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'how', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.theirOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'their', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('their', alienAdventureStatus['their'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.hereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'out', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.hereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'here', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('here', alienAdventureStatus['here'])} style={styles.Image} />
                     </TouchableOpacity>
 
@@ -204,19 +204,19 @@ const AlienAdventuresWordsView = ({ navigation }) => {
 
                 <SafeAreaView style={styles.bottom}>
 
-                    <TouchableOpacity style={styles.otherOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'many', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.otherOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'other', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('other', alienAdventureStatus['other'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.aboutOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'then', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.aboutOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'about', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('about', alienAdventureStatus['about'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.wantOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'them', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.wantOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'want', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('want', alienAdventureStatus['want'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.tooOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'which', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.tooOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'too', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('too', alienAdventureStatus['too'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.manyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'each', batch: 'Alien Adventures' })}>
+                    <TouchableOpacity style={styles.manyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'many', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('many', alienAdventureStatus['many'])} style={styles.Image} />
                     </TouchableOpacity>
 
