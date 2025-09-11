@@ -16,7 +16,6 @@ const ReadView = ({ navigation, route }) => {
   const isLandscape = screenWidth > screenHeight;
   const aspectRatio = screenWidth / screenHeight;
   const videoRef = useRef(null); // Create a ref for the video
-  console.log(batch);
 
   const readingVideo = readVideoMapping[selectedWord] || readVideoMapping.default;
 

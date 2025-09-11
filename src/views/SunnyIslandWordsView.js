@@ -228,18 +228,18 @@ const SunnyIslandWordsView = ({ navigation }) => {
 
                     <View style={styles.middleLeft}>
                         <View style={styles.middleTopSection}>
-                            <TouchableOpacity style={styles.isOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'or', batch: 'Sunny Island'})}>
+                            <TouchableOpacity style={styles.isOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'is', batch: 'Sunny Island'})}>
                                 <Image source={getImageSource('is', sunnyIslandStatus['is'])} style={styles.Image} />
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.myOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'be', batch: 'Sunny Island'})}>
+                            <TouchableOpacity style={styles.myOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'my', batch: 'Sunny Island'})}>
                                 <Image source={getImageSource('my', sunnyIslandStatus['my'])} style={styles.Image} />
                             </TouchableOpacity>
                         </View>
 
                         <View style={styles.middleBottomSection}>
                             
-                            <TouchableOpacity style={styles.meOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'had', batch: 'Sunny Island'})}>
+                            <TouchableOpacity style={styles.meOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'me', batch: 'Sunny Island'})}>
                                 <Image source={getImageSource('me', sunnyIslandStatus['me'])} style={styles.Image} />
                             </TouchableOpacity>
                         </View>
@@ -248,20 +248,20 @@ const SunnyIslandWordsView = ({ navigation }) => {
                     <View style={styles.middleMiddle}>
 
                         <View style={styles.middleTopSection}>
-                            <TouchableOpacity style={styles.asOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'on', batch: 'Sunny Island'})}>
+                            <TouchableOpacity style={styles.asOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'as', batch: 'Sunny Island'})}>
                                 <Image source={getImageSource('as', sunnyIslandStatus['as'])} style={styles.Image} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.sayOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'have', batch: 'Sunny Island'})}>
+                            <TouchableOpacity style={styles.sayOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'say', batch: 'Sunny Island'})}>
                                 <Image source={getImageSource('say', sunnyIslandStatus['say'])} style={styles.Image} />
                             </TouchableOpacity>
                         </View>
 
                         <View style={styles.middleBottomSection}>
 
-                            <TouchableOpacity style={styles.comeOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'one', batch: 'Sunny Island'})}>
+                            <TouchableOpacity style={styles.comeOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'come', batch: 'Sunny Island'})}>
                                 <Image source={getImageSource('come', sunnyIslandStatus['come'])} style={styles.Image} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.hasOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'are', batch: 'Sunny Island'})}>
+                            <TouchableOpacity style={styles.hasOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'has', batch: 'Sunny Island'})}>
                                 <Image source={getImageSource('has', sunnyIslandStatus['has'])} style={styles.Image} />
                             </TouchableOpacity>
                         </View>
@@ -271,21 +271,21 @@ const SunnyIslandWordsView = ({ navigation }) => {
                     <View style={styles.middleRight}>
 
                     <View style={styles.middleTopSection}>
-                            <TouchableOpacity style={styles.theyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'with', batch: 'Sunny Island' })}>
+                            <TouchableOpacity style={styles.theyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'they', batch: 'Sunny Island' })}>
                                 <Image source={getImageSource('they', sunnyIslandStatus['they'])} style={styles.Image} />
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.whereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'as', batch: 'Sunny Island' })}>
+                            <TouchableOpacity style={styles.whereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'where', batch: 'Sunny Island' })}>
                                 <Image source={getImageSource('where', sunnyIslandStatus['where'])} style={styles.Image} />
                             </TouchableOpacity>
                         </View>
 
                         <View style={styles.middleBottomSection}>
-                            <TouchableOpacity style={styles.haveOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'this', batch: 'Sunny Island'  })}>
+                            <TouchableOpacity style={styles.haveOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'have', batch: 'Sunny Island'  })}>
                                 <Image source={getImageSource('have', sunnyIslandStatus['have'])} style={styles.Image} />
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.awayOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'they', batch: 'Sunny Island'})}>
+                            <TouchableOpacity style={styles.awayOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'away', batch: 'Sunny Island'})}>
                                 <Image source={getImageSource('away', sunnyIslandStatus['away'])} style={styles.Image} />
                             </TouchableOpacity>
                         </View>
@@ -298,11 +298,11 @@ const SunnyIslandWordsView = ({ navigation }) => {
 
                     <View style={styles.bottomLeft}>
 
-                        <TouchableOpacity style={styles.whatOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'his', batch: 'Sunny Island'})}>
+                        <TouchableOpacity style={styles.whatOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'what', batch: 'Sunny Island'})}>
                             <Image source={getImageSource('what', sunnyIslandStatus['what'])} style={styles.Image} />
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.fromOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'I', batch: 'Sunny Island'})}>
+                        <TouchableOpacity style={styles.fromOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'from', batch: 'Sunny Island'})}>
                             <Image source={getImageSource('from', sunnyIslandStatus['from'])} style={styles.Image} />
                         </TouchableOpacity>
 
@@ -311,18 +311,18 @@ const SunnyIslandWordsView = ({ navigation }) => {
 
                     <View style={styles.bottomMiddle}>
 
-                        <TouchableOpacity style={styles.byOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'I', batch: 'Sunny Island'})}>
+                        <TouchableOpacity style={styles.byOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'by', batch: 'Sunny Island'})}>
                             <Image source={getImageSource('by', sunnyIslandStatus['by'])} style={styles.Image} />
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.findOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'from', batch: 'Sunny Island'})}>
+                        <TouchableOpacity style={styles.findOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'find', batch: 'Sunny Island'})}>
                             <Image source={getImageSource('find', sunnyIslandStatus['find'])} style={styles.Image} />
                         </TouchableOpacity>
 
                     </View>
 
                     <View style={styles.bottomRight}>
-                        <TouchableOpacity style={styles.funnyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'at', batch: 'Sunny Island'})}>
+                        <TouchableOpacity style={styles.funnyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'funny', batch: 'Sunny Island'})}>
                             <Image source={getImageSource('funny', sunnyIslandStatus['funny'])} style={styles.Image} />
                         </TouchableOpacity>
 
