@@ -31,7 +31,7 @@ const DeleteProgramView = ({ navigation, route }) => {
 
     const handleDeleteAccount = () => {
 
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/delete-student-account/', { email: email, password: password })
+        axios.delete('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/delete-student-account/', { data: { email: email, password: accountPassword } })
             .then(response => {
                 Alert.alert('Success', 'Your account has been deleted.');
                 navigation.navigate('Login');
