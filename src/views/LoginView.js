@@ -42,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
         await checkPlanetsAndBeyond('Planets and Beyond');
         await checkDivingDeep('Diving Deep');
         
-        navigation.navigate('Word Batches');
+        navigation.navigate('Word Batches', { email: email });
     })
     .catch(error => {
         // Handle error
