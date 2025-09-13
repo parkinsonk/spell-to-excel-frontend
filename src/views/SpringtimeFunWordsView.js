@@ -91,20 +91,20 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '2%') : calculateImageDimensions(aspectRatio, '8%', '8%', '8%'),
         },
         threeOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '33%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '16%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '2%', '5%', '5%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
             marginRight: '5%'
         },
         yellowOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '50%', '38%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '15%', '17%', '16%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '2%') : calculateImageDimensions(aspectRatio, '10%', '10%', '10%'),
             marginRight: '5%'
         },
         nineOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '33%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '16%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '2%', '5%', '5%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
         },
         greenOpacity: {

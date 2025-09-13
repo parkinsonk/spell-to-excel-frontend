@@ -6,8 +6,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
-const SelectWordBatchesView = ({ navigation }) => {
+const SelectWordBatchesView = ({ navigation, route }) => {
 
+    const { email } = route.params;
     const { height: screenHeight, width: screenWidth } = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
@@ -109,24 +110,8 @@ const SelectWordBatchesView = ({ navigation }) => {
             top: {
                 flex: 1,
                 flexDirection: 'row',
+                justifyContent: 'space-evenly',
 
-            },
-            topLeft: {
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start',
-                
-            },
-            topRight: {
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'flex-end',
-                alignItems: 'flex-start',
-            },
-            topMiddle: {
-                flex: 1,
-                flexDirection: 'row',
             },
             bottom: {
                 flex: 10,
@@ -220,22 +205,18 @@ const SelectWordBatchesView = ({ navigation }) => {
                 style={styles.background}>
 
                     <SafeAreaView style={styles.top}>
-                        <View style={styles.topLeft}>
 
                             <TouchableOpacity style={styles.wordsIKnowopacity} onPress={logout}>
-                                <Image source={require('../assets/selectWordBatchesView/logout.png')}  resizeMode='contain' style={styles.image} />
+                                <Image source={require('../assets/selectWordBatchesView/accountSettings.png')}  resizeMode='contain' style={styles.image} />
                             </TouchableOpacity>
-
-                        </View>
-
-
-
-                        <View style={styles.topRight}>
 
                             <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>
                                 <Image source={require('../assets/selectWordBatchesView/wordsIKnow.png')}  resizeMode='contain' style={styles.image} />
                             </TouchableOpacity>
-                        </View>
+
+                            <TouchableOpacity style={styles.wordsIKnowopacity} onPress={logout}>
+                                <Image source={require('../assets/selectWordBatchesView/logout.png')}  resizeMode='contain' style={styles.image} />
+                            </TouchableOpacity>
                     
                     </SafeAreaView>
 
