@@ -34,30 +34,20 @@ const SunnyIslandWordsView = ({ navigation }) => {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         middle: {
             flex: 1,
             flexDirection: 'row',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         middleLeft: {
             flex: 1,
-            borderColor: 'red',
-            borderWidth: 2,
         },
         middleMiddle: {
             flex: 1,
-            borderColor: 'green',
-            borderWidth: 2,
             
         },
         middleRight: {
             flex: 1,
-            borderColor: 'green',
-            borderWidth: 2,
         },
         middleBottomSection: {
             flex: 1,
@@ -74,28 +64,21 @@ const SunnyIslandWordsView = ({ navigation }) => {
         bottom: {
             flex: 1.1,
             flexDirection: 'row',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         bottomLeft: {
             flex: 1,
             flexDirection: 'row',
             justifyContent: 'flex-start',
             alignItems: 'flex-start',
-            borderColor: 'black',
-            borderWidth: 2,
+
         },
         bottomMiddle: {
             flex: 1,
             flexDirection: 'row',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         bottomRight: {
             flex: 1,
             flexDirection: 'row',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         isOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '45%' : '50%' : '25%', 
@@ -105,13 +88,13 @@ const SunnyIslandWordsView = ({ navigation }) => {
         },
         myOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '45%' : '50%' : '25%',
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '25%' : '30%',
+            width: isLandscape ? aspectRatio > 1.7 ? '22%' : '30%' : '30%',
             marginBottom: '5%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '10%' : '20%',
         },
         meOpacity: {
-            height: isLandscape ? aspectRatio > 1.7 ? '100%' : '90%' : '60%', 
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '25%' : '30%',
+            height: isLandscape ? aspectRatio > 1.7 ? '100%' : '100%' : '60%', 
+            width: isLandscape ? aspectRatio > 1.7 ? '17%' : '22%' : '30%',
             marginLeft: '25%',
         },
         asOpacity: {
@@ -122,7 +105,7 @@ const SunnyIslandWordsView = ({ navigation }) => {
         },
         sayOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '45%' : '45%' : '25%',
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '25%' : '35%',
+            width: isLandscape ? aspectRatio > 1.7 ? '25%' : '30%' : '35%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '30%' : '10%' : '15%',
             marginBottom: isLandscape ? aspectRatio > 1.7 ? '2%' : '2%' : '1%'
         },
@@ -145,43 +128,42 @@ const SunnyIslandWordsView = ({ navigation }) => {
         },
         whereOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '45%' : '45%' : '25%',
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '30%' : '35%',
+            width: isLandscape ? aspectRatio > 1.7 ? '25%' : '35%' : '35%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '20%' : '5%',
         },
         haveOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '100%' : '100%' : '80%',
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '25%' : '40%',
+            width: isLandscape ? aspectRatio > 1.7 ? '18%' : '25%' : '40%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '10%' : '10%',
 
         },
         awayOpacity: {
-            height: isLandscape ? aspectRatio > 1.7 ? '100%' : '100%' : '80%',
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '20%' : '40%',
+            height: isLandscape ? aspectRatio > 1.7 ? '100%' : '90%' : '80%',
+            width: isLandscape ? aspectRatio > 1.7 ? '17%' : '22%' : '40%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '10%' : '10%',
-            
         },
         funnyOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '35%' : '25%' : '15%', // If landscape and aspect ratio is greater than 1.7, set height to 30%, else set height to 23%. If portrait, set height to 15%.
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '25%' : '35%', 
+            width: isLandscape ? aspectRatio > 1.7 ? '25%' : '26%' : '35%', 
             marginTop: '5%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '10%' : '10%',
         },
         
         byOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '35%' : '25%' : '15%',
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '20%' : '35%',
+            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '25%' : '35%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '10%' : '10%',
             marginTop: '3%',
         },
         findOpacity: {
-            height: isLandscape ? aspectRatio > 1.7 ? '35%' : '25%' : '20%',
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '20%' : '35%',
+            height: isLandscape ? aspectRatio > 1.7 ? '35%' : '23%' : '20%',
+            width: isLandscape ? aspectRatio > 1.7 ? '25%' : '22%' : '35%',
             marginTop: '5%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '20%' : '10%' : '10%',
         },
         whatOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '35%' : '25%' : '15%',
-            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '20%' : '35%',
+            width: isLandscape ? aspectRatio > 1.7 ? '20%' : '18%' : '25%',
             marginTop: '2%',
             marginLeft: '5%',
         },

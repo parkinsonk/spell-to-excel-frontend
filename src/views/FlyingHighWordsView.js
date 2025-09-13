@@ -3,6 +3,7 @@ import { ActivityIndicator } from 'react-native';
 import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
 import { useProgress } from '../components/ProgressContext';
 import wordImageMapping from '../utils/wordImageMapping';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const FlyingHighWordsView = ({ navigation }) => {
 
@@ -35,8 +36,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             width: '100%',
             height: '100%',
             flexDirection: 'row',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         middle: {
             flex: 1,
@@ -44,8 +43,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             height: '100%',
             flexDirection: 'row',
             justifyContent: 'space-between',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         bottom: {
             flex: 1,
@@ -53,8 +50,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             height: '100%',
             flexDirection: 'row',
             justifyContent: 'space-between',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         IOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '30%', // If landscape and aspect ratio is greater than 1.7, set height to 55%, else set height to 55%. If portrait, set height to 55%.
@@ -62,8 +57,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             resizeMode: 'contain',
             marginTop: '6%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         theOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '30%', // If landscape and aspect ratio is greater than 1.7, set height to 55%, else set height to 55%. If portrait, set height to 55%.
@@ -71,8 +64,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             resizeMode: 'contain',
             marginTop: '4%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         toOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '60%' : '60%' : '30%',
@@ -80,8 +71,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             resizeMode: 'contain',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '15%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         helicopter: {
             height: isLandscape ? aspectRatio > 1.7 ? '90%' : '90%' : '40%',
@@ -89,8 +78,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             resizeMode: 'contain',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '5%',
-            borderColor : 'red',
-            borderWidth: 2,
         },
         seeOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '35%',
@@ -98,8 +85,6 @@ const FlyingHighWordsView = ({ navigation }) => {
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '3%' : '3%' : '6%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '2%' : '1%' : '1%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         ofOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '40%',
@@ -107,40 +92,30 @@ const FlyingHighWordsView = ({ navigation }) => {
             resizeMode: 'contain',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '5%' : '5%' : '15%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         andOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '10%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         youOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '0%' : '0%' : '12%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         saidOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '2%' : '2%' : '8%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         weOpacity: { 
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '4%' : '4%' : '14%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         goOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
@@ -153,32 +128,24 @@ const FlyingHighWordsView = ({ navigation }) => {
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '2%' : '2%' : '3%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         wasOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         aOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '0%' : '0%' : '0%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         heOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '0%' : '0%' : '0%',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         forOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '50%' : '50%' : '45%',
@@ -208,7 +175,7 @@ const FlyingHighWordsView = ({ navigation }) => {
                 resizeMode="cover"
                 style={styles.background}
             >
-                <View style={styles.top}>
+                <SafeAreaView style={styles.top}>
 
                     <TouchableOpacity style={styles.IOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'I', batch: 'Flying High'})}>
                         <Image source={getImageSource('I', flyingHighStatus['I'])} style={styles.Image} />
@@ -234,9 +201,9 @@ const FlyingHighWordsView = ({ navigation }) => {
                         <Image source={getImageSource('of', flyingHighStatus['of'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                </View>
+                </SafeAreaView>
 
-                <View style={styles.middle}>
+                <SafeAreaView style={styles.middle}>
 
                     <TouchableOpacity style={styles.andOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'and', batch: 'Flying High'})}>
                         <Image source={getImageSource('and', flyingHighStatus['and'])} style={styles.Image} />
@@ -258,9 +225,9 @@ const FlyingHighWordsView = ({ navigation }) => {
                         <Image source={getImageSource('we', flyingHighStatus['we'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                </View>
+                </SafeAreaView>
 
-                <View style={styles.bottom}>
+                <SafeAreaView style={styles.bottom}>
 
                     <TouchableOpacity style={styles.wasOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'was', batch: 'Flying High'})}>
                             <Image source={getImageSource('was', flyingHighStatus['was'])} style={styles.Image} />
@@ -282,7 +249,7 @@ const FlyingHighWordsView = ({ navigation }) => {
                             <Image source={getImageSource('are', flyingHighStatus['are'])} style={styles.Image} />
                     </TouchableOpacity>
                 
-                </View>
+                </SafeAreaView>
             
                 
             </ImageBackground>
