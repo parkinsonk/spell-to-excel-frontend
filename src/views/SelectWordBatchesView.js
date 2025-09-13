@@ -206,7 +206,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
 
                     <SafeAreaView style={styles.top}>
 
-                            <TouchableOpacity style={styles.wordsIKnowopacity} onPress={logout}>
+                            <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Account Settings', { email: email })}>
                                 <Image source={require('../assets/selectWordBatchesView/accountSettings.png')}  resizeMode='contain' style={styles.image} />
                             </TouchableOpacity>
 
