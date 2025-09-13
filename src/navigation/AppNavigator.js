@@ -24,6 +24,7 @@ import OuterSpaceWordsView from '../views/OuterSpaceWordsView';
 import PlanetsAndBeyondView from '../views/PlanetsAndBeyondView';
 import DivingDeepWordsView from '../views/DivingDeepWordsView';
 import AccountSettingsView from '../views/AccountSettingsView';
+import DeleteProgramView from '../views/DeleteProgramView';
 
 
 const Stack = createNativeStackNavigator();
@@ -43,6 +44,7 @@ const AppNavigator = () => {
       headerShown: false, // Hides the header entirely
     }} />
         <Stack.Screen name="Account Settings" component={AccountSettingsView} />
+        <Stack.Screen name="Delete Program" component={DeleteProgramView} />
         <Stack.Screen name="Flying High" component={FlyingHighWordsView} />
         <Stack.Screen name="Sunny Island" component={SunnyIslandWordsView} />
         <Stack.Screen name="SpringTime Fun" component={SpringtimeFundWordsView} />

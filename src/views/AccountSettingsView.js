@@ -9,8 +9,7 @@ import { Ionicons } from '@expo/vector-icons'; // Assuming you're using Expo and
 /* Start of Login Logic. Sends a message over to the backend to authenticate student */
 const AccountSettings = ({ navigation, route }) => {
 
-    
-    const [email, setEmail] = useState('');
+    const { email } = route.params;
     //const [studentName, setStudentName] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
@@ -74,11 +73,11 @@ const AccountSettings = ({ navigation, route }) => {
             
             <View style={styles.screen}>
 
-                    <TouchableOpacity style={styles.imageOpacity}>
+                    <TouchableOpacity style={styles.imageOpacity} onPress={() => navigation.navigate('Delete Program', { email: email })}>
                         <Image source={require('../assets/accountSettingsView/restartProgram.png')}  style={styles.image} resizeMode='contain' />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.imageOpacity}>
+                    <TouchableOpacity style={styles.imageOpacity} onPress={() => navigation.navigate('Delete Program', { email: email })}>
                         <Image source={require('../assets/accountSettingsView/deleteAccount.png')}  style={styles.image} resizeMode='contain' />
                     </TouchableOpacity>
 
