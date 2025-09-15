@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
+import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions, ActivityIndicator} from 'react-native';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'; // Import SecureStore from expo-secure-store
 import { useProgress } from '../components/ProgressContext';
@@ -13,6 +13,7 @@ const LoginScreen = ({ navigation }) => {
     //const [studentName, setStudentName] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
+    const [isLoading, setIsLoading] = useState(false);
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
@@ -22,10 +23,11 @@ const LoginScreen = ({ navigation }) => {
 
     const handleLogin = () => {
         // Logic to handle login
-    axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/student-login/', {
-        email: email,
-        password: password
-    })
+        setIsLoading(true);
+        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/student-login/', {
+            email: email,
+            password: password
+        })
     .then(async response => {
         // Handle success
         const { refresh, access } = response.data;
@@ -50,12 +52,26 @@ const LoginScreen = ({ navigation }) => {
         navigation.navigate('Word Batches', { email: emailToSend });
         })
         .catch(error => {
-            // Handle error
-            console.log(error);
-            
-            // Show error message
-            Alert.alert("Login failed", "Invalid credentials")
-    });
+            // Show only two user-facing messages: 'Invalid credentials' or 'Network error'
+            if (error.response) {
+                // Server responded with a status code
+                if (error.response.status === 401) {
+                    Alert.alert('Invalid credentials', 'Please check your email and password.');
+                } else {
+                    // For any other server error, surface a generic network/server message
+                    Alert.alert('Network error', 'Server error. Please try again later.');
+                }
+            } else if (error.request) {
+                // Request made but no response received
+                Alert.alert('Network error', 'No response from server. Check your connection and try again.');
+            } else {
+                // Something happened setting up the request
+                Alert.alert('Network error', 'An unexpected error occurred. Please try again.');
+            }
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
         
     };
     /* End of Login Logic. */
@@ -172,6 +188,23 @@ const LoginScreen = ({ navigation }) => {
             fontSize: 15,
             fontWeight: 'bold',
         },
+        loadingOverlay: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255,255,255,0.8)',
+            zIndex: 10,
+        },
+        loadingText: {
+            marginTop: 12,
+            fontSize: 16,
+            fontWeight: 'bold',
+            color: 'black',
+        },
     });
 
     return (
@@ -234,6 +267,13 @@ const LoginScreen = ({ navigation }) => {
             <SafeAreaView style={styles.right}>
                 <Image source={require('../assets/loginView/cloud.png')} style={styles.cloudImage} resizeMode='contain'/>
             </SafeAreaView>
+
+            {isLoading && (
+                <View style={styles.loadingOverlay} pointerEvents="none">
+                    <ActivityIndicator size="large" color="#0000ff" />
+                    <Text style={styles.loadingText}>Logging You Into Your Account</Text>
+                </View>
+            )}
         </ImageBackground>
     );
 };

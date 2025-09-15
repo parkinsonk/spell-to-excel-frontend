@@ -195,8 +195,8 @@ const SelectWordBatchesView = ({ navigation, route }) => {
                 width: '100%',
             },
             wordsIKnowopacity: {
-                width: isLandscape ? calculateImageDimensions(aspectRatio, '50%', '50%', '50%') : calculateImageDimensions(aspectRatio, '60%', '60%', '65%'),
-                height: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '100%', '100%') : calculateImageDimensions(aspectRatio, '65%', '65%', '65%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '50%', '50%', '50%') : calculateImageDimensions(aspectRatio, '60%', '50%', '50%'),
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '100%', '100%') : calculateImageDimensions(aspectRatio, '65%', '60%', '60%'),
             },
         };       
  

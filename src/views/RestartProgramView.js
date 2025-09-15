@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
+import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions, ActivityIndicator } from 'react-native';
 import axios from 'axios';
-import * as SecureStore from 'expo-secure-store'; // Import SecureStore from expo-secure-store
 import { useProgress } from '../components/ProgressContext';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons'; // Assuming you're using Expo and @expo/vector-icons
 
 /* Start of Login Logic. Sends a message over to the backend to authenticate student */
@@ -11,13 +9,14 @@ const RestartProgramView = ({ navigation, route }) => {
 
     const { email } = route.params;
     const [accountPassword, setAccountPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
 
     const { checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
-        checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep } = useProgress();
+            checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep } = useProgress();
 
     const calculateImageDimensions = (aspectRatio, iPhoneValue, iPadMiniValue, iPadValue) => {
         if (aspectRatio > 1.7) {
@@ -30,23 +29,31 @@ const RestartProgramView = ({ navigation, route }) => {
     };
 
     const handleRestartProgram = () => {
+        setIsLoading(true);
 
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/restart-student-program/', { data: { email: email, password: accountPassword } })
-            .then(response => {
+        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/restart-program/', { email: email, password: accountPassword })
+            .then(async response => {
+                
+                await checkFlyingHigh('Flying High');
+                await checkSpringtimeFun('SpringTime Fun');
+                await checkSunnyIsland('Sunny Island');
+                await checkAlienAdventure('Alien Adventures');
+                await checkOuterSpace('Outer Space');
+                await checkPlanetsAndBeyond('Planets and Beyond');
+                await checkDivingDeep('Diving Deep');   
+                setIsLoading(false);
                 Alert.alert('Success', 'Your program has been restarted.');
-                navigation.navigate('Login');
+                navigation.navigate('Word Batches', { email: email });
             })
             .catch(error => {
+                setIsLoading(false);
                 if (error.response) {
                     const errorMessage = error.response.data.error || 'Failed to restart program';
                     Alert.alert('Error', errorMessage);
-                    console.error('Response error:', error.response.data);
                 } else if (error.request) {
                     Alert.alert('Error', 'No response from server. Please try again.');
-                    console.error('Request error:', error.request);
                 } else {
                     Alert.alert('Error', 'Failed to restart program. Please try again.');
-                    console.error('Error:', error.message);
                 }
             });
     };
@@ -94,6 +101,23 @@ const RestartProgramView = ({ navigation, route }) => {
             height: '100%',
             width: '100%',
         },
+        loadingOverlay: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255,255,255,0.8)',
+            zIndex: 10,
+        },
+        loadingText: {
+            marginTop: 12,
+            fontSize: 16,
+            fontWeight: 'bold',
+            color: 'black',
+        },
 
     });
 
@@ -127,9 +151,16 @@ const RestartProgramView = ({ navigation, route }) => {
                             />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.imageOpacity} onPress={handleRestartProgram}>
+                    <TouchableOpacity style={[styles.imageOpacity, isLoading && { opacity: 0.6 }]} onPress={handleRestartProgram} disabled={isLoading}>
                         <Image source={require('../assets/accountSettingsView/restartProgram.png')}  style={styles.image} resizeMode='contain' />
                     </TouchableOpacity>
+
+                    {isLoading && (
+                        <View style={styles.loadingOverlay} pointerEvents="none">
+                            <ActivityIndicator size="large" color="#0000ff" />
+                            <Text style={styles.loadingText}>Restarting your program…</Text>
+                        </View>
+                    )}
 
 
             </View>

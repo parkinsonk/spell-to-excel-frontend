@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
+import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions, ActivityIndicator} from 'react-native';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'; // Import SecureStore from expo-secure-store
 import { useProgress } from '../components/ProgressContext';
@@ -12,12 +12,10 @@ const DeleteProgramView = ({ navigation, route }) => {
     const { email } = route.params;
     const [accountPassword, setAccountPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
+    const [isLoading, setIsLoading] = useState(false);
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
-
-    const { checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
-        checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep } = useProgress();
 
     const calculateImageDimensions = (aspectRatio, iPhoneValue, iPadMiniValue, iPadValue) => {
         if (aspectRatio > 1.7) {
@@ -31,12 +29,15 @@ const DeleteProgramView = ({ navigation, route }) => {
 
     const handleDeleteAccount = () => {
 
+        setIsLoading(true);
         axios.delete('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/delete-student-account/', { data: { email: email, password: accountPassword } })
             .then(response => {
+                setIsLoading(false);
                 Alert.alert('Success', 'Your account has been deleted.');
                 navigation.navigate('Login');
             })
             .catch(error => {
+                setIsLoading(false);
                 if (error.response) {
                     const errorMessage = error.response.data.error || 'Failed to delete account';
                     Alert.alert('Error', errorMessage);
