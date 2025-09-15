@@ -10,15 +10,9 @@ import { Ionicons } from '@expo/vector-icons'; // Assuming you're using Expo and
 const AccountSettings = ({ navigation, route }) => {
 
     const { email } = route.params;
-    //const [studentName, setStudentName] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
-
-    const { checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
-        checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep } = useProgress();
 
     const calculateImageDimensions = (aspectRatio, iPhoneValue, iPadMiniValue, iPadValue) => {
         if (aspectRatio > 1.7) {
@@ -50,17 +44,13 @@ const AccountSettings = ({ navigation, route }) => {
             flexDirection: 'column',
         },
         imageOpacity: {
-            height: isLandscape ? calculateImageDimensions(aspectRatio, '18%', '18%', '18%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
-            width: isLandscape ? calculateImageDimensions(aspectRatio, '33%', '48%', '50%') : calculateImageDimensions(aspectRatio, '100%', '100%', '100%'),
-            borderColor: 'black',
-            borderWidth: 2},
+            height: isLandscape ? calculateImageDimensions(aspectRatio, '18%', '18%', '13%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
+            width: isLandscape ? calculateImageDimensions(aspectRatio, '33%', '48%', '35%') : calculateImageDimensions(aspectRatio, '100%', '100%', '100%'),
+        },
         image: {
             height: '100%',
             width: '100%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
-
     });
 
     return (
@@ -73,7 +63,7 @@ const AccountSettings = ({ navigation, route }) => {
             
             <View style={styles.screen}>
 
-                    <TouchableOpacity style={styles.imageOpacity} onPress={() => navigation.navigate('Delete Program', { email: email })}>
+                    <TouchableOpacity style={styles.imageOpacity} onPress={() => navigation.navigate('Restart Program', { email: email })}>
                         <Image source={require('../assets/accountSettingsView/restartProgram.png')}  style={styles.image} resizeMode='contain' />
                     </TouchableOpacity>
 

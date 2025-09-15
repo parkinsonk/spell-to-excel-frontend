@@ -28,8 +28,11 @@ const SelectWordBatchesView = ({ navigation, route }) => {
         await SecureStore.deleteItemAsync('access_token');
         await SecureStore.deleteItemAsync('refresh_token');
         
-        // Navigate back to the login screen
-        navigation.navigate('Login');
+        // Reset navigation to the Login screen so it remounts and clears inputs
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Login' }],
+        });
     };
 
     const calculateImageDimensions = (aspectRatio, iPhoneValue, iPadMiniValue, iPadValue) => {

@@ -89,14 +89,10 @@ const DeleteProgramView = ({ navigation, route }) => {
         imageOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '14%', '8%', '8%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '22%', '20%', '20%') : calculateImageDimensions(aspectRatio, '100%', '100%', '100%'),
-            borderColor: 'black',
-            borderWidth: 2,
             marginTop: '2%'},
         image: {
             height: '100%',
             width: '100%',
-            borderColor: 'black',
-            borderWidth: 2,
         },
 
     });
