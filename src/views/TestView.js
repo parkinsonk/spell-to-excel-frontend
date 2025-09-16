@@ -248,7 +248,6 @@ const TestView = ({ navigation, route }) => {
       // If the word matches, mark it as correct in the backend
       try {
         const accessToken = await SecureStore.getItemAsync('access_token');
-        console.log("Retrieved access token:", accessToken);
         
         await axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/mark-word-correct/', {
             word: selectedWord,
@@ -260,10 +259,8 @@ const TestView = ({ navigation, route }) => {
             },
         });
 
-        // If the word matches
-        ['are', 'funny', 'nine', 'many', 'soon', 'give', 'work']
 
-        if (!['are', 'funny', 'nine', 'many', 'soon', 'give', 'work'].includes(selectedWord)) {
+        if (!['are', 'funny', 'black', 'nine', 'many', 'soon', 'give', 'work'].includes(selectedWord)) {
           Alert.alert("Correct!", "You've typed the correct word.");
         }
 
@@ -272,7 +269,7 @@ const TestView = ({ navigation, route }) => {
           await checkFlyingHigh('Flying High');
 
           if (selectedWord == 'are' && flyingHighStatus['are']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed word 1-15!");
+            Alert.alert("Congratulations!", "You've completed words 1-15!");
             navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Flying High' });
             return;
           }
@@ -280,15 +277,15 @@ const TestView = ({ navigation, route }) => {
           await checkSunnyIsland('Sunny Island');
 
           if (selectedWord == 'funny' && sunnyIslandStatus['funny']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed word 16-31!");
+            Alert.alert("Congratulations!", "You've completed words 16-31!");
             navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Sunny Island' });
             return;
           }   
         } else if (batch == 'SpringTime Fun') {
           await checkSpringtimeFun('SpringTime Fun');
-          
-          if (selectedWord == 'nine' && springtimeFunStatus['nine']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed word 32-46!");
+
+          if (selectedWord == 'black' && springtimeFunStatus['black']?.test_correct === true) {
+            Alert.alert("Congratulations!", "You've completed words 32-46!");
             navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'SpringTime Fun' });
             return;
           }
@@ -296,7 +293,7 @@ const TestView = ({ navigation, route }) => {
           await checkAlienAdventure('Alien Adventures');
           
           if (selectedWord == 'many' && alienAdventureStatus['many']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed word 47-61!");
+            Alert.alert("Congratulations!", "You've completed words 47-61!");
             navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Alien Adventures' });
             return;
           }
@@ -304,21 +301,21 @@ const TestView = ({ navigation, route }) => {
           await checkOuterSpace('Outer Space');
           
           if (selectedWord == 'soon' && outerSpaceStatus['soon']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed word 62-76!");
+            Alert.alert("Congratulations!", "You've completed words 62-76!");
             navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Outer Space' });
             return;
           }
         } else if (batch == 'Planets and Beyond') {
           await checkPlanetsAndBeyond('Planets and Beyond');
           if (selectedWord == 'give' && planetsAndBeyondStatus['give']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed word 77-91!");
+            Alert.alert("Congratulations!", "You've completed words 77-91!");
             navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Planets and Beyond' });
             return;
           }
         } else if (batch == 'Diving Deep') {
           await checkDivingDeep('Diving Deep');
           if (selectedWord == 'work' && divingDeepStatus['work']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed word 92-100!");
+            Alert.alert("Congratulations!", "You've completed words 92-100!");
             navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Diving Deep' });
             return;
           }
