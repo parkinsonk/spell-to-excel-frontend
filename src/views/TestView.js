@@ -260,68 +260,67 @@ const TestView = ({ navigation, route }) => {
         });
 
 
-        if (!['are', 'funny', 'black', 'nine', 'many', 'soon', 'give', 'work'].includes(selectedWord)) {
+        if (!['are', 'funny', 'black', 'nine', 'many', 'people', 'give', 'work'].includes(selectedWord)) {
           Alert.alert("Correct!", "You've typed the correct word.");
         }
 
         setShowCorrectWord(false); // No need to show the correct word if the input is correct
         if (batch == 'Flying High') {
           await checkFlyingHigh('Flying High');
-
-          if (selectedWord == 'are' && flyingHighStatus['are']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 1-15!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Flying High' });
-            return;
-          }
         } else if (batch == 'Sunny Island') {
           await checkSunnyIsland('Sunny Island');
-
-          if (selectedWord == 'funny' && sunnyIslandStatus['funny']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 16-31!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Sunny Island' });
-            return;
-          }   
         } else if (batch == 'SpringTime Fun') {
           await checkSpringtimeFun('SpringTime Fun');
-
-          if (selectedWord == 'black' && springtimeFunStatus['black']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 32-46!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'SpringTime Fun' });
-            return;
-          }
         } else if (batch == 'Alien Adventures') {
           await checkAlienAdventure('Alien Adventures');
-          
-          if (selectedWord == 'many' && alienAdventureStatus['many']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 47-61!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Alien Adventures' });
-            return;
-          }
         } else if (batch == 'Outer Space') {
           await checkOuterSpace('Outer Space');
-          
-          if (selectedWord == 'soon' && outerSpaceStatus['soon']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 62-76!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Outer Space' });
-            return;
-          }
         } else if (batch == 'Planets and Beyond') {
           await checkPlanetsAndBeyond('Planets and Beyond');
-          if (selectedWord == 'give' && planetsAndBeyondStatus['give']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 77-91!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Planets and Beyond' });
-            return;
-          }
         } else if (batch == 'Diving Deep') {
           await checkDivingDeep('Diving Deep');
-          if (selectedWord == 'work' && divingDeepStatus['work']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 92-100!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Diving Deep' });
-            return;
+        }
+      
+
+        if (selectedWord == 'are' && flyingHighStatus['are']?.test_correct === true) {
+            Alert.alert("Congratulations!", "You've completed words 1-15!");
+            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Flying High' });
+          
           }
+
+        if (selectedWord == 'funny' && sunnyIslandStatus['funny']?.test_correct === true) {
+            Alert.alert("Congratulations!", "You've completed words 16-31!");
+            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Sunny Island' });
         }
 
-        navigation.navigate(batch, { selectedWord: selectedWord, batch: batch, activity: activity });
+        else if (selectedWord == 'black' && springtimeFunStatus['black']?.test_correct === true) {
+            Alert.alert("Congratulations!", "You've completed words 32-46!");
+            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'SpringTime Fun' });
+          }
+
+        else if (selectedWord == 'many' && alienAdventureStatus['many']?.test_correct === true) {
+              Alert.alert("Congratulations!", "You've completed words 47-61!");
+              navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Alien Adventures' });
+          }
+
+        else if (selectedWord == 'give' && planetsAndBeyondStatus['give']?.test_correct === true) {
+            Alert.alert("Congratulations!", "You've completed words 77-91!");
+            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Planets and Beyond' });
+        }
+
+        else if (selectedWord == 'people' && outerSpaceStatus['people']?.test_correct === true) {
+            Alert.alert("Congratulations!", "You've completed words 62-76!");
+            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Outer Space' });
+        }
+
+        else if (selectedWord == 'work' && divingDeepStatus['work']?.test_correct === true) {
+            Alert.alert("Congratulations!", "You've completed words 92-100!");
+            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Diving Deep' });
+        }
+        else {
+            navigation.navigate(batch, { selectedWord: selectedWord, batch: batch, activity: activity });
+        }
+        
     } catch (error){
         
     }

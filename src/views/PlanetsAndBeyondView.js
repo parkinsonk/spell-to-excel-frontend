@@ -4,6 +4,7 @@ import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions
 import { useProgress } from '../components/ProgressContext';
 import wordImageMapping from '../utils/wordImageMapping';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { renderWordPressable } from '../components/wordButtons';
 
 const PlanetsAndBeyondView = ({ navigation }) => {
 
@@ -156,67 +157,44 @@ const PlanetsAndBeyondView = ({ navigation }) => {
                         <Image source={getImageSource('please', planetsAndBeyondStatus['please'])}  style={styles.Image} resizeMode='contain' />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.herOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'her', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('her', planetsAndBeyondStatus['her'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.waterOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'water', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('water', planetsAndBeyondStatus['water'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.beenOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'been', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('been', planetsAndBeyondStatus['been'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.ourOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'our', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('our', planetsAndBeyondStatus['our'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
+                    {/* her */}
+                    {renderWordPressable('please', 'her', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('her'))}
+                    {/* water */}
+                    {renderWordPressable('her', 'water', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('water'))}
+                    {/* been */}
+                    {renderWordPressable('water', 'been', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('been'))}
+                    {/* our */}
+                    {renderWordPressable('been', 'our', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('our'))}
 
                 </SafeAreaView>
 
                 <SafeAreaView style={styles.middle}>
-                    <TouchableOpacity style={styles.calledOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'called', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('called', planetsAndBeyondStatus['called'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-                
-                    <TouchableOpacity style={styles.askOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'ask', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('ask', planetsAndBeyondStatus['ask'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.anyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'any', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('any', planetsAndBeyondStatus['any'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
+                    {/* called */}
+                    {renderWordPressable('our', 'called', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('called'))}
+                    {/* ask */}
+                    {renderWordPressable('called', 'ask', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('ask'))}
+                    {/* any */}
+                    {renderWordPressable('ask', 'any', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('any'))}
+                    {/* long */}
+                    {renderWordPressable('any', 'long', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('long'))}
+                    {/* know */}
+                    {renderWordPressable('long', 'know', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('know'))}
 
-                    <TouchableOpacity style={styles.longOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'long', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('long', planetsAndBeyondStatus['long'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.knowOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'know', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('know', planetsAndBeyondStatus['know'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
                 </SafeAreaView>
 
                 <SafeAreaView style={styles.bottom}>
-                
-                    <TouchableOpacity style={styles.putOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'put', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('put', planetsAndBeyondStatus['put'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.everyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'every', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('every', planetsAndBeyondStatus['every'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.thinkOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'think', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('think', planetsAndBeyondStatus['think'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.flyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'fly', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('fly', planetsAndBeyondStatus['fly'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.giveOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'give', batch: 'Planets and Beyond' })}>
-                        <Image source={getImageSource('give', planetsAndBeyondStatus['give'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
+                    {/* put */}
+                    {renderWordPressable('know', 'put', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('put'))}
+                    {/* every */}
+                    {renderWordPressable('put', 'every', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('every'))}
+                    {/* think */}
+                    {renderWordPressable('every', 'think', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('think'))}
+                    {/* fly */}
+                    {renderWordPressable('think', 'fly', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('fly'))}
+                    {/* give */}
+                    {renderWordPressable('fly', 'give', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('give'))}
 
                 </SafeAreaView>
             

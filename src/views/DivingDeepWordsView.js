@@ -4,6 +4,7 @@ import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions
 import { useProgress } from '../components/ProgressContext';
 import wordImageMapping from '../utils/wordImageMapping';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { renderWordPressable } from '../components/wordButtons';
 
 const DivingDeepWordsView = ({ navigation }) => {
 
@@ -134,48 +135,32 @@ const DivingDeepWordsView = ({ navigation }) => {
                         <Image source={getImageSource('once', divingDeepStatus['once'])} style={styles.Image} resizeMode='contain' />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.liveOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'live', batch: 'Diving Deep' })}>
-                        <Image source={getImageSource('live', divingDeepStatus['live'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
+                    {/* live */}
+                    {renderWordPressable('once', 'live', 'Diving Deep', divingDeepStatus, navigation, styles, getImageSource('live'))}
 
 
                 </SafeAreaView>
 
                 <SafeAreaView style={styles.middle}>
-
-                    <TouchableOpacity style={styles.thankOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'thank', batch: 'Diving Deep' })}>
-                        <Image source={getImageSource('thank', divingDeepStatus['thank'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.shouldOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'should', batch: 'Diving Deep' })}>
-                        <Image source={getImageSource('should', divingDeepStatus['should'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.veryOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'very', batch: 'Diving Deep' })}>
-                        <Image source={getImageSource('very', divingDeepStatus['very'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
-
-                    
+                    {/* thank */}
+                    {renderWordPressable('live', 'thank', 'Diving Deep', divingDeepStatus, navigation, styles, getImageSource('thank'))}
+                    {/* should */}
+                    {renderWordPressable('thank', 'should', 'Diving Deep', divingDeepStatus, navigation, styles, getImageSource('should'))}
+                    {/* very */}
+                    {renderWordPressable('should', 'very', 'Diving Deep', divingDeepStatus, navigation, styles, getImageSource('very'))}
 
                 </SafeAreaView>
 
                 <SafeAreaView style={styles.bottom}>
 
-                    <TouchableOpacity style={styles.washOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'wash', batch: 'Diving Deep' })}>
-                        <Image source={getImageSource('wash', divingDeepStatus['wash'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.doesOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'does', batch: 'Diving Deep' })}>
-                        <Image source={getImageSource('does', divingDeepStatus['does'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.warmOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'warm', batch: 'Diving Deep' })}>
-                        <Image source={getImageSource('warm', divingDeepStatus['warm'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.workOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'work', batch: 'Diving Deep' })}>
-                        <Image source={getImageSource('work', divingDeepStatus['work'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
+                    {/* wash */}
+                    {renderWordPressable('very', 'wash', 'Diving Deep', divingDeepStatus, navigation, styles, getImageSource('wash'))}
+                    {/* does */}
+                    {renderWordPressable('wash', 'does', 'Diving Deep', divingDeepStatus, navigation, styles, getImageSource('does'))}
+                    {/* warm */}
+                    {renderWordPressable('does', 'warm', 'Diving Deep', divingDeepStatus, navigation, styles, getImageSource('warm'))}
+                    {/* work */}
+                    {renderWordPressable('warm', 'work', 'Diving Deep', divingDeepStatus, navigation, styles, getImageSource('work'))}
 
 
                 </SafeAreaView>
