@@ -214,49 +214,44 @@ const FlyingHighWordsView = ({ navigation }) => {
 
                 <SafeAreaView style={styles.middle}>
 
-                    <TouchableOpacity style={styles.andOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'and', batch: 'Flying High'})}>
-                        <Image source={getImageSource('and', flyingHighStatus['and'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* and */}
+                    {renderWordPressable('to', 'and', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('and'))}
 
-                    <TouchableOpacity style={styles.aOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'a', batch: 'Flying High'})}>
-                        <Image source={getImageSource('a', flyingHighStatus['a'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* a */}
+                    {renderWordPressable('and', 'a', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('a'))}
 
-                    <TouchableOpacity style={styles.youOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'you', batch: 'Flying High'})}>
-                        <Image source={getImageSource('you', flyingHighStatus['you'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* you */}
+                    {renderWordPressable('a', 'you', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('you'))}
 
-                    <TouchableOpacity style={styles.saidOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'said', batch: 'Flying High'})}>
-                        <Image source={getImageSource('said', flyingHighStatus['said'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* said */}
+                    {renderWordPressable('you', 'said', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('said'))}
 
-                    <TouchableOpacity style={styles.weOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'we', batch: 'Flying High'})}>
-                        <Image source={getImageSource('we', flyingHighStatus['we'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* for */}
+                    {renderWordPressable('said', 'for', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('for'))}
+
+                    
+                    
 
                 </SafeAreaView>
 
                 <SafeAreaView style={styles.bottom}>
 
-                    <TouchableOpacity style={styles.wasOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'was', batch: 'Flying High'})}>
-                            <Image source={getImageSource('was', flyingHighStatus['was'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    
 
-                    <TouchableOpacity style={styles.forOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'for', batch: 'Flying High'})}>
-                            <Image source={getImageSource('for', flyingHighStatus['for'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* go */}
+                    {renderWordPressable('for', 'go', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('go'))}
 
-                    <TouchableOpacity style={styles.goOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'go', batch: 'Flying High'})}>
-                            <Image source={getImageSource('go', flyingHighStatus['go'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* he */}
+                    {renderWordPressable('go', 'he', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('he'))}
 
-                    <TouchableOpacity style={styles.heOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'he', batch: 'Flying High'})}>
-                            <Image source={getImageSource('he', flyingHighStatus['he'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* we */}
+                    {renderWordPressable('he', 'we', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('we'))}
 
-                    <TouchableOpacity style={styles.areOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'are', batch: 'Flying High'})}>
-                            <Image source={getImageSource('are', flyingHighStatus['are'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* was */}
+                    {renderWordPressable('we', 'was', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('was'))}
+
+                    {/* are */}
+                    {renderWordPressable('was', 'are', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('are'))}
                 
                 </SafeAreaView>
             

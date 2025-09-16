@@ -13,7 +13,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
     const { flyingHighStatus, sunnyIslandStatus, springtimeFunStatus, alienAdventureStatus, 
-        outerSpaceStatus, planetsAndBeyondStatus, divingDeepStatus, isLoading } = useProgress();
+        outerSpaceStatus, planetsAndBeyondStatus, divingDeepStatus } = useProgress();
 
     let flyingHighCompleted;
     let sunnyIslandCompleted;
