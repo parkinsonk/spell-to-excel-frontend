@@ -169,7 +169,7 @@ const flashcardMapping = {
         sound: ['#FF0000', '#00FF00', '#0000FF']
     },
     'pink':{
-        flashcard: require('../assets/wordsIKnowView/springTimeFunFlashcards/orangeFlashcard.png'),
+        flashcard: require('../assets/wordsIKnowView/springTimeFunFlashcards/pinkFlashcard.png'),
         sound: ['#FF0000', '#00FF00', '#0000FF']
     },
     'seven':{
@@ -207,7 +207,7 @@ const flashcardMapping = {
         sound: ['#FF0000', '#00FF00', '#0000FF']
     },
     'your':{
-        flashcard: require('../assets/wordsIKnowView/alienAdventuresFlashcards/whenFlashcard.png'),
+        flashcard: require('../assets/wordsIKnowView/alienAdventuresFlashcards/yourFlashcard.png'),
         sound: ['#FF0000', '#00FF00', '#0000FF']
     },
     'down':{
@@ -253,26 +253,165 @@ const flashcardMapping = {
 
     // Outer Space Flashcards
     'some':{
-        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/twoFlashcard.png'),
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/someFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'pretty':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/prettyFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'would':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/wouldFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'into':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/intoFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'saw':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/sawFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'more':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/moreFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'write':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/writeFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'who':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/whoFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'new':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/newFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'under':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/underFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'could':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/couldFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'walk':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/walkFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'again':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/againFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'soon':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/soonFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'people':{
+        flashcard: require('../assets/wordsIKnowView/outerSpaceFlashcards/peopleFlashcard.png'),
         sound: ['#FF0000', '#00FF00', '#0000FF']
     },
 
     // Planets and Beyond Flashcards
-    'go':{
-        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/goFlashcard.png'),
+    'please':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/pleaseFlashcard.png'),
         sound: ['#FF0000', '#00FF00', '#0000FF']
     },
-
-    
-
-    
-
-    
+    'her':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/herFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'water':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/waterFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'been':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/beenFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'our':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/ourFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'called':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/calledFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'ask':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/askFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'any':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/anyFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'long':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/longFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'know':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/knowFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'put':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/putFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'every':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/everyFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'think':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/thinkFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'fly':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/flyFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'give':{
+        flashcard: require('../assets/wordsIKnowView/planetsAndBeyondFlashcards/giveFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
 
     // Diving Deep Flashcards
-    'day':{
-        flashcard: require('../assets/wordsIKnowView/divingDeepFlashcards/dayFlashcard.png'),
+    'once':{
+        flashcard: require('../assets/wordsIKnowView/divingDeepFlashcards/onceFlashcard.png'),
         sound: ['#FF0000', '#00FF00', '#0000FF']
     },
+    'live':{
+        flashcard: require('../assets/wordsIKnowView/divingDeepFlashcards/liveFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'thank':{
+        flashcard: require('../assets/wordsIKnowView/divingDeepFlashcards/thankFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'should':{
+        flashcard: require('../assets/wordsIKnowView/divingDeepFlashcards/shouldFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'very':{
+        flashcard: require('../assets/wordsIKnowView/divingDeepFlashcards/veryFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'wash':{
+        flashcard: require('../assets/wordsIKnowView/divingDeepFlashcards/washFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'does':{
+        flashcard: require('../assets/wordsIKnowView/divingDeepFlashcards/doesFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'warm':{
+        flashcard: require('../assets/wordsIKnowView/divingDeepFlashcards/warmFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    },
+    'work':{
+        flashcard: require('../assets/wordsIKnowView/divingDeepFlashcards/workFlashcard.png'),
+        sound: ['#FF0000', '#00FF00', '#0000FF']
+    }
+};
 
 export default flashcardMapping;

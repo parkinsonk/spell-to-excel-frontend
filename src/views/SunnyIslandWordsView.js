@@ -223,7 +223,7 @@ const SunnyIslandWordsView = ({ navigation }) => {
                         <View style={styles.middleBottomSection}>
 
                             {/* me */}
-                            {renderWordPressable('is', 'me', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('me'))}
+                            {renderWordPressable('my', 'me', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('me'))}
                         </View>
                     </View>
 
