@@ -66,7 +66,7 @@ const flashcardMapping = {
         flashcard: require('../assets/wordsIKnowView/sunnyIslandFlashcards/isFlashcard.png'),
         sound: ['#FF0000', '#00FF00', '#0000FF']
     },
-    'my ':{
+    'my':{
         flashcard: require('../assets/wordsIKnowView/sunnyIslandFlashcards/myFlashcard.png'),
         sound: ['#FF0000', '#00FF00', '#0000FF']
     },
