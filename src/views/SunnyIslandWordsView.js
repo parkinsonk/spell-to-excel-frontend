@@ -4,6 +4,7 @@ import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions
 import { useProgress } from '../components/ProgressContext';
 import wordImageMapping from '../utils/wordImageMapping';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { renderWordPressable } from '../components/wordButtons';
 
 
 const SunnyIslandWordsView = ({ navigation }) => {
@@ -214,38 +215,37 @@ const SunnyIslandWordsView = ({ navigation }) => {
                                 <Image source={getImageSource('is', sunnyIslandStatus['is'])} style={styles.Image} />
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.myOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'my', batch: 'Sunny Island'})}>
-                                <Image source={getImageSource('my', sunnyIslandStatus['my'])} style={styles.Image} />
-                            </TouchableOpacity>
+                            {/* my */}
+                            {renderWordPressable('is', 'my', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('my'))}
+
                         </View>
 
                         <View style={styles.middleBottomSection}>
-                            
-                            <TouchableOpacity style={styles.meOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'me', batch: 'Sunny Island'})}>
-                                <Image source={getImageSource('me', sunnyIslandStatus['me'])} style={styles.Image} />
-                            </TouchableOpacity>
+
+                            {/* me */}
+                            {renderWordPressable('my', 'me', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('me'))}
                         </View>
                     </View>
 
                     <View style={styles.middleMiddle}>
 
                         <View style={styles.middleTopSection}>
-                            <TouchableOpacity style={styles.asOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'as', batch: 'Sunny Island'})}>
-                                <Image source={getImageSource('as', sunnyIslandStatus['as'])} style={styles.Image} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.sayOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'say', batch: 'Sunny Island'})}>
-                                <Image source={getImageSource('say', sunnyIslandStatus['say'])} style={styles.Image} />
-                            </TouchableOpacity>
+
+                            {/* as */}
+                            {renderWordPressable('me', 'as', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('as'))}
+
+                            {/* say */}
+                            {renderWordPressable('as', 'say', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('say'))}
+                       
                         </View>
 
                         <View style={styles.middleBottomSection}>
 
-                            <TouchableOpacity style={styles.comeOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'come', batch: 'Sunny Island'})}>
-                                <Image source={getImageSource('come', sunnyIslandStatus['come'])} style={styles.Image} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.hasOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'has', batch: 'Sunny Island'})}>
-                                <Image source={getImageSource('has', sunnyIslandStatus['has'])} style={styles.Image} />
-                            </TouchableOpacity>
+                            {/* come */}
+                            {renderWordPressable('say', 'come', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('come'))}
+
+                            {/* has */}
+                            {renderWordPressable('come', 'has', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('has'))}
                         </View>
 
                     </View>
@@ -253,23 +253,22 @@ const SunnyIslandWordsView = ({ navigation }) => {
                     <View style={styles.middleRight}>
 
                     <View style={styles.middleTopSection}>
-                            <TouchableOpacity style={styles.theyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'they', batch: 'Sunny Island' })}>
-                                <Image source={getImageSource('they', sunnyIslandStatus['they'])} style={styles.Image} />
-                            </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.whereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'where', batch: 'Sunny Island' })}>
-                                <Image source={getImageSource('where', sunnyIslandStatus['where'])} style={styles.Image} />
-                            </TouchableOpacity>
+                        {/* they */}
+                        {renderWordPressable('has', 'they', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('they'))}
+
+                        {/* where */}
+                        {renderWordPressable('they', 'where', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('where'))}
+
                         </View>
 
                         <View style={styles.middleBottomSection}>
-                            <TouchableOpacity style={styles.haveOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'have', batch: 'Sunny Island'  })}>
-                                <Image source={getImageSource('have', sunnyIslandStatus['have'])} style={styles.Image} />
-                            </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.awayOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'away', batch: 'Sunny Island'})}>
-                                <Image source={getImageSource('away', sunnyIslandStatus['away'])} style={styles.Image} />
-                            </TouchableOpacity>
+                            {/* have */}
+                            {renderWordPressable('where', 'have', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('have'))}
+
+                            {/* away */}
+                            {renderWordPressable('have', 'away', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('away'))}
                         </View>
                         
                     </View>
@@ -280,35 +279,29 @@ const SunnyIslandWordsView = ({ navigation }) => {
 
                     <View style={styles.bottomLeft}>
 
-                        <TouchableOpacity style={styles.whatOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'what', batch: 'Sunny Island'})}>
-                            <Image source={getImageSource('what', sunnyIslandStatus['what'])} style={styles.Image} />
-                        </TouchableOpacity>
+                        {/* what */}
+                        {renderWordPressable('away', 'what', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('what'))}
 
-                        <TouchableOpacity style={styles.fromOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'from', batch: 'Sunny Island'})}>
-                            <Image source={getImageSource('from', sunnyIslandStatus['from'])} style={styles.Image} />
-                        </TouchableOpacity>
+                        {/* from */}
+                        {renderWordPressable('what', 'from', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('from'))}
 
                         
                     </View>
 
                     <View style={styles.bottomMiddle}>
 
-                        <TouchableOpacity style={styles.byOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'by', batch: 'Sunny Island'})}>
-                            <Image source={getImageSource('by', sunnyIslandStatus['by'])} style={styles.Image} />
-                        </TouchableOpacity>
+                        {/* by */}
+                        {renderWordPressable('from', 'by', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('by'))}
 
-                        <TouchableOpacity style={styles.findOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'find', batch: 'Sunny Island'})}>
-                            <Image source={getImageSource('find', sunnyIslandStatus['find'])} style={styles.Image} />
-                        </TouchableOpacity>
+                        {/* find */}
+                        {renderWordPressable('by', 'find', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('find'))}
 
                     </View>
 
                     <View style={styles.bottomRight}>
-                        <TouchableOpacity style={styles.funnyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'funny', batch: 'Sunny Island'})}>
-                            <Image source={getImageSource('funny', sunnyIslandStatus['funny'])} style={styles.Image} />
-                        </TouchableOpacity>
 
-
+                        {/* funny */}
+                        {renderWordPressable('find', 'funny', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('funny'))}
                     </View>
                     
                 </SafeAreaView>

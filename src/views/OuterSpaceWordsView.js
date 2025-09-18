@@ -4,6 +4,7 @@ import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions
 import { useProgress } from '../components/ProgressContext';
 import wordImageMapping from '../utils/wordImageMapping';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { renderWordPressable } from '../components/wordButtons';
 
 const OuterSpaceWordsView = ({ navigation }) => {
 
@@ -11,6 +12,7 @@ const OuterSpaceWordsView = ({ navigation }) => {
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     isLandscape ? aspectRatio = screenWidth / screenHeight : aspectRatio = screenHeight / screenWidth;
+
 
     const getImageSource = (word) => {
         // Check if the word is completed using the alienAdventureStatus.
@@ -165,78 +167,53 @@ const OuterSpaceWordsView = ({ navigation }) => {
                         <Image source={getImageSource('some', outerSpaceStatus['some'])}  style={styles.Image} resizeMode='contain' />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.prettyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'pretty', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('pretty', outerSpaceStatus['pretty'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.wouldOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'would', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('would', outerSpaceStatus['would'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.intoOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'into', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('into', outerSpaceStatus['into'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.sawOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'saw', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('saw', outerSpaceStatus['saw'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
+                    {/* pretty */}
+                    {renderWordPressable('some', 'pretty', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('pretty'))}
+                    {/* would */}
+                    {renderWordPressable('pretty', 'would', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('would'))}
+                    {/* into */}
+                    {renderWordPressable('would', 'into', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('into'))}
+                    {/* saw */}
+                    {renderWordPressable('into', 'saw', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('saw'))}
 
                 </SafeAreaView>
 
                 <SafeAreaView style={styles.middleTop}>
-                    <TouchableOpacity style={styles.moreOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'more', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('more', outerSpaceStatus['more'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-                
-                
-                    <TouchableOpacity style={styles.writeOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'write', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('write', outerSpaceStatus['write'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.whoOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'who', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('who', outerSpaceStatus['who'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
+                    {/* more */}
+                    {renderWordPressable('saw', 'more', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('more'))}
+                    {/* write */}
+                    {renderWordPressable('more', 'write', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('write'))}
+                    {/* who */}
+                    {renderWordPressable('write', 'who', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('who'))}
+                    {/* new */}
+                    {renderWordPressable('who', 'new', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('new'))}
 
-                    <TouchableOpacity style={styles.newOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'new', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('new', outerSpaceStatus['new'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
                 </SafeAreaView>
 
                 <SafeAreaView style={styles.middleBottom}>
-     
-                    <TouchableOpacity style={styles.underOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'under', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('under', outerSpaceStatus['under'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.couldOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'could', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('could', outerSpaceStatus['could'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.walkOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'walk', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('walk', outerSpaceStatus['walk'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.againOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'again', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('again', outerSpaceStatus['again'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
+                    {/* under */}
+                    {renderWordPressable('new', 'under', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('under'))}
+                    {/* could */}
+                    {renderWordPressable('under', 'could', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('could'))}
+                    {/* walk */}
+                    {renderWordPressable('could', 'walk', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('walk'))}
+                    {/* again */}
+                    {renderWordPressable('walk', 'again', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('again'))}
 
                 </SafeAreaView>
 
 
                 <SafeAreaView style={styles.bottom}>
-                
-                    <TouchableOpacity style={styles.soonOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'soon', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('soon', outerSpaceStatus['soon'])} style={styles.Image} resizeMode='contain' />
-                    </TouchableOpacity>
+
+                    {/* soon */}
+                    {renderWordPressable('again', 'soon', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('soon'))} 
 
                     <Image source={require('../assets/outerSpaceView/astronauts.png')} resizeMode="contain" style={styles.astronautImage}/>
 
-                    <TouchableOpacity style={styles.peopleOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'people', batch: 'Outer Space' })}>
-                        <Image source={getImageSource('people', outerSpaceStatus['people'])} style={styles.Image} resizeMode='contain'/>
-                    </TouchableOpacity>
-
-                    
-
+                    {/* soon */}
+                    {renderWordPressable('soon', 'people', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('people'))} 
                 </SafeAreaView>
             
                 

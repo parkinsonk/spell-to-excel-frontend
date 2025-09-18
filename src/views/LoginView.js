@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions, ActivityIndicator} from 'react-native';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'; // Import SecureStore from expo-secure-store
 import { useProgress } from '../components/ProgressContext';
+import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons'; // Assuming you're using Expo and @expo/vector-icons
 
@@ -12,22 +13,23 @@ const LoginScreen = ({ navigation }) => {
     //const [studentName, setStudentName] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
+    const [isLoading, setIsLoading] = useState(false);
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
     const { checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
         checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep } = useProgress();
 
+
     const handleLogin = () => {
         // Logic to handle login
-    axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/student-login/', {
-        email: email,
-        student_name: 'Student Placeholder', // Hardcoded for now
-        password: password
-    })
+        setIsLoading(true);
+        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/student-login/', {
+            email: email,
+            password: password
+        })
     .then(async response => {
         // Handle success
-        console.log(response.data);
         const { refresh, access } = response.data;
         // You can store these tokens in AsyncStorage or your state management solution
         // Navigate to next screen or show success message
@@ -41,16 +43,35 @@ const LoginScreen = ({ navigation }) => {
         await checkOuterSpace('Outer Space');
         await checkPlanetsAndBeyond('Planets and Beyond');
         await checkDivingDeep('Diving Deep');
-        
-        navigation.navigate('Word Batches', { email: email });
-    })
-    .catch(error => {
-        // Handle error
-        console.log(error);
-        
-        // Show error message
-        Alert.alert("Login failed", "Invalid credentials")
-    });
+
+        // Preserve the current email to pass to the next screen, then clear inputs
+        const emailToSend = email;
+        setEmail('');
+        setPassword('');
+
+        navigation.navigate('Word Batches', { email: emailToSend });
+        })
+        .catch(error => {
+            // Show only two user-facing messages: 'Invalid credentials' or 'Network error'
+            if (error.response) {
+                // Server responded with a status code
+                if (error.response.status === 401) {
+                    Alert.alert('Invalid credentials', 'Please check your email and password.');
+                } else {
+                    // For any other server error, surface a generic network/server message
+                    Alert.alert('Network error', 'Server error. Please try again later.');
+                }
+            } else if (error.request) {
+                // Request made but no response received
+                Alert.alert('Network error', 'No response from server. Check your connection and try again.');
+            } else {
+                // Something happened setting up the request
+                Alert.alert('Network error', 'An unexpected error occurred. Please try again.');
+            }
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
         
     };
     /* End of Login Logic. */
@@ -77,16 +98,12 @@ const LoginScreen = ({ navigation }) => {
             width: '100%',
             height: '100%',
             flexDirection: 'column',
-            borderColor: 'red',
-            borderWidth: 2,
         },
         middle: {
             flex: 1.5,
             width: '100%',
             height: '100%',
             flexDirection: 'column',
-            borderColor: 'red',
-            borderWidth: 2,
             alignContent: 'center',
             justifyContent: 'center',
         },
@@ -95,8 +112,6 @@ const LoginScreen = ({ navigation }) => {
             width: '100%',
             height: '100%',
             flexDirection: 'column',
-            borderColor: 'red',
-            borderWidth: 2,
             justifyContent: 'center',
             alignItems: 'flex-end',
         },
@@ -108,8 +123,6 @@ const LoginScreen = ({ navigation }) => {
             padding: 10,
             borderRadius: 20,
             fontWeight: 'bold',
-            borderColor: 'green',
-            borderWidth: 2,
         },
         textStyles: {
             color: 'black',
@@ -130,14 +143,10 @@ const LoginScreen = ({ navigation }) => {
         trickyImage: {
             width: '100%',
             height: isLandscape ? aspectRatio > 1.7 ? '20%' : '30%' : '30%',
-            borderColor: 'green',
-            borderWidth: 2,
         },
         friendsImage: {
             width: '100%',
             height: '30%',
-            borderColor: 'green',
-            borderWidth: 2,
         },
         forgotLogin: {
             width: '100%',
@@ -157,18 +166,12 @@ const LoginScreen = ({ navigation }) => {
         sunAndCloudImage: {
             width: '100%',
             height: '80%',
-            borderColor: 'green',
-            borderWidth: 2,
         },
         cloudImage: {
             width: '80%',
             height: '30%',
-            borderColor: 'green',
-            borderWidth: 2,
         },
         eyeIcon: {
-            borderColor: 'blue',
-            borderWidth: 2,
         },
         passwordInput: {
             flexDirection: 'row', // To place the eye icon next to the TextInput
@@ -181,11 +184,26 @@ const LoginScreen = ({ navigation }) => {
         },
         passwordText: {
             flex: 1, // Take up all available space
-            borderColor: 'red',
-            borderWidth: 2,
             color: 'black',
             fontSize: 15,
             fontWeight: 'bold',
+        },
+        loadingOverlay: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255,255,255,0.8)',
+            zIndex: 10,
+        },
+        loadingText: {
+            marginTop: 12,
+            fontSize: 16,
+            fontWeight: 'bold',
+            color: 'black',
         },
     });
 
@@ -249,6 +267,13 @@ const LoginScreen = ({ navigation }) => {
             <SafeAreaView style={styles.right}>
                 <Image source={require('../assets/loginView/cloud.png')} style={styles.cloudImage} resizeMode='contain'/>
             </SafeAreaView>
+
+            {isLoading && (
+                <View style={styles.loadingOverlay} pointerEvents="none">
+                    <ActivityIndicator size="large" color="#0000ff" />
+                    <Text style={styles.loadingText}>Logging You Into Your Account</Text>
+                </View>
+            )}
         </ImageBackground>
     );
 };

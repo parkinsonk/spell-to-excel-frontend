@@ -4,6 +4,7 @@ import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions
 import { useProgress } from '../components/ProgressContext';
 import wordImageMapping from '../utils/wordImageMapping';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { renderWordPressable } from '../components/wordButtons';
 
 const AlienAdventuresWordsView = ({ navigation }) => {
 
@@ -163,62 +164,51 @@ const AlienAdventuresWordsView = ({ navigation }) => {
             >
                 <SafeAreaView style={styles.top}>
 
+
                     <TouchableOpacity style={styles.allOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'all', batch: 'Alien Adventures' })}>
                         <Image source={getImageSource('all', alienAdventureStatus['all'])} style={styles.Image} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.lookOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'look', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('look', alienAdventureStatus['look'])} style={styles.Image} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.littleOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'little', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('little', alienAdventureStatus['little'])} style={styles.Image} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.wereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'were', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('were', alienAdventureStatus['were'])} style={styles.Image} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.yourOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'your', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('your', alienAdventureStatus['your'])} style={styles.Image} />
-                    </TouchableOpacity>
+
+                    {/* look */}
+                    {renderWordPressable('all', 'look', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('look'))}
+                    {/* little */}
+                    {renderWordPressable('look', 'little', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('little'))}
+                    {/* were */}
+                    {renderWordPressable('little', 'were', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('were'))}
+                    {/* your */}
+                    {renderWordPressable('were', 'your', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('your'))}
 
                 </SafeAreaView>
 
                 <SafeAreaView style={styles.middle}>
 
-                    <TouchableOpacity style={styles.downOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'down', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('down', alienAdventureStatus['down'])} style={styles.Image} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.thereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'there', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('there', alienAdventureStatus['there'])} style={styles.Image} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.doOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'do', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('do', alienAdventureStatus['do'])} style={styles.Image} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.theirOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'their', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('their', alienAdventureStatus['their'])} style={styles.Image} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.hereOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'here', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('here', alienAdventureStatus['here'])} style={styles.Image} />
-                    </TouchableOpacity>
+
+                    {/* down */}
+                    {renderWordPressable('your', 'down', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('down'))}
+                    {/* there */}
+                    {renderWordPressable('down', 'there', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('there'))}
+                    {/* do */}
+                    {renderWordPressable('there', 'do', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('do'))}
+                    {/* their */}
+                    {renderWordPressable('do', 'their', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('their'))}
+                    {/* here */}
+                    {renderWordPressable('their', 'here', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('here'))}
 
                 </SafeAreaView>
 
 
                 <SafeAreaView style={styles.bottom}>
 
-                    <TouchableOpacity style={styles.otherOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'other', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('other', alienAdventureStatus['other'])} style={styles.Image} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.aboutOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'about', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('about', alienAdventureStatus['about'])} style={styles.Image} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.wantOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'want', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('want', alienAdventureStatus['want'])} style={styles.Image} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.tooOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'too', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('too', alienAdventureStatus['too'])} style={styles.Image} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.manyOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'many', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('many', alienAdventureStatus['many'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* other */}
+                    {renderWordPressable('here', 'other', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('other'))}
+                    {/* about */}
+                    {renderWordPressable('other', 'about', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('about'))}
+                    {/* want */}
+                    {renderWordPressable('about', 'want', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('want'))}
+                    {/* too */}
+                    {renderWordPressable('want', 'too', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('too'))}
+                    {/* many */}
+                    {renderWordPressable('too', 'many', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('many'))}
 
                 </SafeAreaView>
             

@@ -3,6 +3,7 @@ import { ActivityIndicator } from 'react-native';
 import { ImageBackground, View, TextInput, threeton, StyleSheet, Alert, Dimensions, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
 import { useProgress } from '../components/ProgressContext';
 import wordImageMapping from '../utils/wordImageMapping';
+import { renderWordPressable } from '../components/wordButtons';
 
 const SpringtimeFundWordsView = ({ navigation }) => {
 
@@ -47,9 +48,6 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'flex-end',
-            borderColor: 'red',
-            borderWidth: 2,
-
             marginRight: 5
         },
         middle: {
@@ -59,8 +57,6 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'flex-end', 
-            borderColor: 'green',
-            borderWidth: 2,
         },
         bottom: {
             flex: 1,
@@ -69,15 +65,12 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'flex-end',
-            borderColor: 'blue',
-            borderWidth: 2,
         },
         oneOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '2%') : calculateImageDimensions(aspectRatio, '8%', '8%', '8%'),
             marginRight: '5%'
-            
         },
         twoOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
@@ -181,70 +174,57 @@ const SpringtimeFundWordsView = ({ navigation }) => {
                         <Image source={getImageSource('one', springtimeFunStatus['one'])} style={styles.Image} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.twoOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'two', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('two', springtimeFunStatus['two'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* two */}
+                    {renderWordPressable('one', 'two', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('two'))}
+                    
+                    {/* blue */}    
+                    {renderWordPressable('two', 'blue', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('blue'))}
 
-                    <TouchableOpacity style={styles.blueOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'blue', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('blue', springtimeFunStatus['blue'])} style={styles.Image} />
-                    </TouchableOpacity>
 
                 </View>
 
                 <View style={styles.middle}>
+                    {/* three */}
+                    {renderWordPressable('blue', 'three', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('three'))}
 
-                    <TouchableOpacity style={styles.threeOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'three', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('three', springtimeFunStatus['three'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* yellow */}
+                    {renderWordPressable('three', 'yellow', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('yellow'))}
 
-                    <TouchableOpacity style={styles.yellowOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'yellow', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('yellow', springtimeFunStatus['yellow'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* nine */}
+                    {renderWordPressable('yellow', 'nine', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('nine'))}
 
-                    <TouchableOpacity style={styles.nineOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'nine', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('nine', springtimeFunStatus['nine'])} style={styles.Image} />
-                    </TouchableOpacity>
 
                 </View>
 
 
                 <View style={styles.bottom}>
 
-                    <TouchableOpacity style={styles.greenOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'green', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('green', springtimeFunStatus['green'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* green */}
+                    {renderWordPressable('nine', 'green', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('green'))}
 
-                    <TouchableOpacity style={styles.fourOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'four', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('four', springtimeFunStatus['four'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* four */}
+                    {renderWordPressable('green', 'four', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('four'))}
+                    
+                    {/* purple */}
+                    {renderWordPressable('four', 'purple', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('purple'))}
 
-                    <TouchableOpacity style={styles.purpleOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'purple', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('purple', springtimeFunStatus['purple'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* five */}
+                    {renderWordPressable('purple', 'five', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('five'))}
 
-                    <TouchableOpacity style={styles.fiveOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'five', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('five', springtimeFunStatus['five'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* pink */}
+                    {renderWordPressable('five', 'pink', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('pink'))}
 
-                    <TouchableOpacity style={styles.pinkOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'pink', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('pink', springtimeFunStatus['pink'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* seven */}
+                    {renderWordPressable('pink', 'seven', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('seven'))}
 
-                    <TouchableOpacity style={styles.sevenOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'seven', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('seven', springtimeFunStatus['seven'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* eight */}
+                    {renderWordPressable('seven', 'eight', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('eight'))}
 
-                    <TouchableOpacity style={styles.eightOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'eight', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('eight', springtimeFunStatus['eight'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* white */}
+                    {renderWordPressable('eight', 'white', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('white'))}
 
-                    <TouchableOpacity style={styles.whiteOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'white', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('white', springtimeFunStatus['white'])} style={styles.Image} />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.blackOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'black', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('black', springtimeFunStatus['black'])} style={styles.Image} />
-                    </TouchableOpacity>
+                    {/* black */}
+                    {renderWordPressable('white', 'black', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('black'))}
 
                 </View>
             

@@ -34,7 +34,6 @@ export const ProgressProvider = ({ children }) => {
 
       setFlyingHighStatus(response.data); // Update state with fetched data
     } catch (error) {
-      console.error('Error fetching word completion status:', error);
       // Handle errors appropriately
     } finally {
       setIsLoading(false); // End loading
@@ -59,7 +58,6 @@ const checkSunnyIsland = async (batch) => {
     
         setSunnyIslandStatus(response.data); // Update state with fetched data
     } catch (error) {
-        console.error('Error fetching word completion status:', error);
         // Handle errors appropriately
     } finally {
         setIsLoading(false); // End loading
@@ -84,7 +82,6 @@ const checkSpringtimeFun = async (batch) => {
     
         setSpringtimeFunStatus(response.data); // Update state with fetched data
     } catch (error) {
-        console.error('Error fetching word completion status:', error);
         // Handle errors appropriately
     } finally {
         setIsLoading(false); // End loading
@@ -109,7 +106,6 @@ const checkAlienAdventure = async (batch) => {
     
         setAlienAdventureStatus(response.data); // Update state with fetched data
     } catch (error) {
-        console.error('Error fetching word completion status:', error);
         // Handle errors appropriately
     } finally {
         setIsLoading(false); // End loading
@@ -134,7 +130,6 @@ const checkOuterSpace = async (batch) => {
     
         setOuterSpaceStatus(response.data); // Update state with fetched data
     } catch (error) {
-        console.error('Error fetching word completion status:', error);
         // Handle errors appropriately
     } finally {
         setIsLoading(false); // End loading
@@ -159,7 +154,6 @@ const checkPlanetsAndBeyond = async (batch) => {
     
         setPlanetsAndBeyondStatus(response.data); // Update state with fetched data
     } catch (error) {
-        console.error('Error fetching word completion status:', error);
         // Handle errors appropriately
     } finally {
         setIsLoading(false); // End loading
@@ -184,7 +178,6 @@ const checkDivingDeep = async (batch) => {
     
         setDivingDeepStatus(response.data); // Update state with fetched data
     } catch (error) {
-        console.error('Error fetching word completion status:', error);
         // Handle errors appropriately
     } finally {
         setIsLoading(false); // End loading

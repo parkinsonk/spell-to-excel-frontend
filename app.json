@@ -4,12 +4,12 @@
     "slug": "spell-to-excel",
     "version": "1.0.0",
     "orientation": "landscape",
-    "icon": "./src/assets/1.jpeg",
+    "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/1.jpeg",
+      "image": "./src/assets/icon.png",
       "resizeMode": "contain",  
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0cc3fb"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -23,12 +23,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/1.jpeg",
+        "foregroundImage": "./src/assets/icon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./src/assets/1.jpeg"
+      "favicon": "./src/assets/icon.png"
     },
     "extra": {
       "eas": {

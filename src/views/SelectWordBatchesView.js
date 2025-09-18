@@ -13,7 +13,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
     const { flyingHighStatus, sunnyIslandStatus, springtimeFunStatus, alienAdventureStatus, 
-        outerSpaceStatus, planetsAndBeyondStatus, divingDeepStatus, isLoading } = useProgress();
+        outerSpaceStatus, planetsAndBeyondStatus, divingDeepStatus } = useProgress();
 
     let flyingHighCompleted;
     let sunnyIslandCompleted;
@@ -28,8 +28,11 @@ const SelectWordBatchesView = ({ navigation, route }) => {
         await SecureStore.deleteItemAsync('access_token');
         await SecureStore.deleteItemAsync('refresh_token');
         
-        // Navigate back to the login screen
-        navigation.navigate('Login');
+        // Reset navigation to the Login screen so it remounts and clears inputs
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Login' }],
+        });
     };
 
     const calculateImageDimensions = (aspectRatio, iPhoneValue, iPadMiniValue, iPadValue) => {
@@ -192,8 +195,8 @@ const SelectWordBatchesView = ({ navigation, route }) => {
                 width: '100%',
             },
             wordsIKnowopacity: {
-                width: isLandscape ? calculateImageDimensions(aspectRatio, '50%', '50%', '50%') : calculateImageDimensions(aspectRatio, '60%', '60%', '65%'),
-                height: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '100%', '100%') : calculateImageDimensions(aspectRatio, '65%', '65%', '65%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '50%', '50%', '50%') : calculateImageDimensions(aspectRatio, '60%', '50%', '50%'),
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '100%', '100%') : calculateImageDimensions(aspectRatio, '65%', '60%', '60%'),
             },
         };       
  
@@ -206,7 +209,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
 
                     <SafeAreaView style={styles.top}>
 
-                            <TouchableOpacity style={styles.wordsIKnowopacity} onPress={logout}>
+                            <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Account Settings', { email: email })}>
                                 <Image source={require('../assets/selectWordBatchesView/accountSettings.png')}  resizeMode='contain' style={styles.image} />
                             </TouchableOpacity>
 
