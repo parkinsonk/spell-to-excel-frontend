@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { ImageBackground, View, Text, StyleSheet, useWindowDimensions, TouchableOpacity, Image} from 'react-native';
 import { useProgress } from '../components/ProgressContext';
 import { ActivityIndicator } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 
 
@@ -115,8 +116,8 @@ const ActivitiesView = ({ navigation, route}) => {
                 height: '100%',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                borderColor: 'red',
-                borderWidth: 2,
+                borderBottomWidth: 5,
+                borderBottomColor: 'black'
             },
             wordTextTop: {
                 flex: 1,
@@ -124,8 +125,7 @@ const ActivitiesView = ({ navigation, route}) => {
                 height: '100%',
                 flexDirection: 'row',
                 justifyContent: 'center',
-                borderColor: 'black',
-                borderWidth: 2
+                marginTop: '2%',
             },
             wordTextContainer: {
                 justifyContent: 'center',
@@ -138,7 +138,7 @@ const ActivitiesView = ({ navigation, route}) => {
                 borderRadius: 20,
             },
             wordText: {
-                fontSize: isLandscape ? 75  : 48,
+                fontSize: isLandscape ? calculateImageDimensions(aspectRatio, 30, 60, 75) : calculateImageDimensions(aspectRatio, 30, 40, 48),
                 fontWeight: 'bold',
                 textAlign: 'center',
             },
@@ -149,8 +149,6 @@ const ActivitiesView = ({ navigation, route}) => {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderColor: 'black',
-                borderWidth: 2,
             },
             bottom: {
                 flex: 3,
@@ -159,8 +157,6 @@ const ActivitiesView = ({ navigation, route}) => {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderColor: 'green',
-                borderWidth: 2,
             },
             activityOpacity: {
                 height: isLandscape ? '80%' : '60%',
@@ -174,9 +170,7 @@ const ActivitiesView = ({ navigation, route}) => {
             },
             wordsIKnowopacity: {
                 width: isLandscape ? calculateImageDimensions(aspectRatio, '50%', '50%', '25%') : calculateImageDimensions(aspectRatio, '60%', '50%', '30%'),
-                height: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '100%', '100%') : calculateImageDimensions(aspectRatio, '65%', '60%', '60%'),
-                borderColor: 'black',
-                borderWidth: 2,
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '100%', '100%') : calculateImageDimensions(aspectRatio, '65%', '60%', '70%'),
             }
 
 
@@ -191,15 +185,10 @@ const ActivitiesView = ({ navigation, route}) => {
     const { image: testImage, isPrerequisiteCompleted: isReadCompletedForTest } = getTestImageAndStatus(selectedWord);
 
     const logout = async () => {
-            // Remove tokens or any authentication information
-            await SecureStore.deleteItemAsync('access_token');
-            await SecureStore.deleteItemAsync('refresh_token');
-            
-            // Reset navigation to the Login screen so it remounts and clears inputs
-            navigation.reset({
-                index: 0,
-                routes: [{ name: 'Login' }],
-            });
+           navigation.reset({
+            index: 0,
+            routes: [{ name: 'Login' }],
+});
         };
 
     return (
@@ -211,6 +200,11 @@ const ActivitiesView = ({ navigation, route}) => {
             >
 
                 <View style={styles.top}>
+                    
+                    <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>
+                        <Image source={require('../assets/instructions.png')}  resizeMode='contain' style={styles.image} />
+                    </TouchableOpacity>
+
                     <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>
                         <Image source={require('../assets/selectWordBatchesView/wordsIKnow.png')}  resizeMode='contain' style={styles.image} />
                     </TouchableOpacity>
@@ -231,8 +225,8 @@ const ActivitiesView = ({ navigation, route}) => {
 
                 <View style={styles.middle}>
                     <TouchableOpacity
-                        
-                        onPress={() => navigation.navigate('Sounds', { selectedWord, batch })}
+
+                        onPress={() => navigation.navigate('Boxes', { batch, activity: "sounds", selectedWord })}
                         style={styles.activityOpacity}
                     >   
                         <Image source={soundsImage} style={styles.image} />
@@ -241,7 +235,7 @@ const ActivitiesView = ({ navigation, route}) => {
                     
                     <TouchableOpacity
                         disabled={!isSoundsCompletedForTrace}
-                        onPress={() => navigation.navigate('Trace', { selectedWord, batch })}
+                        onPress={() => navigation.navigate('Trace', { batch, activity: "trace", selectedWord })}
                         style={{...styles.activityOpacity, opacity: isSoundsCompletedForTrace ? 1 : 0.5}}
                     >
                             <Image source={traceImage} style={styles.image} />
@@ -255,7 +249,7 @@ const ActivitiesView = ({ navigation, route}) => {
 
                     <TouchableOpacity
                         disabled={!isTraceCompletedForRead}
-                        onPress={() => navigation.navigate('Read', { selectedWord, batch })}
+                        onPress={() => navigation.navigate('Read', { batch, activity: "read", selectedWord })}
                         style={{...styles.activityOpacity, opacity: isTraceCompletedForRead ? 1 : 0.5}}
                     >
                             <Image source={readImage} style={styles.image} />
@@ -263,7 +257,7 @@ const ActivitiesView = ({ navigation, route}) => {
 
                     <TouchableOpacity
                         disabled={!isReadCompletedForTest}
-                        onPress={() => navigation.navigate('Test', { selectedWord, batch })}
+                        onPress={() => navigation.navigate('Test', { batch, activity: "test", selectedWord })}
                         style={{ ...styles.activityOpacity, opacity: isReadCompletedForTest ? 1 : 0.5 }}
                     >
                             <Image source={testImage} style={styles.image} />
