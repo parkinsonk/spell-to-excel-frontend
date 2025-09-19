@@ -1,15 +1,15 @@
 const boxesWordMapping = {
         'the': {
             images: [require('../assets/boxesViews/theBoxesViews/th.png'), require('../assets/boxesViews/theBoxesViews/e.png')],
-            colors: ['#25d127', '#FF3131']
+            colors: ['#000000ff', '#000000ff']
         },
         'to':{
             images: [require('../assets/boxesViews/theBoxesViews/th.png'), require('../assets/boxesViews/theBoxesViews/e.png'),require('../assets/boxesViews/theBoxesViews/e.png')],
-            colors: ['#FF0000', '#00FF00', '#0000FF']
+            colors: ['#000000ff', '#000000ff', '#000000ff']
         },
         default: {
             images: [require('../assets/boxesViews/theBoxesViews/th.png'), require('../assets/boxesViews/theBoxesViews/e.png'),require('../assets/boxesViews/theBoxesViews/e.png')],
-            colors: ['#FF0000', '#00FF00', '#0000FF']
+            colors: ['#000000ff', '#000000ff', '#000000ff']
         }};
   
     export default boxesWordMapping;

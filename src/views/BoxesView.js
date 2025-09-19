@@ -67,7 +67,7 @@ const BoxesView = ({ navigation, route  }) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'white',
+          backgroundColor: '#38b6ff',
           
         },
         leftBackground: {
