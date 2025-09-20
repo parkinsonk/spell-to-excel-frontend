@@ -67,7 +67,7 @@ const BoxesView = ({ navigation, route  }) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#38b6ff',
+          backgroundColor: '#0CCFFF',
           
         },
         leftBackground: {
@@ -161,6 +161,17 @@ const BoxesView = ({ navigation, route  }) => {
           borderRadius: 10,
           margin: BOX_MARGIN, // Add margin to space out the boxes
           zIndex: 1,
+        },
+      blueBox: {
+        position: 'absolute',
+        width: BOX_WIDTH,
+        height: BOX_HEIGHT,
+        backgroundColor: '#0CCFFF',
+        borderWidth: 2,
+        borderColor: 'black',
+        borderRadius: 10,
+        margin: BOX_MARGIN, // Add margin to space out the boxes
+        zIndex: 1,
         },
       lettersImage: {
           position: 'absolute',
@@ -435,7 +446,6 @@ const BoxesView = ({ navigation, route  }) => {
         {/*Start of Landscape View*/}
         <View style={orientationStyles.leftBackground}>
 
-        <Image source={require('../assets/boxesViews/landscapeBackgroundImage.png')} style={orientationStyles.landscapeBackgroundImage} />
 
         </View>
 
@@ -466,7 +476,7 @@ const BoxesView = ({ navigation, route  }) => {
                             onLayout={handleBoxPositioning(index)}
                         />
                         <View
-                            style={[orientationStyles.box, {
+                            style={[orientationStyles.blueBox, {
                               top: aspectRatio < 1.4 ? '33%' : '27%',
                                 left: calculateBoxLeftPosition(index),
                             }]}
@@ -546,8 +556,6 @@ const BoxesView = ({ navigation, route  }) => {
         </View>
 
         <View style={orientationStyles.rightBackground}>
-
-          <Image source={require('../assets/boxesViews/landscapeBackgroundImage.png')} style={orientationStyles.landscapeBackgroundImage} />
 
         </View>
           
