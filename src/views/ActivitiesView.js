@@ -1,7 +1,10 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ImageBackground, View, Text, StyleSheet, useWindowDimensions, TouchableOpacity, Image} from 'react-native';
 import { useProgress } from '../components/ProgressContext';
 import { ActivityIndicator } from 'react-native';
+import { Audio } from 'expo-av';
+import wordAudioMapping from '../utils/wordAudioMapping.js';
+import * as Speech from 'expo-speech';
 import * as SecureStore from 'expo-secure-store';
 
 
@@ -95,6 +98,39 @@ const ActivitiesView = ({ navigation, route}) => {
             return iPadValue;
         }
     };
+
+    const soundRef = useRef(null);
+
+    const playWord = async () => {
+        const word = selectedWord;
+        if (!word) return;
+
+        const key = word.trim().toLowerCase();
+        const audioFile = wordAudioMapping[key] || wordAudioMapping[word] || null;
+
+        try {
+            // unload previous sound if present
+            if (soundRef.current) {
+                try { await soundRef.current.unloadAsync(); } catch (e) { /* ignore */ }
+                soundRef.current = null;
+            }
+
+            const { sound } = await Audio.Sound.createAsync(audioFile);
+            soundRef.current = sound;
+            await sound.playAsync();
+        } catch (err) {
+        }
+    };
+
+    useEffect(() => {
+        return () => {
+            // cleanup sound on unmount
+            if (soundRef.current) {
+                try { soundRef.current.unloadAsync(); } catch (e) { /* ignore */ }
+                soundRef.current = null;
+            }
+        };
+    }, []);
 
     
 
@@ -216,11 +252,13 @@ const ActivitiesView = ({ navigation, route}) => {
                 </View>
 
                 <View style={styles.wordTextTop}>
-                    <View style={styles.wordTextContainer}>
-                        <Text style={styles.wordText}>
-                            {selectedWord}
-                        </Text>
-                    </View>
+                    <TouchableOpacity
+                        style={styles.wordTextContainer}
+                        onPress={playWord}
+                        accessibilityRole="button"
+                    >
+                        <Text style={styles.wordText}> {selectedWord} </Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.middle}>
