@@ -164,6 +164,7 @@ const ActivitiesView = ({ navigation, route}) => {
                 marginTop: '2%',
             },
             wordTextContainer: {
+                flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderColor: 'black',
@@ -172,6 +173,14 @@ const ActivitiesView = ({ navigation, route}) => {
                 width: '50%',
                 backgroundColor: 'white',
                 borderRadius: 20,
+            },
+            wordSoundContainer: {
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%',
+                width: '80%',
+
             },
             wordText: {
                 fontSize: isLandscape ? calculateImageDimensions(aspectRatio, 30, 60, 75) : calculateImageDimensions(aspectRatio, 30, 40, 48),
@@ -205,8 +214,12 @@ const ActivitiesView = ({ navigation, route}) => {
                 resizeMode: 'contain',
             },
             wordsIKnowopacity: {
-                width: isLandscape ? calculateImageDimensions(aspectRatio, '50%', '50%', '25%') : calculateImageDimensions(aspectRatio, '60%', '50%', '30%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '18%', '50%', '25%') : calculateImageDimensions(aspectRatio, '60%', '50%', '30%'),
                 height: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '100%', '100%') : calculateImageDimensions(aspectRatio, '65%', '60%', '70%'),
+            },
+            speaker: {
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '8%', '10%', '10%') : calculateImageDimensions(aspectRatio, '50%', '50%', '15%'),
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '50%', '40%') : calculateImageDimensions(aspectRatio, '50%', '50%', '25%'),
             }
 
 
@@ -252,13 +265,16 @@ const ActivitiesView = ({ navigation, route}) => {
                 </View>
 
                 <View style={styles.wordTextTop}>
-                    <TouchableOpacity
-                        style={styles.wordTextContainer}
-                        onPress={playWord}
-                        accessibilityRole="button"
-                    >
-                        <Text style={styles.wordText}> {selectedWord} </Text>
-                    </TouchableOpacity>
+                    <View style={styles.wordTextContainer}>
+                        <TouchableOpacity
+                            style={styles.wordSoundContainer}
+                            onPress={playWord}
+                            accessibilityRole="button"
+                        >
+                            <Image source={require('../assets/sound.png')} style={styles.speaker} />
+                            <Text style={styles.wordText}> {selectedWord} </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <View style={styles.middle}>
