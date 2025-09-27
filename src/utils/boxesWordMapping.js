@@ -1,14 +1,14 @@
 const boxesWordMapping = {
         'the': {
-            images: [require('../assets/boxesViews/theBoxesViews/th.png'), require('../assets/boxesViews/theBoxesViews/e.png')],
+            images: [require('../assets/boxesViews/theBoxesViews/the1.png'), require('../assets/boxesViews/theBoxesViews/the2.png')],
             colors: ['#ffffffff', '#ffffffff']
         },
         'to':{
-            images: [require('../assets/boxesViews/theBoxesViews/th.png'), require('../assets/boxesViews/theBoxesViews/e.png'),require('../assets/boxesViews/theBoxesViews/e.png')],
+            images: [require('../assets/boxesViews/theBoxesViews/the1.png'), require('../assets/boxesViews/theBoxesViews/the2.png')],
             colors: ['#ffffffff', '#ffffffff', '#ffffffff']
         },
         default: {
-            images: [require('../assets/boxesViews/theBoxesViews/th.png'), require('../assets/boxesViews/theBoxesViews/e.png'),require('../assets/boxesViews/theBoxesViews/e.png')],
+            images: [require('../assets/boxesViews/theBoxesViews/the1.png'), require('../assets/boxesViews/theBoxesViews/the2.png')],
             colors: ['#ffffffff', '#ffffffff', '#ffffffff']
         }
     };

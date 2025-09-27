@@ -108,8 +108,8 @@ const BoxesView = ({ navigation, route  }) => {
           alignItems: 'center',
         },
         eraser: {
-          width: aspectRatio > 1.75 ? '27%': '30%',
-          height: aspectRatio > 1.75 ? '70%': '50%',
+          width: aspectRatio > 1.75 ? '35%': '45%',
+          height: aspectRatio > 1.75 ? '40  %': '30%',
           marginLeft: '5%',
         },
         eraserImage: {

@@ -251,7 +251,7 @@ const ActivitiesView = ({ navigation, route}) => {
                 <View style={styles.top}>
                     
                     <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>
-                        <Image source={require('../assets/instructions.png')}  resizeMode='contain' style={styles.image} />
+                        <Image source={require('../assets/instructionsVideo.png')}  resizeMode='contain' style={styles.image} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>

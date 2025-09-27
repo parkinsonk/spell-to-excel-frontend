@@ -1,6 +1,0 @@
-import { Audio } from 'expo-av';
-import wordAudioMapping from './wordAudioMapping.js';
-
-const soundMap = wordAudioMapping;
-
-
