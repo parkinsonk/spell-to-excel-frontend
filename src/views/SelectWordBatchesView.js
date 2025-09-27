@@ -214,7 +214,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
                             </TouchableOpacity>
 
                             <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Account Settings', { email: email })}>
-                                <Image source={require('../assets/selectWordBatchesView/accountSettings.png')}  resizeMode='contain' style={styles.image} />
+                                <Image source={require('../assets/accountSettings.png')}  resizeMode='contain' style={styles.image} />
                             </TouchableOpacity>
 
                             <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>
