@@ -3,6 +3,10 @@ const boxesWordMapping = {
             images: [require('../assets/boxesViews/theBoxesViews/the1.png'), require('../assets/boxesViews/theBoxesViews/the2.png')],
             colors: ['#ffffffff', '#ffffffff']
         },
+        'see': {
+            images: [require('../assets/boxesViews/theBoxesViews/see1.png'), require('../assets/boxesViews/theBoxesViews/see2.png')],
+            colors: ['#ffffffff', '#ffffffff', '#ffffffff']
+        },
         'to':{
             images: [require('../assets/boxesViews/theBoxesViews/the1.png'), require('../assets/boxesViews/theBoxesViews/the2.png')],
             colors: ['#ffffffff', '#ffffffff', '#ffffffff']
