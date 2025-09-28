@@ -1,18 +1,24 @@
 const boxesWordMapping = {
+
+        // Flying High
         'the': {
-            images: [require('../assets/boxesViews/theBoxesViews/the1.png'), require('../assets/boxesViews/theBoxesViews/the2.png')],
+            images: [require('../assets/boxesViews/theBoxesViews/th.png'), require('../assets/boxesViews/theBoxesViews/e.png')],
             colors: ['#ffffffff', '#ffffffff']
         },
         'see': {
-            images: [require('../assets/boxesViews/theBoxesViews/see1.png'), require('../assets/boxesViews/theBoxesViews/see2.png')],
+            images: [require('../assets/boxesViews/theBoxesViews/s.png'), require('../assets/boxesViews/theBoxesViews/ee.png')],
             colors: ['#ffffffff', '#ffffffff', '#ffffffff']
         },
         'to':{
-            images: [require('../assets/boxesViews/theBoxesViews/the1.png'), require('../assets/boxesViews/theBoxesViews/the2.png')],
+            images: [require('../assets/boxesViews/theBoxesViews/t.png'), require('../assets/boxesViews/theBoxesViews/o.png')],
+            colors: ['#ffffffff', '#ffffffff', '#ffffffff']
+        },
+        'to':{
+            images: [require('../assets/boxesViews/theBoxesViews/t.png'), require('../assets/boxesViews/theBoxesViews/o.png')],
             colors: ['#ffffffff', '#ffffffff', '#ffffffff']
         },
         default: {
-            images: [require('../assets/boxesViews/theBoxesViews/the1.png'), require('../assets/boxesViews/theBoxesViews/the2.png')],
+            images: [require('../assets/boxesViews/theBoxesViews/th.png'), require('../assets/boxesViews/theBoxesViews/e.png')],
             colors: ['#ffffffff', '#ffffffff', '#ffffffff']
         }
     };
