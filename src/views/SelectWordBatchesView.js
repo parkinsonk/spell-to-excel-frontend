@@ -209,7 +209,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
 
                     <SafeAreaView style={styles.top}>
 
-                            <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Account Settings', { email: email })}>
+                            <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Instructions', { email: email })}>
                                 <Image source={require('../assets/instructionsVideo.png')}  resizeMode='contain' style={styles.image} />
                             </TouchableOpacity>
 
