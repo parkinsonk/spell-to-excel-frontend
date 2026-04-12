@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
     ImageBackground, View, Text, StyleSheet,
     TouchableOpacity, FlatList, Image, useWindowDimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Audio } from 'expo-av';
 
 const InstructionsView = ({ navigation, route }) => {
     const { email } = route.params;
@@ -11,7 +12,66 @@ const InstructionsView = ({ navigation, route }) => {
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
     const [currentStep, setCurrentStep] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
     const flatListRef = useRef(null);
+    const soundRef = useRef(null);
+
+    // Audio files — one per slide, in order
+    const audioFiles = [
+        require('../assets/selectWordBatchesView/wordBatchesHowToPlay.mp3'),
+        require('../assets/selectWordBatchesView/wordBatchesinstructions1.mp3'),
+        require('../assets/selectWordBatchesView/wordBatchesLearnEveryWord2.mp3'),
+        require('../assets/selectWordBatchesView/wordBatches3.mp3'),
+    ];
+
+    // Unload the current sound object cleanly
+    const unloadSound = async () => {
+        if (soundRef.current) {
+            await soundRef.current.stopAsync().catch(() => {});
+            await soundRef.current.unloadAsync().catch(() => {});
+            soundRef.current = null;
+        }
+        setIsPlaying(false);
+    };
+
+    // Play an audio file from the start
+    const playAudio = async (file) => {
+        await unloadSound();
+        await Audio.setAudioModeAsync({
+            playsInSilentModeIOS: true,
+            allowsRecordingIOS: false,
+            shouldDuckAndroid: true,
+        });
+        const { sound } = await Audio.Sound.createAsync(file, { shouldPlay: true });
+        soundRef.current = sound;
+        setIsPlaying(true);
+        sound.setOnPlaybackStatusUpdate((status) => {
+            if (status.didJustFinish) {
+                setIsPlaying(false);
+            }
+        });
+    };
+
+    // Auto-play when the slide changes (also fires on first mount for slide 0)
+    // Small delay lets the swipe animation finish before audio starts
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            playAudio(audioFiles[currentStep]);
+        }, 350);
+        return () => {
+            clearTimeout(timer);
+            unloadSound();
+        };
+    }, [currentStep]);
+
+    // Replay button — tap to replay from start, tap again while playing to stop
+    const handleSpeakerPress = async (file) => {
+        if (isPlaying) {
+            await unloadSound();
+        } else {
+            await playAudio(file);
+        }
+    };
 
     const calculateDimension = (ar, iPhoneVal, iPadMiniVal, iPadVal) => {
         if (ar > 1.7) return iPhoneVal;
@@ -25,13 +85,14 @@ const InstructionsView = ({ navigation, route }) => {
 
     const TOTAL_SLIDES = 4;
 
-    const goNext = () => {
+    const goNext = async () => {
+        await unloadSound();
         if (currentStep < TOTAL_SLIDES - 1) {
             const next = currentStep + 1;
             flatListRef.current?.scrollToIndex({ index: next, animated: true });
             setCurrentStep(next);
         } else {
-            navigation.navigate('Select Word Batches', { email });
+            navigation.goBack();
         }
     };
 
@@ -123,36 +184,78 @@ const InstructionsView = ({ navigation, route }) => {
         );
     };
 
-    // ─── Word list visual (Step 2) ─────────────────────────────────────────────
-    const WordListMock = () => (
-        <View style={{ width: '86%', backgroundColor: 'rgba(255,255,255,0.93)', borderRadius: 14, padding: 10, borderWidth: 3, borderColor: '#FFD93D' }}>
-            {[
-                { word: 'the', done: true  },
-                { word: 'and', done: true  },
-                { word: 'of',  done: false },
-            ].map((item, i) => (
-                <View key={i} style={{
-                    flexDirection: 'row', alignItems: 'center',
-                    backgroundColor: item.done ? '#6BCB77' : '#fff3c4',
-                    borderRadius: 10, paddingVertical: 8, paddingHorizontal: 12,
-                    marginBottom: i < 2 ? 8 : 0,
-                    borderWidth: !item.done ? 2 : 0, borderColor: '#FFD93D',
+    // ─── Flying High word screen mock (Step 2) ────────────────────────────────
+    const FlyingHighWordMock = () => {
+        const wordMockH = isLandscape ? screenHeight * 0.40 : screenHeight * 0.25;
+        const wordMockW = wordMockH * 1.55;
+        const cloudFontSize = baseFontSize * 0.72;
+
+        // Completed cloud: white, bold dark text, checkmark
+        // Incomplete cloud: translucent, faded text
+        // Tap cloud: translucent with yellow border + 👆
+        const Cloud = ({ word, done = false, tap = false }) => (
+            <View style={{
+                backgroundColor: done ? '#ffffff' : 'rgba(255,255,255,0.45)',
+                borderRadius: 18,
+                paddingHorizontal: 7,
+                paddingVertical: 5,
+                alignItems: 'center',
+                borderWidth: tap ? 2.5 : 0,
+                borderColor: '#FFD93D',
+                margin: 3,
+                shadowColor: '#000',
+                shadowOpacity: done ? 0.12 : 0,
+                shadowRadius: 3,
+                elevation: done ? 2 : 0,
+            }}>
+                <Text style={{
+                    fontSize: cloudFontSize,
+                    fontWeight: done ? '800' : '500',
+                    color: done ? '#111' : '#5a8fa8',
                 }}>
-                    <Text style={{ fontSize: baseFontSize * 1.1, marginRight: 10 }}>
-                        {item.done ? '✅' : '👆'}
-                    </Text>
-                    <Text style={{ fontSize: baseFontSize, fontWeight: '700', color: item.done ? '#fff' : '#555' }}>
-                        {item.word}
-                    </Text>
-                    {!item.done && (
-                        <Text style={{ marginLeft: 'auto', fontSize: baseFontSize * 0.8, color: '#999' }}>
-                            your turn!
-                        </Text>
-                    )}
+                    {word}{done ? ' ☑' : ''}
+                </Text>
+                {tap && (
+                    <Text style={{ fontSize: cloudFontSize * 0.95, marginTop: 1 }}>👆 tap me!</Text>
+                )}
+            </View>
+        );
+
+        return (
+            <View style={{
+                width: wordMockW, height: wordMockH,
+                backgroundColor: '#3EC8E8',
+                borderRadius: 14, overflow: 'hidden',
+                borderWidth: 3, borderColor: '#FFD93D',
+                padding: 6,
+                justifyContent: 'space-around',
+            }}>
+                {/* Row 1: completed words */}
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                    <Cloud word="the" done />
+                    <Cloud word="see" done />
+                    <Cloud word="I" done />
+                    <Cloud word="to" tap />
                 </View>
-            ))}
-        </View>
-    );
+
+                {/* Row 2: incomplete words */}
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                    <Cloud word="and" />
+                    <Cloud word="a" />
+                    <Cloud word="you" />
+                    <Cloud word="said" />
+                </View>
+
+                {/* Row 3: incomplete words */}
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                    <Cloud word="go" />
+                    <Cloud word="he" />
+                    <Cloud word="was" />
+                    <Cloud word="are" />
+                </View>
+            </View>
+        );
+    };
 
     // ─── Slides ───────────────────────────────────────────────────────────────
     const slides = [
@@ -161,8 +264,9 @@ const InstructionsView = ({ navigation, route }) => {
             emoji: '🌟',
             title: 'How to Play!',
             subtitle: 'Swipe to see the steps →',
+            audio: audioFiles[0],
             content: () => (
-                <Text style={{ fontSize: baseFontSize * 3.5, marginVertical: 8 }}>🎮 📚 ✏️</Text>
+                <Text style={{ fontSize: baseFontSize * 3.5, marginVertical: 8 }}>📚 ✏️</Text>
             ),
             buttonLabel: "Let's Learn! →",
         },
@@ -171,6 +275,7 @@ const InstructionsView = ({ navigation, route }) => {
             emoji: '1️⃣',
             title: 'Tap a Word Batch!',
             subtitle: 'Find a group of words and tap it!',
+            audio: audioFiles[1],
             content: () => <MiniMock tapBatch="flyingHigh" />,
             buttonLabel: 'Next →',
         },
@@ -179,7 +284,8 @@ const InstructionsView = ({ navigation, route }) => {
             emoji: '2️⃣',
             title: 'Learn Every Word!',
             subtitle: 'Go through every word in the batch!',
-            content: () => <WordListMock />,
+            audio: audioFiles[2],
+            content: () => <FlyingHighWordMock />,
             buttonLabel: 'Next →',
         },
         {
@@ -187,6 +293,7 @@ const InstructionsView = ({ navigation, route }) => {
             emoji: '3️⃣',
             title: 'Unlock the Next Batch!',
             subtitle: 'Finish one to open the next! 🔓',
+            audio: audioFiles[3],
             content: () => (
                 <View style={{ alignItems: 'center' }}>
                     <MiniMock doneBatch="flyingHigh" unlockBatch="sunnyIsland" />
@@ -209,6 +316,17 @@ const InstructionsView = ({ navigation, route }) => {
                 paddingVertical: isLandscape ? '2%' : '4%',
                 paddingHorizontal: isLandscape ? '4%' : '6%',
             }]}>
+
+                {/* Speaker button — top right corner of card */}
+                <TouchableOpacity
+                    style={[styles.speakerButton, isPlaying && styles.speakerButtonActive]}
+                    onPress={() => handleSpeakerPress(item.audio)}
+                >
+                    <Text style={{ fontSize: baseFontSize * 1.4 }}>
+                        {isPlaying ? '🔊' : '🔈'}
+                    </Text>
+                </TouchableOpacity>
+
                 <Text style={{ fontSize: baseFontSize * 2.2, marginBottom: 2 }}>{item.emoji}</Text>
                 <Text style={[styles.title, { fontSize: baseFontSize * 1.45 }]}>{item.title}</Text>
                 <Text style={[styles.subtitle, { fontSize: baseFontSize * 0.9 }]}>{item.subtitle}</Text>
@@ -262,7 +380,7 @@ const InstructionsView = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: 'rgba(255, 255, 255, 0.96)',
+        backgroundColor: '#fff',   // solid white required for efficient shadow on iOS
         borderRadius: 28,
         alignItems: 'center',
         shadowColor: '#000',
@@ -335,6 +453,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         borderWidth: 3,
         borderColor: '#FFD93D',
+        backgroundColor: '#000',   // required for shadow to render efficiently on iOS
         shadowColor: '#000',
         shadowOpacity: 0.2,
         shadowRadius: 6,
@@ -360,6 +479,24 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: '#2c3e50',
         textAlign: 'center',
+    },
+    speakerButton: {
+        position: 'absolute',
+        top: 10,
+        right: 12,
+        backgroundColor: '#E8F4FD',
+        borderRadius: 22,
+        width: 44,
+        height: 44,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 2,
+        borderColor: '#AED6F1',
+        zIndex: 10,
+    },
+    speakerButtonActive: {
+        backgroundColor: '#AED6F1',
+        borderColor: '#3498db',
     },
 });
 
