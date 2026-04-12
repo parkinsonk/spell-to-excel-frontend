@@ -1,7 +1,10 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ImageBackground, View, Text, StyleSheet, useWindowDimensions, TouchableOpacity, Image} from 'react-native';
 import { useProgress } from '../components/ProgressContext';
 import { ActivityIndicator } from 'react-native';
+import { Audio } from 'expo-av';
+import wordAudioMapping from '../utils/wordAudioMapping.js';
+import * as Speech from 'expo-speech';
 import * as SecureStore from 'expo-secure-store';
 
 
@@ -96,6 +99,39 @@ const ActivitiesView = ({ navigation, route}) => {
         }
     };
 
+    const soundRef = useRef(null);
+
+    const playWord = async () => {
+        const word = selectedWord;
+        if (!word) return;
+
+        const key = word.trim().toLowerCase();
+        const audioFile = wordAudioMapping[key] || wordAudioMapping[word] || null;
+
+        try {
+            // unload previous sound if present
+            if (soundRef.current) {
+                try { await soundRef.current.unloadAsync(); } catch (e) { /* ignore */ }
+                soundRef.current = null;
+            }
+
+            const { sound } = await Audio.Sound.createAsync(audioFile);
+            soundRef.current = sound;
+            await sound.playAsync();
+        } catch (err) {
+        }
+    };
+
+    useEffect(() => {
+        return () => {
+            // cleanup sound on unmount
+            if (soundRef.current) {
+                try { soundRef.current.unloadAsync(); } catch (e) { /* ignore */ }
+                soundRef.current = null;
+            }
+        };
+    }, []);
+
     
 
     const styles = StyleSheet.create({
@@ -128,6 +164,7 @@ const ActivitiesView = ({ navigation, route}) => {
                 marginTop: '2%',
             },
             wordTextContainer: {
+                flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderColor: 'black',
@@ -136,6 +173,14 @@ const ActivitiesView = ({ navigation, route}) => {
                 width: '50%',
                 backgroundColor: 'white',
                 borderRadius: 20,
+            },
+            wordSoundContainer: {
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%',
+                width: '80%',
+
             },
             wordText: {
                 fontSize: isLandscape ? calculateImageDimensions(aspectRatio, 30, 60, 75) : calculateImageDimensions(aspectRatio, 30, 40, 48),
@@ -169,8 +214,12 @@ const ActivitiesView = ({ navigation, route}) => {
                 resizeMode: 'contain',
             },
             wordsIKnowopacity: {
-                width: isLandscape ? calculateImageDimensions(aspectRatio, '50%', '50%', '25%') : calculateImageDimensions(aspectRatio, '60%', '50%', '30%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '18%', '50%', '25%') : calculateImageDimensions(aspectRatio, '60%', '50%', '30%'),
                 height: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '100%', '100%') : calculateImageDimensions(aspectRatio, '65%', '60%', '70%'),
+            },
+            speaker: {
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '8%', '10%', '10%') : calculateImageDimensions(aspectRatio, '50%', '50%', '15%'),
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '60%', '50%', '40%') : calculateImageDimensions(aspectRatio, '50%', '50%', '25%'),
             }
 
 
@@ -202,7 +251,7 @@ const ActivitiesView = ({ navigation, route}) => {
                 <View style={styles.top}>
                     
                     <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>
-                        <Image source={require('../assets/instructions.png')}  resizeMode='contain' style={styles.image} />
+                        <Image source={require('../assets/instructionsVideo.png')}  resizeMode='contain' style={styles.image} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>
@@ -217,9 +266,14 @@ const ActivitiesView = ({ navigation, route}) => {
 
                 <View style={styles.wordTextTop}>
                     <View style={styles.wordTextContainer}>
-                        <Text style={styles.wordText}>
-                            {selectedWord}
-                        </Text>
+                        <TouchableOpacity
+                            style={styles.wordSoundContainer}
+                            onPress={playWord}
+                            accessibilityRole="button"
+                        >
+                            <Image source={require('../assets/sound.png')} style={styles.speaker} />
+                            <Text style={styles.wordText}> {selectedWord} </Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
 

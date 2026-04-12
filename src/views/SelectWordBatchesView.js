@@ -195,8 +195,8 @@ const SelectWordBatchesView = ({ navigation, route }) => {
                 width: '100%',
             },
             wordsIKnowopacity: {
-                width: isLandscape ? calculateImageDimensions(aspectRatio, '50%', '50%', '50%') : calculateImageDimensions(aspectRatio, '60%', '50%', '50%'),
-                height: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '100%', '100%') : calculateImageDimensions(aspectRatio, '65%', '60%', '60%'),
+                width: isLandscape ? calculateImageDimensions(aspectRatio, '15%', '18%', '20%') : calculateImageDimensions(aspectRatio, '60%', '50%', '22%'),
+                height: isLandscape ? calculateImageDimensions(aspectRatio, '100%', '100%', '100%') : calculateImageDimensions(aspectRatio, '65%', '60%', '70%'),
             },
         };       
  
@@ -209,8 +209,12 @@ const SelectWordBatchesView = ({ navigation, route }) => {
 
                     <SafeAreaView style={styles.top}>
 
+                            <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Instructions', { email: email })}>
+                                <Image source={require('../assets/instructionsVideo.png')}  resizeMode='contain' style={styles.image} />
+                            </TouchableOpacity>
+
                             <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Account Settings', { email: email })}>
-                                <Image source={require('../assets/selectWordBatchesView/accountSettings.png')}  resizeMode='contain' style={styles.image} />
+                                <Image source={require('../assets/accountSettings.png')}  resizeMode='contain' style={styles.image} />
                             </TouchableOpacity>
 
                             <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>
