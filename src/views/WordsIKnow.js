@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ScrollView, Text, View, TouchableOpacity, StyleSheet, Image, useWindowDimensions } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
-import * as ScreenOrientation from 'expo-screen-orientation';
+import { Audio } from 'expo-av';
 import flashcardMapping from '../utils/flashcardMapping';
+import wordAudioMapping from '../utils/wordAudioMapping';
 import { useProgress } from '../components/ProgressContext';
 
 
@@ -10,28 +10,70 @@ const WordsIKnow = ({ navigation }) => {
 
   const { height: screenHeight, width: screenWidth } = useWindowDimensions();
   const aspectRatio = screenWidth / screenHeight;
+  const soundRef = useRef(null);
   let wordsIKnowList = [];
 
   const { flyingHighStatus, springtimeFunStatus, sunnyIslandStatus, alienAdventureStatus, outerSpaceStatus,
     planetsAndBeyondStatus, divingDeepStatus, isLoading } = useProgress();
 
-    // Create an array of all the status objects
     const allStatuses = [flyingHighStatus, springtimeFunStatus, sunnyIslandStatus, alienAdventureStatus, outerSpaceStatus, planetsAndBeyondStatus, divingDeepStatus];
 
-    
-    // Iterate over each status object in the array
     for (let i = 0; i < allStatuses.length; i++) {
         const status = allStatuses[i];
-        const keys = Object.keys(status); // Get all keys (property names) of the status object
+        const keys = Object.keys(status);
         for (let j = 0; j < keys.length; j++) {
-            const word = status[keys[j]]; // Use the key to access the correct property value
-            if (word && word.test_correct) { // Added a check to ensure word is defined
+            const word = status[keys[j]];
+            if (word && word.test_correct) {
                 wordsIKnowList.push(keys[j]);
             }
         }
     }
 
-    wordsIKnowList.sort(); // Sort the list of words alphabetically
+    wordsIKnowList.sort();
+
+    // Unload any currently playing sound then play the new word
+    const playWord = async (word) => {
+        try {
+            // Stop and unload previous sound
+            if (soundRef.current) {
+                await soundRef.current.stopAsync().catch(() => {});
+                await soundRef.current.unloadAsync().catch(() => {});
+                soundRef.current = null;
+            }
+
+            const audioFile = wordAudioMapping[word];
+            if (!audioFile) return;
+
+            await Audio.setAudioModeAsync({
+                playsInSilentModeIOS: true,
+                allowsRecordingIOS: false,
+                shouldDuckAndroid: true,
+            });
+
+            const { sound } = await Audio.Sound.createAsync(audioFile, { shouldPlay: true });
+            soundRef.current = sound;
+
+            // Auto-unload when finished so memory isn't held
+            sound.setOnPlaybackStatusUpdate((status) => {
+                if (status.didJustFinish) {
+                    sound.unloadAsync().catch(() => {});
+                    soundRef.current = null;
+                }
+            });
+        } catch (e) {
+            console.warn('WordsIKnow audio error:', e);
+        }
+    };
+
+    // Clean up sound when leaving the screen
+    useEffect(() => {
+        return () => {
+            if (soundRef.current) {
+                soundRef.current.stopAsync().catch(() => {});
+                soundRef.current.unloadAsync().catch(() => {});
+            }
+        };
+    }, []);
 
     const styles = StyleSheet.create({
       container: {
@@ -60,53 +102,46 @@ const WordsIKnow = ({ navigation }) => {
           paddingVertical: 10,
           backgroundColor: '#E0E0E0',
           width: '100%',
-          textAlign: 'center',  // Center the header text
+          textAlign: 'center',
       },
     });
-    
-  // Function to render flashcards
+
   const renderFlashcards = () => {
     let lastInitial = null;
 
     return wordsIKnowList.map((word, index) => {
-        const currentInitial = word[0].toUpperCase(); // Get the first letter of the current word
+        const currentInitial = word[0].toUpperCase();
         let header = null;
 
-        // Check if this is a new group by comparing the current initial with the last initial
         if (currentInitial !== lastInitial) {
             header = (
                 <Text key={`header-${currentInitial}`} style={styles.headerStyle}>
                     {currentInitial}
                 </Text>
             );
-            lastInitial = currentInitial; // Update lastInitial to the current one
+            lastInitial = currentInitial;
         }
 
         return (
             <React.Fragment key={index}>
                 {header}
-                <View style={styles.flashcard}>
+                <TouchableOpacity style={styles.flashcard} onPress={() => playWord(word)} activeOpacity={0.7}>
                     <Image source={flashcardMapping[word].flashcard} style={styles.flashcardImage} />
-                </View>
+                </TouchableOpacity>
             </React.Fragment>
         );
     });
-};
-
+  };
 
   return (
     <View style={styles.container}>
-
         <View style={styles.flashcardContainer}>
             <ScrollView>
                 {renderFlashcards()}
             </ScrollView>
         </View>
-
     </View>
   );
 };
-
-
 
 export default WordsIKnow;
