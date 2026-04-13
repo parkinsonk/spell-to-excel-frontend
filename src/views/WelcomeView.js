@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { View, Image, StyleSheet, Dimensions, TouchableOpacity, ImageBackground, useWindowDimensions } from 'react-native';
 
 const WelcomeScreen = ({ navigation }) => {

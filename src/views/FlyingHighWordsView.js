@@ -1,4 +1,3 @@
-import React, { useState, useEffect} from 'react';
 import { ActivityIndicator } from 'react-native';
 import { ImageBackground, View, Pressable, Button, StyleSheet, Alert, Dimensions, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
 import { useProgress } from '../components/ProgressContext';

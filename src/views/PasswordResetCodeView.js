@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ImageBackground, useWindowDimensions, Image } from 'react-native';
-import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for the eye icon
+import api from '../components/api'; // Import the configured axios instance
 
 const PasswordResetCodeView = ({ navigation, route }) => {
     const { email } = route.params;
@@ -22,7 +22,7 @@ const PasswordResetCodeView = ({ navigation, route }) => {
             return;
         }
 
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/reset-password/', { reset_code: resetCode, new_password: newPassword, email: email })
+        api.post('/reset-password/', { reset_code: resetCode, new_password: newPassword, email: email })
             .then(response => {
                 Alert.alert('Success', 'Your password has been reset.');
                 navigation.navigate('Login');

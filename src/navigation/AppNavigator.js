@@ -27,6 +27,7 @@ import AccountSettingsView from '../views/AccountSettingsView';
 import DeleteProgramView from '../views/DeleteProgramView';
 import RestartProgramView from '../views/RestartProgramView';
 import InstructionsView from '../views/InstructionsView';
+import IntructionsActivitiesView from '../views/IntructionsActivitiesView'
 
 
 const Stack = createNativeStackNavigator();
@@ -47,6 +48,7 @@ const AppNavigator = () => {
     }} />
         <Stack.Screen name="Account Settings" component={AccountSettingsView} />
         <Stack.Screen name="Instructions" component={InstructionsView} />
+        <Stack.Screen name="Instructions Activities" component={IntructionsActivitiesView} />
         <Stack.Screen name="Delete Program" component={DeleteProgramView} />
         <Stack.Screen name="Restart Program" component={RestartProgramView} />
         <Stack.Screen name="Flying High" component={FlyingHighWordsView} />
