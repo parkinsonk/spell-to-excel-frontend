@@ -1,34 +1,71 @@
-import React, { useState, useEffect} from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { ImageBackground, View, TextInput, Button, StyleSheet, Alert, Dimensions, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
+import { ImageBackground, View, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import { useProgress } from '../components/ProgressContext';
 import wordImageMapping from '../utils/wordImageMapping';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { renderWordPressable } from '../components/wordButtons';
+import { Audio } from 'expo-av';
+import wordAudioMapping from '../utils/wordAudioMapping.js';
 
 const AlienAdventuresWordsView = ({ navigation }) => {
 
     const { alienAdventureStatus, isLoading } = useProgress();
-    const {width: screenWidth, height: screenHeight} = useWindowDimensions();
+    const { width: screenWidth, height: screenHeight } = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
-    isLandscape ? aspectRatio = screenWidth / screenHeight : aspectRatio = screenHeight / screenWidth;
+    const aspectRatio = screenWidth / screenHeight;
 
     const getImageSource = (word) => {
-        // Check if the word is completed using the alienAdventureStatus.
-        const isCompleted = alienAdventureStatus[word] ? alienAdventureStatus[word].test_correct : false; // Check if word exists.
-        const key = isCompleted ? `${word}completed` : word; // If word is completed, append 'completed' to the word to get the image key.
+        const isCompleted = alienAdventureStatus[word] ? alienAdventureStatus[word].test_correct : false;
+        const key = isCompleted ? `${word}completed` : word;
         return wordImageMapping[key];
     };
 
     const calculateImageDimensions = (aspectRatio, iPhoneValue, iPadMiniValue, iPadValue) => {
-        if (aspectRatio > 1.7) {
-            return iPhoneValue;
-        } else if (aspectRatio > 1.4 && aspectRatio < 1.7) {
-            return iPadMiniValue;
-        } else {
-            return iPadValue;
+        if (aspectRatio > 1.7) return iPhoneValue;
+        else if (aspectRatio > 1.4 && aspectRatio < 1.7) return iPadMiniValue;
+        else return iPadValue;
+    };
+
+    // ── Audio ─────────────────────────────────────────────────────────────────
+    const soundRef = useRef(null);
+
+    const playWord = async (word) => {
+        if (!word) return;
+        const audioFile = wordAudioMapping[word.trim().toLowerCase()];
+        if (!audioFile) return;
+
+        try {
+            if (soundRef.current) {
+                await soundRef.current.unloadAsync().catch(() => {});
+                soundRef.current = null;
+            }
+            await Audio.setAudioModeAsync({
+                playsInSilentModeIOS: true,
+                allowsRecordingIOS: false,
+                shouldDuckAndroid: true,
+            });
+            const { sound } = await Audio.Sound.createAsync(audioFile, { shouldPlay: true });
+            soundRef.current = sound;
+            sound.setOnPlaybackStatusUpdate((status) => {
+                if (status.didJustFinish) {
+                    sound.unloadAsync().catch(() => {});
+                    soundRef.current = null;
+                }
+            });
+        } catch (err) {
+            console.warn('AlienAdventuresWordsView audio error:', err);
         }
     };
+
+    useEffect(() => {
+        return () => {
+            if (soundRef.current) {
+                soundRef.current.unloadAsync().catch(() => {});
+                soundRef.current = null;
+            }
+        };
+    }, []);
 
     const styles = StyleSheet.create({
         loadingContainer: {
@@ -156,68 +193,53 @@ const AlienAdventuresWordsView = ({ navigation }) => {
     }
 
     return (
-        
-            <ImageBackground
-                source={require('../assets/alienAdventureView/alienAdventuresBackground.png')}
-                resizeMode="cover"
-                style={styles.background}
-            >
-                <SafeAreaView style={styles.top}>
+        <ImageBackground
+            source={require('../assets/alienAdventureView/alienAdventuresBackground.png')}
+            resizeMode="cover"
+            style={styles.background}
+        >
+            <SafeAreaView style={styles.top}>
 
+                {/* all — first word, always unlocked */}
+                <TouchableOpacity
+                    style={styles.allOpacity}
+                    onPress={() => {
+                        playWord('all');
+                        navigation.navigate('Activities', { selectedWord: 'all', batch: 'Alien Adventures' });
+                    }}
+                >
+                    <Image source={getImageSource('all')} style={styles.Image} />
+                </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.allOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'all', batch: 'Alien Adventures' })}>
-                        <Image source={getImageSource('all', alienAdventureStatus['all'])} style={styles.Image} />
-                    </TouchableOpacity>
+                {renderWordPressable('all',    'look',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('look'),   playWord)}
+                {renderWordPressable('look',   'little', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('little'), playWord)}
+                {renderWordPressable('little', 'were',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('were'),   playWord)}
+                {renderWordPressable('were',   'your',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('your'),   playWord)}
 
-                    {/* look */}
-                    {renderWordPressable('all', 'look', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('look'))}
-                    {/* little */}
-                    {renderWordPressable('look', 'little', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('little'))}
-                    {/* were */}
-                    {renderWordPressable('little', 'were', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('were'))}
-                    {/* your */}
-                    {renderWordPressable('were', 'your', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('your'))}
+            </SafeAreaView>
 
-                </SafeAreaView>
+            <SafeAreaView style={styles.middle}>
 
-                <SafeAreaView style={styles.middle}>
+                {renderWordPressable('your',  'down',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('down'),  playWord)}
+                {renderWordPressable('down',  'there', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('there'), playWord)}
+                {renderWordPressable('there', 'do',    'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('do'),    playWord)}
+                {renderWordPressable('do',    'their', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('their'), playWord)}
+                {renderWordPressable('their', 'here',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('here'),  playWord)}
 
+            </SafeAreaView>
 
-                    {/* down */}
-                    {renderWordPressable('your', 'down', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('down'))}
-                    {/* there */}
-                    {renderWordPressable('down', 'there', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('there'))}
-                    {/* do */}
-                    {renderWordPressable('there', 'do', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('do'))}
-                    {/* their */}
-                    {renderWordPressable('do', 'their', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('their'))}
-                    {/* here */}
-                    {renderWordPressable('their', 'here', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('here'))}
+            <SafeAreaView style={styles.bottom}>
 
-                </SafeAreaView>
+                {renderWordPressable('here',  'other', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('other'), playWord)}
+                {renderWordPressable('other', 'about', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('about'), playWord)}
+                {renderWordPressable('about', 'want',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('want'),  playWord)}
+                {renderWordPressable('want',  'too',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('too'),   playWord)}
+                {renderWordPressable('too',   'many',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('many'),  playWord)}
 
+            </SafeAreaView>
 
-                <SafeAreaView style={styles.bottom}>
-
-                    {/* other */}
-                    {renderWordPressable('here', 'other', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('other'))}
-                    {/* about */}
-                    {renderWordPressable('other', 'about', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('about'))}
-                    {/* want */}
-                    {renderWordPressable('about', 'want', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('want'))}
-                    {/* too */}
-                    {renderWordPressable('want', 'too', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('too'))}
-                    {/* many */}
-                    {renderWordPressable('too', 'many', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('many'))}
-
-                </SafeAreaView>
-            
-                
-            </ImageBackground>
-
+        </ImageBackground>
     );
 };
-
-
 
 export default AlienAdventuresWordsView;

@@ -1,33 +1,70 @@
-import React, { useState, useEffect} from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { ImageBackground, View, TextInput, threeton, StyleSheet, Alert, Dimensions, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
+import { ImageBackground, View, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import { useProgress } from '../components/ProgressContext';
 import wordImageMapping from '../utils/wordImageMapping';
 import { renderWordPressable } from '../components/wordButtons';
+import { Audio } from 'expo-av';
+import wordAudioMapping from '../utils/wordAudioMapping.js';
 
-const SpringtimeFundWordsView = ({ navigation }) => {
+const SpringtimeFunWordsView = ({ navigation }) => {
 
     const { springtimeFunStatus, isLoading } = useProgress();
-    const {width: screenWidth, height: screenHeight} = useWindowDimensions();
+    const { width: screenWidth, height: screenHeight } = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
-    isLandscape ? aspectRatio = screenWidth / screenHeight : aspectRatio = screenHeight / screenWidth;
+    const aspectRatio = screenWidth / screenHeight;
 
     const getImageSource = (word) => {
-        // Check if the word is completed using the flyingHighStatus
-        const isCompleted = springtimeFunStatus[word] ? springtimeFunStatus[word].test_correct : false; // Check if word exists.
-        const key = isCompleted ? `${word}completed` : word; // If word is completed, append 'completed' to the word to get the image key.
+        const isCompleted = springtimeFunStatus[word] ? springtimeFunStatus[word].test_correct : false;
+        const key = isCompleted ? `${word}completed` : word;
         return wordImageMapping[key];
     };
 
     const calculateImageDimensions = (aspectRatio, iPhoneValue, iPadMiniValue, iPadValue) => {
-        if (aspectRatio > 1.7) {
-            return iPhoneValue;
-        } else if (aspectRatio > 1.4 && aspectRatio < 1.7) {
-            return iPadMiniValue;
-        } else {
-            return iPadValue;
+        if (aspectRatio > 1.7) return iPhoneValue;
+        else if (aspectRatio > 1.4 && aspectRatio < 1.7) return iPadMiniValue;
+        else return iPadValue;
+    };
+
+    // ── Audio ─────────────────────────────────────────────────────────────────
+    const soundRef = useRef(null);
+
+    const playWord = async (word) => {
+        if (!word) return;
+        const audioFile = wordAudioMapping[word.trim().toLowerCase()];
+        if (!audioFile) return;
+
+        try {
+            if (soundRef.current) {
+                await soundRef.current.unloadAsync().catch(() => {});
+                soundRef.current = null;
+            }
+            await Audio.setAudioModeAsync({
+                playsInSilentModeIOS: true,
+                allowsRecordingIOS: false,
+                shouldDuckAndroid: true,
+            });
+            const { sound } = await Audio.Sound.createAsync(audioFile, { shouldPlay: true });
+            soundRef.current = sound;
+            sound.setOnPlaybackStatusUpdate((status) => {
+                if (status.didJustFinish) {
+                    sound.unloadAsync().catch(() => {});
+                    soundRef.current = null;
+                }
+            });
+        } catch (err) {
+            console.warn('SpringtimeFunWordsView audio error:', err);
         }
     };
+
+    useEffect(() => {
+        return () => {
+            if (soundRef.current) {
+                soundRef.current.unloadAsync().catch(() => {});
+                soundRef.current = null;
+            }
+        };
+    }, []);
 
     const styles = StyleSheet.create({
         loadingContainer: {
@@ -48,7 +85,7 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'flex-end',
-            marginRight: 5
+            marginRight: 5,
         },
         middle: {
             flex: 1,
@@ -56,7 +93,7 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             height: '100%',
             flexDirection: 'row',
             justifyContent: 'center',
-            alignItems: 'flex-end', 
+            alignItems: 'flex-end',
         },
         bottom: {
             flex: 1,
@@ -70,13 +107,13 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '2%') : calculateImageDimensions(aspectRatio, '8%', '8%', '8%'),
-            marginRight: '5%'
+            marginRight: '5%',
         },
         twoOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '15%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '2%', '5%', '5%') : calculateImageDimensions(aspectRatio, '15%', '15%', '15%'),
-            marginRight: '5%'
+            marginRight: '5%',
         },
         blueOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
@@ -87,13 +124,13 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '33%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '16%', '17%', '16%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '2%', '5%', '5%') : calculateImageDimensions(aspectRatio, '20%', '20%', '20%'),
-            marginRight: '5%'
+            marginRight: '5%',
         },
         yellowOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '50%', '38%', '32%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '15%', '17%', '16%') : calculateImageDimensions(aspectRatio, '25%', '25%', '26%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '0%', '0%', '2%') : calculateImageDimensions(aspectRatio, '10%', '10%', '10%'),
-            marginRight: '5%'
+            marginRight: '5%',
         },
         nineOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '56%', '41%', '33%') : calculateImageDimensions(aspectRatio, '40%', '25%', '30%'),
@@ -103,7 +140,6 @@ const SpringtimeFundWordsView = ({ navigation }) => {
         greenOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '50%', '60%') : calculateImageDimensions(aspectRatio, '35%', '30%', '35%'),
             width: isLandscape ? calculateImageDimensions(aspectRatio, '7%', '8%', '9%') : calculateImageDimensions(aspectRatio, '10%', '10%', '10%'),
-
         },
         fourOpacity: {
             height: isLandscape ? calculateImageDimensions(aspectRatio, '70%', '50%', '60%') : calculateImageDimensions(aspectRatio, '35%', '30%', '35%'),
@@ -146,7 +182,6 @@ const SpringtimeFundWordsView = ({ navigation }) => {
             width: isLandscape ? calculateImageDimensions(aspectRatio, '6%', '7%', '8%') : calculateImageDimensions(aspectRatio, '9%', '9%', '9%'),
             marginBottom: isLandscape ? calculateImageDimensions(aspectRatio, '1%', '5%', '3%') : calculateImageDimensions(aspectRatio, '5%', '5%', '5%'),
         },
-        
         Image: {
             height: '100%',
             width: '100%',
@@ -162,78 +197,78 @@ const SpringtimeFundWordsView = ({ navigation }) => {
     }
 
     return (
-        
-            <ImageBackground
-                source={require('../assets/springtimeFunView/springtimeFunBackground.png')}
-                resizeMode="cover"
-                style={styles.background}
-            >
-                <View style={styles.top}>
+        <ImageBackground
+            source={require('../assets/springtimeFunView/springtimeFunBackground.png')}
+            resizeMode="cover"
+            style={styles.background}
+        >
+            <View style={styles.top}>
 
-                    <TouchableOpacity style={styles.oneOpacity} onPress={() => navigation.navigate('Activities', { selectedWord: 'one', batch: 'SpringTime Fun'})}>
-                        <Image source={getImageSource('one', springtimeFunStatus['one'])} style={styles.Image} />
-                    </TouchableOpacity>
+                {/* one — first word, always unlocked */}
+                <TouchableOpacity
+                    style={styles.oneOpacity}
+                    onPress={() => {
+                        playWord('one');
+                        navigation.navigate('Activities', { selectedWord: 'one', batch: 'SpringTime Fun' });
+                    }}
+                >
+                    <Image source={getImageSource('one')} style={styles.Image} />
+                </TouchableOpacity>
 
-                    {/* two */}
-                    {renderWordPressable('one', 'two', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('two'))}
-                    
-                    {/* blue */}    
-                    {renderWordPressable('two', 'blue', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('blue'))}
+                {/* two */}
+                {renderWordPressable('one', 'two', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('two'), playWord)}
 
+                {/* blue */}
+                {renderWordPressable('two', 'blue', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('blue'), playWord)}
 
-                </View>
+            </View>
 
-                <View style={styles.middle}>
-                    {/* three */}
-                    {renderWordPressable('blue', 'three', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('three'))}
+            <View style={styles.middle}>
 
-                    {/* yellow */}
-                    {renderWordPressable('three', 'yellow', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('yellow'))}
+                {/* three */}
+                {renderWordPressable('blue', 'three', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('three'), playWord)}
 
-                    {/* nine */}
-                    {renderWordPressable('yellow', 'nine', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('nine'))}
+                {/* yellow */}
+                {renderWordPressable('three', 'yellow', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('yellow'), playWord)}
 
+                {/* nine */}
+                {renderWordPressable('yellow', 'nine', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('nine'), playWord)}
 
-                </View>
+            </View>
 
+            <View style={styles.bottom}>
 
-                <View style={styles.bottom}>
+                {/* green */}
+                {renderWordPressable('nine', 'green', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('green'), playWord)}
 
-                    {/* green */}
-                    {renderWordPressable('nine', 'green', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('green'))}
+                {/* four */}
+                {renderWordPressable('green', 'four', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('four'), playWord)}
 
-                    {/* four */}
-                    {renderWordPressable('green', 'four', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('four'))}
-                    
-                    {/* purple */}
-                    {renderWordPressable('four', 'purple', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('purple'))}
+                {/* purple */}
+                {renderWordPressable('four', 'purple', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('purple'), playWord)}
 
-                    {/* five */}
-                    {renderWordPressable('purple', 'five', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('five'))}
+                {/* five */}
+                {renderWordPressable('purple', 'five', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('five'), playWord)}
 
-                    {/* pink */}
-                    {renderWordPressable('five', 'pink', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('pink'))}
+                {/* pink */}
+                {renderWordPressable('five', 'pink', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('pink'), playWord)}
 
-                    {/* seven */}
-                    {renderWordPressable('pink', 'seven', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('seven'))}
+                {/* seven */}
+                {renderWordPressable('pink', 'seven', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('seven'), playWord)}
 
-                    {/* eight */}
-                    {renderWordPressable('seven', 'eight', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('eight'))}
+                {/* eight */}
+                {renderWordPressable('seven', 'eight', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('eight'), playWord)}
 
-                    {/* white */}
-                    {renderWordPressable('eight', 'white', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('white'))}
+                {/* white */}
+                {renderWordPressable('eight', 'white', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('white'), playWord)}
 
-                    {/* black */}
-                    {renderWordPressable('white', 'black', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('black'))}
+                {/* black */}
+                {renderWordPressable('white', 'black', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('black'), playWord)}
 
-                </View>
-            
-                
-            </ImageBackground>
+            </View>
 
+        </ImageBackground>
     );
 };
 
-
-
-export default SpringtimeFundWordsView;
+export default SpringtimeFunWordsView;
