@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions, ActivityIndicator } from 'react-native';
-import axios from 'axios';
 import { useProgress } from '../components/ProgressContext';
 import { Ionicons } from '@expo/vector-icons'; // Assuming you're using Expo and @expo/vector-icons
+import api from '../components/api'; // Import the configured axios instance
 
 /* Start of Login Logic. Sends a message over to the backend to authenticate student */
 const RestartProgramView = ({ navigation, route }) => {
@@ -31,7 +31,7 @@ const RestartProgramView = ({ navigation, route }) => {
     const handleRestartProgram = () => {
         setIsLoading(true);
 
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/restart-program/', { email: email, password: accountPassword })
+        api.post('/restart-program/', { email: email, password: accountPassword })
             .then(async response => {
                 
                 await checkFlyingHigh('Flying High');

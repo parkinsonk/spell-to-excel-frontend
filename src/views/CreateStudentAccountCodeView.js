@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ImageBackground, useWindowDimensions, Image } from 'react-native';
-import axios from 'axios';
-import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for the eye icon
+import api from '../components/api'; // Import the configured axios instance
 
 const CreateStudentAccountCodeView = ({ navigation, route }) => {
     const { email, password} = route.params;
@@ -13,7 +12,7 @@ const CreateStudentAccountCodeView = ({ navigation, route }) => {
             return;
         }
 
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/create-student-account/', {
+        api.post('/create-student-account/', {
             email: email,
             password: password,
             confirmation_code: accountConfirmationCode,

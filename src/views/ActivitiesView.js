@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ImageBackground, View, Text, StyleSheet, useWindowDimensions, TouchableOpacity, Image} from 'react-native';
 import { useProgress } from '../components/ProgressContext';
-import { ActivityIndicator } from 'react-native';
 import { Audio } from 'expo-av';
 import wordAudioMapping from '../utils/wordAudioMapping.js';
-import * as Speech from 'expo-speech';
-import * as SecureStore from 'expo-secure-store';
 
 
 
@@ -250,7 +247,7 @@ const ActivitiesView = ({ navigation, route}) => {
 
                 <View style={styles.top}>
                     
-                    <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Words I Know')}>
+                    <TouchableOpacity style={styles.wordsIKnowopacity} onPress={() => navigation.navigate('Instructions Activities')}>
                         <Image source={require('../assets/instructionsVideo.png')}  resizeMode='contain' style={styles.image} />
                     </TouchableOpacity>
 

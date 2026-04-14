@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ImageBackground, useWindowDimensions, Image} from 'react-native';
-import axios from 'axios';
 
 const ForgotPasswordView = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -18,7 +16,7 @@ const ForgotPasswordView = ({ navigation }) => {
         }
     
         // Using axios without CSRF
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/forgot-password/', { email })
+        api.post('/forgot-password/', { email })
             .then(response => {
                 Alert.alert('Success', 'Password reset link has been sent to your email');
                 navigation.navigate('Password Reset Code', { email });

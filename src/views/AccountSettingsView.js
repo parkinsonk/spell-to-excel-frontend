@@ -1,10 +1,4 @@
-import React, { useState } from 'react';
 import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
-import axios from 'axios';
-import * as SecureStore from 'expo-secure-store'; // Import SecureStore from expo-secure-store
-import { useProgress } from '../components/ProgressContext';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons'; // Assuming you're using Expo and @expo/vector-icons
 
 /* Start of Login Logic. Sends a message over to the backend to authenticate student */
 const AccountSettings = ({ navigation, route }) => {

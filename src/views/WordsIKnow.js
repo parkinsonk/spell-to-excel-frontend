@@ -29,7 +29,7 @@ const WordsIKnow = ({ navigation }) => {
         }
     }
 
-    wordsIKnowList.sort();
+    wordsIKnowList.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
     // Unload any currently playing sound then play the new word
     const playWord = async (word) => {

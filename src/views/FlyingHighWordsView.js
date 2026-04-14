@@ -1,10 +1,12 @@
-import React, { useState, useEffect} from 'react';
 import { ActivityIndicator } from 'react-native';
-import { ImageBackground, View, Pressable, Button, StyleSheet, Alert, Dimensions, TouchableOpacity, Image, useWindowDimensions} from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { ImageBackground, View, Pressable, Button, StyleSheet, Image, useWindowDimensions} from 'react-native';
 import { useProgress } from '../components/ProgressContext';
 import wordImageMapping from '../utils/wordImageMapping';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { renderWordPressable } from '../components/wordButtons';
+import { Audio } from 'expo-av';
+import wordAudioMapping from '../utils/wordAudioMapping.js';
 
 const FlyingHighWordsView = ({ navigation }) => {
 
@@ -14,11 +16,50 @@ const FlyingHighWordsView = ({ navigation }) => {
     const aspectRatio = screenWidth / screenHeight;
 
     const getImageSource = (word) => {
-        // Check if the word is completed using the flyingHighStatus
-        const isCompleted = flyingHighStatus[word] ? flyingHighStatus[word].test_correct : false; // Check if word exists.
-        const key = isCompleted ? `${word}completed` : word; // If word is completed, append 'completed' to the word to get the image key.
+        const isCompleted = flyingHighStatus[word] ? flyingHighStatus[word].test_correct : false;
+        const key = isCompleted ? `${word}completed` : word;
         return wordImageMapping[key];
     };
+
+    const soundRef = useRef(null);
+
+    // ── Play audio for any word ───────────────────────────────────────────────
+    const playWord = async (word) => {
+        if (!word) return;
+        const audioFile = wordAudioMapping[word.trim().toLowerCase()];
+        if (!audioFile) return;
+
+        try {
+            if (soundRef.current) {
+                await soundRef.current.unloadAsync().catch(() => {});
+                soundRef.current = null;
+            }
+            await Audio.setAudioModeAsync({
+                playsInSilentModeIOS: true,
+                allowsRecordingIOS: false,
+                shouldDuckAndroid: true,
+            });
+            const { sound } = await Audio.Sound.createAsync(audioFile, { shouldPlay: true });
+            soundRef.current = sound;
+            sound.setOnPlaybackStatusUpdate((status) => {
+                if (status.didJustFinish) {
+                    sound.unloadAsync().catch(() => {});
+                    soundRef.current = null;
+                }
+            });
+        } catch (err) {
+            console.warn('FlyingHighWordsView audio error:', err);
+        }
+    };
+
+    useEffect(() => {
+        return () => {
+            if (soundRef.current) {
+                soundRef.current.unloadAsync().catch(() => {});
+                soundRef.current = null;
+            }
+        };
+    }, []);
 
     const styles = StyleSheet.create({
         loadingContainer: {
@@ -53,15 +94,15 @@ const FlyingHighWordsView = ({ navigation }) => {
             justifyContent: 'space-between',
         },
         IOpacity: {
-            height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '30%', // If landscape and aspect ratio is greater than 1.7, set height to 55%, else set height to 55%. If portrait, set height to 55%.
-            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '15%', 
+            height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '30%',
+            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '15%',
             resizeMode: 'contain',
             marginTop: '6%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
         },
         theOpacity: {
-            height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '30%', // If landscape and aspect ratio is greater than 1.7, set height to 55%, else set height to 55%. If portrait, set height to 55%.
-            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '15%', 
+            height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '30%',
+            width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '15%',
             resizeMode: 'contain',
             marginTop: '4%',
             marginLeft: isLandscape ? aspectRatio > 1.7 ? '1%' : '1%' : '1%',
@@ -112,7 +153,7 @@ const FlyingHighWordsView = ({ navigation }) => {
             resizeMode: 'contain',
             marginTop: isLandscape ? aspectRatio > 1.7 ? '2%' : '2%' : '8%',
         },
-        weOpacity: { 
+        weOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '70%' : '70%' : '45%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '18%',
             resizeMode: 'contain',
@@ -170,97 +211,82 @@ const FlyingHighWordsView = ({ navigation }) => {
     }
 
     return (
-        
-            <ImageBackground
-                source={require('../assets/flyingHighWordsView/flyingHighBackground.png')}
-                resizeMode="cover"
-                style={styles.background}
-            >
-                <SafeAreaView style={styles.top}>
+        <ImageBackground
+            source={require('../assets/flyingHighWordsView/flyingHighBackground.png')}
+            resizeMode="cover"
+            style={styles.background}
+        >
+            <SafeAreaView style={styles.top}>
 
-                    {/* The */}
-                    <Pressable
-                        onPress={() => {
-                            navigation.navigate('Activities', { selectedWord: 'the', batch: 'Flying High'});
-                        }}
-                        style={({ pressed }) => [
-                            styles.IOpacity,
-                            {
-                                opacity: pressed ? 0.5 : 1,
-                            },
-                        ]}
-                    >
-                        <Image source={getImageSource('the', flyingHighStatus['the'])} style={styles.Image} />
-                    </Pressable>
+                {/* the */}
+                <Pressable
+                    onPress={() => {
+                        playWord('the');
+                        navigation.navigate('Activities', { selectedWord: 'the', batch: 'Flying High' });
+                    }}
+                    style={({ pressed }) => [styles.IOpacity, { opacity: pressed ? 0.5 : 1 }]}
+                >
+                    <Image source={getImageSource('the')} style={styles.Image} />
+                </Pressable>
 
-                    {/* see */}
-                    {renderWordPressable('the', 'see', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('see'))}
+                {/* see */}
+                {renderWordPressable('the', 'see', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('see'), playWord)}
 
-                    {/* I */}
-                    {renderWordPressable('see', 'I', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('I'))}
+                {/* I */}
+                {renderWordPressable('see', 'I', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('I'), playWord)}
 
-                    {/* to */}
-                    {renderWordPressable('I', 'to', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('to'))}
+                {/* to */}
+                {renderWordPressable('I', 'to', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('to'), playWord)}
 
-                    <View style={styles.helicopter}>
-                        <Image source={require('../assets/flyingHighWordsView/helicopter.png')} style={styles.Image} />
-                    </View>
+                <View style={styles.helicopter}>
+                    <Image source={require('../assets/flyingHighWordsView/helicopter.png')} style={styles.Image} />
+                </View>
 
-                    {/* of */}
-                    {renderWordPressable('to', 'of', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('of'))}    
+                {/* of */}
+                {renderWordPressable('to', 'of', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('of'), playWord)}
 
+            </SafeAreaView>
 
-                </SafeAreaView>
+            <SafeAreaView style={styles.middle}>
 
-                <SafeAreaView style={styles.middle}>
+                {/* and */}
+                {renderWordPressable('to', 'and', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('and'), playWord)}
 
-                    {/* and */}
-                    {renderWordPressable('to', 'and', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('and'))}
+                {/* a */}
+                {renderWordPressable('and', 'a', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('a'), playWord)}
 
-                    {/* a */}
-                    {renderWordPressable('and', 'a', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('a'))}
+                {/* you */}
+                {renderWordPressable('a', 'you', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('you'), playWord)}
 
-                    {/* you */}
-                    {renderWordPressable('a', 'you', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('you'))}
+                {/* said */}
+                {renderWordPressable('you', 'said', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('said'), playWord)}
 
-                    {/* said */}
-                    {renderWordPressable('you', 'said', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('said'))}
+                {/* for */}
+                {renderWordPressable('said', 'for', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('for'), playWord)}
 
-                    {/* for */}
-                    {renderWordPressable('said', 'for', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('for'))}
+            </SafeAreaView>
 
-                    
-                    
+            <SafeAreaView style={styles.bottom}>
 
-                </SafeAreaView>
+                {/* go */}
+                {renderWordPressable('for', 'go', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('go'), playWord)}
 
-                <SafeAreaView style={styles.bottom}>
+                {/* he */}
+                {renderWordPressable('go', 'he', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('he'), playWord)}
 
-                    
+                {/* we */}
+                {renderWordPressable('he', 'we', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('we'), playWord)}
 
-                    {/* go */}
-                    {renderWordPressable('for', 'go', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('go'))}
+                {/* was */}
+                {renderWordPressable('we', 'was', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('was'), playWord)}
 
-                    {/* he */}
-                    {renderWordPressable('go', 'he', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('he'))}
+                {/* are */}
+                {renderWordPressable('was', 'are', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('are'), playWord)}
 
-                    {/* we */}
-                    {renderWordPressable('he', 'we', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('we'))}
+            </SafeAreaView>
 
-                    {/* was */}
-                    {renderWordPressable('we', 'was', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('was'))}
-
-                    {/* are */}
-                    {renderWordPressable('was', 'are', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('are'))}
-                
-                </SafeAreaView>
-            
-                
-            </ImageBackground>
-
+        </ImageBackground>
     );
 };
-
-
 
 export default FlyingHighWordsView;

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions, ActivityIndicator} from 'react-native';
-import axios from 'axios';
+import api from '../components/api'; // Import the configured axios instance
 import * as SecureStore from 'expo-secure-store'; // Import SecureStore from expo-secure-store
 import { useProgress } from '../components/ProgressContext';
 import { useFocusEffect } from '@react-navigation/native';
@@ -24,7 +24,7 @@ const LoginScreen = ({ navigation }) => {
     const handleLogin = () => {
         // Logic to handle login
         setIsLoading(true);
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/student-login/', {
+        api.post('/student-login/', {
             email: email,
             password: password
         })

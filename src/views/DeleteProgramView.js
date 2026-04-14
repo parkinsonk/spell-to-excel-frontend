@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { ImageBackground, View, TextInput, StyleSheet, Alert, Text, TouchableOpacity, Image, useWindowDimensions, ActivityIndicator} from 'react-native';
-import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'; // Import SecureStore from expo-secure-store
 import { useProgress } from '../components/ProgressContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons'; // Assuming you're using Expo and @expo/vector-icons
+import api from '../components/api'; // Import the configured axios instance
 
 /* Start of Login Logic. Sends a message over to the backend to authenticate student */
 const DeleteProgramView = ({ navigation, route }) => {
@@ -30,7 +30,7 @@ const DeleteProgramView = ({ navigation, route }) => {
     const handleDeleteAccount = () => {
 
         setIsLoading(true);
-        axios.delete('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/delete-student-account/', { data: { email: email, password: accountPassword } })
+        api.delete('/delete-student-account/', { data: { email: email, password: accountPassword } })
             .then(response => {
                 setIsLoading(false);
                 Alert.alert('Success', 'Your account has been deleted.');

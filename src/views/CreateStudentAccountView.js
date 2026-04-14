@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ImageBackground, Image, useWindowDimensions } from 'react-native';
-import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for the eye icon
+import api from '../components/api'; // Import the configured axios instance
 
 const RegisterScreen = () => {
     const [email, setEmail] = useState('');
@@ -33,7 +33,7 @@ const RegisterScreen = () => {
             return;
         }
 
-        axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/send-account-creation-code/', {
+        api.post('/send-account-creation-code/', {
             email: email,
         })
         .then(response => {
@@ -119,7 +119,7 @@ const RegisterScreen = () => {
                 resizeMode="cover"
                 style={styles.background}
         >
-            <Text style={styles.title}>Create Letter Friends Account</Text>
+            <Text style={styles.title}>Create Tricky Words Account</Text>
             <Text style={styles.subtitle}>Input your email and a password. After you have created an account, a confirmation code will be sent to your email.</Text>
             <TextInput
                 style={styles.input}

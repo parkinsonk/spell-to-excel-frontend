@@ -11,12 +11,30 @@ const InstructionsView = ({ navigation, route }) => {
     const { width: screenWidth, height: screenHeight } = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
-    const [currentStep, setCurrentStep] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const flatListRef = useRef(null);
-    const soundRef = useRef(null);
 
-    // Audio files — one per slide, in order
+    // ── Device detection ───────────────────────────────────────────────────────
+    // Use the SHORTER physical edge — stays the same regardless of orientation.
+    //   iPhone SE / mini  : ~375 px
+    //   iPhone standard   : 390–430 px
+    //   iPad Mini         : 744 px
+    //   iPad              : 810+ px
+    const minDim  = Math.min(screenWidth, screenHeight);
+    const isPhone = minDim < 500;
+
+    // Font size that is actually correct per device + orientation.
+    // (The old calculateDimension used aspectRatio, which is always < 1 in portrait
+    //  so it always returned the iPad value on every phone in portrait mode.)
+    const baseFontSize = isPhone
+        ? (isLandscape ? 12 : 14)          // iPhone landscape / portrait
+        : (isLandscape
+            ? (aspectRatio > 1.4 ? 15 : 17)   // iPad Mini landscape / iPad landscape
+            : 20);                             // iPad portrait
+
+    const [currentStep, setCurrentStep] = useState(0);
+    const [isPlaying, setIsPlaying]     = useState(false);
+    const flatListRef = useRef(null);
+    const soundRef    = useRef(null);
+
     const audioFiles = [
         require('../assets/selectWordBatchesView/wordBatchesHowToPlay.mp3'),
         require('../assets/selectWordBatchesView/wordBatchesinstructions1.mp3'),
@@ -24,7 +42,6 @@ const InstructionsView = ({ navigation, route }) => {
         require('../assets/selectWordBatchesView/wordBatches3.mp3'),
     ];
 
-    // Unload the current sound object cleanly
     const unloadSound = async () => {
         if (soundRef.current) {
             await soundRef.current.stopAsync().catch(() => {});
@@ -34,7 +51,6 @@ const InstructionsView = ({ navigation, route }) => {
         setIsPlaying(false);
     };
 
-    // Play an audio file from the start
     const playAudio = async (file) => {
         await unloadSound();
         await Audio.setAudioModeAsync({
@@ -46,42 +62,19 @@ const InstructionsView = ({ navigation, route }) => {
         soundRef.current = sound;
         setIsPlaying(true);
         sound.setOnPlaybackStatusUpdate((status) => {
-            if (status.didJustFinish) {
-                setIsPlaying(false);
-            }
+            if (status.didJustFinish) setIsPlaying(false);
         });
     };
 
-    // Auto-play when the slide changes (also fires on first mount for slide 0)
-    // Small delay lets the swipe animation finish before audio starts
     useEffect(() => {
-        const timer = setTimeout(() => {
-            playAudio(audioFiles[currentStep]);
-        }, 350);
-        return () => {
-            clearTimeout(timer);
-            unloadSound();
-        };
+        const timer = setTimeout(() => playAudio(audioFiles[currentStep]), 350);
+        return () => { clearTimeout(timer); unloadSound(); };
     }, [currentStep]);
 
-    // Replay button — tap to replay from start, tap again while playing to stop
     const handleSpeakerPress = async (file) => {
-        if (isPlaying) {
-            await unloadSound();
-        } else {
-            await playAudio(file);
-        }
+        if (isPlaying) await unloadSound();
+        else           await playAudio(file);
     };
-
-    const calculateDimension = (ar, iPhoneVal, iPadMiniVal, iPadVal) => {
-        if (ar > 1.7) return iPhoneVal;
-        else if (ar > 1.4) return iPadMiniVal;
-        else return iPadVal;
-    };
-
-    const baseFontSize = isLandscape
-        ? calculateDimension(aspectRatio, 13, 15, 17)
-        : calculateDimension(aspectRatio, 16, 18, 22);
 
     const TOTAL_SLIDES = 4;
 
@@ -96,29 +89,30 @@ const InstructionsView = ({ navigation, route }) => {
         }
     };
 
-    const mockH = isLandscape ? screenHeight * 0.44 : screenHeight * 0.27;
-    const mockW = mockH * 1.42;
+    // Mock sizing — phones get smaller mocks so the full card fits on screen
+    const mockH = isPhone
+        ? (isLandscape ? screenHeight * 0.36 : screenHeight * 0.20)
+        : (isLandscape ? screenHeight * 0.44 : screenHeight * 0.27);
+    const mockW    = mockH * 1.42;
     const imgStyle = { height: '100%', width: '100%' };
 
-    // ─── Reusable mini-screen mock ────────────────────────────────────────────
-    // tapBatch:    which batch gets the 👆 TAP! badge  (e.g. 'flyingHigh')
-    // doneBatch:   which batch gets the ✅ badge        (e.g. 'flyingHigh')
-    // unlockBatch: which batch gets the 🔓 NEW! badge   (e.g. 'sunnyIsland')
-    const MiniMock = ({ tapBatch, doneBatch, unlockBatch }) => {
+    // Card padding — tighter on phones so content doesn't overflow
+    const cardPadV = isPhone ? (isLandscape ? 8  : 14) : (isLandscape ? 16 : 24);
+    const cardPadH = isPhone ? (isLandscape ? 16 : 18) : (isLandscape ? 28 : 32);
 
-        const opacity = (key) => {
-            if (key === tapBatch || key === doneBatch || key === unlockBatch) return 1;
-            return 0.35;
-        };
+    // ─── Reusable mini-screen mock ─────────────────────────────────────────────
+    const MiniMock = ({ tapBatch, doneBatch, unlockBatch }) => {
+        const opacity = (key) =>
+            (key === tapBatch || key === doneBatch || key === unlockBatch) ? 1 : 0.35;
 
         const Badge = ({ label, color, textColor = '#fff' }) => (
             <View style={{
-                position: 'absolute', bottom: -10, alignSelf: 'center',
+                position: 'absolute', bottom: -8, alignSelf: 'center',
                 backgroundColor: color, borderRadius: 8,
-                paddingHorizontal: 6, paddingVertical: 2,
+                paddingHorizontal: 5, paddingVertical: 2,
                 shadowColor: '#000', shadowOpacity: 0.3, shadowRadius: 3, elevation: 4,
             }}>
-                <Text style={{ fontSize: baseFontSize * 0.68, fontWeight: '800', color: textColor }}>
+                <Text style={{ fontSize: baseFontSize * 0.65, fontWeight: '800', color: textColor }}>
                     {label}
                 </Text>
             </View>
@@ -126,37 +120,29 @@ const InstructionsView = ({ navigation, route }) => {
 
         return (
             <View style={[styles.mockFrame, { width: mockW, height: mockH }]}>
-
-                {/* ── Sky column ── */}
+                {/* Sky column */}
                 <ImageBackground
                     source={require('../assets/selectWordBatchesView/skyBackground.png')}
-                    resizeMode="cover"
-                    style={styles.mockCol}
+                    resizeMode="cover" style={styles.mockCol}
                 >
-                    {/* Flying High */}
                     <View style={{ height: '28%', width: '82%', opacity: opacity('flyingHigh') }}>
                         <Image source={require('../assets/selectWordBatchesView/flyingHigh.png')} resizeMode="contain" style={imgStyle} />
-                        {tapBatch === 'flyingHigh' && <Badge label="👆 TAP!" color="#FFD93D" textColor="#333" />}
-                        {doneBatch === 'flyingHigh' && <Badge label="✅ Done!" color="#6BCB77" />}
+                        {tapBatch  === 'flyingHigh' && <Badge label="👆 TAP!"     color="#FFD93D" textColor="#333" />}
+                        {doneBatch === 'flyingHigh' && <Badge label="✅ Done!"    color="#6BCB77" />}
                     </View>
-
-                    {/* Sunny Island */}
                     <View style={{ height: '27%', width: '72%', opacity: opacity('sunnyIsland') }}>
                         <Image source={require('../assets/selectWordBatchesView/sunnyIsland.png')} resizeMode="contain" style={imgStyle} />
                         {unlockBatch === 'sunnyIsland' && <Badge label="🔓 Unlocked!" color="#6BCB77" />}
                     </View>
-
-                    {/* Springtime Fun */}
                     <View style={{ height: '30%', width: '90%', opacity: opacity('springtimeFun') }}>
                         <Image source={require('../assets/selectWordBatchesView/springtimeFun.png')} resizeMode="contain" style={imgStyle} />
                     </View>
                 </ImageBackground>
 
-                {/* ── Space column ── */}
+                {/* Space column */}
                 <ImageBackground
                     source={require('../assets/selectWordBatchesView/spaceBackground.png')}
-                    resizeMode="cover"
-                    style={styles.mockCol}
+                    resizeMode="cover" style={styles.mockCol}
                 >
                     <View style={{ height: '25%', width: '80%', opacity: opacity('alienAdventures') }}>
                         <Image source={require('../assets/selectWordBatchesView/alienAdventures.png')} resizeMode="contain" style={imgStyle} />
@@ -169,55 +155,50 @@ const InstructionsView = ({ navigation, route }) => {
                     </View>
                 </ImageBackground>
 
-                {/* ── Beach column ── */}
+                {/* Beach column */}
                 <ImageBackground
                     source={require('../assets/selectWordBatchesView/beachBackground.png')}
-                    resizeMode="cover"
-                    style={[styles.mockCol, { justifyContent: 'center' }]}
+                    resizeMode="cover" style={[styles.mockCol, { justifyContent: 'center' }]}
                 >
                     <View style={{ height: '38%', width: '82%', opacity: opacity('divingDeep') }}>
                         <Image source={require('../assets/selectWordBatchesView/divingDeep.png')} resizeMode="contain" style={imgStyle} />
                     </View>
                 </ImageBackground>
-
             </View>
         );
     };
 
-    // ─── Flying High word screen mock (Step 2) ────────────────────────────────
+    // ─── Flying High word screen mock ─────────────────────────────────────────
     const FlyingHighWordMock = () => {
-        const wordMockH = isLandscape ? screenHeight * 0.40 : screenHeight * 0.25;
-        const wordMockW = wordMockH * 1.55;
-        const cloudFontSize = baseFontSize * 0.72;
+        const wordMockH = isPhone
+            ? (isLandscape ? screenHeight * 0.34 : screenHeight * 0.19)
+            : (isLandscape ? screenHeight * 0.40 : screenHeight * 0.25);
+        const wordMockW     = wordMockH * 1.55;
+        const cloudFontSize = baseFontSize * 0.75;
 
-        // Completed cloud: white, bold dark text, checkmark
-        // Incomplete cloud: translucent, faded text
-        // Tap cloud: translucent with yellow border + 👆
         const Cloud = ({ word, done = false, tap = false }) => (
             <View style={{
                 backgroundColor: done ? '#ffffff' : 'rgba(255,255,255,0.45)',
-                borderRadius: 18,
-                paddingHorizontal: 7,
-                paddingVertical: 5,
+                borderRadius: 16,
+                paddingHorizontal: isPhone ? 5 : 7,
+                paddingVertical:   isPhone ? 3 : 5,
                 alignItems: 'center',
                 borderWidth: tap ? 2.5 : 0,
                 borderColor: '#FFD93D',
-                margin: 3,
+                margin: isPhone ? 2 : 3,
                 shadowColor: '#000',
                 shadowOpacity: done ? 0.12 : 0,
                 shadowRadius: 3,
                 elevation: done ? 2 : 0,
             }}>
                 <Text style={{
-                    fontSize: cloudFontSize,
+                    fontSize:   cloudFontSize,
                     fontWeight: done ? '800' : '500',
-                    color: done ? '#111' : '#5a8fa8',
+                    color:      done ? '#111' : '#5a8fa8',
                 }}>
                     {word}{done ? ' ☑' : ''}
                 </Text>
-                {tap && (
-                    <Text style={{ fontSize: cloudFontSize * 0.95, marginTop: 1 }}>👆 tap me!</Text>
-                )}
+                {tap && <Text style={{ fontSize: cloudFontSize * 0.9, marginTop: 1 }}>👆 tap!</Text>}
             </View>
         );
 
@@ -227,26 +208,21 @@ const InstructionsView = ({ navigation, route }) => {
                 backgroundColor: '#3EC8E8',
                 borderRadius: 14, overflow: 'hidden',
                 borderWidth: 3, borderColor: '#FFD93D',
-                padding: 6,
+                padding: isPhone ? 4 : 6,
                 justifyContent: 'space-around',
             }}>
-                {/* Row 1: completed words */}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                     <Cloud word="the" done />
                     <Cloud word="see" done />
-                    <Cloud word="I" done />
-                    <Cloud word="to" tap />
+                    <Cloud word="I"   done />
+                    <Cloud word="to"  tap />
                 </View>
-
-                {/* Row 2: incomplete words */}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                     <Cloud word="and" />
                     <Cloud word="a" />
                     <Cloud word="you" />
                     <Cloud word="said" />
                 </View>
-
-                {/* Row 3: incomplete words */}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                     <Cloud word="go" />
                     <Cloud word="he" />
@@ -266,7 +242,9 @@ const InstructionsView = ({ navigation, route }) => {
             subtitle: 'Swipe to see the steps →',
             audio: audioFiles[0],
             content: () => (
-                <Text style={{ fontSize: baseFontSize * 3.5, marginVertical: 8 }}>📚 ✏️</Text>
+                <Text style={{ fontSize: isPhone ? baseFontSize * 2.8 : baseFontSize * 3.5, marginVertical: isPhone ? 4 : 8 }}>
+                    📚 ✏️
+                </Text>
             ),
             buttonLabel: "Let's Learn! →",
         },
@@ -298,7 +276,7 @@ const InstructionsView = ({ navigation, route }) => {
                 <View style={{ alignItems: 'center' }}>
                     <MiniMock doneBatch="flyingHigh" unlockBatch="sunnyIsland" />
                     <View style={styles.unlockBanner}>
-                        <Text style={[styles.unlockBannerText, { fontSize: baseFontSize * 0.88 }]}>
+                        <Text style={[styles.unlockBannerText, { fontSize: baseFontSize * 0.82 }]}>
                             ✅ Flying High done!{'  '}→{'  '}🔓 Sunny Island unlocked!
                         </Text>
                     </View>
@@ -312,31 +290,33 @@ const InstructionsView = ({ navigation, route }) => {
     const renderSlide = ({ item }) => (
         <View style={{ width: screenWidth, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <View style={[styles.card, {
-                width: isLandscape ? '76%' : '90%',
-                paddingVertical: isLandscape ? '2%' : '4%',
-                paddingHorizontal: isLandscape ? '4%' : '6%',
+                width:             isLandscape ? '76%' : '90%',
+                paddingVertical:   cardPadV,
+                paddingHorizontal: cardPadH,
             }]}>
-
-                {/* Speaker button — top right corner of card */}
+                {/* Speaker button */}
                 <TouchableOpacity
                     style={[styles.speakerButton, isPlaying && styles.speakerButtonActive]}
                     onPress={() => handleSpeakerPress(item.audio)}
                 >
-                    <Text style={{ fontSize: baseFontSize * 1.4 }}>
+                    <Text style={{ fontSize: baseFontSize * 1.3 }}>
                         {isPlaying ? '🔊' : '🔈'}
                     </Text>
                 </TouchableOpacity>
 
-                <Text style={{ fontSize: baseFontSize * 2.2, marginBottom: 2 }}>{item.emoji}</Text>
-                <Text style={[styles.title, { fontSize: baseFontSize * 1.45 }]}>{item.title}</Text>
-                <Text style={[styles.subtitle, { fontSize: baseFontSize * 0.9 }]}>{item.subtitle}</Text>
+                <Text style={{ fontSize: baseFontSize * 2.0, marginBottom: 2 }}>{item.emoji}</Text>
+                <Text style={[styles.title,    { fontSize: baseFontSize * 1.4  }]}>{item.title}</Text>
+                <Text style={[styles.subtitle, { fontSize: baseFontSize * 0.88 }]}>{item.subtitle}</Text>
 
-                <View style={styles.visualArea}>
+                <View style={[styles.visualArea, { marginBottom: isPhone ? 10 : 14 }]}>
                     {item.content()}
                 </View>
 
-                <TouchableOpacity style={styles.button} onPress={goNext}>
-                    <Text style={[styles.buttonText, { fontSize: baseFontSize * 1.05 }]}>
+                <TouchableOpacity
+                    style={[styles.button, isPhone && { paddingVertical: 9, paddingHorizontal: 28 }]}
+                    onPress={goNext}
+                >
+                    <Text style={[styles.buttonText, { fontSize: baseFontSize * 1.0 }]}>
                         {item.buttonLabel}
                     </Text>
                 </TouchableOpacity>
@@ -350,7 +330,7 @@ const InstructionsView = ({ navigation, route }) => {
             resizeMode="cover"
             style={{ flex: 1 }}
         >
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom']}>
                 <FlatList
                     ref={flatListRef}
                     data={slides}
@@ -380,7 +360,7 @@ const InstructionsView = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: '#fff',   // solid white required for efficient shadow on iOS
+        backgroundColor: '#fff',
         borderRadius: 28,
         alignItems: 'center',
         shadowColor: '#000',
@@ -399,14 +379,13 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         color: '#777',
-        marginBottom: 12,
+        marginBottom: 10,
         textAlign: 'center',
         fontWeight: '500',
     },
     visualArea: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 14,
         width: '100%',
     },
     button: {
@@ -453,7 +432,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         borderWidth: 3,
         borderColor: '#FFD93D',
-        backgroundColor: '#000',   // required for shadow to render efficiently on iOS
+        backgroundColor: '#000',
         shadowColor: '#000',
         shadowOpacity: 0.2,
         shadowRadius: 6,
@@ -467,11 +446,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 3,
     },
     unlockBanner: {
-        marginTop: 10,
+        marginTop: 8,
         backgroundColor: 'rgba(255,255,255,0.9)',
         borderRadius: 12,
-        paddingHorizontal: 12,
-        paddingVertical: 6,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
         borderWidth: 2,
         borderColor: '#6BCB77',
     },
