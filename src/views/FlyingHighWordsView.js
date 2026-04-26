@@ -95,7 +95,7 @@ const FlyingHighWordsView = ({ navigation, route }) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
         },
-        IOpacity: {
+        hisOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '30%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '15%',
             resizeMode: 'contain',
@@ -226,7 +226,7 @@ const FlyingHighWordsView = ({ navigation, route }) => {
                         playWord('the');
                         navigation.navigate('Activities', { selectedWord: 'the', batch: 'Flying High', email: email });
                     }}
-                    style={({ pressed }) => [styles.IOpacity, { opacity: pressed ? 0.5 : 1 }]}
+                    style={({ pressed }) => [styles.theOpacity, { opacity: pressed ? 0.5 : 1 }]}
                 >
                     <Image source={getImageSource('the')} style={styles.Image} />
                 </Pressable>
@@ -234,11 +234,11 @@ const FlyingHighWordsView = ({ navigation, route }) => {
                 {/* see */}
                 {renderWordPressable('the', 'see', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('see'), playWord, email)}
 
-                {/* I */}
-                {renderWordPressable('see', 'I', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('I'), playWord, email)}
+                {/* his */}
+                {renderWordPressable('see', 'his', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('his'), playWord, email)}
 
                 {/* to */}
-                {renderWordPressable('I', 'to', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('to'), playWord, email)}
+                {renderWordPressable('his', 'to', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('to'), playWord, email)}
 
                 <View style={styles.helicopter}>
                     <Image source={require('../assets/flyingHighWordsView/helicopter.png')} style={styles.Image} />
