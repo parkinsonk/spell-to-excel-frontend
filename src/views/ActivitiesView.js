@@ -8,7 +8,7 @@ import wordAudioMapping from '../utils/wordAudioMapping.js';
 
 const ActivitiesView = ({ navigation, route}) => {
     
-    const { selectedWord, batch } = route.params;
+    const { selectedWord, batch, email } = route.params;
     const { height: screenHeight, width: screenWidth } = useWindowDimensions();
     const isLandscape = screenWidth > screenHeight;
     const aspectRatio = screenWidth / screenHeight;
@@ -308,7 +308,7 @@ const ActivitiesView = ({ navigation, route}) => {
 
                     <TouchableOpacity
                         disabled={!isReadCompletedForTest}
-                        onPress={() => navigation.navigate('Test', { batch, activity: "test", selectedWord })}
+                        onPress={() => navigation.navigate('Test', { batch, activity: "test", selectedWord, email })}
                         style={{ ...styles.activityOpacity, opacity: isReadCompletedForTest ? 1 : 0.5 }}
                     >
                             <Image source={testImage} style={styles.image} />

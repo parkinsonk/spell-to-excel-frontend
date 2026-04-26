@@ -235,7 +235,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
                             style={styles.bottomLeft}>
 
                                     <Pressable
-                                        onPress={() => navigation.navigate('Flying High')}
+                                        onPress={() => navigation.navigate('Flying High', { email: email })} // Always allow navigation to Flying High
                                         style={({ pressed }) => [
                                             styles.FlyingHighOpacity, // Your existing styles
                                             {
@@ -251,7 +251,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
                                     <Pressable
                                         onPress={() => {
                                             if (flyingHighCompleted) {
-                                                navigation.navigate('Sunny Island'); // Only navigate if flyingHighCompleted is true
+                                                navigation.navigate('Sunny Island', { email: email }); // Only navigate if flyingHighCompleted is true
                                             }
                                         }}
                                         style={({ pressed }) => [
@@ -269,7 +269,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
                                     <Pressable
                                         onPress={() => {
                                             if (sunnyIslandCompleted) {
-                                                navigation.navigate('SpringTime Fun'); // Only navigate if flyingHighCompleted is true
+                                                navigation.navigate('SpringTime Fun', { email: email }); // Only navigate if flyingHighCompleted is true
                                             }
                                         }}
                                         style={({ pressed }) => [
@@ -299,7 +299,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
                                     <Pressable
                                         onPress={() => {
                                             if (springtimeFunCompleted) {
-                                                navigation.navigate('Alien Adventures'); // Only navigate if sunnyIslandCompleted is true
+                                                navigation.navigate('Alien Adventures', { email: email }); // Only navigate if sunnyIslandCompleted is true
                                             }
                                         }}
                                         style={({ pressed }) => [
@@ -317,7 +317,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
                                 <Pressable
                                     onPress={() => {
                                         if (alienAdventureCompleted) {
-                                            navigation.navigate('Outer Space');  // Only navigate if alienAdventureCompleted is true
+                                            navigation.navigate('Outer Space', { email: email });  // Only navigate if alienAdventureCompleted is true
                                         }
                                     }}
                                     style={({ pressed }) => [
@@ -335,7 +335,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
                                 <Pressable
                                     onPress={() => {
                                             if (outerSpaceCompleted) {
-                                                navigation.navigate('Planets and Beyond'); // Only navigate if outerSpaceCompleted is true
+                                                navigation.navigate('Planets and Beyond', { email: email }); // Only navigate if outerSpaceCompleted is true
                                             }
                                         }}
                                     style={({ pressed }) => [
@@ -361,7 +361,7 @@ const SelectWordBatchesView = ({ navigation, route }) => {
                                     <Pressable
                                         onPress={() => {
                                             if (planetsAndBeyondCompleted) {
-                                                navigation.navigate('Diving Deep'); // Only navigate if planetsAndBeyond is true
+                                                navigation.navigate('Diving Deep', { email: email }); // Only navigate if planetsAndBeyond is true
                                             }
                                         }}
                                         style={({ pressed }) => [

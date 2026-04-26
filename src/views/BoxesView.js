@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
     View, Text, TouchableOpacity, Image, StyleSheet, Alert,
-    PanResponder, useWindowDimensions, Animated,
+    PanResponder, useWindowDimensions, Animated, ActivityIndicator,
 } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import boxesWordMapping from '../utils/boxesWordMapping';
@@ -21,10 +21,12 @@ const BoxesView = ({ navigation, route }) => {
     const isLandscape = screenWidth > screenHeight;
     const { batch, activity, selectedWord } = route.params;
 
+    const [isLoading, setIsLoading] = useState(false);
+
     // Use the text-based soundMapping instead of image-based boxesWordMapping
     const wordData    = boxesWordMapping[selectedWord] || { sounds: ['?'], colors: ['#ffffffff'] };
-    const soundsList  = wordData.sounds;   // e.g. ['th', 'e']
-    const colorsList  = wordData.colors;   // e.g. ['#ffffffff', '#ffffffff']
+    const soundsList  = wordData.sounds;
+    const colorsList  = wordData.colors;
     const NUM_COLUMNS = soundsList.length;
 
     // Box sizing
@@ -40,36 +42,55 @@ const BoxesView = ({ navigation, route }) => {
 
     // ── Back button ──────────────────────────────────────────────────────────
     const handleCustomBackAction = async () => {
-        Alert.alert("Congrats!", "You've completed the Sounds activity.");
-        await markActivityCompleted(activity, selectedWord);
-        if      (batch === 'Flying High')       await checkFlyingHigh('Flying High');
-        else if (batch === 'Sunny Island')      await checkSunnyIsland('Sunny Island');
-        else if (batch === 'SpringTime Fun')    await checkSpringtimeFun('SpringTime Fun');
-        else if (batch === 'Alien Adventures')  await checkAlienAdventure('Alien Adventures');
-        else if (batch === 'Outer Space')       await checkOuterSpace('Outer Space');
-        else if (batch === 'Planets and Beyond') await checkPlanetsAndBeyond('Planets and Beyond');
-        else if (batch === 'Diving Deep')       await checkDivingDeep('Diving Deep');
-        navigation.goBack();
+        if (isLoading) return;
+
+        setIsLoading(true);
+
+        try {
+            await markActivityCompleted(activity, selectedWord);
+
+            if      (batch === 'Flying High')        await checkFlyingHigh('Flying High');
+            else if (batch === 'Sunny Island')       await checkSunnyIsland('Sunny Island');
+            else if (batch === 'SpringTime Fun')     await checkSpringtimeFun('SpringTime Fun');
+            else if (batch === 'Alien Adventures')   await checkAlienAdventure('Alien Adventures');
+            else if (batch === 'Outer Space')        await checkOuterSpace('Outer Space');
+            else if (batch === 'Planets and Beyond') await checkPlanetsAndBeyond('Planets and Beyond');
+            else if (batch === 'Diving Deep')        await checkDivingDeep('Diving Deep');
+
+            Alert.alert("Congrats!", "You've completed the Sounds activity.", [
+            {
+                text: "OK",
+                onPress: () => navigation.goBack(),
+            },
+        ]);
+        } catch (error) {
+            console.error('Error completing activity:', error);
+            Alert.alert('Error', 'Something went wrong. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     useEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
-                <TouchableOpacity onPress={handleCustomBackAction} style={{ marginLeft: 10 }}>
+                <TouchableOpacity
+                    onPress={handleCustomBackAction}
+                    disabled={isLoading}
+                    style={{ marginLeft: 10, opacity: isLoading ? 0.5 : 1 }}
+                >
                     <Image source={require('../assets/back.png')} style={{ width: 60, height: 60 }} />
                 </TouchableOpacity>
             ),
         });
-    }, [navigation]);
+    }, [navigation, isLoading]);
 
     // ── Drawing state ────────────────────────────────────────────────────────
-    const [paths, setPaths]               = useState([]);
-    const [color, setColor]               = useState('black');
+    const [paths, setPaths] = useState([]);
+    const [color, setColor] = useState('black');
     const [showColorPicker, setShowColorPicker] = useState(false);
     const colorOptions = ['black', 'red', 'blue', 'green', 'yellow', 'purple'];
 
-    // Track the background view's position on screen so we can convert
-    // absolute pageX/pageY touch coords into SVG-local coords.
     const backgroundRef = useRef(null);
     const viewOffset    = useRef({ x: 0, y: 0 });
 
@@ -78,7 +99,6 @@ const BoxesView = ({ navigation, route }) => {
     const [orientationStyles, setOrientationStyles]       = useState({});
 
     // ── Draggable dot state ──────────────────────────────────────────────────
-    // One Animated.ValueXY per sound — initialise once
     const [circlePositions] = useState(() => initializeCirclePositions(soundsList.length));
 
     // ── Orientation ──────────────────────────────────────────────────────────
@@ -103,13 +123,10 @@ const BoxesView = ({ navigation, route }) => {
     };
 
     // ── Drawing PanResponder ─────────────────────────────────────────────────
-    // pageX/pageY are absolute screen coordinates — consistent regardless of
-    // which child view the touch lands on. We subtract the background View's
-    // on-screen position (stored in viewOffset) to get SVG-local coords.
     const currentPath = useRef('');
     const drawPanResponder = useRef(
         PanResponder.create({
-            onStartShouldSetPanResponder: () => true,
+            onStartShouldSetPanResponder: () => !isLoading,
             onPanResponderGrant: (evt) => {
                 const x = evt.nativeEvent.pageX - viewOffset.current.x;
                 const y = evt.nativeEvent.pageY - viewOffset.current.y;
@@ -132,7 +149,7 @@ const BoxesView = ({ navigation, route }) => {
     const circlePanResponders = useRef(
         circlePositions.map((pos) =>
             PanResponder.create({
-                onStartShouldSetPanResponder: () => true,
+                onStartShouldSetPanResponder: () => !isLoading,
                 onPanResponderGrant: () => {
                     pos.setOffset({ x: pos.x._value, y: pos.y._value });
                     pos.setValue({ x: 0, y: 0 });
@@ -149,11 +166,10 @@ const BoxesView = ({ navigation, route }) => {
     ).current;
 
     // ── Vertical positions for the two rows ──────────────────────────────────
-    // Sound boxes + dots live in the upper band; empty drop targets below.
-    const soundRowTop  = aspectRatio < 1.4 ? '28%' : '22%';  // row showing the grapheme text
-    const targetRowTop = aspectRatio < 1.4 ? '55%' : '50%';  // empty drop-target boxes
+    const soundRowTop  = aspectRatio < 1.4 ? '28%' : '22%';
+    const targetRowTop = aspectRatio < 1.4 ? '55%' : '50%';
 
-    // ── Shared row renderer (used for both landscape & portrait) ─────────────
+    // ── Shared row renderer ──────────────────────────────────────────────────
     const renderBoxRows = () => (
         <>
             {soundsList.map((sound, index) => {
@@ -162,8 +178,6 @@ const BoxesView = ({ navigation, route }) => {
 
                 return (
                     <React.Fragment key={index}>
-
-                        {/* ── Sound box (upper row) — shows the grapheme text ── */}
                         <View
                             style={[
                                 localStyles.soundBox,
@@ -183,7 +197,6 @@ const BoxesView = ({ navigation, route }) => {
                             </Text>
                         </View>
 
-                        {/* ── White draggable dot (starts over the sound box) ── */}
                         <Animated.View
                             {...circlePanResponders[index].panHandlers}
                             style={[
@@ -198,7 +211,6 @@ const BoxesView = ({ navigation, route }) => {
                             ]}
                         />
 
-                        {/* ── Empty drop-target box (lower row) ── */}
                         <View
                             style={[
                                 localStyles.targetBox,
@@ -210,19 +222,19 @@ const BoxesView = ({ navigation, route }) => {
                                 },
                             ]}
                         />
-
                     </React.Fragment>
                 );
             })}
         </>
     );
 
-    // ── Toolbar (sound button, eraser, crayon) ───────────────────────────────
+    // ── Toolbar ───────────────────────────────────────────────────────────────
     const renderToolbar = (containerStyle, leftStyle, rightStyle) => (
         <View style={containerStyle}>
             <View style={leftStyle}>
                 <TouchableOpacity
                     style={localStyles.toolButton}
+                    disabled={isLoading}
                     onPress={() => console.log('sound button pressed')}
                 >
                     <Image
@@ -235,6 +247,7 @@ const BoxesView = ({ navigation, route }) => {
             <View style={rightStyle}>
                 <TouchableOpacity
                     style={localStyles.toolButton}
+                    disabled={isLoading}
                     onPress={() => setPaths([])}
                 >
                     <Image
@@ -245,6 +258,7 @@ const BoxesView = ({ navigation, route }) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={localStyles.toolButton}
+                    disabled={isLoading}
                     onPress={() => setShowColorPicker(v => !v)}
                 >
                     <Image
@@ -269,8 +283,6 @@ const BoxesView = ({ navigation, route }) => {
                 });
             }}
         >
-
-            {/* SVG drawing layer — renders strokes, sits behind interactive elements */}
             <View style={StyleSheet.absoluteFill} pointerEvents="none">
                 <Svg height={screenHeight} width={screenWidth}>
                     {paths.map((path, i) => (
@@ -285,7 +297,6 @@ const BoxesView = ({ navigation, route }) => {
                 </Svg>
             </View>
 
-            {/* Main content area */}
             <View
                 style={styles.middle}
                 onLayout={e => setMiddleContainerWidth(e.nativeEvent.layout.width)}
@@ -294,26 +305,34 @@ const BoxesView = ({ navigation, route }) => {
                 {renderBoxRows()}
             </View>
 
-            {/* Toolbar */}
             {renderToolbar(
                 styles.toolbar,
                 styles.toolbarLeft,
                 styles.toolbarRight,
             )}
 
-            {/* Color picker overlay */}
             {showColorPicker && (
                 <View style={localStyles.colorPicker}>
                     {colorOptions.map((c, i) => (
                         <TouchableOpacity
                             key={i}
                             style={[localStyles.colorSwatch, { backgroundColor: c }]}
-                            onPress={() => { setColor(c); setShowColorPicker(false); }}
+                            disabled={isLoading}
+                            onPress={() => {
+                                setColor(c);
+                                setShowColorPicker(false);
+                            }}
                         />
                     ))}
                 </View>
             )}
 
+            {isLoading && (
+                <View style={localStyles.loadingOverlay} pointerEvents="auto">
+                    <ActivityIndicator size="large" color="#0000ff" />
+                    <Text style={localStyles.loadingText}>Saving Progress...</Text>
+                </View>
+            )}
         </View>
     );
 };
@@ -358,7 +377,6 @@ const styles = StyleSheet.create({
 // ─── Local element styles ─────────────────────────────────────────────────────
 
 const localStyles = StyleSheet.create({
-    // Box that displays the grapheme/sound text
     soundBox: {
         position: 'absolute',
         backgroundColor: 'white',
@@ -374,7 +392,6 @@ const localStyles = StyleSheet.create({
         color: '#1a1a1a',
         textAlign: 'center',
     },
-    // Draggable white dot — starts on top of the sound box
     dot: {
         position: 'absolute',
         borderRadius: 100,
@@ -387,7 +404,6 @@ const localStyles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
-    // Empty box below — the drop target
     targetBox: {
         position: 'absolute',
         backgroundColor: 'transparent',
@@ -396,7 +412,6 @@ const localStyles = StyleSheet.create({
         borderRadius: 10,
         zIndex: 1,
     },
-    // Toolbar buttons
     toolButton: {
         width: 80,
         height: 80,
@@ -408,7 +423,6 @@ const localStyles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
-    // Color picker popup
     colorPicker: {
         position: 'absolute',
         bottom: 100,
@@ -432,6 +446,24 @@ const localStyles = StyleSheet.create({
         borderRadius: 22,
         borderWidth: 1,
         borderColor: '#ddd',
+    },
+    loadingOverlay: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(255,255,255,0.8)',
+        zIndex: 999,
+        elevation: 999,
+    },
+    loadingText: {
+        marginTop: 12,
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
     },
 });
 

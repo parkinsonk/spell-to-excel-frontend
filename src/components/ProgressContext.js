@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
+import api from './api';
 
 const ProgressContext = createContext();
 
@@ -21,8 +22,8 @@ export const ProgressProvider = ({ children }) => {
     setIsLoading(true); // Start loading
     try {
       const accessToken = await SecureStore.getItemAsync('access_token');
-      
-      const response = await axios.get('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/check-word/', {
+
+      const response = await api.get('/check-word/', {
         params: {
           batch: batch,
         },
@@ -45,13 +46,13 @@ const checkSunnyIsland = async (batch) => {
     setIsLoading(true); // Start loading
     try {
         const accessToken = await SecureStore.getItemAsync('access_token');
-        
-        const response = await axios.get('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/check-word/', {
-        params: {
-            batch: batch,
-        },
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
+
+        const response = await api.get('/check-word/', {
+            params: {
+                batch: batch,
+            },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
         },
         });
@@ -69,13 +70,13 @@ const checkSpringtimeFun = async (batch) => {
     setIsLoading(true); // Start loading
     try {
         const accessToken = await SecureStore.getItemAsync('access_token');
-        
-        const response = await axios.get('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/check-word/', {
-        params: {
-            batch: batch,
-        },
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
+
+        const response = await api.get('/check-word/', {
+            params: {
+                batch: batch,
+            },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
         },
         });
@@ -93,13 +94,13 @@ const checkAlienAdventure = async (batch) => {
     setIsLoading(true); // Start loading
     try {
         const accessToken = await SecureStore.getItemAsync('access_token');
-        
-        const response = await axios.get('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/check-word/', {
-        params: {
-            batch: batch,
-        },
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
+
+        const response = await api.get('/check-word/', {
+            params: {
+                batch: batch,
+            },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
         },
         });
@@ -117,10 +118,10 @@ const checkOuterSpace = async (batch) => {
     setIsLoading(true); // Start loading
     try {
         const accessToken = await SecureStore.getItemAsync('access_token');
-        
-        const response = await axios.get('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/check-word/', {
-        params: {
-            batch: batch,
+
+        const response = await api.get('/check-word/', {
+            params: {
+                batch: batch,
         },
         headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -141,13 +142,13 @@ const checkPlanetsAndBeyond = async (batch) => {
     setIsLoading(true); // Start loading
     try {
         const accessToken = await SecureStore.getItemAsync('access_token');
-        
-        const response = await axios.get('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/check-word/', {
-        params: {
-            batch: batch,
-        },
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
+
+        const response = await api.get('/check-word/', {
+            params: {
+                batch: batch,
+            },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
         },
         });
@@ -165,13 +166,13 @@ const checkDivingDeep = async (batch) => {
     setIsLoading(true); // Start loading
     try {
         const accessToken = await SecureStore.getItemAsync('access_token');
-        
-        const response = await axios.get('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/check-word/', {
-        params: {
-            batch: batch,
-        },
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
+
+        const response = await api.get('/check-word/', {
+            params: {
+                batch: batch,
+            },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
         },
         });
@@ -188,8 +189,8 @@ const markActivityCompleted = async (activity, word) => {
     setIsLoading(true); // Start loading
     try {
         const accessToken = await SecureStore.getItemAsync('access_token');
-        
-        const response = await axios.post('https://spell-to-excel-7bacf3b9891e.herokuapp.com/api/mark-activity-completed/', {
+
+        const response = await api.post('/mark-activity-completed/', {
             activity: activity,
             word: word,
         },

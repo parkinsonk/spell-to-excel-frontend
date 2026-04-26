@@ -15,7 +15,8 @@ import { renderWordPressable } from '../components/wordButtons';
 import { Audio } from 'expo-av';
 import wordAudioMapping from '../utils/wordAudioMapping.js';
 
-const OuterSpaceWordsView = ({ navigation }) => {
+const OuterSpaceWordsView = ({ navigation, route }) => {
+  const { email } = route.params;
   const { outerSpaceStatus, isLoading } = useProgress();
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const isLandscape = screenWidth > screenHeight;
@@ -288,6 +289,7 @@ const OuterSpaceWordsView = ({ navigation }) => {
             navigation.navigate('Activities', {
               selectedWord: 'some',
               batch: 'Outer Space',
+              email: email,
             });
           }}
         >
@@ -298,28 +300,28 @@ const OuterSpaceWordsView = ({ navigation }) => {
           />
         </TouchableOpacity>
 
-        {renderWordPressable('some', 'pretty', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('pretty'), playWord)}
-        {renderWordPressable('pretty', 'would', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('would'), playWord)}
-        {renderWordPressable('would', 'into', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('into'), playWord)}
-        {renderWordPressable('into', 'saw', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('saw'), playWord)}
+        {renderWordPressable('some', 'pretty', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('pretty'), playWord, email)}
+        {renderWordPressable('pretty', 'would', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('would'), playWord, email)}
+        {renderWordPressable('would', 'into', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('into'), playWord, email)}
+        {renderWordPressable('into', 'saw', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('saw'), playWord, email)}
       </SafeAreaView>
 
       <SafeAreaView style={styles.middleTop}>
-        {renderWordPressable('saw', 'more', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('more'), playWord)}
-        {renderWordPressable('more', 'write', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('write'), playWord)}
-        {renderWordPressable('write', 'who', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('who'), playWord)}
-        {renderWordPressable('who', 'new', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('new'), playWord)}
+        {renderWordPressable('saw', 'more', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('more'), playWord, email)}
+        {renderWordPressable('more', 'write', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('write'), playWord, email)}
+        {renderWordPressable('write', 'who', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('who'), playWord, email)}
+        {renderWordPressable('who', 'new', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('new'), playWord, email)}
       </SafeAreaView>
 
       <SafeAreaView style={styles.middleBottom}>
-        {renderWordPressable('new', 'under', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('under'), playWord)}
-        {renderWordPressable('under', 'could', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('could'), playWord)}
-        {renderWordPressable('could', 'walk', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('walk'), playWord)}
-        {renderWordPressable('walk', 'again', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('again'), playWord)}
+        {renderWordPressable('new', 'under', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('under'), playWord, email)}
+        {renderWordPressable('under', 'could', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('could'), playWord, email)}
+        {renderWordPressable('could', 'walk', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('walk'), playWord, email)}
+        {renderWordPressable('walk', 'again', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('again'), playWord, email)}
       </SafeAreaView>
 
       <SafeAreaView style={styles.bottom}>
-        {renderWordPressable('again', 'soon', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('soon'), playWord)}
+        {renderWordPressable('again', 'soon', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('soon'), playWord, email)}
 
         <Image
           source={require('../assets/outerSpaceView/astronauts.png')}
@@ -327,7 +329,7 @@ const OuterSpaceWordsView = ({ navigation }) => {
           style={styles.astronautImage}
         />
 
-        {renderWordPressable('soon', 'people', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('people'), playWord)}
+        {renderWordPressable('soon', 'people', 'Outer Space', outerSpaceStatus, navigation, styles, getImageSource('people'), playWord, email)}
       </SafeAreaView>
     </ImageBackground>
   );

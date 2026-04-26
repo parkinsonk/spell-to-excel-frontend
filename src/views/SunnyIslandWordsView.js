@@ -8,7 +8,9 @@ import { renderWordPressable } from '../components/wordButtons';
 import { Audio } from 'expo-av';
 import wordAudioMapping from '../utils/wordAudioMapping.js';
 
-const SunnyIslandWordsView = ({ navigation }) => {
+const SunnyIslandWordsView = ({ navigation, route}) => {
+
+    const { email } = route.params;
 
     const { sunnyIslandStatus, isLoading } = useProgress();
     const { height: screenHeight, width: screenWidth } = useWindowDimensions();
@@ -246,20 +248,20 @@ const SunnyIslandWordsView = ({ navigation }) => {
                             style={styles.isOpacity}
                             onPress={() => {
                                 playWord('is');
-                                navigation.navigate('Activities', { selectedWord: 'is', batch: 'Sunny Island' });
+                                navigation.navigate('Activities', { selectedWord: 'is', batch: 'Sunny Island', email: email });
                             }}
                         >
                             <Image source={getImageSource('is')} style={styles.Image} />
                         </TouchableOpacity>
 
                         {/* my */}
-                        {renderWordPressable('is', 'my', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('my'), playWord)}
+                        {renderWordPressable('is', 'my', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('my'), playWord, email)}
 
                     </View>
                     <View style={styles.middleBottomSection}>
 
                         {/* me */}
-                        {renderWordPressable('my', 'me', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('me'), playWord)}
+                        {renderWordPressable('my', 'me', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('me'), playWord, email)}
 
                     </View>
                 </View>
@@ -268,19 +270,19 @@ const SunnyIslandWordsView = ({ navigation }) => {
                     <View style={styles.middleTopSection}>
 
                         {/* as */}
-                        {renderWordPressable('me', 'as', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('as'), playWord)}
+                        {renderWordPressable('me', 'as', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('as'), playWord, email)}
 
                         {/* say */}
-                        {renderWordPressable('as', 'say', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('say'), playWord)}
+                        {renderWordPressable('as', 'say', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('say'), playWord, email)}
 
                     </View>
                     <View style={styles.middleBottomSection}>
 
                         {/* come */}
-                        {renderWordPressable('say', 'come', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('come'), playWord)}
+                        {renderWordPressable('say', 'come', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('come'), playWord, email)}
 
                         {/* has */}
-                        {renderWordPressable('come', 'has', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('has'), playWord)}
+                        {renderWordPressable('come', 'has', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('has'), playWord, email)}
 
                     </View>
                 </View>
@@ -289,19 +291,19 @@ const SunnyIslandWordsView = ({ navigation }) => {
                     <View style={styles.middleTopSection}>
 
                         {/* they */}
-                        {renderWordPressable('has', 'they', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('they'), playWord)}
+                        {renderWordPressable('has', 'they', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('they'), playWord, email)}
 
                         {/* where */}
-                        {renderWordPressable('they', 'where', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('where'), playWord)}
+                        {renderWordPressable('they', 'where', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('where'), playWord, email)}
 
                     </View>
                     <View style={styles.middleBottomSection}>
 
                         {/* have */}
-                        {renderWordPressable('where', 'have', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('have'), playWord)}
+                        {renderWordPressable('where', 'have', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('have'), playWord, email)}
 
                         {/* away */}
-                        {renderWordPressable('have', 'away', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('away'), playWord)}
+                        {renderWordPressable('have', 'away', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('away'), playWord, email)}
 
                     </View>
                 </View>
@@ -313,27 +315,27 @@ const SunnyIslandWordsView = ({ navigation }) => {
                 <View style={styles.bottomLeft}>
 
                     {/* what */}
-                    {renderWordPressable('away', 'what', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('what'), playWord)}
+                    {renderWordPressable('away', 'what', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('what'), playWord, email)}
 
                     {/* from */}
-                    {renderWordPressable('what', 'from', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('from'), playWord)}
+                    {renderWordPressable('what', 'from', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('from'), playWord, email)}
 
                 </View>
 
                 <View style={styles.bottomMiddle}>
 
                     {/* by */}
-                    {renderWordPressable('from', 'by', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('by'), playWord)}
+                    {renderWordPressable('from', 'by', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('by'), playWord, email)}
 
                     {/* find */}
-                    {renderWordPressable('by', 'find', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('find'), playWord)}
+                    {renderWordPressable('by', 'find', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('find'), playWord, email)}
 
                 </View>
 
                 <View style={styles.bottomRight}>
 
                     {/* funny */}
-                    {renderWordPressable('find', 'funny', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('funny'), playWord)}
+                    {renderWordPressable('find', 'funny', 'Sunny Island', sunnyIslandStatus, navigation, styles, getImageSource('funny'), playWord, email)}
 
                 </View>
 

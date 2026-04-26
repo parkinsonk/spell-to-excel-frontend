@@ -8,7 +8,9 @@ import { renderWordPressable } from '../components/wordButtons';
 import { Audio } from 'expo-av';
 import wordAudioMapping from '../utils/wordAudioMapping.js';
 
-const AlienAdventuresWordsView = ({ navigation }) => {
+const AlienAdventuresWordsView = ({ navigation, route }) => {
+
+    const { email } = route.params;
 
     const { alienAdventureStatus, isLoading } = useProgress();
     const { width: screenWidth, height: screenHeight } = useWindowDimensions();
@@ -205,36 +207,36 @@ const AlienAdventuresWordsView = ({ navigation }) => {
                     style={styles.allOpacity}
                     onPress={() => {
                         playWord('all');
-                        navigation.navigate('Activities', { selectedWord: 'all', batch: 'Alien Adventures' });
+                        navigation.navigate('Activities', { selectedWord: 'all', batch: 'Alien Adventures', email: email });
                     }}
                 >
                     <Image source={getImageSource('all')} style={styles.Image} />
                 </TouchableOpacity>
 
-                {renderWordPressable('all',    'look',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('look'),   playWord)}
-                {renderWordPressable('look',   'little', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('little'), playWord)}
-                {renderWordPressable('little', 'were',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('were'),   playWord)}
-                {renderWordPressable('were',   'your',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('your'),   playWord)}
+                {renderWordPressable('all',    'look',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('look'),   playWord, email)}
+                {renderWordPressable('look',   'little', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('little'), playWord, email)}
+                {renderWordPressable('little', 'were',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('were'),   playWord, email)}
+                {renderWordPressable('were',   'your',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('your'),   playWord, email)}
 
             </SafeAreaView>
 
             <SafeAreaView style={styles.middle}>
 
-                {renderWordPressable('your',  'down',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('down'),  playWord)}
-                {renderWordPressable('down',  'there', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('there'), playWord)}
-                {renderWordPressable('there', 'do',    'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('do'),    playWord)}
-                {renderWordPressable('do',    'their', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('their'), playWord)}
-                {renderWordPressable('their', 'here',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('here'),  playWord)}
+                {renderWordPressable('your',  'down',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('down'),  playWord, email)}
+                {renderWordPressable('down',  'there', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('there'), playWord, email)}
+                {renderWordPressable('there', 'do',    'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('do'),    playWord, email)}
+                {renderWordPressable('do',    'their', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('their'), playWord, email)}
+                {renderWordPressable('their', 'here',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('here'),  playWord, email)}
 
             </SafeAreaView>
 
             <SafeAreaView style={styles.bottom}>
 
-                {renderWordPressable('here',  'other', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('other'), playWord)}
-                {renderWordPressable('other', 'about', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('about'), playWord)}
-                {renderWordPressable('about', 'want',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('want'),  playWord)}
-                {renderWordPressable('want',  'too',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('too'),   playWord)}
-                {renderWordPressable('too',   'many',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('many'),  playWord)}
+                {renderWordPressable('here',  'other', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('other'), playWord, email)}
+                {renderWordPressable('other', 'about', 'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('about'), playWord, email)}
+                {renderWordPressable('about', 'want',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('want'),  playWord, email)}
+                {renderWordPressable('want',  'too',   'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('too'),   playWord, email)}
+                {renderWordPressable('too',   'many',  'Alien Adventures', alienAdventureStatus, navigation, styles, getImageSource('many'),  playWord, email)}
 
             </SafeAreaView>
 
