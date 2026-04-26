@@ -402,8 +402,6 @@ const TestView = ({ navigation, route }) => {
       } else {
         setShowCorrectWord(true);
 
-        await refreshBatchProgress();
-
         const accessToken = await SecureStore.getItemAsync('access_token');
 
         await api.post(
@@ -419,6 +417,8 @@ const TestView = ({ navigation, route }) => {
           }
         );
 
+        await refreshBatchProgress();
+
         Alert.alert(
           "Oops!",
           "The typed word is incorrect. Please complete the activities for this word and try again!",
@@ -427,11 +427,31 @@ const TestView = ({ navigation, route }) => {
         );
       }
     } catch (error) {
-      console.error('Error checking word:', error);
-      Alert.alert('Error', 'Something went wrong. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
+        const backendError = error.response?.data?.error;
+
+        if (
+          error.response?.status === 400 &&
+          (
+            backendError?.includes('already marked as correct') ||
+            backendError?.includes('already completed')
+          )
+        ) {
+          Alert.alert("Oops!", "You spelled it wrong. Try again.", [
+    {
+      text: "OK",
+      onPress: () => navigation.goBack(),
+    },
+  ],
+  { cancelable: false }
+);
+          return;
+        }
+
+        console.error('Error checking word:', error.response?.data || error.message);
+        Alert.alert('Error', 'Something went wrong. Please try again.');
+      } finally {
+        setIsLoading(false);
+      }
   };
 
   if (!orientationStyles) {
