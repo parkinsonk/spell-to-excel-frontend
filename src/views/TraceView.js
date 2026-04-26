@@ -7,6 +7,8 @@ import {
   Alert,
   PanResponder,
   useWindowDimensions,
+  ActivityIndicator,
+  Text,
 } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import traceWordMapping from '../utils/traceWordMapping';
@@ -23,6 +25,7 @@ const TraceView = ({ navigation, route }) => {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [showBackground, setBackground] = useState(traceBackground);
   const [orientationStyles, setOrientationStyles] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const aspectRatio = screenWidth / screenHeight;
@@ -42,41 +45,61 @@ const TraceView = ({ navigation, route }) => {
   const currentStrokeColor = useRef(color);
 
   const handleCustomBackAction = async () => {
-    Alert.alert("Congrats!", "You've completed the Trace, Copy, Cover activity.");
-    await markActivityCompleted(activity, selectedWord);
+    if (isLoading) return;
 
-    if (batch === 'Flying High') await checkFlyingHigh('Flying High');
-    else if (batch === 'Sunny Island') await checkSunnyIsland('Sunny Island');
-    else if (batch === 'SpringTime Fun') await checkSpringtimeFun('SpringTime Fun');
-    else if (batch === 'Alien Adventures') await checkAlienAdventure('Alien Adventures');
-    else if (batch === 'Outer Space') await checkOuterSpace('Outer Space');
-    else if (batch === 'Planets and Beyond') await checkPlanetsAndBeyond('Planets and Beyond');
-    else if (batch === 'Diving Deep') await checkDivingDeep('Diving Deep');
+    setIsLoading(true);
 
-    navigation.goBack();
+    try {
+      await markActivityCompleted(activity, selectedWord);
+
+      if (batch === 'Flying High') await checkFlyingHigh('Flying High');
+      else if (batch === 'Sunny Island') await checkSunnyIsland('Sunny Island');
+      else if (batch === 'SpringTime Fun') await checkSpringtimeFun('SpringTime Fun');
+      else if (batch === 'Alien Adventures') await checkAlienAdventure('Alien Adventures');
+      else if (batch === 'Outer Space') await checkOuterSpace('Outer Space');
+      else if (batch === 'Planets and Beyond') await checkPlanetsAndBeyond('Planets and Beyond');
+      else if (batch === 'Diving Deep') await checkDivingDeep('Diving Deep');
+
+      Alert.alert("Congrats!", "You've completed the Trace, Copy, Cover activity.");
+      navigation.goBack();
+
+    } catch (error) {
+      console.error('Error completing activity:', error);
+      Alert.alert('Error', 'Something went wrong. Please try again.');
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <TouchableOpacity onPress={handleCustomBackAction} style={{ marginLeft: 10 }}>
+        <TouchableOpacity
+          onPress={handleCustomBackAction}
+          disabled={isLoading}
+          style={{ marginLeft: 10, opacity: isLoading ? 0.5 : 1 }}
+        >
           <Image source={require('../assets/back.png')} style={{ width: 60, height: 60 }} />
         </TouchableOpacity>
       ),
     });
-  }, [navigation]);
+  }, [navigation, isLoading]);
 
   useEffect(() => {
     currentStrokeColor.current = color;
   }, [color]);
 
-  const setTraceBackground = () => setBackground(traceBackground);
-  const setCoverBackground = () => setBackground(coverBackground);
+  const setTraceBackground = () => {
+    if (!isLoading) setBackground(traceBackground);
+  };
+
+  const setCoverBackground = () => {
+    if (!isLoading) setBackground(coverBackground);
+  };
 
   const panResponder = useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponder: () => !isLoading,
+      onMoveShouldSetPanResponder: () => !isLoading,
 
       onPanResponderGrant: (evt) => {
         const { locationX: x, locationY: y } = evt.nativeEvent;
@@ -166,28 +189,45 @@ const TraceView = ({ navigation, route }) => {
   const renderToolbar = (s) => (
     <View style={s.lowerContainer}>
       <View style={s.lowerContainerLeft}>
-        <TouchableOpacity style={s.eraser} onPress={() => setPaths([])}>
+        <TouchableOpacity
+          style={s.eraser}
+          disabled={isLoading}
+          onPress={() => setPaths([])}
+        >
           <Image source={require('../assets/traceViews/eraser.png')} style={s.eraserImage} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={s.crayonBox} onPress={() => setShowColorPicker((v) => !v)}>
+        <TouchableOpacity
+          style={s.crayonBox}
+          disabled={isLoading}
+          onPress={() => setShowColorPicker((v) => !v)}
+        >
           <Image source={require('../assets/traceViews/crayonBox.png')} style={s.crayonBoxImage} />
         </TouchableOpacity>
       </View>
 
       <View style={s.lowerContainerMiddle}>
-        <TouchableOpacity style={s.sound} onPress={() => console.log('Sound button pressed')}>
+        <TouchableOpacity
+          style={s.sound}
+          disabled={isLoading}
+          onPress={() => console.log('Sound button pressed')}
+        >
           <Image source={require('../assets/traceViews/sound.png')} style={s.soundImage} />
         </TouchableOpacity>
       </View>
 
       <View style={s.lowerContainerRight}>
-        <TouchableOpacity style={s.trace} onPress={setTraceBackground}>
+        <TouchableOpacity
+          style={s.trace}
+          disabled={isLoading}
+          onPress={setTraceBackground}
+        >
           <Image source={require('../assets/traceViews/trace.png')} style={s.traceImage} />
         </TouchableOpacity>
 
         <TouchableOpacity
           style={s.cover}
+          disabled={isLoading}
           onPress={() => {
             setCoverBackground();
             setPaths([]);
@@ -212,6 +252,7 @@ const TraceView = ({ navigation, route }) => {
             <TouchableOpacity
               key={i}
               style={[s.colorOption, { backgroundColor: c }]}
+              disabled={isLoading}
               onPress={() => {
                 setColor(c);
                 setShowColorPicker(false);
@@ -222,6 +263,13 @@ const TraceView = ({ navigation, route }) => {
       )}
 
       {renderToolbar(s)}
+
+      {isLoading && (
+        <View style={s.loadingOverlay} pointerEvents="auto">
+          <ActivityIndicator size="large" color="#0000ff" />
+          <Text style={s.loadingText}>Saving Progress...</Text>
+        </View>
+      )}
     </ImageBackground>
   );
 };
@@ -305,6 +353,24 @@ const styles = (aspectRatio) => ({
       marginLeft: '5%',
     },
     soundImage: { width: '100%', height: '100%' },
+    loadingOverlay: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(255,255,255,0.8)',
+      zIndex: 999,
+      elevation: 999,
+    },
+    loadingText: {
+      marginTop: 12,
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: 'black',
+    },
   },
 
   portrait: {
@@ -385,6 +451,24 @@ const styles = (aspectRatio) => ({
       marginLeft: '5%',
     },
     soundImage: { width: '100%', height: '100%' },
+    loadingOverlay: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(255,255,255,0.8)',
+      zIndex: 999,
+      elevation: 999,
+    },
+    loadingText: {
+      marginTop: 12,
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: 'black',
+    },
   },
 });
 

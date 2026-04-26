@@ -57,12 +57,9 @@ const BoxesView = ({ navigation, route }) => {
             else if (batch === 'Planets and Beyond') await checkPlanetsAndBeyond('Planets and Beyond');
             else if (batch === 'Diving Deep')        await checkDivingDeep('Diving Deep');
 
-            Alert.alert("Congrats!", "You've completed the Sounds activity.", [
-            {
-                text: "OK",
-                onPress: () => navigation.goBack(),
-            },
-        ]);
+            Alert.alert("Congrats!", "You've completed the Sounds activity.");
+            navigation.goBack();
+
         } catch (error) {
             console.error('Error completing activity:', error);
             Alert.alert('Error', 'Something went wrong. Please try again.');
