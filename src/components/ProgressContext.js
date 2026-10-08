@@ -8,38 +8,38 @@ const ProgressContext = createContext();
 export const useProgress = () => useContext(ProgressContext);
 
 export const ProgressProvider = ({ children }) => {
-  const [flyingHighStatus, setFlyingHighStatus] = useState({});
-  const [sunnyIslandStatus, setSunnyIslandStatus] = useState({}); 
-  const [springtimeFunStatus, setSpringtimeFunStatus] = useState({});
-  const [alienAdventureStatus, setAlienAdventureStatus] = useState({});
-  const [outerSpaceStatus, setOuterSpaceStatus] = useState({});
-  const [planetsAndBeyondStatus, setPlanetsAndBeyondStatus] = useState({});
-  const [divingDeepStatus, setDivingDeepStatus] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+const [flyingHighStatus, setFlyingHighStatus] = useState({});
+const [sunnyIslandStatus, setSunnyIslandStatus] = useState({}); 
+const [springtimeFunStatus, setSpringtimeFunStatus] = useState({});
+const [alienAdventureStatus, setAlienAdventureStatus] = useState({});
+const [outerSpaceStatus, setOuterSpaceStatus] = useState({});
+const [planetsAndBeyondStatus, setPlanetsAndBeyondStatus] = useState({});
+const [divingDeepStatus, setDivingDeepStatus] = useState({});
+const [isLoading, setIsLoading] = useState(false);
 
 // Checking Flying High Words
-  const checkFlyingHigh = async (batch) => {
+const checkFlyingHigh = async (batch) => {
     setIsLoading(true); // Start loading
     try {
-      const accessToken = await SecureStore.getItemAsync('access_token');
+    const accessToken = await SecureStore.getItemAsync('access_token');
 
-      const response = await api.get('/check-word/', {
+    const response = await api.get('/check-word/', {
         params: {
-          batch: batch,
+        batch: batch,
         },
         headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
         },
-      });
+    });
 
-      setFlyingHighStatus(response.data); // Update state with fetched data
+    setFlyingHighStatus(response.data); // Update state with fetched data
     } catch (error) {
-      // Handle errors appropriately
+    // Handle errors appropriately
     } finally {
-      setIsLoading(false); // End loading
+    setIsLoading(false); // End loading
     }
-  };
+};
 
 // Checking Sunny Island Words
 const checkSunnyIsland = async (batch) => {
@@ -209,11 +209,11 @@ const markActivityCompleted = async (activity, word) => {
     }
 
 
-  return (
+return (
     <ProgressContext.Provider value={{ flyingHighStatus, springtimeFunStatus, sunnyIslandStatus, alienAdventureStatus, outerSpaceStatus,
-                                     planetsAndBeyondStatus, divingDeepStatus, isLoading, checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
-                                     checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep, markActivityCompleted }}>
+                                    planetsAndBeyondStatus, divingDeepStatus, isLoading, checkFlyingHigh, checkSpringtimeFun, checkSunnyIsland,
+                                    checkAlienAdventure, checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep, markActivityCompleted }}>
         {children}
     </ProgressContext.Provider>
-  );
+);
 };
