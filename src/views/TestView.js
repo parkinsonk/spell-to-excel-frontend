@@ -557,8 +557,8 @@ const TestView = ({ navigation, route }) => {
       color: '#1a1a1a',
     },
 
-    sound: {
-      width: '10%',
+    instructions: {
+      width: '12%',
       height: isLandscape
         ? aspectRatio > 1.7
           ? '80%'
@@ -685,12 +685,12 @@ const TestView = ({ navigation, route }) => {
           {!showCorrectWord && (
             <Pressable
               onPress={() =>
-                console.log('Sound Button Pressed')
+                console.log('Instructions Button Pressed')
               }
-              style={styles.sound}
+              style={styles.instructions}
             >
               <Image
-                source={require('../assets/testViews/sound.png')}
+                source={require('../assets/instructionsVideo.png')}
                 style={{
                   width: '100%',
                   height: '100%',

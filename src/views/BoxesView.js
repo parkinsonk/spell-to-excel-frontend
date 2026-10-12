@@ -235,7 +235,7 @@ const BoxesView = ({ navigation, route }) => {
                     onPress={() => console.log('sound button pressed')}
                 >
                     <Image
-                        source={require('../assets/traceViews/sound.png')}
+                        source={require('../assets/instructionsVideo.png')}
                         style={localStyles.toolImage}
                         resizeMode="contain"
                     />
@@ -410,8 +410,8 @@ const localStyles = StyleSheet.create({
         zIndex: 1,
     },
     toolButton: {
-        width: 80,
-        height: 80,
+        width: 120,
+        height: 100,
         marginHorizontal: 8,
         justifyContent: 'center',
         alignItems: 'center',

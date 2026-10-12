@@ -208,11 +208,11 @@ const TraceView = ({ navigation, route }) => {
 
       <View style={s.lowerContainerMiddle}>
         <TouchableOpacity
-          style={s.sound}
+          style={s.instructions}
           disabled={isLoading}
-          onPress={() => console.log('Sound button pressed')}
+          onPress={() => console.log('Instructions button pressed')}
         >
-          <Image source={require('../assets/traceViews/sound.png')} style={s.soundImage} />
+          <Image source={require('../assets/instructionsVideo.png')} style={s.instructionsImage} />
         </TouchableOpacity>
       </View>
 
@@ -347,12 +347,12 @@ const styles = (aspectRatio) => ({
       marginRight: '15%',
     },
     coverImage: { width: '100%', height: '100%' },
-    sound: {
-      width: '20%',
-      height: aspectRatio > 1.75 ? '50%' : '35%',
+    instructions: {
+      width: '50%',
+      height: aspectRatio > 1.75 ? '50%' : '30%',
       marginLeft: '5%',
     },
-    soundImage: { width: '100%', height: '100%' },
+    instructionsImage: { width: '100%', height: '100%' },
     loadingOverlay: {
       position: 'absolute',
       top: 0,
@@ -445,12 +445,12 @@ const styles = (aspectRatio) => ({
       marginRight: '15%',
     },
     coverImage: { width: '100%', height: '100%' },
-    sound: {
+    instructions: {
       width: aspectRatio > 1.75 ? '20%' : '30%',
       height: aspectRatio > 1.75 ? '50%' : '30%',
       marginLeft: '5%',
     },
-    soundImage: { width: '100%', height: '100%' },
+    instructionsImage: { width: '100%', height: '100%' },
     loadingOverlay: {
       position: 'absolute',
       top: 0,
