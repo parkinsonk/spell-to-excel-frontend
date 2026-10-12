@@ -277,7 +277,7 @@ const ActivitiesView = ({ navigation, route}) => {
                 <View style={styles.middle}>
                     <TouchableOpacity
 
-                        onPress={() => navigation.navigate('Boxes', { batch, activity: "sounds", selectedWord })}
+                        onPress={() => navigation.navigate('Sounds', { batch, activity: "sounds", selectedWord })}
                         style={styles.activityOpacity}
                     >   
                         <Image source={soundsImage} style={styles.image} />

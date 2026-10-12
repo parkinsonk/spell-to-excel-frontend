@@ -180,26 +180,28 @@ const TestView = ({ navigation, route }) => {
     return batchStatuses[batch];
   };
 
-  const isBatchCompleted = () => {
+  // ------------------------------------------------
+  // CHECK IF INDIVIDUAL WORD IS COMPLETED
+  // ------------------------------------------------
+
+  const isWordCompleted = () => {
     const status = getBatchStatus();
-    const batchInfo = COMPLETED_BATCHES[batch];
 
-    if (!status || !batchInfo) {
-      return false;
-    }
+    if (!status) return false;
 
-    const words = Object.values(status);
+    const normalizedWord = selectedWord.trim().toLowerCase();
 
-    // Don't treat a partially loaded batch as completed.
-    if (words.length !== batchInfo.count) {
-      return false;
-    }
+    // Find the individual word in the progress data.
+    const wordStatus =
+      status[selectedWord] ||
+      status[normalizedWord];
 
-    // All words must have been passed previously.
-    return words.every(
-      (wordStatus) => wordStatus?.test_correct === true
-    );
+    return wordStatus?.test_correct === true;
   };
+
+  // ------------------------------------------------
+  // REFRESH PROGRESS
+  // ------------------------------------------------
 
   const refreshProgress = async () => {
     switch (batch) {
@@ -212,7 +214,7 @@ const TestView = ({ navigation, route }) => {
         break;
 
       case 'SpringTime Fun':
-        await checkSpringtimeFun('SpringTime Fun');
+        await checkSpringTimeFun('SpringTime Fun');
         break;
 
       case 'Alien Adventures':
@@ -302,7 +304,7 @@ const TestView = ({ navigation, route }) => {
 
         setShowCorrectWord(false);
 
-        // Refresh the saved progress.
+        // Refresh saved progress.
         await refreshProgress();
 
         const completedBatch = COMPLETED_BATCHES[batch];
@@ -347,22 +349,20 @@ const TestView = ({ navigation, route }) => {
       // INCORRECT ANSWER
       // --------------------------------------------
 
-      const alreadyCompleted = isBatchCompleted();
+      const alreadyCompleted = isWordCompleted();
 
       // --------------------------------------------
-      // COMPLETED BATCH: PRACTICE MODE
+      // COMPLETED WORD: PRACTICE MODE
       // --------------------------------------------
 
       if (alreadyCompleted) {
-        // Do not send mark-word-incorrect.
+        // Do not mark the word incorrect.
         // Do not erase previous progress.
         // Do not make the student repeat activities.
 
-        setShowCorrectWord(true);
-
         Alert.alert(
-          'Oops!',
-          'Try again!',
+          'Oops! Try again!',
+          '',
           [
             {
               text: 'OK',
@@ -376,7 +376,7 @@ const TestView = ({ navigation, route }) => {
       }
 
       // --------------------------------------------
-      // UNFINISHED BATCH
+      // WORD NOT YET COMPLETED
       // --------------------------------------------
 
       const accessToken =
@@ -387,7 +387,7 @@ const TestView = ({ navigation, route }) => {
       }
 
       // Mark the word incorrect only if the
-      // student has not completed the batch.
+      // student has not previously completed it.
       await api.post(
         '/mark-word-incorrect/',
         {
@@ -401,7 +401,6 @@ const TestView = ({ navigation, route }) => {
         }
       );
 
-      // Refresh progress only once.
       await refreshProgress();
 
       setShowCorrectWord(true);

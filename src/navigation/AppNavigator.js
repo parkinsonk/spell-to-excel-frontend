@@ -60,7 +60,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Diving Deep" component={DivingDeepWordsView} />
         <Stack.Screen name="Activities" component={ActivtiesView} />
         <Stack.Screen name="Trace" component={TraceView} />
-        <Stack.Screen name="Boxes" component={BoxesView} />
+        <Stack.Screen name="Sounds" component={BoxesView} />
         <Stack.Screen name="Test" component={TestView} />
         <Stack.Screen name="Letter Friends" component={LetterFriendsView} />
         <Stack.Screen name="Read" component={ReadView} />
