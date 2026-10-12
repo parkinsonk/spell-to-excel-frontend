@@ -9,6 +9,7 @@ import {
   useWindowDimensions,
   ActivityIndicator,
   Text,
+  Pressable,
 } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import traceWordMapping from '../utils/traceWordMapping';
@@ -207,13 +208,13 @@ const TraceView = ({ navigation, route }) => {
       </View>
 
       <View style={s.lowerContainerMiddle}>
-        <TouchableOpacity
+        <Pressable
           style={s.instructions}
           disabled={isLoading}
-          onPress={() => console.log('Instructions button pressed')}
+          onPress={() => navigation.navigate('Trace Instructions', { batch, activity, selectedWord })}
         >
           <Image source={require('../assets/instructionsVideo.png')} style={s.instructionsImage} />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <View style={s.lowerContainerRight}>

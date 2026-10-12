@@ -5,7 +5,7 @@ const boxesWordMapping = {
     'the': { sounds: ['th','e'], colors: ['#ffffffff','#ffffffff'] },
     'see': { sounds: ['s','ee'], colors: ['#ffffffff','#ffffffff'] },
     'his': { sounds: ['h','i','s'], colors: ['#ffffffff','#ffffffff','#ffffffff'] },
-    'to': { sounds: ['th','or'], colors: ['#ffffffff','#ffffffff'] },
+    'to': { sounds: ['t','o'], colors: ['#ffffffff','#ffffffff'] },
     'of': { sounds: ['o','f'], colors: ['#ffffffff','#ffffffff'] },
     'and': { sounds: ['a','n','d'], colors: ['#ffffffff','#ffffffff','#ffffffff'] },
     'a': { sounds: ['a'], colors: ['#ffffffff'] },
@@ -15,7 +15,7 @@ const boxesWordMapping = {
     'go': { sounds: ['g','o'], colors: ['#ffffffff','#ffffffff'] },
     'he': { sounds: ['h','e'], colors: ['#ffffffff','#ffffffff'] },
     'as': { sounds: ['a','s'], colors: ['#ffffffff','#ffffffff'] },
-    'was': { sounds: ['w','ai','s'], colors: ['#ffffffff','#ffffffff','#ffffffff'] },
+    'was': { sounds: ['w','a','s'], colors: ['#ffffffff','#ffffffff','#ffffffff'] },
     'are': { sounds: ['are'], colors: ['#ffffffff'] },
 
     // ── Sunny Island (Words 16–31) ────────────────────────────────────────────

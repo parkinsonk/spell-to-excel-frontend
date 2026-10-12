@@ -73,6 +73,7 @@ const traceWordMapping = {
     'their': require('../assets/traceViews/alienAdventuresTraceView/theirTraceBackground.png'),
     'want': require('../assets/traceViews/alienAdventuresTraceView/wantTraceBackground.png'),
     'here': require('../assets/traceViews/alienAdventuresTraceView/hereTraceBackground.png'),
+    'too': require('../assets/traceViews/alienAdventuresTraceView/tooTraceBackground.png'),
     'if': require('../assets/traceViews/alienAdventuresTraceView/ifTraceBackground.png'),
     'will': require('../assets/traceViews/alienAdventuresTraceView/willTraceBackground.png'),
     'how': require('../assets/traceViews/alienAdventuresTraceView/howTraceBackground.png'),

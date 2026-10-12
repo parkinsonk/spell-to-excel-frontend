@@ -30,6 +30,7 @@ import InstructionsView from '../views/InstructionsView';
 import IntructionsActivitiesView from '../views/IntructionsActivitiesView'
 import TestInstructionsView from '../views/TestInstructionsView';
 import SoundsInstructionsView from '../views/SoundsInstructionsView';
+import TraceInstructionsView from '../views/TraceInstructionsView';
 
 
 const Stack = createNativeStackNavigator();
@@ -62,6 +63,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Diving Deep" component={DivingDeepWordsView} />
         <Stack.Screen name="Activities" component={ActivtiesView} />
         <Stack.Screen name="Trace" component={TraceView} />
+        <Stack.Screen name="Trace Instructions" component={TraceInstructionsView} />
         <Stack.Screen name="Sounds" component={BoxesView} />
         <Stack.Screen name="Sounds Instructions" component={SoundsInstructionsView} />
         <Stack.Screen name="Test" component={TestView} />
