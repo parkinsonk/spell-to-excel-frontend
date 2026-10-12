@@ -21,7 +21,10 @@ import LetterButton from '../components/LetterButton';
 import { useProgress } from '../components/ProgressContext';
 import api from '../components/api';
 
-// Final words and expected number of words in each batch.
+// ------------------------------------------------
+// COMPLETED BATCHES
+// ------------------------------------------------
+
 const COMPLETED_BATCHES = {
   'Flying High': {
     word: 'are',
@@ -88,6 +91,10 @@ const TestView = ({ navigation, route }) => {
     checkPlanetsAndBeyond,
     checkDivingDeep,
   } = useProgress();
+
+  // ------------------------------------------------
+  // STATE
+  // ------------------------------------------------
 
   const [inputValue, setInputValue] = useState('');
   const [showCorrectWord, setShowCorrectWord] = useState(false);
@@ -191,7 +198,6 @@ const TestView = ({ navigation, route }) => {
 
     const normalizedWord = selectedWord.trim().toLowerCase();
 
-    // Find the individual word in the progress data.
     const wordStatus =
       status[selectedWord] ||
       status[normalizedWord];
@@ -214,7 +220,7 @@ const TestView = ({ navigation, route }) => {
         break;
 
       case 'SpringTime Fun':
-        await checkSpringTimeFun('SpringTime Fun');
+        await checkSpringtimeFun('SpringTime Fun');
         break;
 
       case 'Alien Adventures':
@@ -264,6 +270,14 @@ const TestView = ({ navigation, route }) => {
   };
 
   // ------------------------------------------------
+  // TEST INSTRUCTIONS VIDEO NAVIGATION
+  // ------------------------------------------------
+
+  const openInstructionsVideo = () => {
+    navigation.navigate('Test Instructions');
+  };
+
+  // ------------------------------------------------
   // CHECK WORD
   // ------------------------------------------------
 
@@ -304,7 +318,7 @@ const TestView = ({ navigation, route }) => {
 
         setShowCorrectWord(false);
 
-        // Refresh saved progress.
+        // Refresh saved progress
         await refreshProgress();
 
         const completedBatch = COMPLETED_BATCHES[batch];
@@ -329,7 +343,7 @@ const TestView = ({ navigation, route }) => {
           return;
         }
 
-        // Normal correct answer.
+        // Normal correct answer
         Alert.alert(
           'Correct!',
           "You've typed the correct word.",
@@ -386,8 +400,6 @@ const TestView = ({ navigation, route }) => {
         throw new Error('No access token found');
       }
 
-      // Mark the word incorrect only if the
-      // student has not previously completed it.
       await api.post(
         '/mark-word-incorrect/',
         {
@@ -681,11 +693,10 @@ const TestView = ({ navigation, route }) => {
             editable={false}
           />
 
+          {/* TEST INSTRUCTIONS BUTTON */}
           {!showCorrectWord && (
             <Pressable
-              onPress={() =>
-                console.log('Instructions Button Pressed')
-              }
+              onPress={openInstructionsVideo}
               style={styles.instructions}
             >
               <Image
