@@ -7,7 +7,8 @@ import { renderWordPressable } from '../components/wordButtons';
 import { Audio } from 'expo-av';
 import wordAudioMapping from '../utils/wordAudioMapping.js';
 
-const SpringtimeFunWordsView = ({ navigation }) => {
+const SpringtimeFunWordsView = ({ navigation, route }) => {
+    const { email } = route.params;
 
     const { springtimeFunStatus, isLoading } = useProgress();
     const { width: screenWidth, height: screenHeight } = useWindowDimensions();
@@ -209,61 +210,61 @@ const SpringtimeFunWordsView = ({ navigation }) => {
                     style={styles.oneOpacity}
                     onPress={() => {
                         playWord('one');
-                        navigation.navigate('Activities', { selectedWord: 'one', batch: 'SpringTime Fun' });
+                        navigation.navigate('Activities', { selectedWord: 'one', batch: 'SpringTime Fun', email: email });
                     }}
                 >
                     <Image source={getImageSource('one')} style={styles.Image} />
                 </TouchableOpacity>
 
                 {/* two */}
-                {renderWordPressable('one', 'two', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('two'), playWord)}
+                {renderWordPressable('one', 'two', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('two'), playWord, email)}
 
                 {/* blue */}
-                {renderWordPressable('two', 'blue', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('blue'), playWord)}
+                {renderWordPressable('two', 'blue', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('blue'), playWord, email)}
 
             </View>
 
             <View style={styles.middle}>
 
                 {/* three */}
-                {renderWordPressable('blue', 'three', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('three'), playWord)}
+                {renderWordPressable('blue', 'three', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('three'), playWord, email)}
 
                 {/* yellow */}
-                {renderWordPressable('three', 'yellow', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('yellow'), playWord)}
+                {renderWordPressable('three', 'yellow', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('yellow'), playWord, email)}
 
                 {/* nine */}
-                {renderWordPressable('yellow', 'nine', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('nine'), playWord)}
+                {renderWordPressable('yellow', 'nine', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('nine'), playWord, email)}
 
             </View>
 
             <View style={styles.bottom}>
 
                 {/* green */}
-                {renderWordPressable('nine', 'green', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('green'), playWord)}
+                {renderWordPressable('nine', 'green', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('green'), playWord, email)}
 
                 {/* four */}
-                {renderWordPressable('green', 'four', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('four'), playWord)}
+                {renderWordPressable('green', 'four', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('four'), playWord, email)}
 
                 {/* purple */}
-                {renderWordPressable('four', 'purple', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('purple'), playWord)}
+                {renderWordPressable('four', 'purple', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('purple'), playWord, email)}
 
                 {/* five */}
-                {renderWordPressable('purple', 'five', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('five'), playWord)}
+                {renderWordPressable('purple', 'five', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('five'), playWord, email)}
 
                 {/* pink */}
-                {renderWordPressable('five', 'pink', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('pink'), playWord)}
+                {renderWordPressable('five', 'pink', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('pink'), playWord, email)}
 
                 {/* seven */}
-                {renderWordPressable('pink', 'seven', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('seven'), playWord)}
+                {renderWordPressable('pink', 'seven', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('seven'), playWord, email)}
 
                 {/* eight */}
-                {renderWordPressable('seven', 'eight', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('eight'), playWord)}
+                {renderWordPressable('seven', 'eight', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('eight'), playWord, email)}
 
                 {/* white */}
-                {renderWordPressable('eight', 'white', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('white'), playWord)}
+                {renderWordPressable('eight', 'white', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('white'), playWord, email)}
 
                 {/* black */}
-                {renderWordPressable('white', 'black', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('black'), playWord)}
+                {renderWordPressable('white', 'black', 'SpringTime Fun', springtimeFunStatus, navigation, styles, getImageSource('black'), playWord, email)}
 
             </View>
 

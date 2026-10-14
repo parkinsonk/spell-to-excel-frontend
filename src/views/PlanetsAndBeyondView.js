@@ -15,7 +15,8 @@ import { renderWordPressable } from '../components/wordButtons';
 import { Audio } from 'expo-av';
 import wordAudioMapping from '../utils/wordAudioMapping.js';
 
-const PlanetsAndBeyondView = ({ navigation }) => {
+const PlanetsAndBeyondView = ({ navigation, route }) => {
+  const { email } = route.params;
   const { planetsAndBeyondStatus, isLoading } = useProgress();
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const isLandscape = screenWidth > screenHeight;
@@ -284,6 +285,7 @@ const PlanetsAndBeyondView = ({ navigation }) => {
             navigation.navigate('Activities', {
               selectedWord: 'please',
               batch: 'Planets and Beyond',
+              email: email,
             });
           }}
         >
@@ -294,26 +296,26 @@ const PlanetsAndBeyondView = ({ navigation }) => {
           />
         </TouchableOpacity>
 
-        {renderWordPressable('please', 'her', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('her'), playWord)}
-        {renderWordPressable('her', 'water', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('water'), playWord)}
-        {renderWordPressable('water', 'been', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('been'), playWord)}
-        {renderWordPressable('been', 'our', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('our'), playWord)}
+        {renderWordPressable('please', 'her', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('her'), playWord, email)}
+        {renderWordPressable('her', 'water', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('water'), playWord, email)}
+        {renderWordPressable('water', 'been', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('been'), playWord, email)}
+        {renderWordPressable('been', 'our', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('our'), playWord, email)}
       </SafeAreaView>
 
       <SafeAreaView style={styles.middle}>
-        {renderWordPressable('our', 'called', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('called'), playWord)}
-        {renderWordPressable('called', 'ask', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('ask'), playWord)}
-        {renderWordPressable('ask', 'any', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('any'), playWord)}
-        {renderWordPressable('any', 'long', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('long'), playWord)}
-        {renderWordPressable('long', 'know', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('know'), playWord)}
+        {renderWordPressable('our', 'called', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('called'), playWord, email)}
+        {renderWordPressable('called', 'ask', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('ask'), playWord, email)}
+        {renderWordPressable('ask', 'any', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('any'), playWord, email)}
+        {renderWordPressable('any', 'long', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('long'), playWord, email)}
+        {renderWordPressable('long', 'know', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('know'), playWord, email)}
       </SafeAreaView>
 
       <SafeAreaView style={styles.bottom}>
-        {renderWordPressable('know', 'put', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('put'), playWord)}
-        {renderWordPressable('put', 'every', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('every'), playWord)}
-        {renderWordPressable('every', 'think', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('think'), playWord)}
-        {renderWordPressable('think', 'fly', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('fly'), playWord)}
-        {renderWordPressable('fly', 'give', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('give'), playWord)}
+        {renderWordPressable('know', 'put', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('put'), playWord, email)}
+        {renderWordPressable('put', 'every', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('every'), playWord, email)}
+        {renderWordPressable('every', 'think', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('think'), playWord, email)}
+        {renderWordPressable('think', 'fly', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('fly'), playWord, email)}
+        {renderWordPressable('fly', 'give', 'Planets and Beyond', planetsAndBeyondStatus, navigation, styles, getImageSource('give'), playWord, email)}
       </SafeAreaView>
     </ImageBackground>
   );

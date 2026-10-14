@@ -8,8 +8,8 @@ const flashcardMapping = {
         flashcard: require('../assets/wordsIKnowView/flyingHighFlashCards/seeFlashcard.png'),
         sound: ['#FF0000', '#00FF00', '#0000FF']
     },
-    'I':{
-        flashcard: require('../assets/wordsIKnowView/flyingHighFlashCards/IFlashcard.png'),
+    'his':{
+        flashcard: require('../assets/wordsIKnowView/flyingHighFlashCards/hisFlashcard.png'),
         sound: ['#FF0000', '#00FF00', '#0000FF']
     },
     'to':{

@@ -83,8 +83,6 @@ const WordsIKnow = ({ navigation }) => {
       flashcardContainer: {
           flex: 10,
           backgroundColor: '#F0F0F0',
-          borderColor: 'black',
-          borderWidth: 2,
       },
       flashcard: {
           padding: 5,
@@ -136,7 +134,13 @@ const WordsIKnow = ({ navigation }) => {
   return (
     <View style={styles.container}>
         <View style={styles.flashcardContainer}>
-            <ScrollView>
+            <ScrollView
+                showsVerticalScrollIndicator={true}
+                persistentScrollbar={true}
+                indicatorStyle="black"
+                style={{ flex: 1 }}
+                contentContainerStyle={{ paddingRight: 12 }}
+            >
                 {renderFlashcards()}
             </ScrollView>
         </View>

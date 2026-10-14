@@ -15,7 +15,8 @@ import { renderWordPressable } from '../components/wordButtons';
 import { Audio } from 'expo-av';
 import wordAudioMapping from '../utils/wordAudioMapping.js';
 
-const DivingDeepWordsView = ({ navigation }) => {
+const DivingDeepWordsView = ({ navigation, route }) => {
+  const { email } = route.params;
   const { divingDeepStatus, isLoading } = useProgress();
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const isLandscape = screenWidth > screenHeight;
@@ -231,6 +232,7 @@ const DivingDeepWordsView = ({ navigation }) => {
             navigation.navigate('Activities', {
               selectedWord: 'once',
               batch: 'Diving Deep',
+              email: email,
             });
           }}
         >
@@ -249,7 +251,8 @@ const DivingDeepWordsView = ({ navigation }) => {
           navigation,
           styles,
           getImageSource('live'),
-          playWord
+          playWord,
+          email
         )}
       </SafeAreaView>
 
@@ -262,7 +265,8 @@ const DivingDeepWordsView = ({ navigation }) => {
           navigation,
           styles,
           getImageSource('thank'),
-          playWord
+          playWord,
+          email
         )}
         {renderWordPressable(
           'thank',
@@ -272,7 +276,8 @@ const DivingDeepWordsView = ({ navigation }) => {
           navigation,
           styles,
           getImageSource('should'),
-          playWord
+          playWord,
+          email
         )}
         {renderWordPressable(
           'should',
@@ -282,7 +287,8 @@ const DivingDeepWordsView = ({ navigation }) => {
           navigation,
           styles,
           getImageSource('very'),
-          playWord
+          playWord,
+          email
         )}
       </SafeAreaView>
 
@@ -295,7 +301,8 @@ const DivingDeepWordsView = ({ navigation }) => {
           navigation,
           styles,
           getImageSource('wash'),
-          playWord
+          playWord,
+          email
         )}
         {renderWordPressable(
           'wash',
@@ -305,7 +312,8 @@ const DivingDeepWordsView = ({ navigation }) => {
           navigation,
           styles,
           getImageSource('does'),
-          playWord
+          playWord,
+          email
         )}
         {renderWordPressable(
           'does',
@@ -315,7 +323,7 @@ const DivingDeepWordsView = ({ navigation }) => {
           navigation,
           styles,
           getImageSource('warm'),
-          playWord
+          playWord, email
         )}
         {renderWordPressable(
           'warm',
@@ -325,7 +333,8 @@ const DivingDeepWordsView = ({ navigation }) => {
           navigation,
           styles,
           getImageSource('work'),
-          playWord
+          playWord,
+          email
         )}
       </SafeAreaView>
     </ImageBackground>

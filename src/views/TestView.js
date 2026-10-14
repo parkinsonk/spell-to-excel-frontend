@@ -1,665 +1,736 @@
-import React, { useState, useEffect} from 'react';
-import { ImageBackground, View, TextInput, Text, StyleSheet, Alert, useWindowDimensions, Pressable, Image, SafeAreaView} from 'react-native';
+
+import React, { useState, useEffect } from 'react';
+
+import {
+  ImageBackground,
+  View,
+  TextInput,
+  Text,
+  StyleSheet,
+  Alert,
+  useWindowDimensions,
+  Pressable,
+  Image,
+  SafeAreaView,
+} from 'react-native';
+
 import * as ScreenOrientation from 'expo-screen-orientation';
-import * as SecureStore from 'expo-secure-store'; 
-import LetterButton from '../components/LetterButton'; // Adjust the path as necessary
+import * as SecureStore from 'expo-secure-store';
+
+import LetterButton from '../components/LetterButton';
 import { useProgress } from '../components/ProgressContext';
-import api from '../components/api'; // Import the configured axios instance
+import api from '../components/api';
 
+// ------------------------------------------------
+// COMPLETED BATCHES
+// ------------------------------------------------
 
+const COMPLETED_BATCHES = {
+  'Flying High': {
+    word: 'are',
+    count: 15,
+    message: "You've completed words 1-15!",
+  },
+  'Sunny Island': {
+    word: 'funny',
+    count: 16,
+    message: "You've completed words 16-31!",
+  },
+  'SpringTime Fun': {
+    word: 'black',
+    count: 15,
+    message: "You've completed words 32-46!",
+  },
+  'Alien Adventures': {
+    word: 'many',
+    count: 15,
+    message: "You've completed words 47-61!",
+  },
+  'Outer Space': {
+    word: 'people',
+    count: 15,
+    message: "You've completed words 62-76!",
+  },
+  'Planets and Beyond': {
+    word: 'give',
+    count: 15,
+    message: "You've completed words 77-91!",
+  },
+  'Diving Deep': {
+    word: 'work',
+    count: 9,
+    message: "You've completed words 92-100!",
+  },
+};
 
 const TestView = ({ navigation, route }) => {
+  const { batch, activity, selectedWord } = route.params;
 
-    const { batch, activity, selectedWord } = route.params;
-    const { height: screenHeight, width: screenWidth } = useWindowDimensions();
-    const { flyingHighStatus, sunnyIslandStatus, springtimeFunStatus, alienAdventureStatus, 
-            outerSpaceStatus, planetsAndBeyondStatus, divingDeepStatus } = useProgress();
-    const isLandscape = screenWidth > screenHeight;
-    const aspectRatio = screenWidth / screenHeight;
+  const {
+    height: screenHeight,
+    width: screenWidth,
+  } = useWindowDimensions();
 
-    const styles = StyleSheet.create({
+  const isLandscape = screenWidth > screenHeight;
+  const aspectRatio = screenWidth / screenHeight;
 
-      // Landscape styles
-      landscape: {
-          safeArea: {
-            flex: 1,
-            width: '100%',
-            height: '100%'
-          },
-          background: {
-                  flex: 1,
-                  width: '100%',
-                  height: '100%',
-                  flexDirection: 'column',
-              },
-      
-              top: {
-                  flex: 1,
-                  width: '100%',
-                  height: '100%',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-              },
-              inputArea: {
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'flex-end',
-                  justifyContent: 'center', // This helps the incorrect and correct words line up when a word is spelled incorrectly
-                  paddingBottom: aspectRatio > 1.7 ? '0%': '5%',
-              },
-              row1: {
-                  flex: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'space-evenly',
-                  alignItems: 'center', 
-              },
-              row2: {
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
-                alignItems: 'center',
-                paddingLeft: '2%',
-                paddingRight: '2%',
-            },
-            row3: {
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              alignItems: 'center',
-              paddingLeft: '6%',
-              paddingRight: '6%',
-          },
-            textBox: {
-                width: aspectRatio > 1.7 ? '70%' : '70%',
-                height: '100%',
-                fontSize: 100,
-                textAlign: 'center',
+  const {
+    flyingHighStatus,
+    sunnyIslandStatus,
+    springtimeFunStatus,
+    alienAdventureStatus,
+    outerSpaceStatus,
+    planetsAndBeyondStatus,
+    divingDeepStatus,
 
-            },
-            correctWord: {
-              color: 'red', 
-              fontSize: aspectRatio > 1.7 ? 50 : 100,
-              alignSelf: 'center', // Center it if the layout allows
-              padding: 10, // Add some padding for visual spacing
-  
-          },
-            checkButton: {
-              backgroundColor: '#7ed957', // Example green color
-              padding: aspectRatio > 1.7 ? 5 : 10,
-              height: aspectRatio > 1.7 ? '80%' : '45%',
-              borderRadius: 5,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderColor: 'black',
-              borderWidth: 2,
-              marginBottom: aspectRatio > 1.7 ? '1%' : '4%',
-              marginLeft: aspectRatio > 1.7 ? '0%' : '4%',
-          },
-          checkButtonText: {
-              color: 'black',
-              fontSize: 20,
-          },
-          sound: {
-              width: aspectRatio > 1.7 ? '10%' : '10%',
-              height: aspectRatio > 1.7 ? '80%' : '60%',
-              marginRight: aspectRatio > 1.7 ? '0%' :'4%',
-              marginBottom: '1%',
-          },
-      },
-      // Portrait styles
-      portrait: {
-          safeArea: {
-            flex: 1,
-            width: '100%',
-            height: '100%'
-          },
-          background: {
-              flex: 1,
-              width: '100%',
-              height: '100%',
-              flexDirection: 'column',
-          },
-          top: {
-              flex: 1,
-              width: '100%',
-              height: '100%',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-          },
-          inputArea: {
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'flex-end',
-            justifyContent: 'center',
-            paddingBottom: '5%',
+    checkFlyingHigh,
+    checkSunnyIsland,
+    checkSpringtimeFun,
+    checkAlienAdventure,
+    checkOuterSpace,
+    checkPlanetsAndBeyond,
+    checkDivingDeep,
+  } = useProgress();
 
-        },
-        row1: {
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          alignItems: 'flex-end',
-      },
-        row2: {
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
-          paddingLeft: '2%',
-          paddingRight: '2%',
-        },
-        row3: {
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          alignItems: 'flex-start',
-          paddingLeft: '6%',
-          paddingRight: '6%',
-        },
-        textBox: {
-          width: '60%',
-          height: '90%',
-          fontSize: 100,
-          textAlign: 'center',
-        },
-        correctWord: {
-          color: 'red', 
-          fontSize: 100,
-          alignSelf: 'center', // Center it if the layout allows
-          padding: 10, // Add some padding for visual spacing
-        },
-        checkButton: {
-          backgroundColor: '#7ed957', // Example green color
-          padding: 10,
-          margin: 10,
-          height: '35%',
-          borderRadius: 5,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderColor: 'black',
-          borderWidth: 2,
-          marginBottom: '6%',
+  // ------------------------------------------------
+  // STATE
+  // ------------------------------------------------
 
-        },
-        checkButtonText: {
-          color: 'black',
-          fontSize: 20,
-        },
-        sound: {
-          width: '10%',
-          height:'30%',
-          marginBottom: '6%',
-        },
-      }
-      });
+  const [inputValue, setInputValue] = useState('');
+  const [showCorrectWord, setShowCorrectWord] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [backgroundImage, setBackgroundImage] = useState(
+    require('../assets/testViews/blankTestBackground.png')
+  );
 
-    const [backgroundImage, setBackgroundImage] = useState(require('../assets/testViews/blankTestBackground.png'));
-    const [inputValue, setInputValue] = useState('');
-    const [showCorrectWord, setShowCorrectWord] = useState(false);
-    const { checkFlyingHigh, checkSunnyIsland, checkSpringtimeFun, checkAlienAdventure, 
-      checkOuterSpace, checkPlanetsAndBeyond, checkDivingDeep } = useProgress();
-    const row1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
-    const row2 = ['j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r']
-    const row3 = ['s', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    const [orientationStyles, setOrientationStyles] = useState(styles.portrait);
-    const [fontSize, setFontSize] = useState(30);
+  const [fontSize, setFontSize] = useState(55);
 
-    
+  const row1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
+  const row2 = ['j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r'];
+  const row3 = ['s', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-    useEffect(() => {
-    // Function to update styles and font size based on orientation
+  // ------------------------------------------------
+  // ORIENTATION
+  // ------------------------------------------------
+
+  useEffect(() => {
     const updateOrientationStyles = async () => {
-      const orientation = await ScreenOrientation.getOrientationAsync();
-      if (orientation === ScreenOrientation.Orientation.LANDSCAPE_LEFT || orientation === ScreenOrientation.Orientation.LANDSCAPE_RIGHT) {
-        setOrientationStyles(styles.landscape);
-        setBackgroundImage(require('../assets/testViews/blankTestBackground.png'));
-        aspectRatio > 1.7 ? setFontSize(55) : setFontSize(80); // Adjust font size for landscape
-      } else {
-        setOrientationStyles(styles.portrait);
-        setBackgroundImage(require('../assets/testViews/blankTestBackground.png'));
-        setFontSize(55); // Adjust font size for portrait
+      try {
+        const orientation =
+          await ScreenOrientation.getOrientationAsync();
+
+        if (
+          orientation ===
+            ScreenOrientation.Orientation.LANDSCAPE_LEFT ||
+          orientation ===
+            ScreenOrientation.Orientation.LANDSCAPE_RIGHT
+        ) {
+          setFontSize(aspectRatio > 1.7 ? 55 : 80);
+        } else {
+          setFontSize(55);
+        }
+
+        setBackgroundImage(
+          require('../assets/testViews/blankTestBackground.png')
+        );
+      } catch (error) {
+        console.error('Orientation error:', error);
       }
     };
 
     updateOrientationStyles();
-    const subscription = ScreenOrientation.addOrientationChangeListener(() => {
-      updateOrientationStyles();
-    });
+
+    const subscription =
+      ScreenOrientation.addOrientationChangeListener(
+        updateOrientationStyles
+      );
 
     return () => {
-      ScreenOrientation.removeOrientationChangeListener(subscription);
+      ScreenOrientation.removeOrientationChangeListener(
+        subscription
+      );
     };
-}, []);
+  }, [aspectRatio]);
+
+  // ------------------------------------------------
+  // KEYBOARD
+  // ------------------------------------------------
 
   const handleLetterPress = (letter) => {
-    setInputValue(inputValue + letter);
+    if (isSubmitting || showCorrectWord) return;
+
+    setInputValue((previous) => previous + letter);
   };
 
   const handleBackspacePress = () => {
-    setInputValue(inputValue.slice(0, -1));
+    if (isSubmitting || showCorrectWord) return;
+
+    setInputValue((previous) => previous.slice(0, -1));
   };
 
-  const checkWord = async () => {
-    if (inputValue.toLowerCase() === selectedWord.toLowerCase()) {
+  // ------------------------------------------------
+  // BATCH PROGRESS
+  // ------------------------------------------------
 
-      // If the word matches, mark it as correct in the backend
-      try {
-        const accessToken = await SecureStore.getItemAsync('access_token');
-        
-        await api.post('/mark-word-correct/', {
-            word: selectedWord,
-            // Include any other necessary parameters your backend requires
-        }, {
-            headers: {
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-            },
-        });
+  const getBatchStatus = () => {
+    const batchStatuses = {
+      'Flying High': flyingHighStatus,
+      'Sunny Island': sunnyIslandStatus,
+      'SpringTime Fun': springtimeFunStatus,
+      'Alien Adventures': alienAdventureStatus,
+      'Outer Space': outerSpaceStatus,
+      'Planets and Beyond': planetsAndBeyondStatus,
+      'Diving Deep': divingDeepStatus,
+    };
 
+    return batchStatuses[batch];
+  };
 
-        if (!['are', 'funny', 'black', 'nine', 'many', 'people', 'give', 'work'].includes(selectedWord)) {
-          Alert.alert("Correct!", "You've typed the correct word.");
-        }
+  // ------------------------------------------------
+  // CHECK IF INDIVIDUAL WORD IS COMPLETED
+  // ------------------------------------------------
 
-        setShowCorrectWord(false); // No need to show the correct word if the input is correct
-        if (batch == 'Flying High') {
-          await checkFlyingHigh('Flying High');
-        } else if (batch == 'Sunny Island') {
-          await checkSunnyIsland('Sunny Island');
-        } else if (batch == 'SpringTime Fun') {
-          await checkSpringtimeFun('SpringTime Fun');
-        } else if (batch == 'Alien Adventures') {
-          await checkAlienAdventure('Alien Adventures');
-        } else if (batch == 'Outer Space') {
-          await checkOuterSpace('Outer Space');
-        } else if (batch == 'Planets and Beyond') {
-          await checkPlanetsAndBeyond('Planets and Beyond');
-        } else if (batch == 'Diving Deep') {
-          await checkDivingDeep('Diving Deep');
-        }
-      
+  const isWordCompleted = () => {
+    const status = getBatchStatus();
 
-        if (selectedWord == 'are' && flyingHighStatus['are']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 1-15!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Flying High' });
-          
-          }
+    if (!status) return false;
 
-        if (selectedWord == 'funny' && sunnyIslandStatus['funny']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 16-31!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Sunny Island' });
-        }
+    const normalizedWord = selectedWord.trim().toLowerCase();
 
-        else if (selectedWord == 'black' && springtimeFunStatus['black']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 32-46!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'SpringTime Fun' });
-          }
+    const wordStatus =
+      status[selectedWord] ||
+      status[normalizedWord];
 
-        else if (selectedWord == 'many' && alienAdventureStatus['many']?.test_correct === true) {
-              Alert.alert("Congratulations!", "You've completed words 47-61!");
-              navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Alien Adventures' });
-          }
+    return wordStatus?.test_correct === true;
+  };
 
-        else if (selectedWord == 'give' && planetsAndBeyondStatus['give']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 77-91!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Planets and Beyond' });
-        }
+  // ------------------------------------------------
+  // REFRESH PROGRESS
+  // ------------------------------------------------
 
-        else if (selectedWord == 'people' && outerSpaceStatus['people']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 62-76!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Outer Space' });
-        }
-
-        else if (selectedWord == 'work' && divingDeepStatus['work']?.test_correct === true) {
-            Alert.alert("Congratulations!", "You've completed words 92-100!");
-            navigation.navigate('Word Batches', { selectedWord: selectedWord, batch: 'Diving Deep' });
-        }
-        else {
-            navigation.navigate(batch, { selectedWord: selectedWord, batch: batch, activity: activity });
-        }
-        
-    } catch (error){
-        
-    }
-
-    } else {
-
-      setShowCorrectWord(true); // Show the correct word
-
-      if (batch == 'Flying High') {
+  const refreshProgress = async () => {
+    switch (batch) {
+      case 'Flying High':
         await checkFlyingHigh('Flying High');
-      } else if (batch == 'Sunny Island') {
+        break;
+
+      case 'Sunny Island':
         await checkSunnyIsland('Sunny Island');
-      } else if (batch == 'SpringTime Fun') {
+        break;
+
+      case 'SpringTime Fun':
         await checkSpringtimeFun('SpringTime Fun');
-      } else if (batch == 'Alien Adventures') {
+        break;
+
+      case 'Alien Adventures':
         await checkAlienAdventure('Alien Adventures');
-      } else if (batch == 'Outer Space') {
+        break;
+
+      case 'Outer Space':
         await checkOuterSpace('Outer Space');
-      } else if (batch == 'Planets and Beyond') {
+        break;
+
+      case 'Planets and Beyond':
         await checkPlanetsAndBeyond('Planets and Beyond');
-      } else if (batch == 'Diving Deep') {
+        break;
+
+      case 'Diving Deep':
         await checkDivingDeep('Diving Deep');
-      }
-      try {
-        const accessToken = await SecureStore.getItemAsync('access_token');
-        console.log("Retrieved access token:", accessToken);
+        break;
 
-        await api.post('/mark-word-incorrect/', {
-            word: selectedWord,
-            // Include any other necessary parameters your backend requires
-        }, {
-            headers: {
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-            },
-        });
+      default:
+        console.warn('Unknown batch:', batch);
+    }
+  };
 
-        if (batch == 'Flying High') {
-          await checkFlyingHigh('Flying High');
-        } else if (batch == 'Sunny Island') {
-          await checkSunnyIsland('Sunny Island');
-        } else if (batch == 'SpringTime Fun') {
-          await checkSpringtimeFun('SpringTime Fun');
-        } else if (batch == 'Alien Adventures') {
-          await checkAlienAdventure('Alien Adventures');
-        } else if (batch == 'Outer Space') {
-          await checkOuterSpace('Outer Space');
-        } else if (batch == 'Planets and Beyond') {
-          await checkPlanetsAndBeyond('Planets and Beyond');
-        } else if (batch == 'Diving Deep') {
-          await checkDivingDeep('Diving Deep');
+  // ------------------------------------------------
+  // NAVIGATION
+  // ------------------------------------------------
+
+  const goToWordBatches = () => {
+    navigation.navigate('Word Batches', {
+      selectedWord,
+      batch,
+      activity,
+    });
+  };
+
+  const goToBatch = () => {
+    navigation.navigate(batch, {
+      selectedWord,
+      batch,
+      activity,
+    });
+  };
+
+  const retryWord = () => {
+    setInputValue('');
+    setShowCorrectWord(false);
+  };
+
+  // ------------------------------------------------
+  // TEST INSTRUCTIONS VIDEO NAVIGATION
+  // ------------------------------------------------
+
+  const openInstructionsVideo = () => {
+    navigation.navigate('Test Instructions');
+  };
+
+  // ------------------------------------------------
+  // CHECK WORD
+  // ------------------------------------------------
+
+  const checkWord = async () => {
+    if (isSubmitting) return;
+
+    const isCorrect =
+      inputValue.trim().toLowerCase() ===
+      selectedWord.trim().toLowerCase();
+
+    setIsSubmitting(true);
+
+    try {
+      // --------------------------------------------
+      // CORRECT ANSWER
+      // --------------------------------------------
+
+      if (isCorrect) {
+        const accessToken =
+          await SecureStore.getItemAsync('access_token');
+
+        if (!accessToken) {
+          throw new Error('No access token found');
         }
-        
-        // If the word does not match
-        Alert.alert(
-          "Oops!", 
-          "The typed word is incorrect. Please complete the activities for this word and try again!",
-          [
-            { text: "OK", onPress: () => navigation.goBack() }
-          ],
-          { cancelable: false } // This prevents the alert from being dismissed by tapping outside of it
+
+        await api.post(
+          '/mark-word-correct/',
+          {
+            word: selectedWord,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          }
         );
-      } catch (error){
-        console.error('Error marking word as correct:', error);}
-    
+
+        setShowCorrectWord(false);
+
+        // Refresh saved progress
+        await refreshProgress();
+
+        const completedBatch = COMPLETED_BATCHES[batch];
+
+        const isFinalWord =
+          completedBatch &&
+          selectedWord.toLowerCase() === completedBatch.word;
+
+        if (isFinalWord) {
+          Alert.alert(
+            'Congratulations!',
+            completedBatch.message,
+            [
+              {
+                text: 'Continue',
+                onPress: goToWordBatches,
+              },
+            ],
+            { cancelable: false }
+          );
+
+          return;
+        }
+
+        // Normal correct answer
+        Alert.alert(
+          'Correct!',
+          "You've typed the correct word.",
+          [
+            {
+              text: 'Continue',
+              onPress: goToBatch,
+            },
+          ],
+          { cancelable: false }
+        );
+
+        return;
       }
-};
 
+      // --------------------------------------------
+      // INCORRECT ANSWER
+      // --------------------------------------------
 
+      const alreadyCompleted = isWordCompleted();
 
-    return (
+      // --------------------------------------------
+      // COMPLETED WORD: PRACTICE MODE
+      // --------------------------------------------
 
-        
-          
-            <ImageBackground
-                source={backgroundImage}
-                resizeMode="cover"
-                style={orientationStyles.background}
+      if (alreadyCompleted) {
+        // Do not mark the word incorrect.
+        // Do not erase previous progress.
+        // Do not make the student repeat activities.
+
+        Alert.alert(
+          'Oops! Try again!',
+          '',
+          [
+            {
+              text: 'OK',
+              onPress: retryWord,
+            },
+          ],
+          { cancelable: false }
+        );
+
+        return;
+      }
+
+      // --------------------------------------------
+      // WORD NOT YET COMPLETED
+      // --------------------------------------------
+
+      const accessToken =
+        await SecureStore.getItemAsync('access_token');
+
+      if (!accessToken) {
+        throw new Error('No access token found');
+      }
+
+      await api.post(
+        '/mark-word-incorrect/',
+        {
+          word: selectedWord,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      await refreshProgress();
+
+      setShowCorrectWord(true);
+
+      Alert.alert(
+        'Oops!',
+        'The typed word is incorrect. Please complete the activities for this word and try again!',
+        [
+          {
+            text: 'OK',
+            onPress: () => navigation.goBack(),
+          },
+        ],
+        { cancelable: false }
+      );
+
+    } catch (error) {
+      console.error(
+        'Error checking word:',
+        error.response?.data || error.message
+      );
+
+      Alert.alert(
+        'Error',
+        'Unable to save your progress. Please try again.'
+      );
+
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // ------------------------------------------------
+  // STYLES
+  // ------------------------------------------------
+
+  const styles = StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      width: '100%',
+      height: '100%',
+    },
+
+    background: {
+      flex: 1,
+      width: '100%',
+      height: '100%',
+      flexDirection: 'column',
+    },
+
+    top: {
+      flex: 1,
+      width: '100%',
+      height: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+
+    inputArea: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      justifyContent: 'center',
+      paddingBottom: isLandscape
+        ? aspectRatio > 1.7
+          ? '0%'
+          : '5%'
+        : '5%',
+    },
+
+    row1: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
+      alignItems: isLandscape
+        ? 'center'
+        : 'flex-end',
+    },
+
+    row2: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
+      alignItems: 'center',
+      paddingLeft: '2%',
+      paddingRight: '2%',
+    },
+
+    row3: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
+      alignItems: isLandscape
+        ? 'center'
+        : 'flex-start',
+      paddingLeft: '6%',
+      paddingRight: '6%',
+    },
+
+    textBox: {
+      width: isLandscape ? '70%' : '60%',
+      height: isLandscape ? '100%' : '90%',
+      fontSize,
+      textAlign: 'center',
+      fontWeight: isLandscape ? '800' : 'normal',
+      color: '#1a1a1a',
+    },
+
+    correctWord: {
+      color: 'red',
+      fontSize: isLandscape
+        ? aspectRatio > 1.7
+          ? 50
+          : 100
+        : 100,
+      alignSelf: 'center',
+      padding: 10,
+    },
+
+    checkButton: {
+      backgroundColor: '#7ed957',
+      padding: isLandscape
+        ? aspectRatio > 1.7
+          ? 5
+          : 10
+        : 10,
+      height: isLandscape
+        ? aspectRatio > 1.7
+          ? '80%'
+          : '45%'
+        : '35%',
+      borderRadius: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderColor: 'black',
+      borderWidth: 2,
+      marginBottom: isLandscape
+        ? aspectRatio > 1.7
+          ? '1%'
+          : '4%'
+        : '6%',
+      marginLeft: isLandscape
+        ? aspectRatio > 1.7
+          ? '0%'
+          : '4%'
+        : '4%',
+    },
+
+    checkButtonText: {
+      fontSize: 20,
+      fontWeight: '800',
+      color: '#1a1a1a',
+    },
+
+    instructions: {
+      width: '12%',
+      height: isLandscape
+        ? aspectRatio > 1.7
+          ? '80%'
+          : '60%'
+        : '30%',
+      marginRight: isLandscape ? '0%' : '4%',
+      marginBottom: isLandscape ? '1%' : '6%',
+    },
+  });
+
+  // ------------------------------------------------
+  // LETTER BUTTON
+  // ------------------------------------------------
+
+  const renderLetter = (letter) => (
+    <LetterButton
+      key={letter}
+      letter={letter}
+      onPress={() => handleLetterPress(letter)}
+      style={{
+        backgroundColor: '#0cc3fb',
+        width: isLandscape
+          ? aspectRatio > 1.7
+            ? 50
+            : 75
+          : 65,
+        height: isLandscape
+          ? aspectRatio > 1.7
+            ? 50
+            : 75
+          : 65,
+      }}
+      textStyle={{
+        fontSize: isLandscape
+          ? aspectRatio > 1.7
+            ? 35
+            : 45
+          : 45,
+        fontWeight: '800',
+        color: '#1a1a1a',
+      }}
+    />
+  );
+
+  const renderBackspace = () => (
+    <LetterButton
+      letter="⌫"
+      onPress={handleBackspacePress}
+      style={{
+        backgroundColor: 'red',
+        width: isLandscape
+          ? aspectRatio > 1.7
+            ? 50
+            : 75
+          : 65,
+        height: isLandscape
+          ? aspectRatio > 1.7
+            ? 50
+            : 75
+          : 65,
+      }}
+      textStyle={{
+        fontSize: isLandscape
+          ? aspectRatio > 1.7
+            ? 35
+            : 45
+          : 45,
+      }}
+    />
+  );
+
+  // ------------------------------------------------
+  // SCREEN
+  // ------------------------------------------------
+
+  return (
+    <ImageBackground
+      source={backgroundImage}
+      resizeMode="cover"
+      style={styles.background}
+    >
+      <SafeAreaView style={styles.safeArea}>
+
+        {/* Display correct word when incorrect */}
+        <View style={styles.top}>
+          {showCorrectWord && (
+            <Text style={styles.correctWord}>
+              {selectedWord.toLowerCase()}
+            </Text>
+          )}
+        </View>
+
+        {/* Word input */}
+        <View style={styles.inputArea}>
+
+          {!showCorrectWord && (
+            <Pressable
+              onPress={checkWord}
+              disabled={isSubmitting}
+              style={[
+                styles.checkButton,
+                {
+                  opacity: isSubmitting ? 0.5 : 1,
+                },
+              ]}
             >
+              <Text style={styles.checkButtonText}>
+                {isSubmitting
+                  ? 'Saving...'
+                  : 'Check Word'}
+              </Text>
+            </Pressable>
+          )}
 
-              
+          <TextInput
+            style={styles.textBox}
+            placeholder="Type Word Here"
+            value={inputValue}
+            showSoftInputOnFocus={false}
+            autoCorrect={false}
+            editable={false}
+          />
 
-              {isLandscape ? (
-                  <>
+          {/* TEST INSTRUCTIONS BUTTON */}
+          {!showCorrectWord && (
+            <Pressable
+              onPress={openInstructionsVideo}
+              style={styles.instructions}
+            >
+              <Image
+                source={require('../assets/instructionsVideo.png')}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+                resizeMode="contain"
+              />
+            </Pressable>
+          )}
 
-                  {/* Start of Landscape Views */}
+        </View>
 
-                  
-                  
-                  <SafeAreaView style={orientationStyles.safeArea}>
+        {/* Keyboard Row 1 */}
+        <View style={styles.row1}>
+          {row1.map(renderLetter)}
+          {renderBackspace()}
+        </View>
 
-                    <View style={orientationStyles.top}>
-                          
+        {/* Keyboard Row 2 */}
+        <View style={styles.row2}>
+          {row2.map(renderLetter)}
+        </View>
 
-                      {/* Conditionally show the correct word if needed */}
-                      {showCorrectWord && (
-                          <Text style={orientationStyles.correctWord}>
-                              {selectedWord.toLowerCase()}
-                          </Text>
-                      )}
-                    
-                    </View>
-                    
-                    <View style={orientationStyles.inputArea}>
-                    
-                        {/* Check word button */}
-                      {!showCorrectWord && (<Pressable
-                          onPress={checkWord}
-                          style={orientationStyles.checkButton}
-                      >
-                          <Text style={orientationStyles.checkButtonText}>Check Word</Text>
+        {/* Keyboard Row 3 */}
+        <View style={styles.row3}>
+          {row3.map(renderLetter)}
+        </View>
 
-                      </Pressable>)}
-
-
-                      {/* Text input for the word */}
-                      <TextInput
-                          style={[orientationStyles.textBox, { fontSize: fontSize }]}
-                          placeholder="Type Word Here"
-                          value={inputValue}
-                          showSoftInputOnFocus={false}
-                          autoCorrect={false}
-                      />
-
-                      {/* Sound Button */}
-                      {!showCorrectWord && (<Pressable
-                          onPress={() => console.log('Sound Button Pressed')}
-                          style={({ pressed }) => [
-                            {
-                              opacity: pressed ? 0.5 : 1, // Change opacity when pressed
-                              width: '100%',
-                              height: '100%',
-                              // Any other styles you need
-                            },
-                            orientationStyles.sound
-                          ]}
-                      >
-                          <Image source={require('../assets/testViews/sound.png')} style={{ width: '100%', height: '100%' }} />
-
-                      </Pressable>)}
-
-                    </View>
-
-
-                    {/* Row 1 of alphabet letters */}
-                    <View style={orientationStyles.row1}>
-                      
-                      {row1.map((letter) => (
-                        <LetterButton
-                          key={letter} // Ensure each child in a list has a unique "key" prop
-                          letter={letter}
-                          onPress={() => handleLetterPress(letter)}
-                          style={{ backgroundColor: '#0cc3fb', 
-                          width: aspectRatio > 1.7 ? 50 : 75, 
-                          height: aspectRatio > 1.7 ? 50 : 75}} 
-                          textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
-                        
-                        />
-                      ))}
-
-                      <LetterButton
-                        letter="⌫" // Using a common symbol for backspace
-                        onPress={handleBackspacePress}
-                        style={{ backgroundColor: 'red',
-                        width: aspectRatio > 1.7 ? 50 : 75, 
-                        height: aspectRatio > 1.7 ? 50 : 75}}
-                        textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
-                      />
-
-                    </View>
-
-
-                    {/* Row 2 of alphabet letters */}
-                    <View style={orientationStyles.row2}>
-
-                    {row2.map((letter) => (
-                        <LetterButton
-                          key={letter} // Ensure each child in a list has a unique "key" prop
-                          letter={letter}
-                          onPress={() => handleLetterPress(letter)}
-                          style={{ backgroundColor: '#0cc3fb', 
-                          width: aspectRatio > 1.7 ? 50 : 75, 
-                          height: aspectRatio > 1.7 ? 50 : 75}} // Example of passing custom style
-                          textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
-                        />
-                      ))}
-
-                    </View>
-                    
-                    {/* Row 3 of alphabet letters */}
-                    <View style={orientationStyles.row3}>
-
-                    {row3.map((letter) => (
-                        <LetterButton
-                          key={letter} // Ensure each child in a list has a unique "key" prop
-                          letter={letter}
-                          onPress={() => handleLetterPress(letter)}
-                          style={{ backgroundColor: '#0cc3fb', 
-                          width: aspectRatio > 1.7 ? 50 : 75, 
-                          height: aspectRatio > 1.7 ? 50 : 75}} // Example of passing custom style
-                          textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
-                        />
-                      ))}
-
-                    </View>
-                  </SafeAreaView>
-
-                  </>) : (
-                          <>
-
-                          {/* Start of Portrait Views */}
-
-                          <SafeAreaView style={orientationStyles.safeArea}>
-
-                            <View style={orientationStyles.top}>
-                          
-
-                              {/* Conditionally show the correct word if needed */}
-                              {showCorrectWord && (
-                                  <Text style={orientationStyles.correctWord}>
-                                      {selectedWord.toLowerCase()}
-                                  </Text>
-                              )}
-                            
-                            </View>
-                            <View style={orientationStyles.inputArea}>
-                            
-                                {/* Check word button */}
-                              {!showCorrectWord && (<Pressable
-                                  onPress={checkWord}
-                                  style={orientationStyles.checkButton}
-                              >
-                                  <Text style={orientationStyles.checkButtonText}>Check Word</Text>
-
-                              </Pressable>)}
-
-                              <TextInput
-                                  style={[orientationStyles.textBox, { fontSize: fontSize }]}
-                                  placeholder="Type Word Here"
-                                  value={inputValue}
-                                  showSoftInputOnFocus={false}
-                                  autoCorrect={false}
-                              />
-
-                              {/* Sound Button */}
-                              {!showCorrectWord && (<Pressable
-                                  onPress={() => console.log('Sound Button Pressed')}
-                                  style={({ pressed }) => [
-                                    {
-                                      opacity: pressed ? 0.5 : 1, // Change opacity when pressed
-                                      width: '100%',
-                                      height: '100%',
-                                      // Any other styles you need
-                                    },
-                                    orientationStyles.sound
-                                  ]}
-                              >
-                                  <Image source={require('../assets/testViews/sound.png')} style={{ width: '100%', height: '100%' }} />
-
-                              </Pressable>)}
-
-                            </View>
-
-                    {/* Row 1 of alphabet letters */}
-                    <View style={orientationStyles.row1}>
-                      
-                      {row1.map((letter) => (
-                        <LetterButton
-                          key={letter} // Ensure each child in a list has a unique "key" prop
-                          letter={letter}
-                          onPress={() => handleLetterPress(letter)}
-                          style={{ backgroundColor: '#0cc3fb', 
-                          width: aspectRatio > 1.7 ? 50 : 65, 
-                          height: aspectRatio > 1.7 ? 50 : 65}} 
-                          textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
-                        
-                        />
-                      ))}
-
-                      <LetterButton
-                        letter="⌫" // Using a common symbol for backspace
-                        onPress={handleBackspacePress}
-                        style={{ backgroundColor: 'red',
-                        width: aspectRatio > 1.7 ? 50 : 65, 
-                        height: aspectRatio > 1.7 ? 50 : 65}}
-                        textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
-                      />
-
-                    </View>
-
-
-                    {/* Row 2 of alphabet letters */}
-                    <View style={orientationStyles.row2}>
-
-                    {row2.map((letter) => (
-                        <LetterButton
-                          key={letter} // Ensure each child in a list has a unique "key" prop
-                          letter={letter}
-                          onPress={() => handleLetterPress(letter)}
-                          style={{ backgroundColor: '#0cc3fb', 
-                          width: aspectRatio > 1.7 ? 50 : 65, 
-                          height: aspectRatio > 1.7 ? 50 : 65}} // Example of passing custom style
-                          textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
-                        />
-                      ))}
-
-                    </View>
-                    
-                    {/* Row 3 of alphabet letters */}
-                    <View style={orientationStyles.row3}>
-
-                    {row3.map((letter) => (
-                        <LetterButton
-                          key={letter} // Ensure each child in a list has a unique "key" prop
-                          letter={letter}
-                          onPress={() => handleLetterPress(letter)}
-                          style={{ backgroundColor: '#0cc3fb', 
-                          width: aspectRatio > 1.7 ? 50 : 65, 
-                          height: aspectRatio > 1.7 ? 50 : 65}} // Example of passing custom style
-                          textStyle={{ fontSize: aspectRatio > 1.7 ? 35 : 45 }}
-                        />
-                      ))}
-
-                    </View>
-                  </SafeAreaView>
-                        
-
-                          </>
-                          
-                          
-                          )}
-              
-                  
-              </ImageBackground>
-            
-
-    );
+      </SafeAreaView>
+    </ImageBackground>
+  );
 };
-
-
 
 export default TestView;

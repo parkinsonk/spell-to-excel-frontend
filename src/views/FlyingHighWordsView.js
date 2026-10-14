@@ -8,7 +8,9 @@ import { renderWordPressable } from '../components/wordButtons';
 import { Audio } from 'expo-av';
 import wordAudioMapping from '../utils/wordAudioMapping.js';
 
-const FlyingHighWordsView = ({ navigation }) => {
+const FlyingHighWordsView = ({ navigation, route }) => {
+
+    const { email } = route.params;
 
     const { flyingHighStatus, isLoading } = useProgress();
     const {width: screenWidth, height: screenHeight} = useWindowDimensions();
@@ -93,7 +95,7 @@ const FlyingHighWordsView = ({ navigation }) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
         },
-        IOpacity: {
+        hisOpacity: {
             height: isLandscape ? aspectRatio > 1.7 ? '55%' : '55%' : '30%',
             width: isLandscape ? aspectRatio > 1.7 ? '15%' : '15%' : '15%',
             resizeMode: 'contain',
@@ -222,66 +224,66 @@ const FlyingHighWordsView = ({ navigation }) => {
                 <Pressable
                     onPress={() => {
                         playWord('the');
-                        navigation.navigate('Activities', { selectedWord: 'the', batch: 'Flying High' });
+                        navigation.navigate('Activities', { selectedWord: 'the', batch: 'Flying High', email: email });
                     }}
-                    style={({ pressed }) => [styles.IOpacity, { opacity: pressed ? 0.5 : 1 }]}
+                    style={({ pressed }) => [styles.theOpacity, { opacity: pressed ? 0.5 : 1 }]}
                 >
                     <Image source={getImageSource('the')} style={styles.Image} />
                 </Pressable>
 
                 {/* see */}
-                {renderWordPressable('the', 'see', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('see'), playWord)}
+                {renderWordPressable('the', 'see', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('see'), playWord, email)}
 
-                {/* I */}
-                {renderWordPressable('see', 'I', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('I'), playWord)}
+                {/* his */}
+                {renderWordPressable('see', 'his', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('his'), playWord, email)}
 
                 {/* to */}
-                {renderWordPressable('I', 'to', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('to'), playWord)}
+                {renderWordPressable('his', 'to', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('to'), playWord, email)}
 
                 <View style={styles.helicopter}>
                     <Image source={require('../assets/flyingHighWordsView/helicopter.png')} style={styles.Image} />
                 </View>
 
                 {/* of */}
-                {renderWordPressable('to', 'of', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('of'), playWord)}
+                {renderWordPressable('to', 'of', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('of'), playWord, email)}
 
             </SafeAreaView>
 
             <SafeAreaView style={styles.middle}>
 
                 {/* and */}
-                {renderWordPressable('to', 'and', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('and'), playWord)}
+                {renderWordPressable('to', 'and', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('and'), playWord, email)}
 
                 {/* a */}
-                {renderWordPressable('and', 'a', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('a'), playWord)}
+                {renderWordPressable('and', 'a', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('a'), playWord, email)}
 
                 {/* you */}
-                {renderWordPressable('a', 'you', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('you'), playWord)}
+                {renderWordPressable('a', 'you', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('you'), playWord, email)}
 
                 {/* said */}
-                {renderWordPressable('you', 'said', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('said'), playWord)}
+                {renderWordPressable('you', 'said', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('said'), playWord, email)}
 
                 {/* for */}
-                {renderWordPressable('said', 'for', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('for'), playWord)}
+                {renderWordPressable('said', 'for', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('for'), playWord, email)}
 
             </SafeAreaView>
 
             <SafeAreaView style={styles.bottom}>
 
                 {/* go */}
-                {renderWordPressable('for', 'go', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('go'), playWord)}
+                {renderWordPressable('for', 'go', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('go'), playWord, email)}
 
                 {/* he */}
-                {renderWordPressable('go', 'he', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('he'), playWord)}
+                {renderWordPressable('go', 'he', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('he'), playWord, email)}
 
                 {/* we */}
-                {renderWordPressable('he', 'we', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('we'), playWord)}
+                {renderWordPressable('he', 'we', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('we'), playWord, email)}
 
                 {/* was */}
-                {renderWordPressable('we', 'was', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('was'), playWord)}
+                {renderWordPressable('we', 'was', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('was'), playWord, email)}
 
                 {/* are */}
-                {renderWordPressable('was', 'are', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('are'), playWord)}
+                {renderWordPressable('was', 'are', 'Flying High', flyingHighStatus, navigation, styles, getImageSource('are'), playWord, email)}
 
             </SafeAreaView>
 
